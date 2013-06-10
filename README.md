@@ -1,2 +1,0 @@
-armv7-multiplatform
-===================
