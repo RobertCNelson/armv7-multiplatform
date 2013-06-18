@@ -13,7 +13,7 @@ if [ "${GIT_NOEDIT}" ] ; then
 	GIT_OPTS="${GIT_OPTS} --no-edit"
 fi
 
-config="omap2plus_defconfig"
+config="multi_v7_defconfig"
 
 #linaro_toolchain="arm9_gcc_4_7"
 #linaro_toolchain="cortex_gcc_4_6"
@@ -23,7 +23,7 @@ linaro_toolchain="cortex_gcc_4_8"
 #Kernel/Build
 KERNEL_REL=3.10
 KERNEL_TAG=${KERNEL_REL}-rc6
-BUILD=armv7-x0
+BUILD=armv7-x0.1
 
 #v3.X-rcX + upto SHA
 #KERNEL_SHA=""
