@@ -142,6 +142,11 @@ omap () {
 	${git} "${DIR}/patches/omap_sgx/0001-arm-Export-cache-flush-management-symbols-when-MULTI.patch"
 }
 
+saucy () {
+	echo "dir: saucy"
+	${git} "${DIR}/patches/saucy/0001-saucy-disable-stack-protector.patch"
+}
+
 sprz319_erratum () {
 	echo "dir: omap_sprz319-erratum-2.1"
 	${git} "${DIR}/patches/omap_sprz319-erratum-2.1/0001-hack-omap-clockk-dpll5-apply-sprz319e-2.1-erratum.patch"
@@ -195,6 +200,8 @@ chipidea () {
 #edma
 arm
 omap
+saucy
+
 #Disabled for testing...
 #sprz319_erratum
 
