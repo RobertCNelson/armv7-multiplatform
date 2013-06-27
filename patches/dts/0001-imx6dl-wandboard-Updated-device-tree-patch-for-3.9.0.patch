@@ -14,13 +14,17 @@ file later).
 NOTE:  This patch does not have anything in it to enable the HDMI port or
 any of the audio yet.  It isn't immediately important to me so I did not do
 it yet.
+
+v2: rcn-ee: remove &i2c3, ethernet now works..
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
- arch/arm/boot/dts/imx6dl-wandboard.dts |   64 +++++++++++++++++++++++
+ arch/arm/boot/dts/imx6dl-wandboard.dts |   58 +++++++++++++++++++++
  arch/arm/boot/dts/imx6dl.dtsi          |   87 ++++++++++++++++++++++++++++++--
- 2 files changed, 148 insertions(+), 3 deletions(-)
+ 2 files changed, 142 insertions(+), 3 deletions(-)
 
 diff --git a/arch/arm/boot/dts/imx6dl-wandboard.dts b/arch/arm/boot/dts/imx6dl-wandboard.dts
-index bfc59c3..3846f5b 100644
+index bfc59c3..f89b26c 100644
 --- a/arch/arm/boot/dts/imx6dl-wandboard.dts
 +++ b/arch/arm/boot/dts/imx6dl-wandboard.dts
 @@ -18,6 +18,16 @@
@@ -40,7 +44,7 @@ index bfc59c3..3846f5b 100644
  };
  
  &fec {
-@@ -27,16 +37,70 @@
+@@ -27,16 +37,64 @@
  	status = "okay";
  };
  
@@ -71,12 +75,6 @@ index bfc59c3..3846f5b 100644
 +&i2c2 {
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&pinctrl_i2c2_2>;
-+	status = "okay";
-+};
-+
-+&i2c3 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_i2c3_2>;
 +	status = "okay";
 +};
 +
@@ -112,7 +110,7 @@ index bfc59c3..3846f5b 100644
  	pinctrl-names = "default";
  	pinctrl-0 = <&pinctrl_usdhc3_2>;
 diff --git a/arch/arm/boot/dts/imx6dl.dtsi b/arch/arm/boot/dts/imx6dl.dtsi
-index 5bcdf3a..1c3306d 100644
+index 5bcdf3a..c6ae036 100644
 --- a/arch/arm/boot/dts/imx6dl.dtsi
 +++ b/arch/arm/boot/dts/imx6dl.dtsi
 @@ -78,6 +78,47 @@
@@ -149,8 +147,8 @@ index 5bcdf3a..1c3306d 100644
 +						fsl,pins = <
 +							MX6DL_PAD_EIM_D17__I2C3_SCL 0x4001b8b1
 +							MX6DL_PAD_EIM_D18__I2C3_SDA 0x4001b8b1
-+					>;
-+				};
++						>;
++					};
 +
 +					pinctrl_i2c3_2: i2c3grp-2 {
 +						fsl,pins = <
