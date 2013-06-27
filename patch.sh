@@ -142,7 +142,7 @@ imx () {
 
 dts () {
 	echo "dir: dts"
-	${git} "${DIR}/patches/dts/0001-imx6dl-wandboard-Updated-device-tree-patch-for-3.9.0.patch"
+	${git} "${DIR}/patches/dts/0001-wandboard-add-quad-plus-2nd-mmc-card.patch"
 }
 
 
