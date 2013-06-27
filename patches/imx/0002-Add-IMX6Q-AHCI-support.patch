@@ -1,7 +1,7 @@
-From 9aa9fd657948a3418ca28b40e050e24d28d7637b Mon Sep 17 00:00:00 2001
+From 8e890a259208dbe3aba6f46f7c3a213269d8f123 Mon Sep 17 00:00:00 2001
 From: Allen Ibara <allen@zee.aero>
 Date: Tue, 4 Dec 2012 20:44:26 -0800
-Subject: [PATCH 2/3] Add IMX6Q AHCI support
+Subject: [PATCH 2/5] Add IMX6Q AHCI support
 
 Adds device tree node and ahci_platform bits to make AHCI work on sabrelite IMX6Q board.
 
@@ -29,7 +29,7 @@ index 8ad0fd2..3f7e790 100644
  	vbus-supply = <&reg_usb_otg_vbus>;
  	pinctrl-names = "default";
 diff --git a/arch/arm/boot/dts/imx6q.dtsi b/arch/arm/boot/dts/imx6q.dtsi
-index 4461daa..6cbd2cf 100644
+index 8551c3d..11b546f 100644
 --- a/arch/arm/boot/dts/imx6q.dtsi
 +++ b/arch/arm/boot/dts/imx6q.dtsi
 @@ -344,6 +344,14 @@

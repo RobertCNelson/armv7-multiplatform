@@ -1,7 +1,7 @@
-From 3500484de72c05fa19592e6151826c59cafa373f Mon Sep 17 00:00:00 2001
+From 41cc1967181a833c3c5af30682ea85dd01c28ff4 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Tue, 22 Jan 2013 22:21:03 -0600
-Subject: [PATCH 3/3] imx: Add IMX53 AHCI support
+Subject: [PATCH 3/5] imx: Add IMX53 AHCI support
 
 Adds device tree node and ahci_platform bits to make AHCI work on mx53 qsb board.
 
@@ -28,7 +28,7 @@ index 8f0e9ae..5e1d0cb 100644
  	pinctrl-names = "default";
  	pinctrl-0 = <&pinctrl_audmux_1>;
 diff --git a/arch/arm/boot/dts/imx53.dtsi b/arch/arm/boot/dts/imx53.dtsi
-index 845982e..a1bb8dc 100644
+index eb83aa0..fcb8758 100644
 --- a/arch/arm/boot/dts/imx53.dtsi
 +++ b/arch/arm/boot/dts/imx53.dtsi
 @@ -782,5 +782,13 @@
