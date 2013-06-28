@@ -13,7 +13,7 @@ if [ "${GIT_NOEDIT}" ] ; then
 	GIT_OPTS="${GIT_OPTS} --no-edit"
 fi
 
-config="multi_v7_defconfig"
+config="imx_v6_v7_defconfig"
 
 #linaro_toolchain="arm9_gcc_4_7"
 #linaro_toolchain="cortex_gcc_4_6"
