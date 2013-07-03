@@ -138,6 +138,8 @@ imx () {
 	${git} "${DIR}/patches/imx/0003-imx-Add-IMX53-AHCI-support.patch"
 	${git} "${DIR}/patches/imx/0004-SAUCE-imx6-enable-sata-clk-if-SATA_AHCI_PLATFORM.patch"
 	${git} "${DIR}/patches/imx/0005-thermal-add-imx-thermal-driver-support.patch"
+	#http://marc.info/?l=linux-arm-kernel&m=137286613127404&w=2
+	${git} "${DIR}/patches/imx/0006-ARM-mx6-Fix-the-number-of-reported-cores.patch"
 }
 
 dts () {
