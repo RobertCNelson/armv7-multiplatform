@@ -150,9 +150,12 @@ dts () {
 	${git} "${DIR}/patches/dts/0002-arm-imx6dl.dtsi-add-audmux-from-v3.11-rc0.patch"
 	${git} "${DIR}/patches/dts/0003-ARM-dts-imx6dl-wandboard-Add-audio-support.patch"
 	${git} "${DIR}/patches/dts/0004-ARM-dts-imx6q-wandboard-Add-audio-support.patch"
+	${git} "${DIR}/patches/dts/0005-mainline-sync-imx6q-dl-wandboard.dts-remove-usdhc1.patch"
+	${git} "${DIR}/patches/dts/0006-ARM-dts-imx6dl-wandboard-Add-SDHC1-and-SDHC2-ports.patch"
+	${git} "${DIR}/patches/dts/0007-ARM-dts-imx6q-wandboard-Add-SDHC1-and-SDHC2-ports.patch"
 
 #wip:
-#	${git} "${DIR}/patches/dts/0005-i.MX6-Wandboard-add-sound-stgl5000-and-wifi-bt.patch"
+#	${git} "${DIR}/patches/dts/0008-i.MX6-Wandboard-add-sound-stgl5000-and-wifi-bt.patch"
 }
 
 arm

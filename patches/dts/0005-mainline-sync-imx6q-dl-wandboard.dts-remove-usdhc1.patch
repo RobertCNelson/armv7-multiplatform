@@ -1,0 +1,73 @@
+From 589da189a8e9ca74d31e0014a2679af31de98f62 Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Wed, 10 Jul 2013 12:37:01 -0500
+Subject: [PATCH 5/5] (mainline sync) imx6q/dl-wandboard.dts remove usdhc1
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/boot/dts/imx6dl-wandboard.dts |    6 ------
+ arch/arm/boot/dts/imx6dl.dtsi          |   13 -------------
+ arch/arm/boot/dts/imx6q-wandboard.dts  |    6 ------
+ 3 files changed, 25 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx6dl-wandboard.dts b/arch/arm/boot/dts/imx6dl-wandboard.dts
+index be0fed4..ab6a053 100644
+--- a/arch/arm/boot/dts/imx6dl-wandboard.dts
++++ b/arch/arm/boot/dts/imx6dl-wandboard.dts
+@@ -110,12 +110,6 @@
+ 	status = "okay";
+ };
+ 
+-&usdhc1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_usdhc1_1>;
+-	status = "okay";
+-};
+-
+ &usdhc3 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_usdhc3_2>;
+diff --git a/arch/arm/boot/dts/imx6dl.dtsi b/arch/arm/boot/dts/imx6dl.dtsi
+index bf4dd1f..2a63496 100644
+--- a/arch/arm/boot/dts/imx6dl.dtsi
++++ b/arch/arm/boot/dts/imx6dl.dtsi
+@@ -117,19 +117,6 @@
+ 					};
+ 				};
+ 
+-				usdhc1 {
+-					pinctrl_usdhc1_1: usdhc1grp-1 {
+-						fsl,pins = <
+-							MX6DL_PAD_SD1_CMD__SD1_CMD    0x17059
+-							MX6DL_PAD_SD1_CLK__SD1_CLK    0x10059
+-							MX6DL_PAD_SD1_DAT0__SD1_DATA0 0x17059
+-							MX6DL_PAD_SD1_DAT1__SD1_DATA1 0x17059
+-							MX6DL_PAD_SD1_DAT2__SD1_DATA2 0x17059
+-							MX6DL_PAD_SD1_DAT3__SD1_DATA3 0x17059
+-						>;
+-					};
+-				};
+-
+ 				usdhc2 {
+ 					pinctrl_usdhc2_1: usdhc2grp-1 {
+ 						fsl,pins = <
+diff --git a/arch/arm/boot/dts/imx6q-wandboard.dts b/arch/arm/boot/dts/imx6q-wandboard.dts
+index 6aed42b..787a6c6 100644
+--- a/arch/arm/boot/dts/imx6q-wandboard.dts
++++ b/arch/arm/boot/dts/imx6q-wandboard.dts
+@@ -104,12 +104,6 @@
+ 	status = "okay";
+ };
+ 
+-&usdhc1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_usdhc1_1>;
+-	status = "okay";
+-};
+-
+ &usdhc3 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_usdhc3_2>;
+-- 
+1.7.10.4
+

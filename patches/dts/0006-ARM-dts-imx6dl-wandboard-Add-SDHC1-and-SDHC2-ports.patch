@@ -1,0 +1,98 @@
+From df7a25cca990e992f41ed035f328d1389858f8c1 Mon Sep 17 00:00:00 2001
+From: Fabio Estevam <fabio.estevam@freescale.com>
+Date: Mon, 8 Jul 2013 12:14:43 -0300
+Subject: [PATCH 6/6] ARM: dts: imx6dl-wandboard: Add SDHC1 and SDHC2 ports
+
+Wandboard has a SD card slot on the baseboard connected to SDHC1 and a
+BCM4329 (Wifi + Bluetooth chip) connected to SDHC2.
+
+Add support for these ports.
+
+While at it, provide the card detect gpio on SDHC3.
+
+Signed-off-by: Fabio Estevam <fabio.estevam@freescale.com>
+---
+ arch/arm/boot/dts/imx6dl-wandboard.dts |   17 +++++++++++++++++
+ arch/arm/boot/dts/imx6dl.dtsi          |   29 +++++++++++++++++++++++++++++
+ 2 files changed, 46 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6dl-wandboard.dts b/arch/arm/boot/dts/imx6dl-wandboard.dts
+index ab6a053..027ece5 100644
+--- a/arch/arm/boot/dts/imx6dl-wandboard.dts
++++ b/arch/arm/boot/dts/imx6dl-wandboard.dts
+@@ -83,6 +83,8 @@
+ 		pinctrl_hog: hoggrp {
+ 			fsl,pins = <
+ 				MX6DL_PAD_GPIO_0__CCM_CLKO1    0x130b0
++				MX6DL_PAD_GPIO_2__GPIO1_IO02	0x80000000
++				MX6DL_PAD_EIM_DA9__GPIO3_IO09	0x80000000
+ 			>;
+ 		};
+ 	};
+@@ -110,8 +112,23 @@
+ 	status = "okay";
+ };
+ 
++&usdhc1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc1_2>;
++	cd-gpios = <&gpio1 2 0>;
++	status = "okay";
++};
++
++&usdhc2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc2_2>;
++	non-removable;
++	status = "okay";
++};
++
+ &usdhc3 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_usdhc3_2>;
++	cd-gpios = <&gpio3 9 0>;
+ 	status = "okay";
+ };
+diff --git a/arch/arm/boot/dts/imx6dl.dtsi b/arch/arm/boot/dts/imx6dl.dtsi
+index bf4dd1f..4760fe1 100644
+--- a/arch/arm/boot/dts/imx6dl.dtsi
++++ b/arch/arm/boot/dts/imx6dl.dtsi
+@@ -130,6 +130,35 @@
+ 					};
+ 				};
+ 
++				usdhc1 {
++					pinctrl_usdhc1_1: usdhc1grp-1 {
++						fsl,pins = <
++							MX6DL_PAD_SD1_CMD__SD1_CMD    0x17059
++							MX6DL_PAD_SD1_CLK__SD1_CLK    0x10059
++							MX6DL_PAD_SD1_DAT0__SD1_DATA0 0x17059
++							MX6DL_PAD_SD1_DAT1__SD1_DATA1 0x17059
++							MX6DL_PAD_SD1_DAT2__SD1_DATA2 0x17059
++							MX6DL_PAD_SD1_DAT3__SD1_DATA3 0x17059
++							MX6DL_PAD_NANDF_D0__SD1_DATA4 0x17059
++							MX6DL_PAD_NANDF_D1__SD1_DATA5 0x17059
++							MX6DL_PAD_NANDF_D2__SD1_DATA6 0x17059
++							MX6DL_PAD_NANDF_D3__SD1_DATA7 0x17059
++						>;
++					};
++
++					pinctrl_usdhc1_2: usdhc1grp-2 {
++						fsl,pins = <
++							MX6DL_PAD_SD1_CMD__SD1_CMD    0x17059
++							MX6DL_PAD_SD1_CLK__SD1_CLK    0x10059
++							MX6DL_PAD_SD1_DAT0__SD1_DATA0 0x17059
++							MX6DL_PAD_SD1_DAT1__SD1_DATA1 0x17059
++							MX6DL_PAD_SD1_DAT2__SD1_DATA2 0x17059
++							MX6DL_PAD_SD1_DAT3__SD1_DATA3 0x17059
++						>;
++					};
++				};
++
++
+ 				usdhc2 {
+ 					pinctrl_usdhc2_1: usdhc2grp-1 {
+ 						fsl,pins = <
+-- 
+1.7.10.4
+

@@ -1,0 +1,114 @@
+From 4ce141b7c9a63d7e3ffcaf00166d2726e1d3cf6e Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Wed, 10 Jul 2013 12:58:01 -0500
+Subject: [PATCH 7/7] ARM: dts: imx6q-wandboard: Add SDHC1 and SDHC2 ports
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/boot/dts/imx6dl.dtsi         |   11 +++++++++++
+ arch/arm/boot/dts/imx6q-wandboard.dts |   17 +++++++++++++++++
+ arch/arm/boot/dts/imx6q.dtsi          |   22 ++++++++++++++++++++++
+ 3 files changed, 50 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6dl.dtsi b/arch/arm/boot/dts/imx6dl.dtsi
+index 78a2c3c..617c5ef 100644
+--- a/arch/arm/boot/dts/imx6dl.dtsi
++++ b/arch/arm/boot/dts/imx6dl.dtsi
+@@ -161,6 +161,17 @@
+ 							MX6DL_PAD_NANDF_D7__SD2_DATA7 0x17059
+ 						>;
+ 					};
++
++					pinctrl_usdhc2_2: usdhc2grp-2 {
++						fsl,pins = <
++							MX6DL_PAD_SD2_CMD__SD2_CMD    0x17059
++							MX6DL_PAD_SD2_CLK__SD2_CLK    0x10059
++							MX6DL_PAD_SD2_DAT0__SD2_DATA0 0x17059
++							MX6DL_PAD_SD2_DAT1__SD2_DATA1 0x17059
++							MX6DL_PAD_SD2_DAT2__SD2_DATA2 0x17059
++							MX6DL_PAD_SD2_DAT3__SD2_DATA3 0x17059
++						>;
++					};
+ 				};
+ 
+ 				usdhc3 {
+diff --git a/arch/arm/boot/dts/imx6q-wandboard.dts b/arch/arm/boot/dts/imx6q-wandboard.dts
+index 787a6c6..9b62a46 100644
+--- a/arch/arm/boot/dts/imx6q-wandboard.dts
++++ b/arch/arm/boot/dts/imx6q-wandboard.dts
+@@ -77,6 +77,8 @@
+ 		pinctrl_hog: hoggrp {
+ 			fsl,pins = <
+ 				MX6Q_PAD_GPIO_0__CCM_CLKO1    0x130b0
++				MX6Q_PAD_GPIO_2__GPIO1_IO02	0x80000000
++				MX6Q_PAD_EIM_DA9__GPIO3_IO09	0x80000000
+ 			>;
+ 		};
+ 	};
+@@ -104,8 +106,23 @@
+ 	status = "okay";
+ };
+ 
++&usdhc1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc1_2>;
++	cd-gpios = <&gpio1 2 0>;
++	status = "okay";
++};
++
++&usdhc2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc2_2>;
++	non-removable;
++	status = "okay";
++};
++
+ &usdhc3 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_usdhc3_2>;
++	cd-gpios = <&gpio3 9 0>;
+ 	status = "okay";
+ };
+diff --git a/arch/arm/boot/dts/imx6q.dtsi b/arch/arm/boot/dts/imx6q.dtsi
+index 9717764..5818835 100644
+--- a/arch/arm/boot/dts/imx6q.dtsi
++++ b/arch/arm/boot/dts/imx6q.dtsi
+@@ -275,6 +275,17 @@
+ 							MX6Q_PAD_SD1_DAT3__SD1_DATA3 0x17059
+ 						>;
+ 					};
++
++					pinctrl_usdhc1_2: usdhc1grp-2 {
++						fsl,pins = <
++							MX6Q_PAD_SD1_CMD__SD1_CMD    0x17059
++							MX6Q_PAD_SD1_CLK__SD1_CLK    0x10059
++							MX6Q_PAD_SD1_DAT0__SD1_DATA0 0x17059
++							MX6Q_PAD_SD1_DAT1__SD1_DATA1 0x17059
++							MX6Q_PAD_SD1_DAT2__SD1_DATA2 0x17059
++							MX6Q_PAD_SD1_DAT3__SD1_DATA3 0x17059
++						>;
++					};
+ 				};
+ 
+ 				usdhc2 {
+@@ -292,6 +303,17 @@
+ 							MX6Q_PAD_NANDF_D7__SD2_DATA7 0x17059
+ 						>;
+ 					};
++
++					pinctrl_usdhc2_2: usdhc2grp-2 {
++						fsl,pins = <
++							MX6Q_PAD_SD2_CMD__SD2_CMD    0x17059
++							MX6Q_PAD_SD2_CLK__SD2_CLK    0x10059
++							MX6Q_PAD_SD2_DAT0__SD2_DATA0 0x17059
++							MX6Q_PAD_SD2_DAT1__SD2_DATA1 0x17059
++							MX6Q_PAD_SD2_DAT2__SD2_DATA2 0x17059
++							MX6Q_PAD_SD2_DAT3__SD2_DATA3 0x17059
++						>;
++					};
+ 				};
+ 
+ 				usdhc3 {
+-- 
+1.7.10.4
+
