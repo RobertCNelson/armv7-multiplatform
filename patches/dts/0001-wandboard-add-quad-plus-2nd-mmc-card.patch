@@ -1,0 +1,156 @@
+From a957f06191d1eb1afe7acbcdfb976188466ee8ea Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Thu, 27 Jun 2013 17:18:36 -0500
+Subject: [PATCH] wandboard: add quad plus 2nd mmc card
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/boot/dts/Makefile             |    3 ++-
+ arch/arm/boot/dts/imx6dl-wandboard.dts |    6 +++++
+ arch/arm/boot/dts/imx6dl.dtsi          |   15 ++++++++++-
+ arch/arm/boot/dts/imx6q-wandboard.dts  |   44 ++++++++++++++++++++++++++++++++
+ arch/arm/boot/dts/imx6q.dtsi           |   13 ++++++++++
+ 5 files changed, 79 insertions(+), 2 deletions(-)
+ create mode 100644 arch/arm/boot/dts/imx6q-wandboard.dts
+
+diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
+index f0895c5..a3d2869 100644
+--- a/arch/arm/boot/dts/Makefile
++++ b/arch/arm/boot/dts/Makefile
+@@ -120,7 +120,8 @@ dtb-$(CONFIG_ARCH_MXC) += \
+ 	imx6q-sabreauto.dtb \
+ 	imx6q-sabrelite.dtb \
+ 	imx6q-sabresd.dtb \
+-	imx6q-sbc6x.dtb
++	imx6q-sbc6x.dtb \
++	imx6q-wandboard.dtb
+ dtb-$(CONFIG_ARCH_MXS) += imx23-evk.dtb \
+ 	imx23-olinuxino.dtb \
+ 	imx23-stmp378x_devb.dtb \
+diff --git a/arch/arm/boot/dts/imx6dl-wandboard.dts b/arch/arm/boot/dts/imx6dl-wandboard.dts
+index bfc59c3..ea8b0fd 100644
+--- a/arch/arm/boot/dts/imx6dl-wandboard.dts
++++ b/arch/arm/boot/dts/imx6dl-wandboard.dts
+@@ -37,6 +37,12 @@
+ 	status = "okay";
+ };
+ 
++&usdhc1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc1_1>;
++	status = "okay";
++};
++
+ &usdhc3 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_usdhc3_2>;
+diff --git a/arch/arm/boot/dts/imx6dl.dtsi b/arch/arm/boot/dts/imx6dl.dtsi
+index 5bcdf3a..bcc5ef3 100644
+--- a/arch/arm/boot/dts/imx6dl.dtsi
++++ b/arch/arm/boot/dts/imx6dl.dtsi
+@@ -104,6 +104,19 @@
+ 					};
+ 				};
+ 
++				usdhc1 {
++					pinctrl_usdhc1_1: usdhc1grp-1 {
++						fsl,pins = <
++							MX6DL_PAD_SD1_CMD__SD1_CMD    0x17059
++							MX6DL_PAD_SD1_CLK__SD1_CLK    0x10059
++							MX6DL_PAD_SD1_DAT0__SD1_DATA0 0x17059
++							MX6DL_PAD_SD1_DAT1__SD1_DATA1 0x17059
++							MX6DL_PAD_SD1_DAT2__SD1_DATA2 0x17059
++							MX6DL_PAD_SD1_DAT3__SD1_DATA3 0x17059
++						>;
++					};
++				};
++
+ 				usdhc2 {
+ 					pinctrl_usdhc2_1: usdhc2grp-1 {
+ 						fsl,pins = <
+@@ -137,7 +150,7 @@
+ 						>;
+ 					};
+ 
+-					pinctrl_usdhc3_2: usdhc3grp_2 {
++					pinctrl_usdhc3_2: usdhc3grp-2 {
+ 						fsl,pins = <
+ 							MX6DL_PAD_SD3_CMD__SD3_CMD    0x17059
+ 							MX6DL_PAD_SD3_CLK__SD3_CLK    0x10059
+diff --git a/arch/arm/boot/dts/imx6q-wandboard.dts b/arch/arm/boot/dts/imx6q-wandboard.dts
+new file mode 100644
+index 0000000..24be415
+--- /dev/null
++++ b/arch/arm/boot/dts/imx6q-wandboard.dts
+@@ -0,0 +1,44 @@
++/*
++ * Copy of mx6dl-wandboard.dts
++ * 2Gb of ram
++ */
++/dts-v1/;
++#include "imx6q.dtsi"
++
++/ {
++	model = "Wandboard i.MX6 Quad Board";
++	compatible = "wand,imx6q-wandboard", "fsl,imx6q";
++
++	memory {
++		reg = <0x10000000 0x80000000>; /* 2GB */
++	};
++};
++
++&fec {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_enet_1>;
++	phy-mode = "rgmii";
++	status = "okay";
++};
++
++&uart1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart1_1>;
++	status = "okay";
++};
++
++&usbh1 {
++	status = "okay";
++};
++
++&usdhc1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc1_1>;
++	status = "okay";
++};
++
++&usdhc3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc3_2>;
++	status = "okay";
++};
+diff --git a/arch/arm/boot/dts/imx6q.dtsi b/arch/arm/boot/dts/imx6q.dtsi
+index 11b546f..4d0927e 100644
+--- a/arch/arm/boot/dts/imx6q.dtsi
++++ b/arch/arm/boot/dts/imx6q.dtsi
+@@ -260,6 +260,19 @@
+ 					};
+ 				};
+ 
++				usdhc1 {
++					pinctrl_usdhc1_1: usdhc1grp-1 {
++						fsl,pins = <
++							MX6Q_PAD_SD1_CMD__SD1_CMD    0x17059
++							MX6Q_PAD_SD1_CLK__SD1_CLK    0x10059
++							MX6Q_PAD_SD1_DAT0__SD1_DATA0 0x17059
++							MX6Q_PAD_SD1_DAT1__SD1_DATA1 0x17059
++							MX6Q_PAD_SD1_DAT2__SD1_DATA2 0x17059
++							MX6Q_PAD_SD1_DAT3__SD1_DATA3 0x17059
++						>;
++					};
++				};
++
+ 				usdhc2 {
+ 					pinctrl_usdhc2_1: usdhc2grp-1 {
+ 						fsl,pins = <
+-- 
+1.7.10.4
+
