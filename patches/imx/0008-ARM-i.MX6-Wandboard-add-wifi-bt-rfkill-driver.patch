@@ -1,4 +1,4 @@
-From 4878aa895099623d40273263934b171f90d5cffd Mon Sep 17 00:00:00 2001
+From 5e0841a27506b3c735ff5783c7b3552b5f4be154 Mon Sep 17 00:00:00 2001
 From: Vladimir Ermakov <vooon341@gmail.com>
 Date: Wed, 10 Jul 2013 03:06:54 +0400
 Subject: [PATCH 3/3]  [ARM] i.MX6 Wandboard add wifi+bt rfkill driver
@@ -6,12 +6,14 @@ Subject: [PATCH 3/3]  [ARM] i.MX6 Wandboard add wifi+bt rfkill driver
 BRCM WiFi module requires initialization for control gpio;
 Additional provides rfkill funcs.
 
+v2: fix wrong probe func in driver struct
+
 Signed-off-by: Vladimir Ermakov <vooon341@gmail.com>
 ---
  arch/arm/mach-imx/devices/Kconfig       |   6 +
  arch/arm/mach-imx/devices/Makefile      |   1 +
- arch/arm/mach-imx/devices/wand-rfkill.c | 288 ++++++++++++++++++++++++++++++++
- 3 files changed, 295 insertions(+)
+ arch/arm/mach-imx/devices/wand-rfkill.c | 289 ++++++++++++++++++++++++++++++++
+ 3 files changed, 296 insertions(+)
  create mode 100644 arch/arm/mach-imx/devices/wand-rfkill.c
 
 diff --git a/arch/arm/mach-imx/devices/Kconfig b/arch/arm/mach-imx/devices/Kconfig
@@ -39,10 +41,10 @@ index 67416fb..b2aded5 100644
 +obj-$(CONFIG_WAND_RFKILL) += wand-rfkill.o
 diff --git a/arch/arm/mach-imx/devices/wand-rfkill.c b/arch/arm/mach-imx/devices/wand-rfkill.c
 new file mode 100644
-index 0000000..a7b2251
+index 0000000..ec7672d
 --- /dev/null
 +++ b/arch/arm/mach-imx/devices/wand-rfkill.c
-@@ -0,0 +1,288 @@
+@@ -0,0 +1,289 @@
 +/*
 + * arch/arm/mach-imx/devices/wand-rfkill.c
 + *
@@ -255,7 +257,6 @@ index 0000000..a7b2251
 +		return ret;
 +	}
 +
-+
 +	/* setup WiFi */
 +	ret = wand_rfkill_wifi_probe(&pdev->dev, pdev->dev.of_node, &rfkill[0]);
 +	if (ret < 0)
@@ -288,6 +289,8 @@ index 0000000..a7b2251
 +{
 +	struct wand_rfkill_data *rfkill = platform_get_drvdata(pdev);
 +
++	dev_info(&pdev->dev, "Module unloading\n");
++
 +	if (!rfkill)
 +		return 0;
 +
@@ -318,12 +321,12 @@ index 0000000..a7b2251
 +
 +static struct platform_driver wand_rfkill_driver = {
 +	.driver = {
-+		.name = "wandboard_rfkill",
++		.name = "wandboard-rfkill",
 +		.owner = THIS_MODULE,
 +		.of_match_table = of_match_ptr(wand_rfkill_match),
 +	},
 +	.probe = wand_rfkill_probe,
-+	.probe = wand_rfkill_remove
++	.remove = wand_rfkill_remove
 +};
 +
 +module_platform_driver(wand_rfkill_driver);
