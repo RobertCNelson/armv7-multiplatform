@@ -153,9 +153,11 @@ dts () {
 	${git} "${DIR}/patches/dts/0005-mainline-sync-imx6q-dl-wandboard.dts-remove-usdhc1.patch"
 	${git} "${DIR}/patches/dts/0006-ARM-dts-imx6dl-wandboard-Add-SDHC1-and-SDHC2-ports.patch"
 	${git} "${DIR}/patches/dts/0007-ARM-dts-imx6q-wandboard-Add-SDHC1-and-SDHC2-ports.patch"
+	${git} "${DIR}/patches/dts/0008-ARM-dts-imx6dl-wandboard-Add-support-for-UART3.patch"
+	${git} "${DIR}/patches/dts/0009-ARM-dts-imx6q-wandboard-Add-support-for-UART3.patch"
 
 #wip:
-#	${git} "${DIR}/patches/dts/0008-i.MX6-Wandboard-add-sound-stgl5000-and-wifi-bt.patch"
+#	${git} "${DIR}/patches/dts/0010-i.MX6-Wandboard-add-sound-stgl5000-and-wifi-bt.patch"
 }
 
 arm
