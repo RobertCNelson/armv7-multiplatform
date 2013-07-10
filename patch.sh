@@ -140,13 +140,16 @@ imx () {
 	${git} "${DIR}/patches/imx/0005-thermal-add-imx-thermal-driver-support.patch"
 	#http://marc.info/?l=linux-arm-kernel&m=137286613127404&w=2
 	${git} "${DIR}/patches/imx/0006-ARM-mx6-Fix-the-number-of-reported-cores.patch"
+	${git} "${DIR}/patches/imx/0007-i.MX6-Wandboard-add-CKO1-clock-output.patch"
+	${git} "${DIR}/patches/imx/0008-i.MX6-Wandboard-add-wifi-bt-rfkill-driver.patch"
 }
 
 dts () {
 	echo "dir: dts"
 	${git} "${DIR}/patches/dts/0001-wandboard-add-quad-plus-2nd-mmc-card.patch"
+#wip:
+#	${git} "${DIR}/patches/dts/0002-i.MX6-Wandboard-add-sound-stgl5000-and-wifi-bt.patch"
 }
-
 
 arm
 omap
