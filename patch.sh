@@ -124,6 +124,7 @@ omap () {
 saucy () {
 	echo "dir: saucy"
 	${git} "${DIR}/patches/saucy/0001-saucy-disable-stack-protector.patch"
+	${git} "${DIR}/patches/saucy/0002-saucy-disable-Werror-unused-but-set-variable.patch"
 }
 
 sprz319_erratum () {
