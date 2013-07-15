@@ -18,7 +18,7 @@ index f2feedb..c9bf524 100644
  		   -fno-delete-null-pointer-checks \
 -		   -fno-stack-protector
 +		   -fno-stack-protector \
-+		   -Wno-unsed-but-set-variable
++		   -Wno-unused-but-set-variable
  KBUILD_AFLAGS_KERNEL :=
  KBUILD_CFLAGS_KERNEL :=
  KBUILD_AFLAGS   := -D__ASSEMBLY__
