@@ -176,6 +176,7 @@ debian_regs () {
 		esac
 
 		#pkg: libncurses5-dev
+		echo "host debug: libncurses5-dev: [`LC_ALL=C dpkg --list | awk '{print $2}' | grep "^libncurses5-dev"`]"
 		case "${deb_distro}" in
 		squeeze|lucid)
 			pkg="libncurses5-dev"
@@ -192,7 +193,8 @@ debian_regs () {
 		*)
 			deb_arch=$(LC_ALL=C dpkg --print-architecture)
 			pkg="libncurses5-dev"
-			LC_ALL=C dpkg --list | awk '{print $2}' | grep "^${pkg}:${deb_arch}" >/dev/null || deb_pkgs="${deb_pkgs}${pkg} "
+			#LC_ALL=C dpkg --list | awk '{print $2}' | grep "^${pkg}:${deb_arch}" >/dev/null || deb_pkgs="${deb_pkgs}${pkg} "
+			LC_ALL=C dpkg --list | awk '{print $2}' | grep "^${pkg}" >/dev/null || deb_pkgs="${deb_pkgs}${pkg} "
 			;;
 		esac
 
