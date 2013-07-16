@@ -1,6 +1,6 @@
-From c98b8b038d72f150db8064a6c70e2df481c63dda Mon Sep 17 00:00:00 2001
+From 05b0e6201a62e5efddf0d2786aaac8cbb904597e Mon Sep 17 00:00:00 2001
 From: Richard Zhu <r65037@freescale.com>
-Date: Fri, 12 Jul 2013 17:41:18 +0800
+Date: Tue, 16 Jul 2013 11:28:48 +0800
 Subject: [PATCH 3/3] sata: imx: add ahci sata support on imx platforms
 
 imx6q contains one Synopsys AHCI SATA controller,
@@ -26,15 +26,16 @@ initialized codes, re-use the generic ahci_platform driver, and
 keep the generic ahci_platform driver clean as much as possible.
 
 Signed-off-by: Richard Zhu <r65037@freescale.com>
+Reviewed-by: Shawn Guo <shawn.guo@linaro.org>
 ---
  drivers/ata/Kconfig    |    9 ++
  drivers/ata/Makefile   |    1 +
- drivers/ata/sata_imx.c |  241 ++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 251 insertions(+)
+ drivers/ata/sata_imx.c |  236 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 246 insertions(+)
  create mode 100644 drivers/ata/sata_imx.c
 
 diff --git a/drivers/ata/Kconfig b/drivers/ata/Kconfig
-index aba6e93..34ca308 100644
+index 80dc988..bfe01ff 100644
 --- a/drivers/ata/Kconfig
 +++ b/drivers/ata/Kconfig
 @@ -97,6 +97,15 @@ config SATA_AHCI_PLATFORM
@@ -67,10 +68,10 @@ index c04d0fd..04b1c6c 100644
  obj-$(CONFIG_PDC_ADMA)		+= pdc_adma.o
 diff --git a/drivers/ata/sata_imx.c b/drivers/ata/sata_imx.c
 new file mode 100644
-index 0000000..fb13867
+index 0000000..328f2d3
 --- /dev/null
 +++ b/drivers/ata/sata_imx.c
-@@ -0,0 +1,241 @@
+@@ -0,0 +1,236 @@
 +/*
 + * Freescale IMX AHCI SATA platform driver
 + * Copyright 2013 Freescale Semiconductor, Inc.
@@ -107,6 +108,7 @@ index 0000000..fb13867
 +struct imx_ahci_priv {
 +	struct platform_device *ahci_pdev;
 +	struct clk *sata_ref_clk;
++	struct clk *ahb_clk;
 +	struct regmap *gpr;
 +};
 +
@@ -114,7 +116,6 @@ index 0000000..fb13867
 +{
 +	int ret = 0;
 +	unsigned int reg_val;
-+	struct clk *ahb_clk;
 +	struct imx_ahci_priv *imxpriv = dev_get_drvdata(dev->parent);
 +
 +	imxpriv->gpr =
@@ -175,16 +176,8 @@ index 0000000..fb13867
 +		writel(reg_val, mmio + HOST_PORTS_IMPL);
 +	}
 +
-+	ahb_clk = devm_clk_get(dev, "ahb");
-+	if (IS_ERR(ahb_clk)) {
-+		dev_err(dev, "no ahb clock.\n");
-+		clk_disable_unprepare(imxpriv->sata_ref_clk);
-+		devm_clk_put(dev, imxpriv->sata_ref_clk);
-+		return PTR_ERR(ahb_clk);
-+	}
-+	reg_val = clk_get_rate(ahb_clk) / 1000;
++	reg_val = clk_get_rate(imxpriv->ahb_clk) / 1000;
 +	writel(reg_val, mmio + HOST_TIMER1MS);
-+	devm_clk_put(dev, ahb_clk);
 +
 +	return 0;
 +}
@@ -233,11 +226,18 @@ index 0000000..fb13867
 +	ahci_dev = &ahci_pdev->dev;
 +	ahci_dev->parent = dev;
 +
++	imxpriv->ahb_clk = devm_clk_get(dev, "ahb");
++	if (IS_ERR(imxpriv->ahb_clk)) {
++		dev_err(dev, "can't get ahb clock.\n");
++		ret = PTR_ERR(imxpriv->ahb_clk);
++		goto err_out;
++	}
++
 +	imxpriv->sata_ref_clk = devm_clk_get(dev, "sata_ref");
 +	if (IS_ERR(imxpriv->sata_ref_clk)) {
 +		dev_err(dev, "can't get sata_ref clock.\n");
 +		ret = PTR_ERR(imxpriv->sata_ref_clk);
-+		goto err_pdev_put;
++		goto err_out;
 +	}
 +
 +	imxpriv->ahci_pdev = ahci_pdev;
@@ -277,9 +277,6 @@ index 0000000..fb13867
 +	ret = platform_device_add(ahci_pdev);
 +	if (ret) {
 +err_out:
-+		platform_set_drvdata(pdev, NULL);
-+		devm_clk_put(dev, imxpriv->sata_ref_clk);
-+err_pdev_put:
 +		platform_device_put(ahci_pdev);
 +		return ret;
 +	}
@@ -293,7 +290,6 @@ index 0000000..fb13867
 +	struct platform_device *ahci_pdev = imxpriv->ahci_pdev;
 +
 +	platform_device_unregister(ahci_pdev);
-+	platform_set_drvdata(pdev, NULL);
 +	return 0;
 +}
 +

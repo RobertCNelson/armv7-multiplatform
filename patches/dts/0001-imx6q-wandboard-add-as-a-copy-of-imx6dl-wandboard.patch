@@ -5,6 +5,7 @@ Subject: [PATCH 1/2] imx6q-wandboard: add as a copy of imx6dl-wandboard
 
 v1: 2GB
 v2: add ahci
+v3: ahci -> sata rename (v7 patchset)
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
@@ -27,7 +28,7 @@ index 641b3c9..fb3d863 100644
  dtb-$(CONFIG_ARCH_MXS) += imx23-evk.dtb \
 diff --git a/arch/arm/boot/dts/imx6q-wandboard.dts b/arch/arm/boot/dts/imx6q-wandboard.dts
 new file mode 100644
-index 0000000..695779d
+index 0000000..39dcea7
 --- /dev/null
 +++ b/arch/arm/boot/dts/imx6q-wandboard.dts
 @@ -0,0 +1,48 @@
@@ -53,7 +54,7 @@ index 0000000..695779d
 +	};
 +};
 +
-+&ahci {
++&sata {
 +	status = "okay";
 +};
 +

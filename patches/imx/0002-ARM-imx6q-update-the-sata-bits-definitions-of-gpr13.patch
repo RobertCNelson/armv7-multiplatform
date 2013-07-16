@@ -1,11 +1,13 @@
-From 23c9b0d1575d9dab11671f3c0135c1d09e10e961 Mon Sep 17 00:00:00 2001
+From 24d34bf1684477b06414ef6ffd021b71990993fb Mon Sep 17 00:00:00 2001
 From: Richard Zhu <r65037@freescale.com>
-Date: Fri, 12 Jul 2013 17:41:17 +0800
+Date: Tue, 16 Jul 2013 11:28:47 +0800
 Subject: [PATCH 2/3] ARM: imx6q: update the sata bits definitions of gpr13
 
 Replace the SATA_PHY_# by the more readable definitons.
 
 Signed-off-by: Richard Zhu <r65037@freescale.com>
+Acked-by: Shawn Guo <shawn.guo@linaro.org>
+Acked-by: Shawn Guo <shawn.guo@linaro.org>
 ---
  include/linux/mfd/syscon/imx6q-iomuxc-gpr.h |  121 +++++++++++++++++++--------
  1 file changed, 84 insertions(+), 37 deletions(-)

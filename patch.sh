@@ -57,7 +57,7 @@ arm () {
 
 imx () {
 	echo "dir: imx"
-	#http://www.spinics.net/lists/arm-kernel/msg258247.html
+	#v7: http://www.spinics.net/lists/linux-ide/msg45738.html
 	#http://patchwork.ozlabs.org/project/linux-ide/list/
 	${git} "${DIR}/patches/imx/0001-ARM-dtsi-enable-ahci-sata-on-imx6q-platforms.patch"
 	${git} "${DIR}/patches/imx/0002-ARM-imx6q-update-the-sata-bits-definitions-of-gpr13.patch"
