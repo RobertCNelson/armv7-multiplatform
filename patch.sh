@@ -160,10 +160,7 @@ imx_dts () {
 	${git} "${DIR}/patches/imx_dts/0092-ARM-imx-Select-MIGHT_HAVE_CACHE_L2X0.patch"
 	${git} "${DIR}/patches/imx_dts/0093-ARM-imx-add-common-clock-support-for-fixup-div.patch"
 	${git} "${DIR}/patches/imx_dts/0094-ARM-imx-add-common-clock-support-for-fixup-mux.patch"
-
-	#Breaks our Solo Wandboard used as SoloLite
-	#${git} "${DIR}/patches/imx_dts/0095-ARM-imx6-change-some-clocks-to-fixup-clocks.patch"
-
+	${git} "${DIR}/patches/imx_dts/0095-ARM-imx6-change-some-clocks-to-fixup-clocks.patch"
 	${git} "${DIR}/patches/imx_dts/0096-ARM-imx-clk-pllv3-improve-the-timeout-waiting-method.patch"
 	${git} "${DIR}/patches/imx_dts/0097-ARM-dts-imx-use-generic-DMA-bindings-for-SSI-nodes.patch"
 	${git} "${DIR}/patches/imx_dts/0098-ARM-dts-imx-remove-old-DMA-binding-data-from-gpmi-no.patch"
@@ -197,10 +194,16 @@ dts () {
 	${git} "${DIR}/patches/dts/0002-imx6s-wandboard-add-as-a-copy-of-imx6dl-wandboard.patch"
 }
 
+hacks () {
+	echo "dir: hacks"
+	${git} "${DIR}/patches/hacks/0001-wand-solo-partial-revert-of-0095-ARM-imx6-change-som.patch"
+}
+
 arm
 drivers
 imx_dts
 imx
 dts
+hacks
 
 echo "patch.sh ran successful"
