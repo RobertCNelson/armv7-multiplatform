@@ -191,8 +191,8 @@ dts () {
 	#omap: https://git.kernel.org/cgit/linux/kernel/git/bcousson/linux-omap-dt.git/
 	#imx: https://git.linaro.org/gitweb?p=people/shawnguo/linux-2.6.git;a=summary
 
-#	${git} "${DIR}/patches/dts/0001-imx6q-wandboard-add-as-a-copy-of-imx6dl-wandboard.patch"
-#	${git} "${DIR}/patches/dts/0002-imx6s-wandboard-add-as-a-copy-of-imx6dl-wandboard.patch"
+	${git} "${DIR}/patches/dts/0001-imx6q-wandboard-add-as-a-copy-of-imx6dl-wandboard.patch"
+	${git} "${DIR}/patches/dts/0002-imx6s-wandboard-add-as-a-copy-of-imx6dl-wandboard.patch"
 }
 
 arm
