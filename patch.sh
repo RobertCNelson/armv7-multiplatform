@@ -160,7 +160,10 @@ imx_dts () {
 	${git} "${DIR}/patches/imx_dts/0092-ARM-imx-Select-MIGHT_HAVE_CACHE_L2X0.patch"
 	${git} "${DIR}/patches/imx_dts/0093-ARM-imx-add-common-clock-support-for-fixup-div.patch"
 	${git} "${DIR}/patches/imx_dts/0094-ARM-imx-add-common-clock-support-for-fixup-mux.patch"
-	${git} "${DIR}/patches/imx_dts/0095-ARM-imx6-change-some-clocks-to-fixup-clocks.patch"
+
+	#Breaks our Solo Wandboard used as SoloLite
+	#${git} "${DIR}/patches/imx_dts/0095-ARM-imx6-change-some-clocks-to-fixup-clocks.patch"
+
 	${git} "${DIR}/patches/imx_dts/0096-ARM-imx-clk-pllv3-improve-the-timeout-waiting-method.patch"
 	${git} "${DIR}/patches/imx_dts/0097-ARM-dts-imx-use-generic-DMA-bindings-for-SSI-nodes.patch"
 	${git} "${DIR}/patches/imx_dts/0098-ARM-dts-imx-remove-old-DMA-binding-data-from-gpmi-no.patch"
@@ -190,7 +193,6 @@ dts () {
 	echo "dir: dts"
 	#omap: https://git.kernel.org/cgit/linux/kernel/git/bcousson/linux-omap-dt.git/
 	#imx: https://git.linaro.org/gitweb?p=people/shawnguo/linux-2.6.git;a=summary
-
 	${git} "${DIR}/patches/dts/0001-imx6q-wandboard-add-as-a-copy-of-imx6dl-wandboard.patch"
 	${git} "${DIR}/patches/dts/0002-imx6s-wandboard-add-as-a-copy-of-imx6dl-wandboard.patch"
 }
