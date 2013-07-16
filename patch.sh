@@ -67,7 +67,7 @@ imx () {
 dts () {
 	echo "dir: dts"
 	${git} "${DIR}/patches/dts/0001-imx6q-wandboard-add-as-a-copy-of-imx6dl-wandboard.patch"
-	${git} "${DIR}/patches/dts/0002-imx6sl-wandboard-add-as-a-copy-of-imx6dl-wandboard.patch"
+	${git} "${DIR}/patches/dts/0002-imx6s-wandboard-add-as-a-copy-of-imx6dl-wandboard.patch"
 }
 
 arm

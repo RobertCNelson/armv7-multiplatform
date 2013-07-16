@@ -1,17 +1,18 @@
 From 9ced54a8f8ac75e60a31e1623e9f7932e4743446 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Thu, 11 Jul 2013 15:54:21 -0500
-Subject: [PATCH 2/2] imx6sl-wandboard: add as a copy of imx6dl-wandboard
+Subject: [PATCH 2/2] imx6s-wandboard: add as a copy of imx6dl-wandboard
 
 v1: 512MB, fec/usb disabled
+v2: u-boot looks for s vs sl: imx6s-wandboard.dtb
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  arch/arm/boot/dts/Makefile             |    1 +
- arch/arm/boot/dts/imx6sl-wandboard.dts |   48 ++++++++++++++++++++++++++++++++
+ arch/arm/boot/dts/imx6s-wandboard.dts |   48 ++++++++++++++++++++++++++++++++
  arch/arm/boot/dts/imx6sl.dtsi          |   11 ++++++++
  3 files changed, 60 insertions(+)
- create mode 100644 arch/arm/boot/dts/imx6sl-wandboard.dts
+ create mode 100644 arch/arm/boot/dts/imx6s-wandboard.dts
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
 index fb3d863..111833a 100644
@@ -21,15 +22,15 @@ index fb3d863..111833a 100644
  	imx6q-sbc6x.dtb \
  	imx6q-wandboard.dtb \
  	imx6sl-evk.dtb \
-+	imx6sl-wandboard.dtb \
++	imx6s-wandboard.dtb \
  	vf610-twr.dtb
  dtb-$(CONFIG_ARCH_MXS) += imx23-evk.dtb \
  	imx23-olinuxino.dtb \
-diff --git a/arch/arm/boot/dts/imx6sl-wandboard.dts b/arch/arm/boot/dts/imx6sl-wandboard.dts
+diff --git a/arch/arm/boot/dts/imx6s-wandboard.dts b/arch/arm/boot/dts/imx6s-wandboard.dts
 new file mode 100644
 index 0000000..96beac0
 --- /dev/null
-+++ b/arch/arm/boot/dts/imx6sl-wandboard.dts
++++ b/arch/arm/boot/dts/imx6s-wandboard.dts
 @@ -0,0 +1,48 @@
 +/*
 + * Copyright 2013 Freescale Semiconductor, Inc.
@@ -46,7 +47,7 @@ index 0000000..96beac0
 +
 +/ {
 +	model = "Wandboard i.MX6 Solo Lite Board";
-+	compatible = "wand,imx6sl-wandboard", "fsl,imx6sl";
++	compatible = "wand,imx6s-wandboard", "fsl,imx6sl";
 +
 +	memory {
 +		reg = <0x10000000 0x20000000>; /* 512Mb */
