@@ -6,19 +6,20 @@ Subject: [PATCH 1/2] imx6q-wandboard: add as a copy of imx6dl-wandboard
 v1: 2GB
 v2: add ahci
 v3: ahci -> sata rename (v7 patchset)
+v4: merge with v3.11-rc1 + for-next
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  arch/arm/boot/dts/Makefile            |    1 +
- arch/arm/boot/dts/imx6q-wandboard.dts |   48 +++++++++++++++++++++++++++++++++
- 2 files changed, 49 insertions(+)
+ arch/arm/boot/dts/imx6q-wandboard.dts |  145 +++++++++++++++++++++++++++++++++
+ 2 files changed, 146 insertions(+)
  create mode 100644 arch/arm/boot/dts/imx6q-wandboard.dts
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 641b3c9..fb3d863 100644
+index 2cec2ff..ce1b3a3 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
-@@ -131,6 +131,7 @@ dtb-$(CONFIG_ARCH_MXC) += \
+@@ -133,6 +133,7 @@ dtb-$(CONFIG_ARCH_MXC) += \
  	imx6q-sabrelite.dtb \
  	imx6q-sabresd.dtb \
  	imx6q-sbc6x.dtb \
@@ -28,10 +29,10 @@ index 641b3c9..fb3d863 100644
  dtb-$(CONFIG_ARCH_MXS) += imx23-evk.dtb \
 diff --git a/arch/arm/boot/dts/imx6q-wandboard.dts b/arch/arm/boot/dts/imx6q-wandboard.dts
 new file mode 100644
-index 0000000..39dcea7
+index 0000000..f75a9df
 --- /dev/null
 +++ b/arch/arm/boot/dts/imx6q-wandboard.dts
-@@ -0,0 +1,48 @@
+@@ -0,0 +1,145 @@
 +/*
 + * Copyright 2013 Freescale Semiconductor, Inc.
 + *
@@ -46,16 +47,82 @@ index 0000000..39dcea7
 +#include "imx6q.dtsi"
 +
 +/ {
-+	model = "Wandboard i.MX6 Quad Lite Board";
++	model = "Wandboard i.MX6 Quad Board";
 +	compatible = "wand,imx6q-wandboard", "fsl,imx6q";
 +
 +	memory {
 +		reg = <0x10000000 0x80000000>; /* 2GB */
 +	};
++
++	regulators {
++		compatible = "simple-bus";
++
++		reg_2p5v: 2p5v {
++			compatible = "regulator-fixed";
++			regulator-name = "2P5V";
++			regulator-min-microvolt = <2500000>;
++			regulator-max-microvolt = <2500000>;
++			regulator-always-on;
++		};
++
++		reg_3p3v: 3p3v {
++			compatible = "regulator-fixed";
++			regulator-name = "3P3V";
++			regulator-min-microvolt = <3300000>;
++			regulator-max-microvolt = <3300000>;
++			regulator-always-on;
++		};
++	};
++
++	sound {
++		compatible = "fsl,imx6q-wandboard-sgtl5000",
++			     "fsl,imx-audio-sgtl5000";
++		model = "imx6q-wandboard-sgtl5000";
++		ssi-controller = <&ssi1>;
++		audio-codec = <&codec>;
++		audio-routing =
++			"MIC_IN", "Mic Jack",
++			"Mic Jack", "Mic Bias",
++			"Headphone Jack", "HP_OUT";
++		mux-int-port = <1>;
++		mux-ext-port = <3>;
++	};
 +};
 +
-+&sata {
++&audmux {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_audmux_2>;
 +	status = "okay";
++};
++
++&i2c2 {
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c2_2>;
++	status = "okay";
++
++	codec: sgtl5000@0a {
++		compatible = "fsl,sgtl5000";
++		reg = <0x0a>;
++		clocks = <&clks 169>;
++		VDDA-supply = <&reg_2p5v>;
++		VDDIO-supply = <&reg_3p3v>;
++	};
++};
++
++&iomuxc {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_hog>;
++
++	hog {
++		pinctrl_hog: hoggrp {
++			fsl,pins = <
++				MX6QDL_PAD_GPIO_0__CCM_CLKO1 	0x130b0
++				MX6QDL_PAD_GPIO_2__GPIO1_IO02	0x80000000
++				MX6QDL_PAD_EIM_DA9__GPIO3_IO09	0x80000000
++			>;
++		};
++	};
 +};
 +
 +&fec {
@@ -65,9 +132,25 @@ index 0000000..39dcea7
 +	status = "okay";
 +};
 +
++&sata {
++	status = "okay";
++};
++
++&ssi1 {
++	fsl,mode = "i2s-slave";
++	status = "okay";
++};
++
 +&uart1 {
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&pinctrl_uart1_1>;
++	status = "okay";
++};
++
++&uart3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart3_2>;
++	fsl,uart-has-rtscts;
 +	status = "okay";
 +};
 +
@@ -75,9 +158,24 @@ index 0000000..39dcea7
 +	status = "okay";
 +};
 +
++&usdhc1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc1_2>;
++	cd-gpios = <&gpio1 2 0>;
++	status = "okay";
++};
++
++&usdhc2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usdhc2_2>;
++	non-removable;
++	status = "okay";
++};
++
 +&usdhc3 {
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&pinctrl_usdhc3_2>;
++	cd-gpios = <&gpio3 9 0>;
 +	status = "okay";
 +};
 -- 

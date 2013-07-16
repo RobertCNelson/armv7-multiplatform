@@ -1,0 +1,30 @@
+From 8c6a9a714c28a2d5c5850f7268af6530535623f1 Mon Sep 17 00:00:00 2001
+From: Alexander Shiyan <shc_work@mail.ru>
+Date: Sun, 23 Jun 2013 10:54:47 +0400
+Subject: [PATCH 015/109] ARM: dts: imx27: Rename PWM devicetree node
+
+i.MX27 have only one PWM, so index from PWM devicetree node removed.
+
+Signed-off-by: Alexander Shiyan <eagle.alexander923@gmail.com>
+Acked-by: Sascha Hauer <s.hauer@pengutronix.de>
+Signed-off-by: Shawn Guo <shawn.guo@linaro.org>
+---
+ arch/arm/boot/dts/imx27.dtsi |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx27.dtsi b/arch/arm/boot/dts/imx27.dtsi
+index c61a4e8..e6f8f7d 100644
+--- a/arch/arm/boot/dts/imx27.dtsi
++++ b/arch/arm/boot/dts/imx27.dtsi
+@@ -102,7 +102,7 @@
+ 				clock-names = "ipg", "per";
+ 			};
+ 
+-			pwm0: pwm@10006000 {
++			pwm: pwm@10006000 {
+ 				compatible = "fsl,imx27-pwm";
+ 				reg = <0x10006000 0x1000>;
+ 				interrupts = <23>;
+-- 
+1.7.10.4
+
