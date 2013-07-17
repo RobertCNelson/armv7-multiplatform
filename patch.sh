@@ -66,6 +66,7 @@ imx_dts () {
 	echo "dir: imx_dts"
 	#With all the imx6*.dtsi changes, its eaiser to just pull the for-next then try to manually rebase
 	#https://git.linaro.org/gitweb?p=people/shawnguo/linux-2.6.git;a=shortlog;h=refs/heads/for-next
+
 	${git} "${DIR}/patches/imx_dts/0001-ARM-i.MX53-Fix-UART-pad-configuration.patch"
 	${git} "${DIR}/patches/imx_dts/0002-ARM-imx27-Fix-documentation-for-SPLL-clock.patch"
 	${git} "${DIR}/patches/imx_dts/0003-ARM-i.MX27-Typo-fix.patch"
@@ -162,19 +163,27 @@ imx_dts () {
 	${git} "${DIR}/patches/imx_dts/0094-ARM-imx-add-common-clock-support-for-fixup-mux.patch"
 	${git} "${DIR}/patches/imx_dts/0095-ARM-imx6-change-some-clocks-to-fixup-clocks.patch"
 	${git} "${DIR}/patches/imx_dts/0096-ARM-imx-clk-pllv3-improve-the-timeout-waiting-method.patch"
-	${git} "${DIR}/patches/imx_dts/0097-ARM-dts-imx-use-generic-DMA-bindings-for-SSI-nodes.patch"
-	${git} "${DIR}/patches/imx_dts/0098-ARM-dts-imx-remove-old-DMA-binding-data-from-gpmi-no.patch"
-	${git} "${DIR}/patches/imx_dts/0099-ARM-mxs-Simplify-detection-of-CrystalFontz-boards.patch"
-	${git} "${DIR}/patches/imx_dts/0100-ARM-mxs-dt-Add-Crystalfontz-CFA-10056-device-tree.patch"
-	${git} "${DIR}/patches/imx_dts/0101-ARM-mxs-dt-Add-Crystalfontz-CFA-10058-device-tree.patch"
-	${git} "${DIR}/patches/imx_dts/0102-ARM-mxs-dt-cfa10037-make-hogpins-grabbed-by-respecti.patch"
-	${git} "${DIR}/patches/imx_dts/0103-ARM-mxs-dt-cfa10049-make-hogpins-grabbed-by-respecti.patch"
-	${git} "${DIR}/patches/imx_dts/0104-ARM-mxs-dt-cfa10055-make-hogpins-grabbed-by-respecti.patch"
-	${git} "${DIR}/patches/imx_dts/0105-ARM-mxs-dt-cfa10057-remove-hogpins.patch"
-	${git} "${DIR}/patches/imx_dts/0106-ARM-mxs-dt-cfa10036-make-hogpins-grabbed-by-respecti.patch"
-	${git} "${DIR}/patches/imx_dts/0107-ARM-mxs-Add-backlight-support-for-M28EVK.patch"
-	${git} "${DIR}/patches/imx_dts/0108-ARM-dts-mxs-remove-old-DMA-binding-data-from-client-.patch"
-	${git} "${DIR}/patches/imx_dts/0109-ARM-dts-imx-add-tempmon-node-for-imx6q-thermal-suppo.patch"
+	${git} "${DIR}/patches/imx_dts/0097-ARM-mxs-Simplify-detection-of-CrystalFontz-boards.patch"
+	${git} "${DIR}/patches/imx_dts/0098-ARM-mxs-dt-Add-Crystalfontz-CFA-10056-device-tree.patch"
+	${git} "${DIR}/patches/imx_dts/0099-ARM-mxs-dt-Add-Crystalfontz-CFA-10058-device-tree.patch"
+	${git} "${DIR}/patches/imx_dts/0100-ARM-mxs-dt-cfa10037-make-hogpins-grabbed-by-respecti.patch"
+	${git} "${DIR}/patches/imx_dts/0101-ARM-mxs-dt-cfa10049-make-hogpins-grabbed-by-respecti.patch"
+	${git} "${DIR}/patches/imx_dts/0102-ARM-mxs-dt-cfa10055-make-hogpins-grabbed-by-respecti.patch"
+	${git} "${DIR}/patches/imx_dts/0103-ARM-mxs-dt-cfa10057-remove-hogpins.patch"
+	${git} "${DIR}/patches/imx_dts/0104-ARM-mxs-dt-cfa10036-make-hogpins-grabbed-by-respecti.patch"
+	${git} "${DIR}/patches/imx_dts/0105-ARM-mxs-Add-backlight-support-for-M28EVK.patch"
+	${git} "${DIR}/patches/imx_dts/0106-ARM-dts-mxs-remove-old-DMA-binding-data-from-client-.patch"
+	${git} "${DIR}/patches/imx_dts/0107-ARM-dts-imx-remove-old-DMA-binding-data-from-gpmi-no.patch"
+	${git} "${DIR}/patches/imx_dts/0108-ARM-dts-imx-add-tempmon-node-for-imx6q-thermal-suppo.patch"
+	${git} "${DIR}/patches/imx_dts/0109-ARM-mxs-pm-Include-pm.h.patch"
+	${git} "${DIR}/patches/imx_dts/0110-ARM-dts-imx23-evk-enable-USB-PHY-and-controller.patch"
+	${git} "${DIR}/patches/imx_dts/0111-ARM-dts-imx23-evk-enable-Low-Resolution-ADC.patch"
+	${git} "${DIR}/patches/imx_dts/0112-ARM-dts-imx23-olinuxino-enable-Low-Resolution-ADC.patch"
+	${git} "${DIR}/patches/imx_dts/0113-ARM-imx-add-low-level-debug-for-vybrid.patch"
+	${git} "${DIR}/patches/imx_dts/0114-ARM-dts-imx6-Add-support-for-imx6q-wandboard.patch"
+	${git} "${DIR}/patches/imx_dts/0115-ARM-dts-imx6q-wandboard-Add-sata-support.patch"
+	${git} "${DIR}/patches/imx_dts/0116-ARM-dts-imx-add-LVDS-panel-for-imx6qdl-sabresd.patch"
+	${git} "${DIR}/patches/imx_dts/0117-ARM-dts-imx-use-generic-DMA-bindings-for-SSI-nodes.patch"
 }
 
 imx () {
@@ -190,7 +199,6 @@ dts () {
 	echo "dir: dts"
 	#omap: https://git.kernel.org/cgit/linux/kernel/git/bcousson/linux-omap-dt.git/
 	#imx: https://git.linaro.org/gitweb?p=people/shawnguo/linux-2.6.git;a=summary
-	${git} "${DIR}/patches/dts/0001-imx6q-wandboard-add-as-a-copy-of-imx6dl-wandboard.patch"
 }
 
 arm

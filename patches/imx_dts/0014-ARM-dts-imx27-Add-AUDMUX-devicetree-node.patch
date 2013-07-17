@@ -1,7 +1,7 @@
-From 2ea09c0f12731e988987327bf24d104c5e9831fa Mon Sep 17 00:00:00 2001
+From 166345a730279b6c9f6d463469e70b6bbfd525a3 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sun, 23 Jun 2013 10:54:46 +0400
-Subject: [PATCH 014/109] ARM: dts: imx27: Add AUDMUX devicetree node
+Subject: [PATCH 014/117] ARM: dts: imx27: Add AUDMUX devicetree node
 
 This patch adds the missing (Digital Audio MUX) AUDMUX devicetree
 node for i.MX27 CPUs.

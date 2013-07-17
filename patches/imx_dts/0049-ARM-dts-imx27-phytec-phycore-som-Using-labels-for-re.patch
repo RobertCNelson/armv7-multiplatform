@@ -1,7 +1,7 @@
-From e09e7eae318d236723ba03f040bca986ff633a6f Mon Sep 17 00:00:00 2001
+From c0fbb76128aedf8b6086bd29e8642f817a2d96c7 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Tue, 2 Jul 2013 20:02:29 +0400
-Subject: [PATCH 049/109] ARM: dts: imx27-phytec-phycore-som: Using labels for
+Subject: [PATCH 049/117] ARM: dts: imx27-phytec-phycore-som: Using labels for
  reusing UART, I2C and FEC
 
 Signed-off-by: Alexander Shiyan <shc_work@mail.ru>

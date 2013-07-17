@@ -1,7 +1,7 @@
-From cae4dac4fdb4c5ea7a206f688c146bd877a93483 Mon Sep 17 00:00:00 2001
+From b75c98e4f6c3ecc9e948825171507793b4fb8d78 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <festevam@gmail.com>
 Date: Fri, 28 Jun 2013 16:50:33 +0200
-Subject: [PATCH 035/109] ARM: imx27: Use 'AITC' for the interrupt controller
+Subject: [PATCH 035/117] ARM: imx27: Use 'AITC' for the interrupt controller
  name
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

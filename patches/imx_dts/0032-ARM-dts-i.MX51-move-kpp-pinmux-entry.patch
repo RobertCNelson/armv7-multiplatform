@@ -1,7 +1,7 @@
-From 1f382d7a5ba71522ee75a4fbc08db076d2f10cf8 Mon Sep 17 00:00:00 2001
+From 6155e084a798a14b632b43bfb9197c02825f9268 Mon Sep 17 00:00:00 2001
 From: Sascha Hauer <s.hauer@pengutronix.de>
 Date: Tue, 25 Jun 2013 15:51:58 +0200
-Subject: [PATCH 032/109] ARM: dts: i.MX51: move kpp pinmux entry
+Subject: [PATCH 032/117] ARM: dts: i.MX51: move kpp pinmux entry
 
 For keeping the alphabetical order in the pinmux nodes.
 

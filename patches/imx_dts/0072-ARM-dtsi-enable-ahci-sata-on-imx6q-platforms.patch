@@ -1,7 +1,7 @@
-From fa0e2a5392807a742c339a5f72f0a6ee3d4ec54a Mon Sep 17 00:00:00 2001
+From 85570055ed0bc83db3d9febbfb581a3f0faae283 Mon Sep 17 00:00:00 2001
 From: Richard Zhu <r65037@freescale.com>
 Date: Tue, 16 Jul 2013 11:28:46 +0800
-Subject: [PATCH 072/109] ARM: dtsi: enable ahci sata on imx6q platforms
+Subject: [PATCH 072/117] ARM: dtsi: enable ahci sata on imx6q platforms
 
 Only imx6q has the ahci sata controller, enable
 it on imx6q platforms.

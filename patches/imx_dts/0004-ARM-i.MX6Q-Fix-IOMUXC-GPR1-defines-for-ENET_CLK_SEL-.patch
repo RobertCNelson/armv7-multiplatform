@@ -1,7 +1,7 @@
-From 8a9e747a231c3ac33a34f7547ef5a34861d35105 Mon Sep 17 00:00:00 2001
+From 70ce5e203eeebfc21a4566fe9172e360ef9c1f1d Mon Sep 17 00:00:00 2001
 From: Philipp Zabel <p.zabel@pengutronix.de>
 Date: Wed, 26 Jun 2013 15:08:48 +0200
-Subject: [PATCH 004/109] ARM i.MX6Q: Fix IOMUXC GPR1 defines for ENET_CLK_SEL
+Subject: [PATCH 004/117] ARM i.MX6Q: Fix IOMUXC GPR1 defines for ENET_CLK_SEL
  and IPU1/2_MUX
 
 Signed-off-by: Philipp Zabel <p.zabel@pengutronix.de>

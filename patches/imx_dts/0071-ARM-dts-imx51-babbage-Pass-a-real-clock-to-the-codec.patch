@@ -1,7 +1,7 @@
-From 2106b1a922bf785ad9ea41e24c4b399f001715ef Mon Sep 17 00:00:00 2001
+From b36ca24919518f2d60c9f252da5487cadad4a2bc Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Sun, 9 Jun 2013 22:07:47 -0300
-Subject: [PATCH 071/109] ARM: dts: imx51-babbage: Pass a real clock to the
+Subject: [PATCH 071/117] ARM: dts: imx51-babbage: Pass a real clock to the
  codec
 
 On imx51_babbage the codec clock is activated via GPIO4_26.

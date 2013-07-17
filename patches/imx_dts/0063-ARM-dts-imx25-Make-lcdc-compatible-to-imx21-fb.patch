@@ -1,7 +1,7 @@
-From d7ffc6d752ffa7d5d2daa3f4c808dfe66e4484c6 Mon Sep 17 00:00:00 2001
+From d4cadaf3a1a262c6b65575476efe3a288d572320 Mon Sep 17 00:00:00 2001
 From: Matthias Weisser <weisserm@arcor.de>
 Date: Fri, 12 Jul 2013 09:34:54 +0200
-Subject: [PATCH 063/109] ARM: dts: imx25: Make lcdc compatible to imx21 fb
+Subject: [PATCH 063/117] ARM: dts: imx25: Make lcdc compatible to imx21 fb
 
 Make lcdc compatible to imx21 fb.
 

@@ -1,7 +1,7 @@
-From 90a44a5a2f552f931772ffc1a0d4fdbbc911b601 Mon Sep 17 00:00:00 2001
+From 7ff559cec186abfa2638ebf0700bf0dcee27f670 Mon Sep 17 00:00:00 2001
 From: Huang Shijie <b32955@freescale.com>
 Date: Mon, 8 Jul 2013 17:14:21 +0800
-Subject: [PATCH 058/109] ARM: dts: imx6q{dl}: add a DTE uart pinctrl for
+Subject: [PATCH 058/117] ARM: dts: imx6q{dl}: add a DTE uart pinctrl for
  uart2
 
 In the arm2 board, the UART2 works in the dte mode.

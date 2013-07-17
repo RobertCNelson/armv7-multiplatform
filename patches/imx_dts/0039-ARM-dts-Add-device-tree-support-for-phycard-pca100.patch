@@ -1,7 +1,7 @@
-From f1625998e0c8ed87097a17eca6aca63a07f72297 Mon Sep 17 00:00:00 2001
+From 068fddaa83179f3d54a3418d16364f835cd52059 Mon Sep 17 00:00:00 2001
 From: Markus Pargmann <mpa@pengutronix.de>
 Date: Fri, 28 Jun 2013 16:50:37 +0200
-Subject: [PATCH 039/109] ARM: dts: Add device tree support for phycard pca100
+Subject: [PATCH 039/117] ARM: dts: Add device tree support for phycard pca100
 
 Board files for Phytec phyCARD-S "System on Module" and "Rapid
 Development Kit".

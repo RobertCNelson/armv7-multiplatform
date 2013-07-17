@@ -1,7 +1,7 @@
-From 3ea292da99a1e1030fa6c6d49bca038f669dc06f Mon Sep 17 00:00:00 2001
+From 3987f292f579e64c3faafe8597587a9d2e83b72d Mon Sep 17 00:00:00 2001
 From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
 Date: Mon, 1 Jul 2013 15:23:27 +0200
-Subject: [PATCH 104/109] ARM: mxs: dt: cfa10055: make hogpins grabbed by
+Subject: [PATCH 102/117] ARM: mxs: dt: cfa10055: make hogpins grabbed by
  respective drivers
 
 Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>

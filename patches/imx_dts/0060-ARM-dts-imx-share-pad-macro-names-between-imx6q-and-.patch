@@ -1,7 +1,7 @@
-From 334ae3c0cf35b02c8523ea832b7d4c7bd5c5f0b9 Mon Sep 17 00:00:00 2001
+From ade4299fe1d32ebaad856581b94742dda1e4ccbe Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Thu, 11 Jul 2013 13:58:36 +0800
-Subject: [PATCH 060/109] ARM: dts: imx: share pad macro names between imx6q
+Subject: [PATCH 060/117] ARM: dts: imx: share pad macro names between imx6q
  and imx6dl
 
 The imx6q and imx6dl are two pin-to-pin compatible SoCs.  The same board

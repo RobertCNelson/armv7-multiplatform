@@ -1,7 +1,7 @@
-From d86292c32b4508915d6c4fa9fbfce50b3a1f8dee Mon Sep 17 00:00:00 2001
+From 453c2dfca26a7cf7f274061aeac61e8bf23600e3 Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Tue, 16 Jul 2013 21:16:36 +0800
-Subject: [PATCH 109/109] ARM: dts: imx: add tempmon node for imx6q thermal
+Subject: [PATCH 108/117] ARM: dts: imx: add tempmon node for imx6q thermal
  support
 
 Mark ocotp as a syscon node and add tempmon for imx6q thermal support.
@@ -12,10 +12,10 @@ Signed-off-by: Shawn Guo <shawn.guo@linaro.org>
  1 file changed, 9 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm/boot/dts/imx6qdl.dtsi b/arch/arm/boot/dts/imx6qdl.dtsi
-index ab72e8e..d84f8da 100644
+index 11dfe5b..7c18fa0 100644
 --- a/arch/arm/boot/dts/imx6qdl.dtsi
 +++ b/arch/arm/boot/dts/imx6qdl.dtsi
-@@ -517,6 +517,13 @@
+@@ -511,6 +511,13 @@
  				};
  			};
  
@@ -29,7 +29,7 @@ index ab72e8e..d84f8da 100644
  			usbphy1: usbphy@020c9000 {
  				compatible = "fsl,imx6q-usbphy", "fsl,imx23-usbphy";
  				reg = <0x020c9000 0x1000>;
-@@ -1483,8 +1490,8 @@
+@@ -1477,8 +1484,8 @@
  				clocks = <&clks 196>;
  			};
  

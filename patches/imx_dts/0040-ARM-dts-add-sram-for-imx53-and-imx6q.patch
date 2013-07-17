@@ -1,7 +1,7 @@
-From ff85be0c970761f62b90af05a9783c493206b6e9 Mon Sep 17 00:00:00 2001
+From a9fda5eb76e9690aed0903f4d44329a2622c9e5c Mon Sep 17 00:00:00 2001
 From: Philipp Zabel <p.zabel@pengutronix.de>
 Date: Mon, 1 Jul 2013 11:06:09 +0200
-Subject: [PATCH 040/109] ARM: dts: add sram for imx53 and imx6q
+Subject: [PATCH 040/117] ARM: dts: add sram for imx53 and imx6q
 
 This patch enables the On-Chip SRAM (OCRAM) on i.MX53 and i.MX6 SoCs.
 

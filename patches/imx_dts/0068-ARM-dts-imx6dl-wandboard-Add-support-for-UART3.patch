@@ -1,7 +1,7 @@
-From be6c84bc1bc64aee92af3412aeef7ed2afaad6e0 Mon Sep 17 00:00:00 2001
+From 8516475debbf285319757a6b097dd93fe473804b Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Fri, 12 Jul 2013 09:49:33 -0300
-Subject: [PATCH 068/109] ARM: dts: imx6dl-wandboard: Add support for UART3
+Subject: [PATCH 068/117] ARM: dts: imx6dl-wandboard: Add support for UART3
 
 Wandboard has a bluetooth device connected to UART3, so add support for it.
 

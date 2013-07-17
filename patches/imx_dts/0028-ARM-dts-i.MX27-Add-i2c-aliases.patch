@@ -1,7 +1,7 @@
-From 58536d34f1b5534a101563f8214cd80f9ed31c1c Mon Sep 17 00:00:00 2001
+From da217ff281fc41cc2310a8ca63a88afb54ea2319 Mon Sep 17 00:00:00 2001
 From: Sascha Hauer <s.hauer@pengutronix.de>
 Date: Tue, 25 Jun 2013 15:51:54 +0200
-Subject: [PATCH 028/109] ARM: dts: i.MX27: Add i2c aliases
+Subject: [PATCH 028/117] ARM: dts: i.MX27: Add i2c aliases
 
 This allows to order the i2c devices correctly.
 While at it reorder the aliases entries alphabetically.

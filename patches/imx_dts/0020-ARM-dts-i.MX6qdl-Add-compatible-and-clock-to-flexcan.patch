@@ -1,7 +1,7 @@
-From 3617fecc076325175586858182f95cc54a9fbd8b Mon Sep 17 00:00:00 2001
+From 0d6c55a53705d3797ecb0f3591f18bba59308625 Mon Sep 17 00:00:00 2001
 From: Sascha Hauer <s.hauer@pengutronix.de>
 Date: Tue, 25 Jun 2013 15:51:46 +0200
-Subject: [PATCH 020/109] ARM: dts: i.MX6qdl: Add compatible and clock to
+Subject: [PATCH 020/117] ARM: dts: i.MX6qdl: Add compatible and clock to
  flexcan nodes
 
 Signed-off-by: Sascha Hauer <s.hauer@pengutronix.de>

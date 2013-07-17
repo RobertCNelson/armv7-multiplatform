@@ -1,7 +1,7 @@
-From 17ab234fa36b65fee53815c3b919e4b1727631d7 Mon Sep 17 00:00:00 2001
+From ef54e47d8765261e5dc04df5d71376c26e7305c3 Mon Sep 17 00:00:00 2001
 From: Markus Pargmann <mpa@pengutronix.de>
 Date: Fri, 28 Jun 2013 16:50:34 +0200
-Subject: [PATCH 036/109] ARM: dts: imx27: Add imx framebuffer device
+Subject: [PATCH 036/117] ARM: dts: imx27: Add imx framebuffer device
 
 Signed-off-by: Markus Pargmann <mpa@pengutronix.de>
 Acked-by: Sascha Hauer <s.hauer@pengutronix.de>

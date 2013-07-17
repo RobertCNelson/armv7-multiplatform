@@ -1,7 +1,7 @@
-From f44a30a77fd3d8b0f992b36a9db2a45be0a06df6 Mon Sep 17 00:00:00 2001
+From e62e9423197485056363705f0c5f708f53024efc Mon Sep 17 00:00:00 2001
 From: Marek Vasut <marex@denx.de>
 Date: Thu, 11 Jul 2013 21:30:16 +0200
-Subject: [PATCH 107/109] ARM: mxs: Add backlight support for M28EVK
+Subject: [PATCH 105/117] ARM: mxs: Add backlight support for M28EVK
 
 This patch adds backlight support for M28EVK.
 

@@ -1,7 +1,7 @@
-From fa1c71ddc8239dff7482f86a81299741b752040f Mon Sep 17 00:00:00 2001
+From e1631bf800ba224f0cc56a6b90a96f8eb4026e14 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Wed, 10 Jul 2013 12:30:16 -0300
-Subject: [PATCH 092/109] ARM: imx: Select MIGHT_HAVE_CACHE_L2X0
+Subject: [PATCH 092/117] ARM: imx: Select MIGHT_HAVE_CACHE_L2X0
 
 Select MIGHT_HAVE_CACHE_L2X0 for armv6 and armv7 i.MX SoCs.
 

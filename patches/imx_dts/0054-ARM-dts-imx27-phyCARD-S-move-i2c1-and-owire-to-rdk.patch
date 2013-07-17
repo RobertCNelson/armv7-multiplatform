@@ -1,7 +1,7 @@
-From 76acf91a13cb6861555ff53bfb29251621d89647 Mon Sep 17 00:00:00 2001
+From 227ccd141c5dfcc33fa8f504dfccecc0f0a983f3 Mon Sep 17 00:00:00 2001
 From: Markus Pargmann <mpa@pengutronix.de>
 Date: Sun, 7 Jul 2013 15:13:30 +0200
-Subject: [PATCH 054/109] ARM: dts: imx27 phyCARD-S, move i2c1 and owire to
+Subject: [PATCH 054/117] ARM: dts: imx27 phyCARD-S, move i2c1 and owire to
  rdk
 
 Both buses are not used on the phyCARD-S module. This patch moves them

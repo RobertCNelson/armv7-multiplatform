@@ -1,7 +1,7 @@
-From 69a89b4624528749415ca1df65fd1faeceb5ff14 Mon Sep 17 00:00:00 2001
+From 197273fe9a987b3a15d7787a91fd35f521a47f51 Mon Sep 17 00:00:00 2001
 From: Philippe Reynes <tremyfr@yahoo.fr>
 Date: Fri, 21 Jun 2013 18:24:13 +0200
-Subject: [PATCH 012/109] apf27dev: add rtc ds1374 to the device tree
+Subject: [PATCH 012/117] apf27dev: add rtc ds1374 to the device tree
 
 Signed-off-by: Philippe Reynes <tremyfr@yahoo.fr>
 Signed-off-by: Shawn Guo <shawn.guo@linaro.org>

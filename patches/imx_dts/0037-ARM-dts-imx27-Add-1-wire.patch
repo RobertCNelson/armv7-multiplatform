@@ -1,7 +1,7 @@
-From f07d1ebed358e6e763d171f089503708a3f0086f Mon Sep 17 00:00:00 2001
+From d6fc20bc8d84388943b62be144b4ccfcf83d2b01 Mon Sep 17 00:00:00 2001
 From: Markus Pargmann <mpa@pengutronix.de>
 Date: Mon, 1 Jul 2013 17:21:22 +0800
-Subject: [PATCH 037/109] ARM: dts: imx27: Add 1-wire
+Subject: [PATCH 037/117] ARM: dts: imx27: Add 1-wire
 
 Signed-off-by: Markus Pargmann <mpa@pengutronix.de>
 Acked-by: Sascha Hauer <s.hauer@pengutronix.de>

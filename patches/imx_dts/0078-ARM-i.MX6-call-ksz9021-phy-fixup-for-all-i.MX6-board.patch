@@ -1,7 +1,7 @@
-From b58e7d598656e1730ab35a07c641588f2387f88f Mon Sep 17 00:00:00 2001
+From 3d95a27721484c5078ea7ca8b2c5de8e1f5a79f6 Mon Sep 17 00:00:00 2001
 From: Sascha Hauer <s.hauer@pengutronix.de>
 Date: Thu, 20 Jun 2013 17:34:31 +0200
-Subject: [PATCH 078/109] ARM: i.MX6: call ksz9021 phy fixup for all i.MX6
+Subject: [PATCH 078/117] ARM: i.MX6: call ksz9021 phy fixup for all i.MX6
  boards
 
 In current U-Boot the sabrelite, nitrogen6x and titanium all need

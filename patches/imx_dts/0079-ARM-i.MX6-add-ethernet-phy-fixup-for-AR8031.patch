@@ -1,7 +1,7 @@
-From faf78acac892ecc51cf231f2dc3b4b5232dc80e3 Mon Sep 17 00:00:00 2001
+From 32145a1e68e56f1b36d1d53559b977c9ff79e75e Mon Sep 17 00:00:00 2001
 From: Sascha Hauer <s.hauer@pengutronix.de>
 Date: Thu, 20 Jun 2013 17:34:32 +0200
-Subject: [PATCH 079/109] ARM: i.MX6: add ethernet phy fixup for AR8031
+Subject: [PATCH 079/117] ARM: i.MX6: add ethernet phy fixup for AR8031
 
 The AR8031 is used on the i.MX6 based sabreSD, sabreauto and wandboard.
 All need the same fixup, so add it for all i.MX6.

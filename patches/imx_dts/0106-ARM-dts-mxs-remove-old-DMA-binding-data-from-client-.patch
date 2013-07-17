@@ -1,7 +1,7 @@
-From 28d246dc456d9aaf182fdb329fb1fade7e4b4229 Mon Sep 17 00:00:00 2001
+From 9dc3ca8e664aedaf876fbf83d37e4d832e58155f Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Tue, 16 Jul 2013 17:10:55 +0800
-Subject: [PATCH 108/109] ARM: dts: mxs: remove old DMA binding data from
+Subject: [PATCH 106/117] ARM: dts: mxs: remove old DMA binding data from
  client nodes
 
 After mxs-dma driver adopts generic DMA device tree binding, channel

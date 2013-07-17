@@ -1,7 +1,7 @@
-From 1ebce1f0422961ca883805ff82b00f15d66b99b2 Mon Sep 17 00:00:00 2001
+From 357efa694d9c5a0fd4d3aa2767973381243654d0 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sat, 29 Jun 2013 08:27:52 +0400
-Subject: [PATCH 075/109] drivers: bus: imx-weim: use
+Subject: [PATCH 075/117] drivers: bus: imx-weim: use
  module_platform_driver_probe()
 
 Driver should be called only once at startup, so code converted

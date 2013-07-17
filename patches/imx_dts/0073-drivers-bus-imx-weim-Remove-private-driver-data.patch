@@ -1,7 +1,7 @@
-From d0f7406c3c171c3dc8715fcb9d66b90dd9d06984 Mon Sep 17 00:00:00 2001
+From 1ff7ba80f06654100fb40dc1b18549c2bec90527 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sat, 29 Jun 2013 08:27:50 +0400
-Subject: [PATCH 073/109] drivers: bus: imx-weim: Remove private driver data
+Subject: [PATCH 073/117] drivers: bus: imx-weim: Remove private driver data
 
 Driver uses only probe function so no reason to keep variables
 in private driver data.

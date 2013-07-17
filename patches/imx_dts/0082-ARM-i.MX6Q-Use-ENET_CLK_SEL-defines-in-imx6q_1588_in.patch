@@ -1,7 +1,7 @@
-From bc545a14607e6affa2c5ac73e3c63b127404ebb5 Mon Sep 17 00:00:00 2001
+From cb9f714d987e3a8c4ca0dcb1fd3ee4a5844e8fc2 Mon Sep 17 00:00:00 2001
 From: Philipp Zabel <p.zabel@pengutronix.de>
 Date: Wed, 26 Jun 2013 15:08:49 +0200
-Subject: [PATCH 082/109] ARM i.MX6Q: Use ENET_CLK_SEL defines in
+Subject: [PATCH 082/117] ARM i.MX6Q: Use ENET_CLK_SEL defines in
  imx6q_1588_init
 
 Signed-off-by: Philipp Zabel <p.zabel@pengutronix.de>
