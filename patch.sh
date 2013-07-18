@@ -202,10 +202,17 @@ dts () {
 	#imx: https://git.linaro.org/gitweb?p=people/shawnguo/linux-2.6.git;a=summary
 }
 
+saucy () {
+	echo "dir: saucy"
+	#Ubuntu Saucy: so Ubuntu decided to enable almost every Warning -> Error option...
+	${git} "${DIR}/patches/saucy/0001-saucy-disable-Werror-unused-but-set-variable.patch"
+}
+
 arm
 drivers
 imx_dts
 imx
 dts
+saucy
 
 echo "patch.sh ran successful"
