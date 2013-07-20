@@ -234,6 +234,7 @@ debian_regs () {
 		echo "-----------------------------"
 		echo "Please cut, paste and email to: bugs@rcn-ee.com"
 		echo "-----------------------------"
+		echo "git: `git rev-parse HEAD`"
 		echo "uname -m"
 		uname -m
 		echo "lsb_release -a"
