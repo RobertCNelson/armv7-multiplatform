@@ -196,6 +196,12 @@ imx () {
 	${git} "${DIR}/patches/imx/0003-sata-imx-add-ahci-sata-support-on-imx-platforms.patch"
 }
 
+omap () {
+	echo "dir: omap"
+	#fix panda/omap4 usb host...
+	${git} "${DIR}/patches/omap/0001-ARM-OMAP2-Provide-alias-to-USB-PHY-clock.patch"
+}
+
 dts () {
 	echo "dir: dts"
 	#omap: https://git.kernel.org/cgit/linux/kernel/git/bcousson/linux-omap-dt.git/
@@ -212,6 +218,7 @@ arm
 drivers
 imx_dts
 imx
+omap
 dts
 saucy
 

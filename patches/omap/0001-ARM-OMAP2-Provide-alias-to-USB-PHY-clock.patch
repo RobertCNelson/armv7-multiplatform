@@ -1,0 +1,70 @@
+From 28f099026b5f2d53cc5f634395da26c4f6ff1cb3 Mon Sep 17 00:00:00 2001
+From: Roger Quadros <rogerq@ti.com>
+Date: Tue, 18 Jun 2013 19:04:47 +0300
+Subject: [PATCH] ARM: OMAP2+: Provide alias to USB PHY clock
+
+Till the OMAP clocks are correctly defined in device tree, use
+this temporary hack to provide clock alias to the USB PHY clocks.
+
+Without this, USB Host & Ethernet will not be functional with
+device tree boots on Panda and uEVM.
+
+Signed-off-by: Roger Quadros <rogerq@ti.com>
+---
+ arch/arm/mach-omap2/board-generic.c |   23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-omap2/board-generic.c b/arch/arm/mach-omap2/board-generic.c
+index e5fbfed..be5d005 100644
+--- a/arch/arm/mach-omap2/board-generic.c
++++ b/arch/arm/mach-omap2/board-generic.c
+@@ -15,6 +15,7 @@
+ #include <linux/of_irq.h>
+ #include <linux/of_platform.h>
+ #include <linux/irqdomain.h>
++#include <linux/clk.h>
+ 
+ #include <asm/mach/arch.h>
+ 
+@@ -35,6 +36,21 @@ static struct of_device_id omap_dt_match_table[] __initdata = {
+ 	{ }
+ };
+ 
++/*
++ * Create alias for USB host PHY clock.
++ * Remove this when clock phandle can be provided via DT
++ */
++static void __init legacy_init_ehci_clk(char *clkname)
++{
++	int ret;
++
++	ret = clk_add_alias("main_clk", NULL, clkname, NULL);
++	if (ret) {
++		pr_err("%s:Failed to add main_clk alias to %s :%d\n",
++						__func__, clkname, ret);
++	}
++}
++
+ static void __init omap_generic_init(void)
+ {
+ 	omap_sdrc_init(NULL, NULL);
+@@ -45,10 +61,15 @@ static void __init omap_generic_init(void)
+ 	 * HACK: call display setup code for selected boards to enable omapdss.
+ 	 * This will be removed when omapdss supports DT.
+ 	 */
+-	if (of_machine_is_compatible("ti,omap4-panda"))
++	if (of_machine_is_compatible("ti,omap4-panda")) {
+ 		omap4_panda_display_init_of();
++		legacy_init_ehci_clk("auxclk3_ck");
++
++	}
+ 	else if (of_machine_is_compatible("ti,omap4-sdp"))
+ 		omap_4430sdp_display_init_of();
++	else if (of_machine_is_compatible("ti,omap5-uevm"))
++		legacy_init_ehci_clk("auxclk1_ck");
+ }
+ 
+ #ifdef CONFIG_SOC_OMAP2420
+-- 
+1.7.10.4
+
