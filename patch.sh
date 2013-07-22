@@ -61,8 +61,6 @@ drivers () {
 	${git} "${DIR}/patches/drivers/0002-ASoC-sglt5000-Provide-the-reg_stride-field.patch"
 	${git} "${DIR}/patches/drivers/0003-ASoC-imx-sgtl5000-fix-error-return-code-in-imx_sgtl5.patch"
 	${git} "${DIR}/patches/drivers/0004-ASoC-sgtl5000-defer-the-probe-if-clock-is-not-found.patch"
-	#[PATCH v10] reset: Add driver for gpio-controlled reset pins
-	${git} "${DIR}/patches/drivers/0005-reset-Add-driver-for-gpio-controlled-reset-pins.patch"
 }
 
 imx_dts () {
@@ -203,6 +201,7 @@ omap () {
 	#fix panda/omap4 usb host...
 	${git} "${DIR}/patches/omap/0001-ARM-OMAP2-Provide-alias-to-USB-PHY-clock.patch"
 
+	#[PATCH v10] reset: Add driver for gpio-controlled reset pins
 	${git} "${DIR}/patches/omap/0002-reset-Add-driver-for-gpio-controlled-reset-pins.patch"
 	${git} "${DIR}/patches/omap/0003-usb-phy-nop-Use-RESET-Controller-for-managing-the-re.patch"
 	${git} "${DIR}/patches/omap/0004-ARM-dts-omap3-beagle-Use-reset-gpio-driver-for-hsusb.patch"
