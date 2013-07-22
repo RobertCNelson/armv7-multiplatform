@@ -1,0 +1,52 @@
+From 5b98c62972608e19b9d55478b5262abf52b2e271 Mon Sep 17 00:00:00 2001
+From: Roger Quadros <rogerq@ti.com>
+Date: Thu, 18 Jul 2013 11:53:06 +0300
+Subject: [PATCH 4/8] ARM: dts: omap3-beagle: Use reset-gpio driver for
+ hsusb2_reset
+
+We no longer need to model a RESET line as a regulator since
+we have the reset-gpio driver available.
+
+Signed-off-by: Roger Quadros <rogerq@ti.com>
+---
+ arch/arm/boot/dts/omap3-beagle.dts |   17 ++++++++---------
+ 1 file changed, 8 insertions(+), 9 deletions(-)
+
+diff --git a/arch/arm/boot/dts/omap3-beagle.dts b/arch/arm/boot/dts/omap3-beagle.dts
+index dfd8310..01fbad6 100644
+--- a/arch/arm/boot/dts/omap3-beagle.dts
++++ b/arch/arm/boot/dts/omap3-beagle.dts
+@@ -45,14 +45,12 @@
+ 	};
+ 
+ 	/* HS USB Port 2 RESET */
+-	hsusb2_reset: hsusb2_reset_reg {
+-		compatible = "regulator-fixed";
+-		regulator-name = "hsusb2_reset";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&gpio5 19 0>;	/* gpio_147 */
+-		startup-delay-us = <70000>;
+-		enable-active-high;
++	hsusb2_reset: hsusb2_reset {
++		compatible = "gpio-reset";
++		reset-gpios = <&gpio5 19 GPIO_ACTIVE_LOW>; /* gpio_147 */
++		reset-delay-us = <70000>;
++		initially-in-reset;
++		#reset-cells = <0>;
+ 	};
+ 
+ 	/* HS USB Port 2 Power */
+@@ -68,7 +66,8 @@
+ 	/* HS USB Host PHY on PORT 2 */
+ 	hsusb2_phy: hsusb2_phy {
+ 		compatible = "usb-nop-xceiv";
+-		reset-supply = <&hsusb2_reset>;
++		resets = <&hsusb2_reset>;
++		reset-names = "reset";
+ 		vcc-supply = <&hsusb2_power>;
+ 	};
+ 
+-- 
+1.7.10.4
+

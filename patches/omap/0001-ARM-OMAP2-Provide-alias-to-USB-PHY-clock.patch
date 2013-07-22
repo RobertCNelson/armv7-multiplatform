@@ -1,7 +1,7 @@
 From 28f099026b5f2d53cc5f634395da26c4f6ff1cb3 Mon Sep 17 00:00:00 2001
 From: Roger Quadros <rogerq@ti.com>
 Date: Tue, 18 Jun 2013 19:04:47 +0300
-Subject: [PATCH] ARM: OMAP2+: Provide alias to USB PHY clock
+Subject: [PATCH 1/8] ARM: OMAP2+: Provide alias to USB PHY clock
 
 Till the OMAP clocks are correctly defined in device tree, use
 this temporary hack to provide clock alias to the USB PHY clocks.
