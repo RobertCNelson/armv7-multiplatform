@@ -209,12 +209,16 @@ omap () {
 	${git} "${DIR}/patches/omap/0006-ARM-dts-omap5-uevm-Use-reset-gpio-driver-for-hsusb2_.patch"
 	${git} "${DIR}/patches/omap/0007-ARM-dts-omap3-beagle-xm-Add-USB-Host-support.patch"
 	${git} "${DIR}/patches/omap/0008-ARM-dts-omap3-beagle-Make-USB-host-pin-naming-consis.patch"
+
+	#omap3430: lockup on reset fix...
+	${git} "${DIR}/patches/omap/0009-omap2-twl-common-Add-default-power-configuration.patch"
 }
 
 dts () {
 	echo "dir: dts"
 	#omap: https://git.kernel.org/cgit/linux/kernel/git/bcousson/linux-omap-dt.git/
 	#imx: https://git.linaro.org/gitweb?p=people/shawnguo/linux-2.6.git;a=summary
+	${git} "${DIR}/patches/dts/0001-ARM-imx-Enable-UART1-for-Sabrelite.patch"
 }
 
 saucy () {
