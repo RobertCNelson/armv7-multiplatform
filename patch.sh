@@ -212,10 +212,11 @@ omap () {
 
 	#omap3430: lockup on reset fix...
 	${git} "${DIR}/patches/omap/0009-omap2-twl-common-Add-default-power-configuration.patch"
+	${git} "${DIR}/patches/omap/0010-ARM-OMAP-Beagle-use-TWL4030-generic-reset-script.patch"
 
 	#omap4: fix video..
-	${git} "${DIR}/patches/omap/0010-ARM-OMAP-dss-common-fix-Panda-s-DVI-DDC-channel.patch"
-	${git} "${DIR}/patches/omap/0011-ARM-OMAP2-Remove-legacy-DSS-initialization-for-omap4.patch"
+	${git} "${DIR}/patches/omap/0011-ARM-OMAP-dss-common-fix-Panda-s-DVI-DDC-channel.patch"
+	${git} "${DIR}/patches/omap/0012-ARM-OMAP2-Remove-legacy-DSS-initialization-for-omap4.patch"
 }
 
 dts () {
