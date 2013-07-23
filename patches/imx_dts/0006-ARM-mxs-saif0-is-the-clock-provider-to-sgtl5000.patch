@@ -1,7 +1,7 @@
-From f40adbe4293f9ca7ff2c6742db3d3ff4e0978d14 Mon Sep 17 00:00:00 2001
+From a11997673cf6833c74d7cdc21abf44cc4fd244fb Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Mon, 1 Jul 2013 15:46:05 +0800
-Subject: [PATCH 006/117] ARM: mxs: saif0 is the clock provider to sgtl5000
+Subject: [PATCH 006/132] ARM: mxs: saif0 is the clock provider to sgtl5000
 
 These systems all use saif0 as the mclock provider to codec sgtl5000.
 Reflect that in device tree source, so that sgtl5000 can find the clock

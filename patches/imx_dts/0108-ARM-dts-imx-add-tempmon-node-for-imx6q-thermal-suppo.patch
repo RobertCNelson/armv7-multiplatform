@@ -1,7 +1,7 @@
-From 453c2dfca26a7cf7f274061aeac61e8bf23600e3 Mon Sep 17 00:00:00 2001
+From 018b2515d71fef07bc111e5bda82eb5e09e9ee83 Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Tue, 16 Jul 2013 21:16:36 +0800
-Subject: [PATCH 108/117] ARM: dts: imx: add tempmon node for imx6q thermal
+Subject: [PATCH 108/132] ARM: dts: imx: add tempmon node for imx6q thermal
  support
 
 Mark ocotp as a syscon node and add tempmon for imx6q thermal support.

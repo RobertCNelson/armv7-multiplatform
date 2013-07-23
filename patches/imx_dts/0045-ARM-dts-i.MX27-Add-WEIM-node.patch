@@ -1,7 +1,7 @@
-From 0fbb0e4a730e9c5aa42fcfd00bfa2c758a6c1015 Mon Sep 17 00:00:00 2001
+From 3cfc0cb0812e5894ba2744dee4038bc67f92c83f Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Tue, 2 Jul 2013 20:02:25 +0400
-Subject: [PATCH 045/117] ARM: dts: i.MX27: Add WEIM node
+Subject: [PATCH 045/132] ARM: dts: i.MX27: Add WEIM node
 
 This patch adds the missing (Wireless External Interface Module) WEIM
 devicetree node for i.MX27 CPUs.

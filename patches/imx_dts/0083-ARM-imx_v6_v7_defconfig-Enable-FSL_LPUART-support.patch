@@ -1,7 +1,7 @@
-From 416f461794fdfc0f8cb7a56ea04f6e2012066dfb Mon Sep 17 00:00:00 2001
+From 9a81181a4f69caba25fadc0e02b38c55e415e4d8 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Thu, 27 Jun 2013 09:48:41 -0300
-Subject: [PATCH 083/117] ARM: imx_v6_v7_defconfig: Enable FSL_LPUART support
+Subject: [PATCH 083/132] ARM: imx_v6_v7_defconfig: Enable FSL_LPUART support
 
 Enable the FSL_LPUART driver as it is used by the VF610 family.
 

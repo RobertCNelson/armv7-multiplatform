@@ -1,7 +1,7 @@
-From 11af2e6fa816043563e7bdc6c7d03abb2bf259f9 Mon Sep 17 00:00:00 2001
+From 960b5adedf6557f4180676d22ff2947741530dc7 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sun, 23 Jun 2013 10:54:50 +0400
-Subject: [PATCH 018/117] ARM: dts: imx27: Add kpp devicetree node
+Subject: [PATCH 018/132] ARM: dts: imx27: Add kpp devicetree node
 
 This patch adds the missing (Keypad Port) KPP devicetree node
 for i.MX27 CPUs.

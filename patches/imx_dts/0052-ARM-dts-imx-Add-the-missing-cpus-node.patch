@@ -1,7 +1,7 @@
-From 79202a9958957d0edc0c8a36260fe7d378964eb4 Mon Sep 17 00:00:00 2001
+From 31f22903e2b8166679112ed703742674b48eb928 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Sun, 7 Jul 2013 10:12:30 -0300
-Subject: [PATCH 052/117] ARM: dts: imx: Add the missing cpus node
+Subject: [PATCH 052/132] ARM: dts: imx: Add the missing cpus node
 
 To make it consistent with the other i.mx SoCs, let's add the cpus nodes.
 

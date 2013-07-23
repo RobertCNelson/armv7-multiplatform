@@ -1,7 +1,7 @@
-From f8749dc08227720e4f1685524dade31d96e24a99 Mon Sep 17 00:00:00 2001
+From dd28a5d7b9d0d77203df65320b3994355d956bba Mon Sep 17 00:00:00 2001
 From: Markus Pargmann <mpa@pengutronix.de>
 Date: Sun, 23 Jun 2013 10:51:10 +0200
-Subject: [PATCH 002/117] ARM: imx27: Fix documentation for SPLL clock
+Subject: [PATCH 002/132] ARM: imx27: Fix documentation for SPLL clock
 
 spll_gate was added with commit b7eed2076183994dbda2c19bc7fba99b65a135e3
 "ARM: imx27: add a clock gate to activate SPLL clock".

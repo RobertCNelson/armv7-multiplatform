@@ -1,7 +1,7 @@
-From de4c034340dbe0cd649cc9a6e7531a68a56c958d Mon Sep 17 00:00:00 2001
+From 91235c2a6d76e0ab5d31034bb97490021310f9f4 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Tue, 2 Jul 2013 20:02:28 +0400
-Subject: [PATCH 048/117] ARM: dts: imx27-phytec-phycore-rdk: Add CAN node
+Subject: [PATCH 048/132] ARM: dts: imx27-phytec-phycore-rdk: Add CAN node
 
 This patch adds CAN (NXP SJA1000) node for Phytec PCM-970 RDK.
 

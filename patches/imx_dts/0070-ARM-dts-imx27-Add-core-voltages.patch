@@ -1,7 +1,7 @@
-From d9ea05cafb0905843893a18ee794e704e4cc9447 Mon Sep 17 00:00:00 2001
+From 66358947478e7471cc3e0eb597d623b5a6fbd1a9 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sat, 13 Jul 2013 08:34:44 +0400
-Subject: [PATCH 070/117] ARM: dts: imx27: Add core voltages
+Subject: [PATCH 070/132] ARM: dts: imx27: Add core voltages
 
 This patch adds core voltages for i.MX27 CPUs. Only 266 and 400 MHz modes
 is documented in the datasheet, so we add a 266 MHz frequency for conform this.

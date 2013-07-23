@@ -1,7 +1,7 @@
-From 5d0e20171426b59991d10d1c743f97e575f189c7 Mon Sep 17 00:00:00 2001
+From 5c9cac25494bac27e084c9c98be98a9b1edf5f82 Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Mon, 8 Jul 2013 21:45:20 +0800
-Subject: [PATCH 088/117] ARM: imx: let L2 initialization be a common function
+Subject: [PATCH 088/132] ARM: imx: let L2 initialization be a common function
 
 Move imx6q L2 initialization function imx6q_init_l2cache() into
 system.c, and rename it imx_init_l2cache(), so that other platforms

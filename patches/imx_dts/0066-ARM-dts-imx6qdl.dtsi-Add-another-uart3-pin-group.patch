@@ -1,7 +1,7 @@
-From b02b75cea7abc04a5797539eac1571c9d4cbb6e5 Mon Sep 17 00:00:00 2001
+From 192419940f472ff5979094ab9b068ea19cd740de Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Fri, 12 Jul 2013 09:49:31 -0300
-Subject: [PATCH 066/117] ARM: dts: imx6qdl.dtsi: Add another uart3 pin group
+Subject: [PATCH 066/132] ARM: dts: imx6qdl.dtsi: Add another uart3 pin group
 
 Signed-off-by: Fabio Estevam <fabio.estevam@freescale.com>
 Signed-off-by: Shawn Guo <shawn.guo@linaro.org>

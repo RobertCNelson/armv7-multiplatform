@@ -1,7 +1,7 @@
-From 63fed220addd1a8b1d898c60fc7ab40c89496acf Mon Sep 17 00:00:00 2001
+From 328be83abb8fd915d70ba885f409c5085f0b0e87 Mon Sep 17 00:00:00 2001
 From: Sascha Hauer <s.hauer@pengutronix.de>
 Date: Tue, 25 Jun 2013 15:51:59 +0200
-Subject: [PATCH 033/117] ARM: dts: i.MX51 babbage: Add spi-cs-high property
+Subject: [PATCH 033/132] ARM: dts: i.MX51 babbage: Add spi-cs-high property
  to pmic
 
 The mc13892 driver knows that it needs spi-cs-high, so the mc13892

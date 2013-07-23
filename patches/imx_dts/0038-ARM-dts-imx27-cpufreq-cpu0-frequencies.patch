@@ -1,7 +1,7 @@
-From d060814e701c04a09fd79db439b15f3b23c96e30 Mon Sep 17 00:00:00 2001
+From c2bab39151586d90a81b2f34e7372e2206addae6 Mon Sep 17 00:00:00 2001
 From: Markus Pargmann <mpa@pengutronix.de>
 Date: Fri, 28 Jun 2013 16:50:36 +0200
-Subject: [PATCH 038/117] ARM: dts: imx27 cpufreq-cpu0 frequencies
+Subject: [PATCH 038/132] ARM: dts: imx27 cpufreq-cpu0 frequencies
 
 Set operating-points for imx27. There is no regulator support, so the
 voltages are 0. The frequencies should be the same for all imx27 boards,

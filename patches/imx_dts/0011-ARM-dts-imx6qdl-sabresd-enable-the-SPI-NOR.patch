@@ -1,7 +1,7 @@
-From 856384a86ec0e2f8b75c07f35b62bc11fab3d728 Mon Sep 17 00:00:00 2001
+From 1a9ff4b78979fe005a82cbef9db5b232a3445036 Mon Sep 17 00:00:00 2001
 From: Huang Shijie <b32955@freescale.com>
 Date: Fri, 21 Jun 2013 10:19:11 +0800
-Subject: [PATCH 011/117] ARM: dts: imx6qdl-sabresd: enable the SPI NOR
+Subject: [PATCH 011/132] ARM: dts: imx6qdl-sabresd: enable the SPI NOR
 
 enable the spi nor for imx6q{dl}-sabresd boards.
 

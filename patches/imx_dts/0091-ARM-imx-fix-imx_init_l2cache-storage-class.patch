@@ -1,7 +1,7 @@
-From 453d621071fded2fec8e26d04755ad3a85af8ef9 Mon Sep 17 00:00:00 2001
+From 433d53890ab9f721c5b09d548e8ec01800d031e9 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@freescale.com>
 Date: Wed, 10 Jul 2013 11:45:46 +0200
-Subject: [PATCH 091/117] ARM: imx: fix imx_init_l2cache storage class
+Subject: [PATCH 091/132] ARM: imx: fix imx_init_l2cache storage class
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

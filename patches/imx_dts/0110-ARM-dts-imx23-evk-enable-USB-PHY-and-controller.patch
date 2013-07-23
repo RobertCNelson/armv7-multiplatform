@@ -1,7 +1,7 @@
-From b893124e7d1cc1834299cc0f8e301cc89153593d Mon Sep 17 00:00:00 2001
+From 61bfc2bf456574832280a9c036173ed945ee9f02 Mon Sep 17 00:00:00 2001
 From: Otavio Salvador <otavio@ossystems.com.br>
 Date: Tue, 16 Jul 2013 09:56:12 -0300
-Subject: [PATCH 110/117] ARM: dts: imx23-evk: enable USB PHY and controller
+Subject: [PATCH 110/132] ARM: dts: imx23-evk: enable USB PHY and controller
 
 The i.MX23EVK board provides a USB port so the USB PHY and controller
 need to be enabled for it to be usable.

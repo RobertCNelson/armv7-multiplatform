@@ -1,7 +1,7 @@
-From aa4f59ad3f722ca870cdec8e6fb54423e342789e Mon Sep 17 00:00:00 2001
+From 85d6664c02674648fd9e7312d167a1dc7e06ced3 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sun, 23 Jun 2013 10:54:47 +0400
-Subject: [PATCH 015/117] ARM: dts: imx27: Rename PWM devicetree node
+Subject: [PATCH 015/132] ARM: dts: imx27: Rename PWM devicetree node
 
 i.MX27 have only one PWM, so index from PWM devicetree node removed.
 

@@ -1,7 +1,7 @@
-From 84279ffecade480929d6c579eced751e6b2967e1 Mon Sep 17 00:00:00 2001
+From 010bf42df78fe2ea53a3be75853789a1fe190f50 Mon Sep 17 00:00:00 2001
 From: Huang Shijie <b32955@freescale.com>
 Date: Tue, 2 Jul 2013 10:15:29 +0800
-Subject: [PATCH 043/117] ARM: dts: imx: add #dma-cells property for sdma
+Subject: [PATCH 043/132] ARM: dts: imx: add #dma-cells property for sdma
 
 Add the #dma-cells property for all the sdma in all the imx platforms.
 

@@ -1,7 +1,7 @@
-From bd38d1fe3a8ba618f10986c3dbb3ee1371b17b9d Mon Sep 17 00:00:00 2001
+From 6f1734646ea290ce0741acd86db36b72b759ae44 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sun, 23 Jun 2013 10:54:45 +0400
-Subject: [PATCH 013/117] ARM: dts: imx27: Add SAHARA2 devicetree node
+Subject: [PATCH 013/132] ARM: dts: imx27: Add SAHARA2 devicetree node
 
 This patch adds the missing (Symmetric/Asymmetric Hashing and Random
 Accelerator) SAHARA2 devicetree node for i.MX27 CPUs.

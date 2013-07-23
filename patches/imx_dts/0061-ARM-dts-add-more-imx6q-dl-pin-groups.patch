@@ -1,7 +1,7 @@
-From ed2c51555ff3edb16043aa7784952405ca6c0c56 Mon Sep 17 00:00:00 2001
+From fa3e0ed2d6fe44e3014c086c2ca52de2e4f2e28d Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Fri, 12 Jul 2013 11:38:50 +0800
-Subject: [PATCH 061/117] ARM: dts: add more imx6q/dl pin groups
+Subject: [PATCH 061/132] ARM: dts: add more imx6q/dl pin groups
 
 Add more imx6q/dl pin groups for those supported boards, e.g. sabresd,
 sabreauto, arm2.

@@ -1,7 +1,7 @@
-From eb06545c716b67fa9129fb609ecd56b74d6a952d Mon Sep 17 00:00:00 2001
+From 8033eabea2db2cebf0d99b4e23aef5bcfc5cb135 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Fri, 28 Jun 2013 19:49:19 -0300
-Subject: [PATCH 086/117] ARM: imx_v6_v7_defconfig: Enable VPU driver
+Subject: [PATCH 086/132] ARM: imx_v6_v7_defconfig: Enable VPU driver
 
 Let VPU driver be selected by default.
 

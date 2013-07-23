@@ -185,6 +185,21 @@ imx_dts () {
 	${git} "${DIR}/patches/imx_dts/0115-ARM-dts-imx6q-wandboard-Add-sata-support.patch"
 	${git} "${DIR}/patches/imx_dts/0116-ARM-dts-imx-add-LVDS-panel-for-imx6qdl-sabresd.patch"
 	${git} "${DIR}/patches/imx_dts/0117-ARM-dts-imx-use-generic-DMA-bindings-for-SSI-nodes.patch"
+	${git} "${DIR}/patches/imx_dts/0118-ARM-imx6q-add-spdif-gate-clock.patch"
+	${git} "${DIR}/patches/imx_dts/0119-ARM-imx6q-add-cko2-clocks.patch"
+	${git} "${DIR}/patches/imx_dts/0120-ARM-imx6q-add-the-missing-cko-output-selection.patch"
+	${git} "${DIR}/patches/imx_dts/0121-ARM-imx6q-remove-board-specific-CLKO-setup.patch"
+	${git} "${DIR}/patches/imx_dts/0122-ARM-dts-imx6qdl-sabresd-Allow-buttons-to-wake-up-the.patch"
+	${git} "${DIR}/patches/imx_dts/0123-ARM-dts-i.MX27-Using-wdog_ipg_gate-clock-source-for-.patch"
+	${git} "${DIR}/patches/imx_dts/0124-ARM-dts-i.MX27-Remove-optional-ptp-clock-source-for-.patch"
+	${git} "${DIR}/patches/imx_dts/0125-ARM-dts-i.MX27-Add-label-to-CPU-node.patch"
+	${git} "${DIR}/patches/imx_dts/0126-ARM-dts-i.MX27-Increase-clock-latency-value.patch"
+	${git} "${DIR}/patches/imx_dts/0127-ARM-dts-i.MX27-Remove-clock-name-from-CPU-node.patch"
+	${git} "${DIR}/patches/imx_dts/0128-ARM-dts-imx27-phytec-phycore-som-Fix-regulator-setti.patch"
+	${git} "${DIR}/patches/imx_dts/0129-ARM-imx6q-add-vdoa-gate-clock.patch"
+	${git} "${DIR}/patches/imx_dts/0130-ARM-dts-mxs-Add-spi-alias.patch"
+	${git} "${DIR}/patches/imx_dts/0131-ARM-dts-imx-ocram-size-is-different-between-imx6q-an.patch"
+	${git} "${DIR}/patches/imx_dts/0132-ARM-imx-add-ocram-clock-for-imx53.patch"
 }
 
 imx () {

@@ -1,7 +1,7 @@
-From d7118b884d8323e277d7aa68ebcb0573d22a5f01 Mon Sep 17 00:00:00 2001
+From cb27c27cf0295ee37e2e5ef9143e6271f9c0055d Mon Sep 17 00:00:00 2001
 From: Huang Shijie <b32955@freescale.com>
 Date: Mon, 8 Jul 2013 17:14:19 +0800
-Subject: [PATCH 056/117] ARM: dts: imx6sl: add "fsl,imx6q-uart" for uart
+Subject: [PATCH 056/132] ARM: dts: imx6sl: add "fsl,imx6q-uart" for uart
  compatible
 
 In order to enable the DMA for some uart port in imx6sl, we add the

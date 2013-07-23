@@ -1,7 +1,7 @@
-From 0f7d2657047881fc11333f5df8ea21e2dba558ce Mon Sep 17 00:00:00 2001
+From afabe91df422dd3c056ce795afd471fa85c00a48 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Fri, 12 Jul 2013 09:49:32 -0300
-Subject: [PATCH 067/117] ARM: dts: imx6dl-wandboard: Add SDHC1 and SDHC2
+Subject: [PATCH 067/132] ARM: dts: imx6dl-wandboard: Add SDHC1 and SDHC2
  ports
 
 Wandboard has a SD card slot on the baseboard connected to SDHC1 and a

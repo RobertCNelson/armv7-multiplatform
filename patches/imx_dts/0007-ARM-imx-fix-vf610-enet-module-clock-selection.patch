@@ -1,7 +1,7 @@
-From 8ce64f37416659c38800ed8d3b920604edfd3102 Mon Sep 17 00:00:00 2001
+From 4bf0951ed5a4e957616fc0e58d04aac6e92ee0ac Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Wed, 10 Jul 2013 14:05:44 +0800
-Subject: [PATCH 007/117] ARM: imx: fix vf610 enet module clock selection
+Subject: [PATCH 007/132] ARM: imx: fix vf610 enet module clock selection
 
 The fec/enet driver calculates MDC rate with the formula below.
 

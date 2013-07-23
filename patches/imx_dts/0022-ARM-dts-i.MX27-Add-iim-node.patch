@@ -1,7 +1,7 @@
-From d6127f89d6db79c3cc14855adf55f2b1ec1f2650 Mon Sep 17 00:00:00 2001
+From 961ecb34f7505630a0cbe5dd540e991198562816 Mon Sep 17 00:00:00 2001
 From: Sascha Hauer <s.hauer@pengutronix.de>
 Date: Tue, 25 Jun 2013 15:51:48 +0200
-Subject: [PATCH 022/117] ARM: dts: i.MX27: Add iim node
+Subject: [PATCH 022/132] ARM: dts: i.MX27: Add iim node
 
 Signed-off-by: Sascha Hauer <s.hauer@pengutronix.de>
 Signed-off-by: Shawn Guo <shawn.guo@linaro.org>

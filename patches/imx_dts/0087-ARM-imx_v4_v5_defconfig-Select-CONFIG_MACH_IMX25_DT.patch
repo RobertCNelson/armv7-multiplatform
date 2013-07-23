@@ -1,7 +1,7 @@
-From 6eae13aabe6ae57423ff4d5471156972e03f904f Mon Sep 17 00:00:00 2001
+From 8f34526a4e62cb5b8a61f3340b7bdebcb8501605 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Wed, 3 Jul 2013 09:42:57 -0300
-Subject: [PATCH 087/117] ARM: imx_v4_v5_defconfig: Select
+Subject: [PATCH 087/132] ARM: imx_v4_v5_defconfig: Select
  CONFIG_MACH_IMX25_DT
 
 Allow booting a mx25 dt kernel by default.
