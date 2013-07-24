@@ -255,6 +255,10 @@ dts () {
 	#Working on enabling the display, similiar to the panda..
 	${git} "${DIR}/patches/dts/0002-dts-omap3-beagle-add-i2c2-i2c3.patch"
 	${git} "${DIR}/patches/dts/0003-dts-add-omap3-beagle-bx-as-a-copy-of-omap3-beagle-bu.patch"
+
+	#omap3-xm: enable video over dss-common (like omap4)
+	${git} "${DIR}/patches/dts/0004-ARM-dts-omap3-beagle-xm-fix-compatible-property.patch"
+	${git} "${DIR}/patches/dts/0005-hack-beagle_xm-like-omap4-use-the-dss-common-transit.patch"
 }
 
 saucy () {
