@@ -28,10 +28,10 @@ linaro_toolchain="cortex_gcc_4_8"
 #Kernel/Build
 KERNEL_REL=3.11
 KERNEL_TAG=${KERNEL_REL}-rc2
-BUILD=armv7-x3.9
+BUILD=armv7-x3.10
 
 #v3.X-rcX + upto SHA
-KERNEL_SHA="b3a3a9c441e2c8f6b6760de9331023a7906a4ac6"
+KERNEL_SHA="04012e3076943f17c8cfc77a196701c8f0b8964f"
 
 #git branch
 BRANCH="v3.11.x"
