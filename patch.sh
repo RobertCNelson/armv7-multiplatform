@@ -251,6 +251,10 @@ dts () {
 	#omap: https://git.kernel.org/cgit/linux/kernel/git/bcousson/linux-omap-dt.git/
 	#imx: https://git.linaro.org/gitweb?p=people/shawnguo/linux-2.6.git;a=summary
 	${git} "${DIR}/patches/dts/0001-ARM-imx-Enable-UART1-for-Sabrelite.patch"
+
+	#Working on enabling the display, similiar to the panda..
+	${git} "${DIR}/patches/dts/0002-dts-omap3-beagle-add-i2c2-i2c3.patch"
+	${git} "${DIR}/patches/dts/0003-dts-add-omap3-beagle-bx-as-a-copy-of-omap3-beagle-bu.patch"
 }
 
 saucy () {
