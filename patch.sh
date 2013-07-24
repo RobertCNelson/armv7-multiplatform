@@ -61,6 +61,9 @@ drivers () {
 	${git} "${DIR}/patches/drivers/0002-ASoC-sglt5000-Provide-the-reg_stride-field.patch"
 	${git} "${DIR}/patches/drivers/0003-ASoC-imx-sgtl5000-fix-error-return-code-in-imx_sgtl5.patch"
 	${git} "${DIR}/patches/drivers/0004-ASoC-sgtl5000-defer-the-probe-if-clock-is-not-found.patch"
+	
+	#TI omap dts clock bindings driver
+	${git} "${DIR}/patches/drivers/0005-ARM-dts-omap-clock-bindings-driver.patch"
 }
 
 imx_dts () {
@@ -232,6 +235,15 @@ omap () {
 	#omap4: fix video..
 	${git} "${DIR}/patches/omap/0011-ARM-OMAP-dss-common-fix-Panda-s-DVI-DDC-channel.patch"
 	${git} "${DIR}/patches/omap/0012-ARM-OMAP2-Remove-legacy-DSS-initialization-for-omap4.patch"
+
+	#omap3: add device tree clock binding support
+	${git} "${DIR}/patches/omap/0014-ARM-dts-omap3-add-clock-bindings-to-dts.patch"
+	
+	#omap: use cpu0-cpufreq SoC generic driver if performing dts boot, use old method if non dts
+	${git} "${DIR}/patches/omap/0015-ARM-dts-omap-boot-support-cpu0-cpufreq.patch"
+	
+	#beagleboard-xm: add abb bindings and OPP1G operating point for 1 GHz operation
+	${git} "${DIR}/patches/omap/0016-ARM-dts-omap3-beagle-xm-add-opp1g-abb-bindings.patch"
 }
 
 dts () {
