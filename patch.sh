@@ -246,6 +246,13 @@ omap () {
 	${git} "${DIR}/patches/omap/0016-ARM-dts-omap3-beagle-xm-add-opp1g-abb-bindings.patch"
 }
 
+omap_sprz319_erratum() {
+	echo "dir: omap_sprz319_erratum"
+
+	# Apply the modified sprz319 erratum for the v3.11-rc2 kernel
+	${git} "${DIR}/patches/omap_sprz319_erratum_v2.1/0001-hack-omap-clockk-dpll5-apply-sprz319e-2.1-erratum-kernel-3.11-rc2.patch"
+}
+
 dts () {
 	echo "dir: dts"
 	#omap: https://git.kernel.org/cgit/linux/kernel/git/bcousson/linux-omap-dt.git/
@@ -272,6 +279,10 @@ drivers
 imx_dts
 imx
 omap
+
+# Supposedly breaks non-xM beagleboards so commented out.  Fixes the dpll5 instability which usually results in the hard crash of the USB ports on Beagleboard xM.  Uncomment to enable
+#omap_sprz319_erratum
+
 dts
 saucy
 
