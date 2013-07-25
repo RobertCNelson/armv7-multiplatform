@@ -1,4 +1,4 @@
-From 28f099026b5f2d53cc5f634395da26c4f6ff1cb3 Mon Sep 17 00:00:00 2001
+From d54ffb492cb2f94cd1d50633e88113bfbbec2ae9 Mon Sep 17 00:00:00 2001
 From: Roger Quadros <rogerq@ti.com>
 Date: Tue, 18 Jun 2013 19:04:47 +0300
 Subject: [PATCH 1/8] ARM: OMAP2+: Provide alias to USB PHY clock

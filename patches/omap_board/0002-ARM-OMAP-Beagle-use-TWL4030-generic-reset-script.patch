@@ -1,7 +1,7 @@
-From 330e24178d7a117d7c2842fbb1f18dfd678002d7 Mon Sep 17 00:00:00 2001
+From 4a1f13e4704d07ccaa1dd2e8d2a26fd5097654bb Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Thu, 24 Jan 2013 09:43:51 -0600
-Subject: [PATCH 10/10] ARM: OMAP: Beagle: use TWL4030 generic reset script
+Subject: [PATCH 2/2] ARM: OMAP: Beagle: use TWL4030 generic reset script
 
 Enable TWL_COMMON_PDATA_POWER such that OMAP3530 revisions of the
 Beagle (Bx/Cx) will not hang on reboot when running at 125 Mhz.

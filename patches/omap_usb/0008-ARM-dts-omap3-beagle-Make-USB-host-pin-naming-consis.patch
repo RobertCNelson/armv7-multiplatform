@@ -1,4 +1,4 @@
-From 622cec3da1db8385ea527c971d051568e9bd65d6 Mon Sep 17 00:00:00 2001
+From 560a997454e7abb588e8869769b6bd3b8e13ecd4 Mon Sep 17 00:00:00 2001
 From: Roger Quadros <rogerq@ti.com>
 Date: Thu, 18 Jul 2013 11:53:10 +0300
 Subject: [PATCH 8/8] ARM: dts: omap3-beagle: Make USB host pin naming

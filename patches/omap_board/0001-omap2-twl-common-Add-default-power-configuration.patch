@@ -1,7 +1,7 @@
-From 6ee0fa68045f45b1bb3cae9f96f63a846a9a6bec Mon Sep 17 00:00:00 2001
+From 3ead85d800a1953ab5544ef82b00d144061cd408 Mon Sep 17 00:00:00 2001
 From: Matthias Brugger <matthias.bgg@gmail.com>
 Date: Wed, 23 Jan 2013 19:50:38 +0100
-Subject: [PATCH 9/9] omap2: twl-common: Add default power configuration
+Subject: [PATCH 1/2] omap2: twl-common: Add default power configuration
 
 This patch adds a generic power script configuration.
 When rebooting an OMAP3530 at 125 MHz, the reboot hangs.

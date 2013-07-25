@@ -1,7 +1,7 @@
-From c141a2d0f8791c990e18ac280a6a2e6606282c20 Mon Sep 17 00:00:00 2001
+From ef48cab55fd705957ecfd02a17885184ffbdf6e0 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Wed, 24 Jul 2013 12:23:54 -0500
-Subject: [PATCH 5/5] hack: beagle_xm: like omap4, use the dss-common
+Subject: [PATCH 4/4] hack: beagle_xm: like omap4, use the dss-common
  transitional file
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>

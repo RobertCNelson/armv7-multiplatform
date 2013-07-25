@@ -1,7 +1,7 @@
-From f01222b0117035ab7096a6c3a361efa134ca4b63 Mon Sep 17 00:00:00 2001
+From eb411be41e00420e8ba835b4f3fb6ff847cc7d4b Mon Sep 17 00:00:00 2001
 From: Tomi Valkeinen <tomi.valkeinen@ti.com>
 Date: Tue, 23 Jul 2013 12:06:44 +0300
-Subject: [PATCH 10/11] ARM: OMAP: dss-common: fix Panda's DVI DDC channel
+Subject: [PATCH 1/4] ARM: OMAP: dss-common: fix Panda's DVI DDC channel
 
 Panda's DVI connector's DDC pins are connected to OMAP's third i2c bus.
 With non-DT, the bus number was 3, and that is what is used in the

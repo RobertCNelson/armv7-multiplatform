@@ -1,10 +1,10 @@
-From 8b6669b06e8e67c8513a0b6700ca62da224478b4 Mon Sep 17 00:00:00 2001
+From 5734fb0bbdabfa68c9457b853f13f0018d30abc6 Mon Sep 17 00:00:00 2001
 From: Teknoman117 <linux.robotdude@gmail.com>
 Date: Wed, 24 Jul 2013 03:01:29 -0700
-Subject: [PATCH] Use cpu0-cpufreq in a device tree supported boot.  This is a
- SoC generic driver, and can pull from the operating points
- listed in the device tree.  Very nifty - originally found
- here:
+Subject: [PATCH 3/4] Use cpu0-cpufreq in a device tree supported boot. This
+ is a SoC generic driver, and can pull from the
+ operating points listed in the device tree. Very nifty
+ - originally found here:
  http://lkml.indiana.edu/hypermail/linux/kernel/1304.1/04077.html
 
 ---

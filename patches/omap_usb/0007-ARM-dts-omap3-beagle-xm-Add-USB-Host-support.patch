@@ -1,4 +1,4 @@
-From 616a3d9f5f91764f8364daeca3544403a230fb02 Mon Sep 17 00:00:00 2001
+From 02330a7b526d07dc618f1ee1f917209f8478e3b2 Mon Sep 17 00:00:00 2001
 From: Roger Quadros <rogerq@ti.com>
 Date: Thu, 18 Jul 2013 11:53:09 +0300
 Subject: [PATCH 7/8] ARM: dts: omap3-beagle-xm: Add USB Host support
@@ -16,7 +16,7 @@ Signed-off-by: Roger Quadros <rogerq@ti.com>
  1 file changed, 66 insertions(+), 9 deletions(-)
 
 diff --git a/arch/arm/boot/dts/omap3-beagle-xm.dts b/arch/arm/boot/dts/omap3-beagle-xm.dts
-index afdb164..2273c24 100644
+index 0c514dc..69e05c2 100644
 --- a/arch/arm/boot/dts/omap3-beagle-xm.dts
 +++ b/arch/arm/boot/dts/omap3-beagle-xm.dts
 @@ -69,6 +69,33 @@

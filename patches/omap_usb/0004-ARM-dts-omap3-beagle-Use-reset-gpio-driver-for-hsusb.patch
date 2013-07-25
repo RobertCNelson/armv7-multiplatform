@@ -1,4 +1,4 @@
-From 5b98c62972608e19b9d55478b5262abf52b2e271 Mon Sep 17 00:00:00 2001
+From c3d7ac92411d42b1ade3ed951bc8e1616dc762ab Mon Sep 17 00:00:00 2001
 From: Roger Quadros <rogerq@ti.com>
 Date: Thu, 18 Jul 2013 11:53:06 +0300
 Subject: [PATCH 4/8] ARM: dts: omap3-beagle: Use reset-gpio driver for

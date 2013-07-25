@@ -61,9 +61,6 @@ drivers () {
 	${git} "${DIR}/patches/drivers/0002-ASoC-sglt5000-Provide-the-reg_stride-field.patch"
 	${git} "${DIR}/patches/drivers/0003-ASoC-imx-sgtl5000-fix-error-return-code-in-imx_sgtl5.patch"
 	${git} "${DIR}/patches/drivers/0004-ASoC-sgtl5000-defer-the-probe-if-clock-is-not-found.patch"
-	
-	#TI omap dts clock bindings driver
-	${git} "${DIR}/patches/drivers/0005-ARM-dts-omap-clock-bindings-driver.patch"
 }
 
 imx_dts () {
@@ -214,36 +211,55 @@ imx () {
 	${git} "${DIR}/patches/imx/0002-ahci_imx-add-ahci-sata-support-on-imx-platforms.patch"
 }
 
-omap () {
-	echo "dir: omap"
+omap_fixes () {
+	echo "dir: omap_fixes"
+	${git} "${DIR}/patches/omap_fixes/0001-ARM-dts-omap3-beagle-xm-fix-compatible-property.patch"
+}
+
+omap_usb () {
+	echo "dir: omap_usb"
 	#fix panda/omap4 usb host...
-	${git} "${DIR}/patches/omap/0001-ARM-OMAP2-Provide-alias-to-USB-PHY-clock.patch"
+	${git} "${DIR}/patches/omap_usb/0001-ARM-OMAP2-Provide-alias-to-USB-PHY-clock.patch"
 
 	#[PATCH v10] reset: Add driver for gpio-controlled reset pins
-	${git} "${DIR}/patches/omap/0002-reset-Add-driver-for-gpio-controlled-reset-pins.patch"
-	${git} "${DIR}/patches/omap/0003-usb-phy-nop-Use-RESET-Controller-for-managing-the-re.patch"
-	${git} "${DIR}/patches/omap/0004-ARM-dts-omap3-beagle-Use-reset-gpio-driver-for-hsusb.patch"
-	${git} "${DIR}/patches/omap/0005-ARM-dts-omap4-panda-Use-reset-gpio-driver-for-hsusb1.patch"
-	${git} "${DIR}/patches/omap/0006-ARM-dts-omap5-uevm-Use-reset-gpio-driver-for-hsusb2_.patch"
-	${git} "${DIR}/patches/omap/0007-ARM-dts-omap3-beagle-xm-Add-USB-Host-support.patch"
-	${git} "${DIR}/patches/omap/0008-ARM-dts-omap3-beagle-Make-USB-host-pin-naming-consis.patch"
+	${git} "${DIR}/patches/omap_usb/0002-reset-Add-driver-for-gpio-controlled-reset-pins.patch"
+	${git} "${DIR}/patches/omap_usb/0003-usb-phy-nop-Use-RESET-Controller-for-managing-the-re.patch"
+	${git} "${DIR}/patches/omap_usb/0004-ARM-dts-omap3-beagle-Use-reset-gpio-driver-for-hsusb.patch"
+	${git} "${DIR}/patches/omap_usb/0005-ARM-dts-omap4-panda-Use-reset-gpio-driver-for-hsusb1.patch"
+	${git} "${DIR}/patches/omap_usb/0006-ARM-dts-omap5-uevm-Use-reset-gpio-driver-for-hsusb2_.patch"
+	${git} "${DIR}/patches/omap_usb/0007-ARM-dts-omap3-beagle-xm-Add-USB-Host-support.patch"
+	${git} "${DIR}/patches/omap_usb/0008-ARM-dts-omap3-beagle-Make-USB-host-pin-naming-consis.patch"
+}
 
-	#omap3430: lockup on reset fix...
-	${git} "${DIR}/patches/omap/0009-omap2-twl-common-Add-default-power-configuration.patch"
-	${git} "${DIR}/patches/omap/0010-ARM-OMAP-Beagle-use-TWL4030-generic-reset-script.patch"
+omap_video () {
+	echo "dir: omap_video"
+	${git} "${DIR}/patches/omap_video/0001-ARM-OMAP-dss-common-fix-Panda-s-DVI-DDC-channel.patch"
+	${git} "${DIR}/patches/omap_video/0002-ARM-OMAP2-Remove-legacy-DSS-initialization-for-omap4.patch"
+	${git} "${DIR}/patches/omap_video/0003-dts-omap3-beagle-add-i2c2-i2c3.patch"
+	${git} "${DIR}/patches/omap_video/0004-hack-beagle_xm-like-omap4-use-the-dss-common-transit.patch"
+}
 
-	#omap4: fix video..
-	${git} "${DIR}/patches/omap/0011-ARM-OMAP-dss-common-fix-Panda-s-DVI-DDC-channel.patch"
-	${git} "${DIR}/patches/omap/0012-ARM-OMAP2-Remove-legacy-DSS-initialization-for-omap4.patch"
+omap_clock () {
+	echo "dir: omap_clock"
+	#TI omap dts clock bindings driver
+	${git} "${DIR}/patches/omap_clock/0001-Added-the-Texas-Instruments-OMAP-Clock-driver-origin.patch"
 
 	#omap3: add device tree clock binding support
-	${git} "${DIR}/patches/omap/0014-ARM-dts-omap3-add-clock-bindings-to-dts.patch"
-	
+	${git} "${DIR}/patches/omap_clock/0002-Add-the-clock-bindings-to-omap3.dtsi-that-were-made-.patch"
+
 	#omap: use cpu0-cpufreq SoC generic driver if performing dts boot, use old method if non dts
-	${git} "${DIR}/patches/omap/0015-ARM-dts-omap-boot-support-cpu0-cpufreq.patch"
-	
+	${git} "${DIR}/patches/omap_clock/0003-Use-cpu0-cpufreq-in-a-device-tree-supported-boot.-Th.patch"
+
 	#beagleboard-xm: add abb bindings and OPP1G operating point for 1 GHz operation
-	${git} "${DIR}/patches/omap/0016-ARM-dts-omap3-beagle-xm-add-opp1g-abb-bindings.patch"
+	${git} "${DIR}/patches/omap_clock/0004-Now-this-one-is-mine-lol.-Reading-through-the-ti-abb.patch"
+}
+
+omap_board () {
+	echo "dir: omap_board"
+	#Note: the plan is to move to device tree, so these will be dropped at some point..
+	#omap3430: lockup on reset fix...
+	${git} "${DIR}/patches/omap_board/0001-omap2-twl-common-Add-default-power-configuration.patch"
+	${git} "${DIR}/patches/omap_board/0002-ARM-OMAP-Beagle-use-TWL4030-generic-reset-script.patch"
 }
 
 omap_sprz319_erratum() {
@@ -258,14 +274,6 @@ dts () {
 	#omap: https://git.kernel.org/cgit/linux/kernel/git/bcousson/linux-omap-dt.git/
 	#imx: https://git.linaro.org/gitweb?p=people/shawnguo/linux-2.6.git;a=summary
 	${git} "${DIR}/patches/dts/0001-ARM-imx-Enable-UART1-for-Sabrelite.patch"
-
-	#Working on enabling the display, similiar to the panda..
-	${git} "${DIR}/patches/dts/0002-dts-omap3-beagle-add-i2c2-i2c3.patch"
-	${git} "${DIR}/patches/dts/0003-dts-add-omap3-beagle-bx-as-a-copy-of-omap3-beagle-bu.patch"
-
-	#omap3-xm: enable video over dss-common (like omap4)
-	${git} "${DIR}/patches/dts/0004-ARM-dts-omap3-beagle-xm-fix-compatible-property.patch"
-	${git} "${DIR}/patches/dts/0005-hack-beagle_xm-like-omap4-use-the-dss-common-transit.patch"
 }
 
 saucy () {
@@ -278,7 +286,11 @@ arm
 drivers
 imx_dts
 imx
-omap
+omap_fixes
+omap_usb
+omap_video
+omap_clock
+omap_board
 
 # Supposedly breaks non-xM beagleboards so commented out.  Fixes the dpll5 instability which usually results in the hard crash of the USB ports on Beagleboard xM.  Uncomment to enable
 #omap_sprz319_erratum

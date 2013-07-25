@@ -1,7 +1,7 @@
-From 0579842cb6f5362279026efe37c08a67114d6a36 Mon Sep 17 00:00:00 2001
+From a508734e779fa7c5b960543800579ff300f05097 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Wed, 24 Jul 2013 09:44:24 -0500
-Subject: [PATCH 2/2] dts: omap3-beagle add i2c2 & i2c3
+Subject: [PATCH 3/4] dts: omap3-beagle add i2c2 & i2c3
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---

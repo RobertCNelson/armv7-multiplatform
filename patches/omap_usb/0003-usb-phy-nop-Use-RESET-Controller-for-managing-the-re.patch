@@ -1,4 +1,4 @@
-From 0e6b77c390c2f48c4975837a17db48d32f790a53 Mon Sep 17 00:00:00 2001
+From f2edfe28a2e63bb4e0412722faec46df5af12f0f Mon Sep 17 00:00:00 2001
 From: Roger Quadros <rogerq@ti.com>
 Date: Thu, 18 Jul 2013 11:53:05 +0300
 Subject: [PATCH 3/8] usb: phy-nop: Use RESET Controller for managing the
