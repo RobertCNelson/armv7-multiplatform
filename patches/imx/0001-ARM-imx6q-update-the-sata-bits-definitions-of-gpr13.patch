@@ -1,19 +1,22 @@
-From 24d34bf1684477b06414ef6ffd021b71990993fb Mon Sep 17 00:00:00 2001
+From 371863a788db77e6092d69df17d8884cb0d94270 Mon Sep 17 00:00:00 2001
 From: Richard Zhu <r65037@freescale.com>
-Date: Tue, 16 Jul 2013 11:28:47 +0800
-Subject: [PATCH 2/3] ARM: imx6q: update the sata bits definitions of gpr13
+Date: Wed, 24 Jul 2013 06:15:28 +0000
+Subject: [PATCH 1/2] ARM: imx6q: update the sata bits definitions of gpr13
 
 Replace the SATA_PHY_# by the more readable definitons.
 
+tj: Being routed through libata branch to enable implementation of
+    ahci_imx.
+
 Signed-off-by: Richard Zhu <r65037@freescale.com>
 Acked-by: Shawn Guo <shawn.guo@linaro.org>
-Acked-by: Shawn Guo <shawn.guo@linaro.org>
+Signed-off-by: Tejun Heo <tj@kernel.org>
 ---
  include/linux/mfd/syscon/imx6q-iomuxc-gpr.h |  121 +++++++++++++++++++--------
  1 file changed, 84 insertions(+), 37 deletions(-)
 
 diff --git a/include/linux/mfd/syscon/imx6q-iomuxc-gpr.h b/include/linux/mfd/syscon/imx6q-iomuxc-gpr.h
-index dab34a1..e235251 100644
+index b1521e8..b6bdcd6 100644
 --- a/include/linux/mfd/syscon/imx6q-iomuxc-gpr.h
 +++ b/include/linux/mfd/syscon/imx6q-iomuxc-gpr.h
 @@ -279,41 +279,88 @@

@@ -1,48 +1,51 @@
-From 05b0e6201a62e5efddf0d2786aaac8cbb904597e Mon Sep 17 00:00:00 2001
+From 093f4fdd74f29031d79be747c65b95fb16601a92 Mon Sep 17 00:00:00 2001
 From: Richard Zhu <r65037@freescale.com>
-Date: Tue, 16 Jul 2013 11:28:48 +0800
-Subject: [PATCH 3/3] sata: imx: add ahci sata support on imx platforms
+Date: Wed, 24 Jul 2013 06:15:29 +0000
+Subject: [PATCH 2/2] ahci_imx: add ahci sata support on imx platforms
 
-imx6q contains one Synopsys AHCI SATA controller,
-But it can't share ahci_platform driver with other
-controllers.
-Because there are some misalignments of the generic
-AHCI controller.
-The bits definitions of the HBA registers, the Vendor
-Specific registers, the AHCI PHY clock and the AHCI
-signals adjustment window(GPR13 register).
- - CAP_SSS(bit20) of the HOST_CAP is writable, default
- value is '0', should be configured to be '1'
- - bit0 (only one AHCI SATA port on imx6q) of the
- HOST_PORTS_IMPL should be set to be '1'.(default 0)
- - One Vendor Specific register HOST_TIMER1MS(offset:0xe0)
- should be configured regarding to the frequency of AHB
- bus clock.
- - Configurations of the AHCI PHY clock, and the signal
- parameters of the GPR13
+imx6q contains one Synopsys AHCI SATA controller, But it can't share
+ahci_platform driver with other controllers because there are some
+misalignments of the generic AHCI controller - the bits definitions of
+the HBA registers, the Vendor Specific registers, the AHCI PHY clock
+and the AHCI signals adjustment window(GPR13 register).
+
+ - CAP_SSS(bit20) of the HOST_CAP is writable, default value is '0',
+   should be configured to be '1'
+
+ - bit0 (only one AHCI SATA port on imx6q) of the HOST_PORTS_IMPL
+   should be set to be '1'.(default 0)
+
+ - One Vendor Specific register HOST_TIMER1MS(offset:0xe0) should be
+   configured regarding to the frequency of AHB bus clock.
+
+ - Configurations of the AHCI PHY clock, and the signal parameters of
+   the GPR13
 
 Setup its own ahci sata driver, contained the imx6q specific
-initialized codes, re-use the generic ahci_platform driver, and
-keep the generic ahci_platform driver clean as much as possible.
+initialized codes, re-use the generic ahci_platform driver, and keep
+the generic ahci_platform driver clean as much as possible.
+
+tj: patch description reformatted
 
 Signed-off-by: Richard Zhu <r65037@freescale.com>
 Reviewed-by: Shawn Guo <shawn.guo@linaro.org>
+Signed-off-by: Tejun Heo <tj@kernel.org>
 ---
  drivers/ata/Kconfig    |    9 ++
  drivers/ata/Makefile   |    1 +
- drivers/ata/sata_imx.c |  236 ++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/ata/ahci_imx.c |  236 ++++++++++++++++++++++++++++++++++++++++++++++++
  3 files changed, 246 insertions(+)
- create mode 100644 drivers/ata/sata_imx.c
+ create mode 100644 drivers/ata/ahci_imx.c
 
 diff --git a/drivers/ata/Kconfig b/drivers/ata/Kconfig
-index 80dc988..bfe01ff 100644
+index 80dc988..cbf7a16 100644
 --- a/drivers/ata/Kconfig
 +++ b/drivers/ata/Kconfig
 @@ -97,6 +97,15 @@ config SATA_AHCI_PLATFORM
  
  	  If unsure, say N.
  
-+config SATA_IMX
++config AHCI_IMX
 +	tristate "Freescale i.MX AHCI SATA support"
 +	depends on SATA_AHCI_PLATFORM
 +	help
@@ -55,22 +58,22 @@ index 80dc988..bfe01ff 100644
  	tristate "Freescale 3.0Gbps SATA support"
  	depends on FSL_SOC
 diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
-index c04d0fd..04b1c6c 100644
+index c04d0fd..46518c6 100644
 --- a/drivers/ata/Makefile
 +++ b/drivers/ata/Makefile
 @@ -10,6 +10,7 @@ obj-$(CONFIG_SATA_INIC162X)	+= sata_inic162x.o
  obj-$(CONFIG_SATA_SIL24)	+= sata_sil24.o
  obj-$(CONFIG_SATA_DWC)		+= sata_dwc_460ex.o
  obj-$(CONFIG_SATA_HIGHBANK)	+= sata_highbank.o libahci.o
-+obj-$(CONFIG_SATA_IMX)		+= sata_imx.o
++obj-$(CONFIG_AHCI_IMX)		+= ahci_imx.o
  
  # SFF w/ custom DMA
  obj-$(CONFIG_PDC_ADMA)		+= pdc_adma.o
-diff --git a/drivers/ata/sata_imx.c b/drivers/ata/sata_imx.c
+diff --git a/drivers/ata/ahci_imx.c b/drivers/ata/ahci_imx.c
 new file mode 100644
-index 0000000..328f2d3
+index 0000000..58debb0
 --- /dev/null
-+++ b/drivers/ata/sata_imx.c
++++ b/drivers/ata/ahci_imx.c
 @@ -0,0 +1,236 @@
 +/*
 + * Freescale IMX AHCI SATA platform driver
@@ -297,7 +300,7 @@ index 0000000..328f2d3
 +	.probe = imx_ahci_probe,
 +	.remove = imx_ahci_remove,
 +	.driver = {
-+		.name = "sata-imx",
++		.name = "ahci-imx",
 +		.owner = THIS_MODULE,
 +		.of_match_table = imx_ahci_of_match,
 +	},
@@ -307,7 +310,7 @@ index 0000000..328f2d3
 +MODULE_DESCRIPTION("Freescale i.MX AHCI SATA platform driver");
 +MODULE_AUTHOR("Richard Zhu <Hong-Xing.Zhu@freescale.com>");
 +MODULE_LICENSE("GPL");
-+MODULE_ALIAS("sata:imx");
++MODULE_ALIAS("ahci:imx");
 -- 
 1.7.10.4
 

@@ -207,11 +207,11 @@ imx_dts () {
 
 imx () {
 	echo "dir: imx"
-	#v7: http://www.spinics.net/lists/linux-ide/msg45738.html
-	#http://patchwork.ozlabs.org/project/linux-ide/list/
-#	${git} "${DIR}/patches/imx/0001-ARM-dtsi-enable-ahci-sata-on-imx6q-platforms.patch"
-	${git} "${DIR}/patches/imx/0002-ARM-imx6q-update-the-sata-bits-definitions-of-gpr13.patch"
-	${git} "${DIR}/patches/imx/0003-sata-imx-add-ahci-sata-support-on-imx-platforms.patch"
+	#v8:
+	#https://git.kernel.org/cgit/linux/kernel/git/tj/libata.git/commit/?h=for-3.11-fixes&id=6a6c21ef487be47b300a0b24cd6afeb69d8b9a1a
+	${git} "${DIR}/patches/imx/0001-ARM-imx6q-update-the-sata-bits-definitions-of-gpr13.patch"
+	#https://git.kernel.org/cgit/linux/kernel/git/tj/libata.git/commit/?h=for-3.11-fixes&id=9e54eae23bc9cca0d8a955018c35b1250e09a73a
+	${git} "${DIR}/patches/imx/0002-ahci_imx-add-ahci-sata-support-on-imx-platforms.patch"
 }
 
 omap () {
