@@ -60,7 +60,8 @@ drivers () {
 	${git} "${DIR}/patches/drivers/0001-thermal-add-imx-thermal-driver-support.patch"
 	${git} "${DIR}/patches/drivers/0002-ASoC-sglt5000-Provide-the-reg_stride-field.patch"
 	${git} "${DIR}/patches/drivers/0003-ASoC-imx-sgtl5000-fix-error-return-code-in-imx_sgtl5.patch"
-	${git} "${DIR}/patches/drivers/0004-ASoC-sgtl5000-defer-the-probe-if-clock-is-not-found.patch"
+#v3.11-rc3:
+#	${git} "${DIR}/patches/drivers/0004-ASoC-sgtl5000-defer-the-probe-if-clock-is-not-found.patch"
 }
 
 imx_dts () {
@@ -68,14 +69,15 @@ imx_dts () {
 	#With all the imx6*.dtsi changes, its eaiser to just pull the for-next then try to manually rebase
 	#https://git.linaro.org/gitweb?p=people/shawnguo/linux-2.6.git;a=shortlog;h=refs/heads/for-next
 
-	${git} "${DIR}/patches/imx_dts/0001-ARM-i.MX53-Fix-UART-pad-configuration.patch"
-	${git} "${DIR}/patches/imx_dts/0002-ARM-imx27-Fix-documentation-for-SPLL-clock.patch"
-	${git} "${DIR}/patches/imx_dts/0003-ARM-i.MX27-Typo-fix.patch"
-	${git} "${DIR}/patches/imx_dts/0004-ARM-i.MX6Q-Fix-IOMUXC-GPR1-defines-for-ENET_CLK_SEL-.patch"
-	${git} "${DIR}/patches/imx_dts/0005-ARM-i.MX6Q-correct-emi_sel-clock-muxing.patch"
-	${git} "${DIR}/patches/imx_dts/0006-ARM-mxs-saif0-is-the-clock-provider-to-sgtl5000.patch"
-	${git} "${DIR}/patches/imx_dts/0007-ARM-imx-fix-vf610-enet-module-clock-selection.patch"
-	${git} "${DIR}/patches/imx_dts/0008-ARM-i.MX53-mba53-Fix-PWM-backlight-DT-node.patch"
+#v3.11-rc3:
+#	${git} "${DIR}/patches/imx_dts/0001-ARM-i.MX53-Fix-UART-pad-configuration.patch"
+#	${git} "${DIR}/patches/imx_dts/0002-ARM-imx27-Fix-documentation-for-SPLL-clock.patch"
+#	${git} "${DIR}/patches/imx_dts/0003-ARM-i.MX27-Typo-fix.patch"
+#	${git} "${DIR}/patches/imx_dts/0004-ARM-i.MX6Q-Fix-IOMUXC-GPR1-defines-for-ENET_CLK_SEL-.patch"
+#	${git} "${DIR}/patches/imx_dts/0005-ARM-i.MX6Q-correct-emi_sel-clock-muxing.patch"
+#	${git} "${DIR}/patches/imx_dts/0006-ARM-mxs-saif0-is-the-clock-provider-to-sgtl5000.patch"
+#	${git} "${DIR}/patches/imx_dts/0007-ARM-imx-fix-vf610-enet-module-clock-selection.patch"
+#	${git} "${DIR}/patches/imx_dts/0008-ARM-i.MX53-mba53-Fix-PWM-backlight-DT-node.patch"
 	${git} "${DIR}/patches/imx_dts/0009-ARM-dts-imx6dl-add-a-new-pinctrl-for-ecspi1.patch"
 	${git} "${DIR}/patches/imx_dts/0010-ARM-dts-imx6q-add-a-new-pinctrl-for-ecspi1.patch"
 	${git} "${DIR}/patches/imx_dts/0011-ARM-dts-imx6qdl-sabresd-enable-the-SPI-NOR.patch"
@@ -138,7 +140,8 @@ imx_dts () {
 	${git} "${DIR}/patches/imx_dts/0068-ARM-dts-imx6dl-wandboard-Add-support-for-UART3.patch"
 	${git} "${DIR}/patches/imx_dts/0069-ARM-dts-i.MX51-Add-WEIM-node.patch"
 	${git} "${DIR}/patches/imx_dts/0070-ARM-dts-imx27-Add-core-voltages.patch"
-	${git} "${DIR}/patches/imx_dts/0071-ARM-dts-imx51-babbage-Pass-a-real-clock-to-the-codec.patch"
+#v3.11-rc3
+#	${git} "${DIR}/patches/imx_dts/0071-ARM-dts-imx51-babbage-Pass-a-real-clock-to-the-codec.patch"
 	${git} "${DIR}/patches/imx_dts/0072-ARM-dtsi-enable-ahci-sata-on-imx6q-platforms.patch"
 	${git} "${DIR}/patches/imx_dts/0073-drivers-bus-imx-weim-Remove-private-driver-data.patch"
 	${git} "${DIR}/patches/imx_dts/0074-drivers-bus-imx-weim-Simplify-error-path.patch"
@@ -204,11 +207,12 @@ imx_dts () {
 
 imx () {
 	echo "dir: imx"
+#v3.11-rc3
 	#v8:
 	#https://git.kernel.org/cgit/linux/kernel/git/tj/libata.git/commit/?h=for-3.11-fixes&id=6a6c21ef487be47b300a0b24cd6afeb69d8b9a1a
-	${git} "${DIR}/patches/imx/0001-ARM-imx6q-update-the-sata-bits-definitions-of-gpr13.patch"
+#	${git} "${DIR}/patches/imx/0001-ARM-imx6q-update-the-sata-bits-definitions-of-gpr13.patch"
 	#https://git.kernel.org/cgit/linux/kernel/git/tj/libata.git/commit/?h=for-3.11-fixes&id=9e54eae23bc9cca0d8a955018c35b1250e09a73a
-	${git} "${DIR}/patches/imx/0002-ahci_imx-add-ahci-sata-support-on-imx-platforms.patch"
+#	${git} "${DIR}/patches/imx/0002-ahci_imx-add-ahci-sata-support-on-imx-platforms.patch"
 
 	#sata for the imx53-qsb
 	${git} "${DIR}/patches/imx/0003-ahci-imx53-ahci-enable-on-imx53-qsb.patch"
@@ -225,8 +229,9 @@ omap_fixes () {
 
 omap_usb () {
 	echo "dir: omap_usb"
+#v3.11-rc3
 	#fix panda/omap4 usb host...
-	${git} "${DIR}/patches/omap_usb/0001-ARM-OMAP2-Provide-alias-to-USB-PHY-clock.patch"
+#	${git} "${DIR}/patches/omap_usb/0001-ARM-OMAP2-Provide-alias-to-USB-PHY-clock.patch"
 
 	#[PATCH v10] reset: Add driver for gpio-controlled reset pins
 	${git} "${DIR}/patches/omap_usb/0002-reset-Add-driver-for-gpio-controlled-reset-pins.patch"
