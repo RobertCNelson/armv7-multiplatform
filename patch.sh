@@ -209,6 +209,9 @@ imx () {
 	${git} "${DIR}/patches/imx/0001-ARM-imx6q-update-the-sata-bits-definitions-of-gpr13.patch"
 	#https://git.kernel.org/cgit/linux/kernel/git/tj/libata.git/commit/?h=for-3.11-fixes&id=9e54eae23bc9cca0d8a955018c35b1250e09a73a
 	${git} "${DIR}/patches/imx/0002-ahci_imx-add-ahci-sata-support-on-imx-platforms.patch"
+
+	#sata for the imx53-qsb
+	${git} "${DIR}/patches/imx/0003-ahci-imx53-ahci-enable-on-imx53-qsb.patch"
 }
 
 omap_fixes () {
