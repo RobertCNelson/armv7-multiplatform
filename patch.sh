@@ -212,6 +212,10 @@ imx () {
 
 	#sata for the imx53-qsb
 	${git} "${DIR}/patches/imx/0003-ahci-imx53-ahci-enable-on-imx53-qsb.patch"
+
+	#usb for the imx53-qsb
+	${git} "${DIR}/patches/imx/0004-ARM-dts-imx53-qsb-Make-USBH1-functional.patch"
+	${git} "${DIR}/patches/imx/0005-chipidea-core-Move-hw_phymode_configure-into-probe.patch"
 }
 
 omap_fixes () {
