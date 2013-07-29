@@ -13,8 +13,8 @@ Reviewed-by: Stephen Warren <swarren@nvidia.com>
  .../devicetree/bindings/reset/gpio-reset.txt       |   35 ++++
  drivers/reset/Kconfig                              |   11 ++
  drivers/reset/Makefile                             |    1 +
- drivers/reset/gpio-reset.c                         |  184 ++++++++++++++++++++
- 4 files changed, 231 insertions(+)
+ drivers/reset/gpio-reset.c                         |  174 ++++++++++++++++++++
+ 4 files changed, 221 insertions(+)
  create mode 100644 Documentation/devicetree/bindings/reset/gpio-reset.txt
  create mode 100644 drivers/reset/gpio-reset.c
 
@@ -87,10 +87,10 @@ index 1e2d83f..b854f20 100644
 +obj-$(CONFIG_RESET_GPIO) += gpio-reset.o
 diff --git a/drivers/reset/gpio-reset.c b/drivers/reset/gpio-reset.c
 new file mode 100644
-index 0000000..3049b22
+index 0000000..a49d8fc
 --- /dev/null
 +++ b/drivers/reset/gpio-reset.c
-@@ -0,0 +1,184 @@
+@@ -0,0 +1,174 @@
 +/*
 + * GPIO Reset Controller driver
 + *
@@ -258,17 +258,7 @@ index 0000000..3049b22
 +	},
 +};
 +
-+static int __init gpio_reset_init(void)
-+{
-+	return platform_driver_register(&gpio_reset_driver);
-+}
-+arch_initcall(gpio_reset_init);
-+
-+static void __exit gpio_reset_exit(void)
-+{
-+	platform_driver_unregister(&gpio_reset_driver);
-+}
-+module_exit(gpio_reset_exit);
++module_platform_driver(gpio_reset_driver);
 +
 +MODULE_AUTHOR("Philipp Zabel <p.zabel@pengutronix.de>");
 +MODULE_DESCRIPTION("gpio reset controller");

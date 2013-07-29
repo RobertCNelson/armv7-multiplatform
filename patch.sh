@@ -233,7 +233,7 @@ omap_usb () {
 	#fix panda/omap4 usb host...
 #	${git} "${DIR}/patches/omap_usb/0001-ARM-OMAP2-Provide-alias-to-USB-PHY-clock.patch"
 
-	#[PATCH v10] reset: Add driver for gpio-controlled reset pins
+	#[PATCH v11] reset: Add driver for gpio-controlled reset pins
 	${git} "${DIR}/patches/omap_usb/0002-reset-Add-driver-for-gpio-controlled-reset-pins.patch"
 	${git} "${DIR}/patches/omap_usb/0003-usb-phy-nop-Use-RESET-Controller-for-managing-the-re.patch"
 	${git} "${DIR}/patches/omap_usb/0004-ARM-dts-omap3-beagle-Use-reset-gpio-driver-for-hsusb.patch"
