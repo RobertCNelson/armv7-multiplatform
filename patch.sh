@@ -215,7 +215,7 @@ imx () {
 #	${git} "${DIR}/patches/imx/0002-ahci_imx-add-ahci-sata-support-on-imx-platforms.patch"
 
 	#sata for the imx53-qsb
-	${git} "${DIR}/patches/imx/0003-ahci-imx53-ahci-enable-on-imx53-qsb.patch"
+#	${git} "${DIR}/patches/imx/0003-ahci-imx53-ahci-enable-on-imx53-qsb.patch"
 
 	#usb for the imx53-qsb
 	${git} "${DIR}/patches/imx/0004-ARM-dts-imx53-qsb-Make-USBH1-functional.patch"
@@ -287,7 +287,7 @@ dts () {
 	#imx: https://git.linaro.org/gitweb?p=people/shawnguo/linux-2.6.git;a=summary
 	${git} "${DIR}/patches/dts/0001-ARM-imx-Enable-UART1-for-Sabrelite.patch"
 	${git} "${DIR}/patches/dts/0002-dts-wandboard-Add-support-for-SDIO-bcm4329.patch"
-	${git} "${DIR}/patches/dts/0003-imx6q-sabresd-disable-sata-till-opps-is-fixed.patch"
+#	${git} "${DIR}/patches/dts/0003-imx6q-sabresd-disable-sata-till-opps-is-fixed.patch"
 }
 
 saucy () {
