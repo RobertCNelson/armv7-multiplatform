@@ -1,7 +1,7 @@
-From 5a76ab80b8fca6ef6923ef9fd90217202bd105d5 Mon Sep 17 00:00:00 2001
+From 52c29d563e8e2c472b573ad943ffa856db180247 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sat, 20 Jul 2013 11:17:58 +0400
-Subject: [PATCH 127/132] ARM: dts: i.MX27: Remove clock name from CPU node
+Subject: [PATCH 127/143] ARM: dts: i.MX27: Remove clock name from CPU node
 
 Clock name is not needed for "cpufreq-cpu0".
 

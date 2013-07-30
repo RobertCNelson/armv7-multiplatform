@@ -1,7 +1,7 @@
-From b1cc731f55e5461b8aa6a99b20e7774236b877eb Mon Sep 17 00:00:00 2001
+From 8b4d0fcd50b3209d7df9616fc446cc13d927cf61 Mon Sep 17 00:00:00 2001
 From: Sascha Hauer <s.hauer@pengutronix.de>
 Date: Tue, 25 Jun 2013 15:51:47 +0200
-Subject: [PATCH 021/132] ARM: dts: i.MX6qdl: Add i.MX31 compatible to gpt
+Subject: [PATCH 021/143] ARM: dts: i.MX6qdl: Add i.MX31 compatible to gpt
  node
 
 The i.MX6 gpt is handled by the i.MX31 gpt driver in the kernel,

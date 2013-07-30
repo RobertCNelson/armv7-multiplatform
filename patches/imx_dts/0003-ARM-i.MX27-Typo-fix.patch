@@ -1,7 +1,7 @@
-From 64c0fd8a8c36468ea0dc4a87a5c058502de401ee Mon Sep 17 00:00:00 2001
+From 6560636998e0473a18d57d1ab1fc5633226be1c4 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sun, 23 Jun 2013 17:40:35 +0400
-Subject: [PATCH 003/132] ARM: i.MX27: Typo fix
+Subject: [PATCH 003/143] ARM: i.MX27: Typo fix
 
 Signed-off-by: Alexander Shiyan <shc_work@mail.ru>
 Acked-by: Sascha Hauer <s.hauer@pengutronix.de>

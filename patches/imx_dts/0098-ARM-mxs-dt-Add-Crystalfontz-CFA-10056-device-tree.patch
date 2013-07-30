@@ -1,7 +1,7 @@
-From 5f4c4a83bb63929a7f7a2b052c78d311777236f5 Mon Sep 17 00:00:00 2001
+From b4f55fe28e5c966099168a5d521d1d5ab02f5148 Mon Sep 17 00:00:00 2001
 From: Brian Lilly <brian@crystalfontz.com>
 Date: Mon, 1 Jul 2013 15:23:23 +0200
-Subject: [PATCH 098/132] ARM: mxs: dt: Add Crystalfontz CFA-10056 device tree
+Subject: [PATCH 098/143] ARM: mxs: dt: Add Crystalfontz CFA-10056 device tree
 
 The CFA-10056 is a breakout board for the CFA-10036, and is
 basically a CFA-10037, with a 4.3" screen.

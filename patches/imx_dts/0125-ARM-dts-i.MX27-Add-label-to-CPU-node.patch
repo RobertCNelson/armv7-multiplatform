@@ -1,7 +1,7 @@
-From 4ea31f30305646af43f7f6647563d887c4551ba5 Mon Sep 17 00:00:00 2001
+From 2934fd21a44622c52f8480711df63758fd2f2192 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sat, 20 Jul 2013 11:17:56 +0400
-Subject: [PATCH 125/132] ARM: dts: i.MX27: Add label to CPU node
+Subject: [PATCH 125/143] ARM: dts: i.MX27: Add label to CPU node
 
 Add a label to i.MX27 CPU node. This change allows the reuse this node
 in the upper levels of the DTS.

@@ -1,7 +1,7 @@
-From b6111fb20216cd9e03844def9fe30cb564b4e98c Mon Sep 17 00:00:00 2001
+From e18d9ea68dd63a71d62b123b3fd00e010647ea04 Mon Sep 17 00:00:00 2001
 From: Huang Shijie <b32955@freescale.com>
 Date: Fri, 12 Jul 2013 18:02:09 +0800
-Subject: [PATCH 064/132] ARM: dts: imx6qdl/imx6sl: add the dma property for
+Subject: [PATCH 064/143] ARM: dts: imx6qdl/imx6sl: add the dma property for
  uart
 
 Add the dma property for all the uart.

@@ -1,7 +1,7 @@
-From e6d6cfe56bc789da3345d5d9d77829fa27d8f853 Mon Sep 17 00:00:00 2001
+From ed33d17a37b034830dde1ae76c6f29e3eea75573 Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Mon, 8 Jul 2013 21:52:33 +0800
-Subject: [PATCH 089/132] ARM: imx: use imx specific L2 init function on
+Subject: [PATCH 089/143] ARM: imx: use imx specific L2 init function on
  imx6sl
 
 The optimized L2 prefect and power setting done in imx_init_l2cache()

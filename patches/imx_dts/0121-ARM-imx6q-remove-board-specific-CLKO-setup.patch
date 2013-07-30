@@ -1,7 +1,7 @@
-From 190fb90d061552a04ca7849229e4935c70e83551 Mon Sep 17 00:00:00 2001
+From 6bc58db214ce12ccb774a38e0dd67214640a2017 Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Thu, 18 Jul 2013 14:42:28 +0800
-Subject: [PATCH 121/132] ARM: imx6q: remove board specific CLKO setup
+Subject: [PATCH 121/143] ARM: imx6q: remove board specific CLKO setup
 
 The CLKO is widely used by imx6q board designs to clock audio codec.
 Since most codecs accept 24 MHz frequency, let's initially set up CLKO

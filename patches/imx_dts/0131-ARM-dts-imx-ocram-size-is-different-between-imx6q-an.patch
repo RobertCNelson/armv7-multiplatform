@@ -1,7 +1,7 @@
-From a2310793f81ad0a4cebb51341fa52065ffe293ea Mon Sep 17 00:00:00 2001
+From 0c421e712b62237ed9d2e1b9275de4ae54a7f04f Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Tue, 23 Jul 2013 15:25:13 +0800
-Subject: [PATCH 131/132] ARM: dts: imx: ocram size is different between imx6q
+Subject: [PATCH 131/143] ARM: dts: imx: ocram size is different between imx6q
  and imx6dl
 
 The ocram on imx6q is 256 KiB while on imx6dl it's 128 KiB.  Let's

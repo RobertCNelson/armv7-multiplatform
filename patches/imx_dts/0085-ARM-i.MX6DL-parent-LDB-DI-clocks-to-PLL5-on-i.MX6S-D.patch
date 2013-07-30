@@ -1,7 +1,7 @@
-From bf8963dd484a4aa6e40d526a6ecceb510a56a303 Mon Sep 17 00:00:00 2001
+From 8a746fd865bbf72e3b189c019e1d871d7e28efc6 Mon Sep 17 00:00:00 2001
 From: Philipp Zabel <p.zabel@pengutronix.de>
 Date: Fri, 28 Jun 2013 14:24:15 +0200
-Subject: [PATCH 085/132] ARM i.MX6DL: parent LDB DI clocks to PLL5 on
+Subject: [PATCH 085/143] ARM i.MX6DL: parent LDB DI clocks to PLL5 on
  i.MX6S/DL
 
 i.MX6S/DL have the Video PLL post dividers fixed already in revision 1.0

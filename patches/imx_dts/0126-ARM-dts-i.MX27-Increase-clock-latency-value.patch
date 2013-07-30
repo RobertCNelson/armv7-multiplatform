@@ -1,7 +1,7 @@
-From 371ad54a723e604d5479a0def9fe4023ce1bdc3d Mon Sep 17 00:00:00 2001
+From c89c6c78e479bac30073ab2053ac2b7d9e4bb3ec Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sat, 20 Jul 2013 11:17:57 +0400
-Subject: [PATCH 126/132] ARM: dts: i.MX27: Increase "clock-latency" value
+Subject: [PATCH 126/143] ARM: dts: i.MX27: Increase "clock-latency" value
 
 i.MX27 CPU can be clocked with a 32 kHz quartz, and not just 32768 Hz,
 so increase "clock-latency" value, which will ensure that we use two

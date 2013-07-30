@@ -1,7 +1,7 @@
-From 57f3bba3f65d721bd1fc2f21a3459dafaaaa5f24 Mon Sep 17 00:00:00 2001
+From 2bd947ccacddf00e96e4c6d4dd33643cfeaafb65 Mon Sep 17 00:00:00 2001
 From: Huang Shijie <b32955@freescale.com>
 Date: Fri, 21 Jun 2013 10:19:10 +0800
-Subject: [PATCH 010/132] ARM: dts: imx6q: add a new pinctrl for ecspi1
+Subject: [PATCH 010/143] ARM: dts: imx6q: add a new pinctrl for ecspi1
 
 This new pinctrl is used by the imx6q-sabresd board.
 

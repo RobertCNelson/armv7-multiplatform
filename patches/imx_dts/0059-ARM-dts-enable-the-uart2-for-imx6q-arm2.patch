@@ -1,7 +1,7 @@
-From bad11d4c1e08cc56496bc05e9778ef5a410ad426 Mon Sep 17 00:00:00 2001
+From 409c50a3e1b9c25012e9adab7ae733d8942de562 Mon Sep 17 00:00:00 2001
 From: Huang Shijie <b32955@freescale.com>
 Date: Mon, 8 Jul 2013 17:14:22 +0800
-Subject: [PATCH 059/132] ARM: dts: enable the uart2 for imx6q-arm2
+Subject: [PATCH 059/143] ARM: dts: enable the uart2 for imx6q-arm2
 
 enable the uart2 for imx6q-arm2 board.
 The uart2 works in the DTE mode, with the RTS/CTS and DMA enabled.

@@ -1,7 +1,7 @@
-From 5989848573c48fe9e4d49d873d5b4766495170a8 Mon Sep 17 00:00:00 2001
+From 02137325bc1df2a2249663780611b893487b1971 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Thu, 4 Jul 2013 15:55:06 -0300
-Subject: [PATCH 051/132] ARM: dts: imx6dl-wandboard: Add audio support
+Subject: [PATCH 051/143] ARM: dts: imx6dl-wandboard: Add audio support
 
 Wandboard has a sgtl5000 codec.
 

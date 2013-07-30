@@ -140,8 +140,10 @@ imx_dts () {
 	${git} "${DIR}/patches/imx_dts/0068-ARM-dts-imx6dl-wandboard-Add-support-for-UART3.patch"
 	${git} "${DIR}/patches/imx_dts/0069-ARM-dts-i.MX51-Add-WEIM-node.patch"
 	${git} "${DIR}/patches/imx_dts/0070-ARM-dts-imx27-Add-core-voltages.patch"
+
 #v3.11-rc3
 #	${git} "${DIR}/patches/imx_dts/0071-ARM-dts-imx51-babbage-Pass-a-real-clock-to-the-codec.patch"
+
 	${git} "${DIR}/patches/imx_dts/0072-ARM-dtsi-enable-ahci-sata-on-imx6q-platforms.patch"
 	${git} "${DIR}/patches/imx_dts/0073-drivers-bus-imx-weim-Remove-private-driver-data.patch"
 	${git} "${DIR}/patches/imx_dts/0074-drivers-bus-imx-weim-Simplify-error-path.patch"
@@ -203,6 +205,17 @@ imx_dts () {
 	${git} "${DIR}/patches/imx_dts/0130-ARM-dts-mxs-Add-spi-alias.patch"
 	${git} "${DIR}/patches/imx_dts/0131-ARM-dts-imx-ocram-size-is-different-between-imx6q-an.patch"
 	${git} "${DIR}/patches/imx_dts/0132-ARM-imx-add-ocram-clock-for-imx53.patch"
+	${git} "${DIR}/patches/imx_dts/0133-ARM-dts-imx6qdl-sabresd-Add-touchscreen-support.patch"
+	${git} "${DIR}/patches/imx_dts/0134-ARM-i.MX6Q-dts-Enable-SPI-NOR-flash-on-Phytec-phyFLE.patch"
+	${git} "${DIR}/patches/imx_dts/0135-ARM-i.MX6Q-dts-Enable-I2C1-with-EEPROM-and-PMIC-on-P.patch"
+	${git} "${DIR}/patches/imx_dts/0136-ARM-imx_v6_v7_defconfig-Select-CONFIG_TOUCHSCREEN_EG.patch"
+	${git} "${DIR}/patches/imx_dts/0137-ARM-dts-imx53-qsb-Make-USBH1-functional.patch"
+	${git} "${DIR}/patches/imx_dts/0138-ARM-mach-imx-Select-ARM_CPU_SUSPEND-at-ARCH_MXC-leve.patch"
+	${git} "${DIR}/patches/imx_dts/0139-ARM-mx53-Allow-suspend-resume.patch"
+	${git} "${DIR}/patches/imx_dts/0140-ARM-i.MX5-clocks-Remove-optional-clock-setup-CKIH1-f.patch"
+	${git} "${DIR}/patches/imx_dts/0141-dts-wandboard-Add-support-for-SDIO-bcm4329.patch"
+	${git} "${DIR}/patches/imx_dts/0142-ARM-imx_v6_v7_defconfig-Cleanup-imx_v6_v7_defconfig.patch"
+	${git} "${DIR}/patches/imx_dts/0143-ARM-imx_v6_v7_defconfig-Add-SATA-support.patch"
 }
 
 imx () {
@@ -218,7 +231,7 @@ imx () {
 #	${git} "${DIR}/patches/imx/0003-ahci-imx53-ahci-enable-on-imx53-qsb.patch"
 
 	#usb for the imx53-qsb
-	${git} "${DIR}/patches/imx/0004-ARM-dts-imx53-qsb-Make-USBH1-functional.patch"
+#	${git} "${DIR}/patches/imx/0004-ARM-dts-imx53-qsb-Make-USBH1-functional.patch"
 	${git} "${DIR}/patches/imx/0005-chipidea-core-Move-hw_phymode_configure-into-probe.patch"
 }
 
@@ -286,7 +299,7 @@ dts () {
 	#omap: https://git.kernel.org/cgit/linux/kernel/git/bcousson/linux-omap-dt.git/
 	#imx: https://git.linaro.org/gitweb?p=people/shawnguo/linux-2.6.git;a=summary
 	${git} "${DIR}/patches/dts/0001-ARM-imx-Enable-UART1-for-Sabrelite.patch"
-	${git} "${DIR}/patches/dts/0002-dts-wandboard-Add-support-for-SDIO-bcm4329.patch"
+#	${git} "${DIR}/patches/dts/0002-dts-wandboard-Add-support-for-SDIO-bcm4329.patch"
 #	${git} "${DIR}/patches/dts/0003-imx6q-sabresd-disable-sata-till-opps-is-fixed.patch"
 }
 

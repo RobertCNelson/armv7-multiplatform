@@ -1,7 +1,7 @@
-From 6a59827d005401cee52519a68224d26e792b8cb0 Mon Sep 17 00:00:00 2001
+From 37c1d9607eebf92c3bc82ed18aca22f889448bd6 Mon Sep 17 00:00:00 2001
 From: Philipp Zabel <p.zabel@pengutronix.de>
 Date: Fri, 21 Jun 2013 15:36:11 +0200
-Subject: [PATCH 001/132] ARM i.MX53: Fix UART pad configuration
+Subject: [PATCH 001/143] ARM i.MX53: Fix UART pad configuration
 
 The current default pad configuration for UART RX and TX pads sets a 360k
 pull-down and writes 1 to a reserved bit (1 << 0). It doesn't seem right to

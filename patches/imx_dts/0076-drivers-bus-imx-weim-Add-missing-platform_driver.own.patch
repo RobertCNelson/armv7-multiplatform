@@ -1,7 +1,7 @@
-From 4dee8a839c854604f16680bc50d4cccf0fc7e6f5 Mon Sep 17 00:00:00 2001
+From 50d50d7f7dc7b814f9e2098db30ecd88f9adea15 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sat, 29 Jun 2013 08:27:53 +0400
-Subject: [PATCH 076/132] drivers: bus: imx-weim: Add missing
+Subject: [PATCH 076/143] drivers: bus: imx-weim: Add missing
  platform_driver.owner field
 
 Signed-off-by: Alexander Shiyan <shc_work@mail.ru>

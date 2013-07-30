@@ -1,7 +1,7 @@
-From f800c98a459c11d975b06b3fe98894ba7ddfbb7b Mon Sep 17 00:00:00 2001
+From 54d40e0dc5848680d1a56fff0fdb98a7e12738db Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Fri, 28 Jun 2013 00:28:07 -0300
-Subject: [PATCH 084/132] ARM: imx_v6_v7_defconfig: Enable LVDS Display Bridge
+Subject: [PATCH 084/143] ARM: imx_v6_v7_defconfig: Enable LVDS Display Bridge
 
 Let IMX_LDB driver be built by default.
 

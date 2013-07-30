@@ -1,7 +1,7 @@
-From 7a22144af161574c8829f67b36b3a3c74c8f1114 Mon Sep 17 00:00:00 2001
+From a92ffdfa0ea7f64270e41662bf4058c6302089ae Mon Sep 17 00:00:00 2001
 From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
 Date: Mon, 1 Jul 2013 15:23:22 +0200
-Subject: [PATCH 097/132] ARM: mxs: Simplify detection of CrystalFontz boards
+Subject: [PATCH 097/143] ARM: mxs: Simplify detection of CrystalFontz boards
 
 As all CrystalFontz boards are compatible with "crystalfontz,cfa10036", make it
 easier to add future boards.

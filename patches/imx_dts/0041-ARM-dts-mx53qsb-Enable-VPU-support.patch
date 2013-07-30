@@ -1,7 +1,7 @@
-From ca21f3e5a94b7e21101c7c3682a9a5af72cb1633 Mon Sep 17 00:00:00 2001
+From 17a9a6e8a8b2344f66793d3cfa4c8e71de8132d3 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Fri, 28 Jun 2013 19:49:18 -0300
-Subject: [PATCH 041/132] ARM: dts: mx53qsb: Enable VPU support
+Subject: [PATCH 041/143] ARM: dts: mx53qsb: Enable VPU support
 
 Enable Video Processing Unit (VPU) support.
 

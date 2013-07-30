@@ -1,7 +1,7 @@
-From 250b45df11ac48e70fcbc00ba4830dd1674b6efb Mon Sep 17 00:00:00 2001
+From 39a4c3850f0a6197b311c69466c0079e33d41abf Mon Sep 17 00:00:00 2001
 From: Philipp Zabel <p.zabel@pengutronix.de>
 Date: Fri, 28 Jun 2013 14:24:16 +0200
-Subject: [PATCH 042/132] ARM i.MX6DL: dts: add clock and mux configuration
+Subject: [PATCH 042/143] ARM i.MX6DL: dts: add clock and mux configuration
  for LDB
 
 i.MX6DL does not have the second IPU, but the LVDS multiplexers can connect

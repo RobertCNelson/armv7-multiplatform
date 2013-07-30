@@ -1,7 +1,7 @@
-From 627ac1d54f1026dc84b949752d37ca4e25707739 Mon Sep 17 00:00:00 2001
+From a017363ebca882efd6a56ad27a4e0b04a26186f6 Mon Sep 17 00:00:00 2001
 From: Markus Pargmann <mpa@pengutronix.de>
 Date: Sun, 7 Jul 2013 15:13:29 +0200
-Subject: [PATCH 053/132] ARM: dts: imx27 phyCARD-S SOM remove wrong i2c
+Subject: [PATCH 053/143] ARM: dts: imx27 phyCARD-S SOM remove wrong i2c
  sensor
 
 This sensor was introduced in the original pca100 board file, but

@@ -1,7 +1,7 @@
-From 57eebdbf845aeeca1949418f6034bce8c546bb3f Mon Sep 17 00:00:00 2001
+From 81e0641a9ca85cb190c93fc63674fed1454f4d16 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sat, 20 Jul 2013 11:17:55 +0400
-Subject: [PATCH 124/132] ARM: dts: i.MX27: Remove optional "ptp" clock source
+Subject: [PATCH 124/143] ARM: dts: i.MX27: Remove optional "ptp" clock source
  for FEC
 
 Patch removes optional "ptp" clock source for FEC. This clock is

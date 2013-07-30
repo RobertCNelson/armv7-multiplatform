@@ -1,7 +1,7 @@
-From 921a3a853315ecd1f6a0b2765132457bd8be4210 Mon Sep 17 00:00:00 2001
+From 527ba606ebcdb409e183d07753e6c6a60dd6bf0e Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Thu, 18 Jul 2013 13:16:40 +0800
-Subject: [PATCH 119/132] ARM: imx6q: add cko2 clocks
+Subject: [PATCH 119/143] ARM: imx6q: add cko2 clocks
 
 It adds the missing cko2 clocks, including multiplexer, divider and
 gate.

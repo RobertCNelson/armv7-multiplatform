@@ -1,7 +1,7 @@
-From 6b58257da0c2346e213ecf4ae80c31340d0f9638 Mon Sep 17 00:00:00 2001
+From dfcee08ed20fb2a51eb3f73b7007fcd16062aed5 Mon Sep 17 00:00:00 2001
 From: Markus Pargmann <mpa@pengutronix.de>
 Date: Fri, 5 Jul 2013 15:45:09 +0200
-Subject: [PATCH 050/132] ARM: dts: imx27 phyCARD-S remove wrong I2C RTC
+Subject: [PATCH 050/143] ARM: dts: imx27 phyCARD-S remove wrong I2C RTC
 
 Fixup of commit "ARM: dts: Add device tree support for phycard pca100".
 

@@ -1,7 +1,7 @@
-From 41ebd24aec3efb8574413e5bb0bfb5d5def8f4a5 Mon Sep 17 00:00:00 2001
+From 24d68361ac04b6f9f83bfab174ce6981bb27b86a Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Wed, 17 Jul 2013 13:50:54 +0800
-Subject: [PATCH 117/132] ARM: dts: imx: use generic DMA bindings for SSI
+Subject: [PATCH 117/143] ARM: dts: imx: use generic DMA bindings for SSI
  nodes
 
 Updates SSI nodes to adopt generic DMA bindings.

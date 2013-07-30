@@ -1,7 +1,7 @@
-From 8309159f4e75d2f6cc89d493dd5e0a2f7c0c1f6d Mon Sep 17 00:00:00 2001
+From cb99952f0aba16d066431b0d9aefebda7b6ed33e Mon Sep 17 00:00:00 2001
 From: Markus Pargmann <mpa@pengutronix.de>
 Date: Sun, 7 Jul 2013 15:13:31 +0200
-Subject: [PATCH 055/132] ARM: dts: imx27 phyCARD-S, i2c ADC device node
+Subject: [PATCH 055/143] ARM: dts: imx27 phyCARD-S, i2c ADC device node
 
 Signed-off-by: Markus Pargmann <mpa@pengutronix.de>
 Signed-off-by: Shawn Guo <shawn.guo@linaro.org>

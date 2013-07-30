@@ -1,7 +1,7 @@
-From ba6472169243803a8919a012dd94ba067264558f Mon Sep 17 00:00:00 2001
+From 7e28a7dc38f14d5508a898a3fa22e8f62da7547f Mon Sep 17 00:00:00 2001
 From: Liu Ying <Ying.Liu@freescale.com>
 Date: Thu, 4 Jul 2013 17:57:17 +0800
-Subject: [PATCH 095/132] ARM: imx6: change some clocks to fixup clocks
+Subject: [PATCH 095/143] ARM: imx6: change some clocks to fixup clocks
 
 All the clocks controlled by the register 'CCM Serial Clock
 Multiplexer Register 1' should be fixup clocks. This patch
