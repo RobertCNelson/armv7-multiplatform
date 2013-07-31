@@ -299,8 +299,8 @@ dts () {
 	#omap: https://git.kernel.org/cgit/linux/kernel/git/bcousson/linux-omap-dt.git/
 	#imx: https://git.linaro.org/gitweb?p=people/shawnguo/linux-2.6.git;a=summary
 	${git} "${DIR}/patches/dts/0001-ARM-imx-Enable-UART1-for-Sabrelite.patch"
-#	${git} "${DIR}/patches/dts/0002-dts-wandboard-Add-support-for-SDIO-bcm4329.patch"
-#	${git} "${DIR}/patches/dts/0003-imx6q-sabresd-disable-sata-till-opps-is-fixed.patch"
+	${git} "${DIR}/patches/dts/0002-ARM-dts-imx6qdl-wandboard-add-gpio-lines-to-wandboar.patch"
+#	${git} "${DIR}/patches/dts/0003-ARM-dts-imx6qdl-wandboard-add-debug-led-for-headless.patch"
 }
 
 saucy () {
