@@ -114,16 +114,12 @@ git_kernel () {
 		git bisect reset || true
 	fi
 
-	#So we are now going to assume the worst, and create a new master branch
 	git am --abort || echo "git tree is clean..."
-	git add .
+	git add --all
 	git commit --allow-empty -a -m 'empty cleanup commit'
 
-	git checkout origin/master -b tmp-master
-	git branch -D master >/dev/null 2>&1 || true
-
-	git checkout origin/master -b master
-	git branch -D tmp-master >/dev/null 2>&1 || true
+	git reset --hard HEAD
+	git checkout master -f
 
 	git pull ${GIT_OPTS} || true
 
