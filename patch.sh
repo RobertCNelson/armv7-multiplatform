@@ -240,6 +240,26 @@ omap_fixes () {
 	${git} "${DIR}/patches/omap_fixes/0001-ARM-dts-omap3-beagle-xm-fix-compatible-property.patch"
 }
 
+omap_usb_beagle () {
+	echo "dir: omap_usb_beagle"
+	#Still needs: CONFIG_NOP_USB_XCEIV=m but works with rc3
+	${git} "${DIR}/patches/omap_usb_beagle/0001-ARM-dts-omap3-beagle-xm-Add-USB-Host-support.patch"
+	${git} "${DIR}/patches/omap_usb_beagle/0002-ARM-dts-omap3-beagle-Make-USB-host-pin-naming-consis.patch"
+	${git} "${DIR}/patches/omap_usb_beagle/0003-pinctrl-single-Prepare-for-supporting-SoC-specific-f.patch"
+	${git} "${DIR}/patches/omap_usb_beagle/0004-pinctrl-single-Add-hardware-specific-hooks-for-IRQ-a.patch"
+	${git} "${DIR}/patches/omap_usb_beagle/0005-pinctrl-single-omap-Add-SoC-specific-module-for-wake.patch"
+	${git} "${DIR}/patches/omap_usb_beagle/0006-ARM-OMAP-Move-DT-wake-up-event-handling-over-to-use-.patch"
+#v3.11-rc3
+#	${git} "${DIR}/patches/omap_usb_beagle/0007-USB-EHCI-Fix-resume-signalling-on-remote-wakeup.patch"
+	${git} "${DIR}/patches/omap_usb_beagle/0008-ARM-OMAP3-Enable-Hardware-Save-and-Restore-for-USB-H.patch"
+	${git} "${DIR}/patches/omap_usb_beagle/0009-ARM-dts-omap3beagle-xm-Add-idle-state-pins-for-USB-h.patch"
+	${git} "${DIR}/patches/omap_usb_beagle/0010-mfd-omap-usb-host-move-initialization-to-module_init.patch"
+	${git} "${DIR}/patches/omap_usb_beagle/0011-mfd-omap-usb-host-Put-pins-in-IDLE-state-on-suspend.patch"
+	${git} "${DIR}/patches/omap_usb_beagle/0012-USB-Support-wakeup-IRQ-for-suspended-controllers.patch"
+	${git} "${DIR}/patches/omap_usb_beagle/0013-USB-ehci-omap-Implement-suspend-resume.patch"
+	${git} "${DIR}/patches/omap_usb_beagle/0014-temp-omap-usb-host-configre-wakeup-based-on-children.patch"
+}
+
 omap_usb () {
 	echo "dir: omap_usb"
 #v3.11-rc3
@@ -315,7 +335,8 @@ drivers
 imx_dts
 imx
 omap_fixes
-omap_usb
+omap_usb_beagle
+#omap_usb
 omap_video
 omap_clock
 omap_board
