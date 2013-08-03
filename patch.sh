@@ -323,6 +323,12 @@ dts () {
 #	${git} "${DIR}/patches/dts/0003-ARM-dts-imx6qdl-wandboard-add-debug-led-for-headless.patch"
 }
 
+imx_video () {
+	echo "dir: imx_video"
+	#total wip...
+	${git} "${DIR}/patches/imx_video/0001-v2-temp-Integrate-Sascha-s-hdmi-drm-driver.patch"
+}
+
 saucy () {
 	echo "dir: saucy"
 	#Ubuntu Saucy: so Ubuntu decided to enable almost every Warning -> Error option...
@@ -345,6 +351,7 @@ omap_board
 #omap_sprz319_erratum
 
 dts
+imx_video
 saucy
 
 echo "patch.sh ran successful"
