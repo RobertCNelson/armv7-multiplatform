@@ -43,13 +43,6 @@ copy_defconfig () {
 	make ARCH=arm CROSS_COMPILE=${CC} distclean
 	make ARCH=arm CROSS_COMPILE=${CC} ${config}
 	cp -v .config ${DIR}/patches/ref_${config}
-
-	make ARCH=arm CROSS_COMPILE=${CC} imx_v6_v7_defconfig
-	cp -v .config ${DIR}/patches/example_imx_v6_v7_defconfig
-
-	make ARCH=arm CROSS_COMPILE=${CC} omap2plus_defconfig
-	cp -v .config ${DIR}/patches/example_omap2plus_defconfig
-
 	cp -v ${DIR}/patches/defconfig .config
 	cd ${DIR}/
 }
@@ -103,10 +96,6 @@ make_kernel () {
 make_pkg () {
 	cd ${DIR}/KERNEL/
 
-	echo "-----------------------------"
-	echo "Building ${pkg} Archive"
-	echo "-----------------------------"
-
 	deployfile="-${pkg}.tar.gz"
 	if [ -f "${DIR}/deploy/${KERNEL_UTS}${deployfile}" ] ; then
 		rm -rf "${DIR}/deploy/${KERNEL_UTS}${deployfile}" || true
@@ -117,23 +106,25 @@ make_pkg () {
 	fi
 	mkdir -p ${DIR}/deploy/tmp
 
+	echo "-----------------------------"
+	echo "Building ${pkg} archive..."
+
 	case "${pkg}" in
 	modules)
-		make ARCH=arm CROSS_COMPILE=${CC} modules_install INSTALL_MOD_PATH=${DIR}/deploy/tmp
+		make -s ARCH=arm CROSS_COMPILE=${CC} modules_install INSTALL_MOD_PATH=${DIR}/deploy/tmp
 		;;
 	firmware)
-		make ARCH=arm CROSS_COMPILE=${CC} firmware_install INSTALL_FW_PATH=${DIR}/deploy/tmp
+		make -s ARCH=arm CROSS_COMPILE=${CC} firmware_install INSTALL_FW_PATH=${DIR}/deploy/tmp
 		;;
 	dtbs)
+		echo "-----------------------------"
 		find ./arch/arm/boot/ -iname "*.dtb" -exec cp -v '{}' ${DIR}/deploy/tmp/ \;
 		;;
 	esac
 
+	echo "Compressing ${KERNEL_UTS}${deployfile}..."
 	cd ${DIR}/deploy/tmp
-	echo "-----------------------------"
-	echo "Building ${KERNEL_UTS}${deployfile}"
 	tar czf ../${KERNEL_UTS}${deployfile} *
-	echo "-----------------------------"
 
 	cd ${DIR}/
 	rm -rf ${DIR}/deploy/tmp || true
@@ -143,6 +134,7 @@ make_pkg () {
 		/bin/sh -e "${DIR}/scripts/error.sh" && { exit 1 ; }
 	else
 		ls -lh "${DIR}/deploy/${KERNEL_UTS}${deployfile}"
+		echo "-----------------------------"
 	fi
 }
 

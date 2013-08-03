@@ -129,7 +129,11 @@ git_kernel () {
 		git_kernel_torvalds
 	fi
 
-	git branch -D v${KERNEL_TAG}-${BUILD} >/dev/null 2>&1 || true
+	test_for_branch=$(git branch --list v${KERNEL_TAG}-${BUILD})
+	if [ "x${test_for_branch}" != "x" ] ; then
+		git branch v${KERNEL_TAG}-${BUILD} -D
+	fi
+
 	if [ ! "${KERNEL_SHA}" ] ; then
 		git checkout v${KERNEL_TAG} -b v${KERNEL_TAG}-${BUILD}
 	else
