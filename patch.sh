@@ -326,7 +326,7 @@ dts () {
 imx_video () {
 	echo "dir: imx_video"
 	#total wip...
-	${git} "${DIR}/patches/imx_video/0001-v2-temp-Integrate-Sascha-s-hdmi-drm-driver.patch"
+	${git} "${DIR}/patches/imx_video/0001-imx-video-staging-Add-HDMI-support-to-imx-drm-driver.patch"
 }
 
 saucy () {
