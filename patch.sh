@@ -327,6 +327,7 @@ imx_video () {
 	echo "dir: imx_video"
 	#total wip...
 	${git} "${DIR}/patches/imx_video/0001-imx-video-staging-Add-HDMI-support-to-imx-drm-driver.patch"
+	${git} "${DIR}/patches/imx_video/0002-imx-enable-hdmi-video-for-imx6q-sabrelite-imx6q-sabr.patch"
 }
 
 saucy () {
