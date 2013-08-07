@@ -43,6 +43,13 @@ copy_defconfig () {
 	make ARCH=arm CROSS_COMPILE=${CC} distclean
 	make ARCH=arm CROSS_COMPILE=${CC} ${config}
 	cp -v .config ${DIR}/patches/ref_${config}
+
+	make ARCH=arm CROSS_COMPILE=${CC} imx_v6_v7_defconfig
+	cp -v .config ${DIR}/patches/example_imx_v6_v7_defconfig
+
+	make ARCH=arm CROSS_COMPILE=${CC} omap2plus_defconfig
+	cp -v .config ${DIR}/patches/example_omap2plus_defconfig
+
 	cp -v ${DIR}/patches/defconfig .config
 	cd ${DIR}/
 }
@@ -64,7 +71,9 @@ make_kernel () {
 	unset DTBS
 	cat ${DIR}/KERNEL/arch/arm/Makefile | grep "dtbs:" >/dev/null 2>&1 && DTBS=1
 	if [ "x${DTBS}" != "x" ] ; then
+		echo "-----------------------------"
 		echo "make -j${CORES} ARCH=arm LOCALVERSION=-${BUILD} CROSS_COMPILE=\"${CC}\" dtbs"
+		echo "-----------------------------"
 		make -j${CORES} ARCH=arm LOCALVERSION=-${BUILD} CROSS_COMPILE="${CC}" dtbs
 		ls arch/arm/boot/* | grep dtb >/dev/null 2>&1 || unset DTBS
 	fi
