@@ -330,6 +330,18 @@ imx_video () {
 	${git} "${DIR}/patches/imx_video/0002-imx-enable-hdmi-video-for-imx6q-sabrelite-imx6q-sabr.patch"
 }
 
+omap3_beagle_xm_rework () {
+	echo "dir: omap3_beagle_xm_rework"
+	#cp omap3-beagle-xm.dts omap3-beagle-xm-c.dts
+	#cp omap3-beagle-xm.dts omap3-beagle-xm-ab.dts
+	#edit Makefile add ^
+	${git} "${DIR}/patches/omap3_beagle_xm_rework/0001-ARM-dts-split-omap3-beagle-xm-to-ab-and-c-variant.patch"
+	#xm-ab has active high usb host power on...
+	${git} "${DIR}/patches/omap3_beagle_xm_rework/0002-ARM-dts-omap3-beagle-xm-ab-usb-host-is-active-high-t.patch"
+}
+
+
+
 saucy () {
 	echo "dir: saucy"
 	#Ubuntu Saucy: so Ubuntu decided to enable almost every Warning -> Error option...
@@ -354,6 +366,7 @@ omap_board
 
 dts
 imx_video
+omap3_beagle_xm_rework
 saucy
 
 echo "patch.sh ran successful"
