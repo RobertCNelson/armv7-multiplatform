@@ -147,23 +147,25 @@ mmc_detect_n_mount () {
 
 	i=0 ; while test $i -le ${num_partitions} ; do
 		partition=$(LC_ALL=C sudo fdisk -l 2>/dev/null | grep "^${MMC}" | grep -v "DM6" | grep -v "Extended" | grep -v "swap" | head -${i} | tail -1 | awk '{print $1}')
-		echo "Trying ${partition}"
+		if [ ! "x${partition}" = "x" ] ; then
+			echo "Trying: [${partition}]"
 
-		if [ ! -d "${DIR}/deploy/disk/" ] ; then
-			mkdir -p "${DIR}/deploy/disk/"
-		fi
+			if [ ! -d "${DIR}/deploy/disk/" ] ; then
+				mkdir -p "${DIR}/deploy/disk/"
+			fi
 
-		echo "Partition: [${partition}] trying: [vfat], [ext4]"
-		if sudo mount -t vfat ${partition} "${DIR}/deploy/disk/" 2>/dev/null ; then
-			echo "Partition: [vfat]"
-			UNTAR="xfo"
-			mmc_partition_discover
-			mmc_unmount
-		elif sudo mount -t ext4 ${partition} "${DIR}/deploy/disk/" 2>/dev/null ; then
-			echo "Partition: [extX]"
-			UNTAR="xf"
-			mmc_partition_discover
-			mmc_unmount
+			echo "Partition: [${partition}] trying: [vfat], [ext4]"
+			if sudo mount -t vfat ${partition} "${DIR}/deploy/disk/" 2>/dev/null ; then
+				echo "Partition: [vfat]"
+				UNTAR="xfo"
+				mmc_partition_discover
+				mmc_unmount
+			elif sudo mount -t ext4 ${partition} "${DIR}/deploy/disk/" 2>/dev/null ; then
+				echo "Partition: [extX]"
+				UNTAR="xf"
+				mmc_partition_discover
+				mmc_unmount
+			fi
 		fi
 	i=$(($i+1))
 	done
@@ -238,6 +240,12 @@ if [ -f "${DIR}/system.sh" ] ; then
 		KERNEL_UTS=$(cat "${DIR}/KERNEL/include/generated/utsrelease.h" | awk '{print $3}' | sed 's/\"//g' )
 		if [ "x${MMC}" = "x" ] ; then
 			echo "ERROR: MMC is not defined in system.sh"
+			if which lsblk > /dev/null ; then
+				echo "-----------------------------"
+				echo "lsblk:"
+				lsblk | grep -v sr0
+				echo "-----------------------------"
+			fi
 		else
 			unset PARTITION_PREFIX
 			echo ${MMC} | grep mmcblk >/dev/null && PARTITION_PREFIX="p"
