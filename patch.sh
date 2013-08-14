@@ -276,6 +276,19 @@ omap_usb () {
 	${git} "${DIR}/patches/omap_usb/0008-ARM-dts-omap3-beagle-Make-USB-host-pin-naming-consis.patch"
 }
 
+omap_usb_reset () {
+	echo "dir: omap_usb_reset"
+	${git} "${DIR}/patches/omap_usb_reset/0001-usb-phy-nop-Add-gpio_reset-to-platform-data.patch"
+	${git} "${DIR}/patches/omap_usb_reset/0002-usb-phy-nop-Don-t-use-regulator-framework-for-RESET-.patch"
+	${git} "${DIR}/patches/omap_usb_reset/0003-ARM-OMAP2-omap-usb-host-Get-rid-of-platform_data-fro.patch"
+	${git} "${DIR}/patches/omap_usb_reset/0004-ARM-OMAP2-usb-host-Adapt-to-USB-phy-nop-RESET-line-c.patch"
+	${git} "${DIR}/patches/omap_usb_reset/0005-ARM-dts-omap3-beagle-Use-reset-gpios-for-hsusb2_rese.patch"
+	${git} "${DIR}/patches/omap_usb_reset/0006-ARM-dts-omap4-panda-Use-reset-gpios-for-hsusb1_reset.patch"
+	${git} "${DIR}/patches/omap_usb_reset/0007-ARM-dts-omap5-uevm-Use-reset-gpios-for-hsusb2_reset.patch"
+	${git} "${DIR}/patches/omap_usb_reset/0008-ARM-dts-omap3-beagle-Make-USB-host-pin-naming-consis.patch"
+	${git} "${DIR}/patches/omap_usb_reset/0009-ARM-dts-omap3-beagle-xm-Add-USB-Host-support.patch"
+}
+
 omap_video () {
 	echo "dir: omap_video"
 #v3.11-rc5
@@ -359,8 +372,9 @@ drivers
 imx_dts
 imx
 omap_fixes
-omap_usb_beagle
+#omap_usb_beagle
 #omap_usb
+omap_usb_reset
 omap_video
 omap_clock
 omap_board
