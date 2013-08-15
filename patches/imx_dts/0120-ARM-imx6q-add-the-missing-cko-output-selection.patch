@@ -1,7 +1,7 @@
-From fe209b6abc8130bfa3632c807c9bbf617d9b9c4b Mon Sep 17 00:00:00 2001
+From 6d46b549402856b846aab1aee04821bc9f114357 Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Thu, 18 Jul 2013 13:35:40 +0800
-Subject: [PATCH 120/143] ARM: imx6q: add the missing cko output selection
+Subject: [PATCH 120/161] ARM: imx6q: add the missing cko output selection
 
 The clock output on imx6q CCM_CLKO1 pad is not always cko1 clock, and
 there is a multiplexer to select between cko1 and cko2.  Add this

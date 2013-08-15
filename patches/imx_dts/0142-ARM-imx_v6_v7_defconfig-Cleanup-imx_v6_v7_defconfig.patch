@@ -1,7 +1,7 @@
-From 93a97e6965065fa637f68c3a25a0590d308cbd35 Mon Sep 17 00:00:00 2001
+From 9a13b34a9de6f9f64c4c49ac26b5983284469984 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Mon, 29 Jul 2013 00:04:15 -0300
-Subject: [PATCH 142/143] ARM: imx_v6_v7_defconfig: Cleanup
+Subject: [PATCH 142/161] ARM: imx_v6_v7_defconfig: Cleanup
  imx_v6_v7_defconfig
 
 Generate imx_v6_v7_defconfig by doing:

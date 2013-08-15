@@ -1,7 +1,7 @@
-From 80712bb52669f6ab308de6c5f715fbfd57e48f87 Mon Sep 17 00:00:00 2001
+From 854270e4c51c6aa1433dbdf7d1ef318170fe6535 Mon Sep 17 00:00:00 2001
 From: Huang Shijie <b32955@freescale.com>
 Date: Fri, 12 Jul 2013 15:56:11 +0800
-Subject: [PATCH 062/143] ARM: dts: imx6qdl: add a new pinctrl for uart3
+Subject: [PATCH 062/161] ARM: dts: imx6qdl: add a new pinctrl for uart3
 
 Add the a new pinctrl for uart3. In the imx6q{dl}-sabreauto boards,
 the uart3 is used for Bluetooth.

@@ -1,7 +1,7 @@
-From 25830b8e9091e5bd807c0cdff651508f1ddda452 Mon Sep 17 00:00:00 2001
+From 8509d968cf6ee2bc1f53315e6f3cc98a16836d26 Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Tue, 23 Jul 2013 15:56:29 +0800
-Subject: [PATCH 132/143] ARM: imx: add ocram clock for imx53
+Subject: [PATCH 132/161] ARM: imx: add ocram clock for imx53
 
 Add missing ocram gate clock for imx53 and also represent it in device
 tree ocram node.

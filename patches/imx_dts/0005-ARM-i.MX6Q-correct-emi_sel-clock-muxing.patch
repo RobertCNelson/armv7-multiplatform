@@ -1,7 +1,7 @@
-From d560dd2ad798f1b4bd1398aff1ecfe64fd78a4f1 Mon Sep 17 00:00:00 2001
+From 4ca733903a05bbe016abf2c3809b2b63c3102d0d Mon Sep 17 00:00:00 2001
 From: Liu Ying <Ying.Liu@freescale.com>
 Date: Wed, 3 Jul 2013 15:29:06 +0800
-Subject: [PATCH 005/143] ARM: i.MX6Q: correct emi_sel clock muxing
+Subject: [PATCH 005/161] ARM: i.MX6Q: correct emi_sel clock muxing
 
 The correct muxing for emi_sel clock should be
 2b'00 - 396M PFD

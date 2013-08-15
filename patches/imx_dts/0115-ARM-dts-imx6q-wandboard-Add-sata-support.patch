@@ -1,7 +1,7 @@
-From c9dd2b4873c3926a3dea30b6f4b0e6c2d8fec496 Mon Sep 17 00:00:00 2001
+From ea6e8803c128567e82fdd56b9113d8dc24114751 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Tue, 16 Jul 2013 14:40:30 -0300
-Subject: [PATCH 115/143] ARM: dts: imx6q-wandboard: Add sata support
+Subject: [PATCH 115/161] ARM: dts: imx6q-wandboard: Add sata support
 
 Signed-off-by: Fabio Estevam <fabio.estevam@freescale.com>
 Signed-off-by: Shawn Guo <shawn.guo@linaro.org>

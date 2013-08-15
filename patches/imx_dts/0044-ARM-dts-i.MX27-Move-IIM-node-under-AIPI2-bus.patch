@@ -1,7 +1,7 @@
-From 24d73f2bc7fc9fde28599efffc661d008354a3bf Mon Sep 17 00:00:00 2001
+From 7af729f89cb18d0713e3d4ad8bb573cd1841f216 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Tue, 2 Jul 2013 20:02:24 +0400
-Subject: [PATCH 044/143] ARM: dts: i.MX27: Move IIM node under AIPI2 bus
+Subject: [PATCH 044/161] ARM: dts: i.MX27: Move IIM node under AIPI2 bus
 
 This patch moves IIM node under AIPI2 bus, since this is proper
 location for this module.

@@ -1,7 +1,7 @@
-From 4d3db7b7e62ebdb75bdb50d5291bccdefa62f13c Mon Sep 17 00:00:00 2001
+From d4ca705b23349d561112a0a97644260c028a5b9e Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sun, 23 Jun 2013 10:54:49 +0400
-Subject: [PATCH 017/143] ARM: dts: imx27-phytec-phycore-som: Define minimal
+Subject: [PATCH 017/161] ARM: dts: imx27-phytec-phycore-som: Define minimal
  memory layout
 
 Define minimal memory layout for i.MX27 PCM-038 module.

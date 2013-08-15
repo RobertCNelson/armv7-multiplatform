@@ -1,7 +1,7 @@
-From da46fe475fee00be761d6ba2f8eb94802feff3ea Mon Sep 17 00:00:00 2001
+From 7857fd99b9517a7659618c74c5db70d0b552c9b5 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sat, 27 Jul 2013 11:19:45 +0400
-Subject: [PATCH 140/143] ARM: i.MX5 clocks: Remove optional clock setup
+Subject: [PATCH 140/161] ARM: i.MX5 clocks: Remove optional clock setup
  (CKIH1) from i.MX51 template
 
 External high frequency clock CKIH1 is optional for i.MX51, so move

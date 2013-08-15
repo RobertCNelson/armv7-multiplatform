@@ -1,7 +1,7 @@
-From a9ac9be0d07e6ea76bd20210c2218ac193e1321d Mon Sep 17 00:00:00 2001
+From 6ec1ce550990d9177b2ca84349bdbe9488e2d6f9 Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Tue, 16 Jul 2013 17:13:00 +0800
-Subject: [PATCH 107/143] ARM: dts: imx: remove old DMA binding data from gpmi
+Subject: [PATCH 107/161] ARM: dts: imx: remove old DMA binding data from gpmi
  node
 
 After mxs-dma driver adopts generic DMA device tree binding, gpmi

@@ -1,7 +1,7 @@
-From eb643349a63051a602106344a8d6841c4d774eda Mon Sep 17 00:00:00 2001
+From 0fc724ac889d85a15f23578f9e8930c66b0eeb2e Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Mon, 22 Jul 2013 17:57:01 -0300
-Subject: [PATCH 130/143] ARM: dts: mxs: Add spi alias
+Subject: [PATCH 130/161] ARM: dts: mxs: Add spi alias
 
 After providing spi alias, we can get the following message during probe:
 

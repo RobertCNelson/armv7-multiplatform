@@ -1,7 +1,7 @@
-From c49f667966d3f0f8ef6ef46a2005f38ea11632f9 Mon Sep 17 00:00:00 2001
+From 4e36843a307983a3c2a34323b066c4e233f95a0d Mon Sep 17 00:00:00 2001
 From: Sascha Hauer <s.hauer@pengutronix.de>
 Date: Thu, 20 Jun 2013 17:34:33 +0200
-Subject: [PATCH 080/143] ARM: i.MX6: add ethernet phy fixup for KSZ9031
+Subject: [PATCH 080/161] ARM: i.MX6: add ethernet phy fixup for KSZ9031
 
 The KSZ9031 is used on the i.MX6 based Data Modul eDM-QMX6
 board. It needs the same fixup to the rx/tx delays as other

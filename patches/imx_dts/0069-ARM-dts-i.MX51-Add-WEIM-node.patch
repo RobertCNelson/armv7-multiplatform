@@ -1,7 +1,7 @@
-From a92bcb3f50b5fb46becc119587b97a068cfeb779 Mon Sep 17 00:00:00 2001
+From 4ed935152ceb0d79ff8debcb13a6ac39fac5a1d8 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sat, 13 Jul 2013 08:30:57 +0400
-Subject: [PATCH 069/143] ARM: dts: i.MX51: Add WEIM node
+Subject: [PATCH 069/161] ARM: dts: i.MX51: Add WEIM node
 
 This patch adds the missing (Wireless External Interface Module) WEIM
 devicetree node for i.MX51 CPUs.

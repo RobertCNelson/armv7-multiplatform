@@ -1,7 +1,7 @@
-From 17739fa0d640c4d8fb56b3ef774f96c24baa560f Mon Sep 17 00:00:00 2001
+From a244dedbbebda6a157d79f7559a498d2e200448a Mon Sep 17 00:00:00 2001
 From: Liu Ying <Ying.Liu@freescale.com>
 Date: Thu, 4 Jul 2013 17:22:26 +0800
-Subject: [PATCH 093/143] ARM: imx: add common clock support for fixup div
+Subject: [PATCH 093/161] ARM: imx: add common clock support for fixup div
 
 One register may have several fields to control some clocks. It
 is possible that the read/write values of some fields may map to

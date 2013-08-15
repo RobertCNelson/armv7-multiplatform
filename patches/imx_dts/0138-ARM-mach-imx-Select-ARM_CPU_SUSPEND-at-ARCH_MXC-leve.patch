@@ -1,7 +1,7 @@
-From e7faabbd893cb8c09d959f2897974600c346d9cf Mon Sep 17 00:00:00 2001
+From ec6d52166cd37c2805f5fa4c1036dc3b35609c90 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Fri, 26 Jul 2013 00:17:35 -0300
-Subject: [PATCH 138/143] ARM: mach-imx: Select ARM_CPU_SUSPEND at ARCH_MXC
+Subject: [PATCH 138/161] ARM: mach-imx: Select ARM_CPU_SUSPEND at ARCH_MXC
  level
 
 Instead of selecting ARM_CPU_SUSPEND only for mx6, we can select it for

@@ -1,7 +1,7 @@
-From 81ae3890b5f625e54852ea3dd7fb91b99c56e101 Mon Sep 17 00:00:00 2001
+From d736e6fa2b86b81b90e91a74fffeca380743026a Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Fri, 19 Jul 2013 10:40:23 -0300
-Subject: [PATCH 122/143] ARM: dts: imx6qdl-sabresd: Allow buttons to wake-up
+Subject: [PATCH 122/161] ARM: dts: imx6qdl-sabresd: Allow buttons to wake-up
  the system
 
 This is useful for testing suspend/resume sequence.

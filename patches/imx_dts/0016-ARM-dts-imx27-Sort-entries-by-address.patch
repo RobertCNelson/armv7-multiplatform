@@ -1,7 +1,7 @@
-From 73ee1d3dd56621b6e77f16bb820c445574872a3f Mon Sep 17 00:00:00 2001
+From 1f37568c791d9f6596cca5d758bc936c943d3811 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sun, 23 Jun 2013 10:54:48 +0400
-Subject: [PATCH 016/143] ARM: dts: imx27: Sort entries by address
+Subject: [PATCH 016/161] ARM: dts: imx27: Sort entries by address
 
 Signed-off-by: Alexander Shiyan <eagle.alexander923@gmail.com>
 Acked-by: Sascha Hauer <s.hauer@pengutronix.de>

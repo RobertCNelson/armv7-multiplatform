@@ -1,7 +1,7 @@
-From 75c334f9151cd54479beeef8be3d8dfabece3c63 Mon Sep 17 00:00:00 2001
+From f1e23bdd2b4f1f12c8599f979fb8dfd1d0de984f Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Mon, 29 Jul 2013 00:04:16 -0300
-Subject: [PATCH 143/143] ARM: imx_v6_v7_defconfig: Add SATA support
+Subject: [PATCH 143/161] ARM: imx_v6_v7_defconfig: Add SATA support
 
 Let SATA support be built by default.
 

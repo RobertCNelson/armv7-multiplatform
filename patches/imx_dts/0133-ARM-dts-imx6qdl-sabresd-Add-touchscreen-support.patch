@@ -1,7 +1,7 @@
-From 03dfacb9b8d9a229d2b3b35229fd10f9a77b3c54 Mon Sep 17 00:00:00 2001
+From 2a81aa2f7f7cff8e355c37cab5cfda47d48ca096 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Wed, 24 Jul 2013 17:20:03 -0300
-Subject: [PATCH 133/143] ARM: dts: imx6qdl-sabresd: Add touchscreen support
+Subject: [PATCH 133/161] ARM: dts: imx6qdl-sabresd: Add touchscreen support
 
 mx6 sabresd boards have a egalax touchscreen controller connected via I2C3.
 

@@ -1,7 +1,7 @@
-From 17a70af534f4cb0ee24795a2a06f0b485b158629 Mon Sep 17 00:00:00 2001
+From 83bcac4a2b0a94ddaad6b80ba19d13599b384339 Mon Sep 17 00:00:00 2001
 From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
 Date: Mon, 1 Jul 2013 15:23:28 +0200
-Subject: [PATCH 103/143] ARM: mxs: dt: cfa10057: remove hogpins
+Subject: [PATCH 103/161] ARM: mxs: dt: cfa10057: remove hogpins
 
 Necessary pins are now grabbed by respective drivers. Unecessary hogpins are
 simply removed.

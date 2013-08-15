@@ -1,7 +1,7 @@
-From 8a150f78f921bca5237f6e957f6b3d8a8bcc0e24 Mon Sep 17 00:00:00 2001
+From f5971714732e101c1b70e891d7115765d3b5d878 Mon Sep 17 00:00:00 2001
 From: Tony Prisk <linux@prisktech.co.nz>
 Date: Sun, 28 Jul 2013 12:00:20 +1200
-Subject: [PATCH 141/143] dts: wandboard: Add support for SDIO bcm4329
+Subject: [PATCH 141/161] dts: wandboard: Add support for SDIO bcm4329
 
 The wandboard has a Broadcom 4329 WiFi connected via SDIO. This patch
 sets the required pins to enable the wifi module.

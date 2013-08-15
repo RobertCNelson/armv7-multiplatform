@@ -1,7 +1,7 @@
-From 5fcbe63bc83dcb4bb4596c1fd663cd468e7933d6 Mon Sep 17 00:00:00 2001
+From b09cfc43d2709dc59b4d98ae5b0392b4b6c6b9a9 Mon Sep 17 00:00:00 2001
 From: Sascha Hauer <s.hauer@pengutronix.de>
 Date: Tue, 25 Jun 2013 15:51:45 +0200
-Subject: [PATCH 019/143] ARM: dts: i.MX6: sync imx6q and imx6dl pinmux
+Subject: [PATCH 019/161] ARM: dts: i.MX6: sync imx6q and imx6dl pinmux
  entries
 
 The i.MX6Q and i.MX6DL are pin compatible, so the pinmux entries

@@ -1,7 +1,7 @@
-From 1127d48bae08c741a8fa238b73553d82f179fef3 Mon Sep 17 00:00:00 2001
+From 79aca3d29f4c772d67e455e67e34a4af9a92480a Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Thu, 18 Jul 2013 13:08:20 +0800
-Subject: [PATCH 118/143] ARM: imx6q: add spdif gate clock
+Subject: [PATCH 118/161] ARM: imx6q: add spdif gate clock
 
 It adds the missing spdif gate clock into imx6q clock driver.
 

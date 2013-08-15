@@ -1,7 +1,7 @@
-From 40b4fac1eba774623695dfccd1526e074ce50cf0 Mon Sep 17 00:00:00 2001
+From 8ad719fb3e8a0177c9b6c2ed7ccc21d4fd6551ec Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Mon, 24 Jun 2013 22:50:17 -0300
-Subject: [PATCH 081/143] ARM: imx_v6_v7_defconfig: Select
+Subject: [PATCH 081/161] ARM: imx_v6_v7_defconfig: Select
  CONFIG_NOP_USB_XCEIV by default
 
 In order to get USB functionality on mx5 boards, we need to select

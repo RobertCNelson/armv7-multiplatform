@@ -1,7 +1,7 @@
-From be68360acadf04fa5e48fd644855620434e0160e Mon Sep 17 00:00:00 2001
+From b04eeecbf08ec39d5feb47e35022a401ff77a2ac Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sat, 20 Jul 2013 11:17:59 +0400
-Subject: [PATCH 128/143] ARM: dts: imx27-phytec-phycore-som: Fix regulator
+Subject: [PATCH 128/161] ARM: dts: imx27-phytec-phycore-som: Fix regulator
  settings
 
 Outputs regulator SW1A and SW1A, SW2A and SW2B are connected together,

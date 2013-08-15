@@ -1,7 +1,7 @@
-From ac84ee66a0e377b544e378f62bf270fd98d23275 Mon Sep 17 00:00:00 2001
+From f558e554c3d385ceb3508e7f7fc20b277415ba48 Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Sat, 29 Jun 2013 08:27:51 +0400
-Subject: [PATCH 074/143] drivers: bus: imx-weim: Simplify error path
+Subject: [PATCH 074/161] drivers: bus: imx-weim: Simplify error path
 
 Signed-off-by: Alexander Shiyan <shc_work@mail.ru>
 Signed-off-by: Shawn Guo <shawn.guo@linaro.org>

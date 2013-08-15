@@ -1,7 +1,7 @@
-From 06e5b41b07a5071cba68f30ae4ff5ab1a4372194 Mon Sep 17 00:00:00 2001
+From 22c9be31d55c6192a4488c084d816a93cdbfbdfb Mon Sep 17 00:00:00 2001
 From: Otavio Salvador <otavio@ossystems.com.br>
 Date: Tue, 16 Jul 2013 09:56:13 -0300
-Subject: [PATCH 111/143] ARM: dts: imx23-evk: enable Low Resolution ADC
+Subject: [PATCH 111/161] ARM: dts: imx23-evk: enable Low Resolution ADC
 
 The i.MX23 has a internal Low Resolution ADC; this enables the support
 for this device.

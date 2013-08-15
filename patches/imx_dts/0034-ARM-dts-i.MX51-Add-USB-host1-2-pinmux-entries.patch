@@ -1,7 +1,7 @@
-From 835692ee6733de6596f52d7e5f1b0c5f108ceeae Mon Sep 17 00:00:00 2001
+From c83854fe6adb06ae19e38bd96f28681fe826e83e Mon Sep 17 00:00:00 2001
 From: Sascha Hauer <s.hauer@pengutronix.de>
 Date: Tue, 25 Jun 2013 15:52:00 +0200
-Subject: [PATCH 034/143] ARM: dts: i.MX51: Add USB host1/2 pinmux entries
+Subject: [PATCH 034/161] ARM: dts: i.MX51: Add USB host1/2 pinmux entries
 
 This adds pinmux entries for USBH1/2 in ULPI mode.
 

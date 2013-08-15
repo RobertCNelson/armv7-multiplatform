@@ -1,7 +1,7 @@
-From 206433681a9cddabe01f5e3754ec92f231495237 Mon Sep 17 00:00:00 2001
+From 6bfc26676545ac28b19ff2d42f1c19b5812b8585 Mon Sep 17 00:00:00 2001
 From: Peter Chen <peter.chen@freescale.com>
 Date: Tue, 16 Jul 2013 10:23:20 +0800
-Subject: [PATCH 096/143] ARM: imx: clk-pllv3: improve the timeout waiting
+Subject: [PATCH 096/161] ARM: imx: clk-pllv3: improve the timeout waiting
  method
 
 There are two improvements for this commit:

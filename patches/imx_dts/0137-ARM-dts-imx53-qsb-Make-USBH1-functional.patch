@@ -1,7 +1,7 @@
-From c8da13adbbe8fc8c1b255ad9724d608b5d1ad440 Mon Sep 17 00:00:00 2001
+From 0562c065caa03efd19bfa19df4a7bf587045eb7e Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Thu, 25 Jul 2013 18:18:33 -0300
-Subject: [PATCH 137/143] ARM: dts: imx53-qsb: Make USBH1 functional
+Subject: [PATCH 137/161] ARM: dts: imx53-qsb: Make USBH1 functional
 
 mx53qsb uses GPIO7_8 to turn on VBUS, so add support for it.
 

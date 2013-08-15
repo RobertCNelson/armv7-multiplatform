@@ -1,7 +1,7 @@
-From d37b13fb6c59b8312a9ebb6a64f852e1b76d6c88 Mon Sep 17 00:00:00 2001
+From 23647e3dad7e5113e839adad82c7533ae8cd63ed Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Tue, 16 Jul 2013 10:32:39 -0300
-Subject: [PATCH 109/143] ARM: mxs: pm: Include "pm.h"
+Subject: [PATCH 109/161] ARM: mxs: pm: Include "pm.h"
 
 Fix the following sparse warning:
 

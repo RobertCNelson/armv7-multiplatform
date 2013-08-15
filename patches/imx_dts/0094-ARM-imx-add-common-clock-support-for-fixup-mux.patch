@@ -1,7 +1,7 @@
-From d401fcdfda78632fdc389f0ee3158d73a054c7f7 Mon Sep 17 00:00:00 2001
+From 9f476be700bf0eb1792d2265399d9ad221cae7fa Mon Sep 17 00:00:00 2001
 From: Liu Ying <Ying.Liu@freescale.com>
 Date: Thu, 4 Jul 2013 17:35:46 +0800
-Subject: [PATCH 094/143] ARM: imx: add common clock support for fixup mux
+Subject: [PATCH 094/161] ARM: imx: add common clock support for fixup mux
 
 One register may have several fields to control some clocks. It
 is possible that the read/write values of some fields may map to

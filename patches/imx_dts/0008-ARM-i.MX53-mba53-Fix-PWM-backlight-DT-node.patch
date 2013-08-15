@@ -1,7 +1,7 @@
-From 380ca95dadc5d61c342c9cabfcb8d079c0d2a725 Mon Sep 17 00:00:00 2001
+From a5de4c9741f5571ca620f69e15e3eb93f1106ec5 Mon Sep 17 00:00:00 2001
 From: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
 Date: Thu, 11 Jul 2013 16:37:47 +0200
-Subject: [PATCH 008/143] ARM i.MX53: mba53: Fix PWM backlight DT node
+Subject: [PATCH 008/161] ARM i.MX53: mba53: Fix PWM backlight DT node
 
 The i.MX53 PWM controller uses two cells to describe the PWM specifier.
 Remove the extra unused values from the backlight DT node pwms property.

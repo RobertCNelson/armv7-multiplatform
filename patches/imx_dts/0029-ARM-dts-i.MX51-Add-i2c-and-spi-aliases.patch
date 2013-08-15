@@ -1,7 +1,7 @@
-From 7bf98d73f3ca35f45c65a9b5e1251eb4f8004471 Mon Sep 17 00:00:00 2001
+From f2e4060044e84f668c2416303b83a0fc73869d1f Mon Sep 17 00:00:00 2001
 From: Sascha Hauer <s.hauer@pengutronix.de>
 Date: Tue, 25 Jun 2013 15:51:55 +0200
-Subject: [PATCH 029/143] ARM: dts: i.MX51: Add i2c and spi aliases
+Subject: [PATCH 029/161] ARM: dts: i.MX51: Add i2c and spi aliases
 
 This allows to order the i2c and spi devices correctly.
 While at it reorder the aliases entries alphabetically.

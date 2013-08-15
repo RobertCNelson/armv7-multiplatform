@@ -1,7 +1,7 @@
-From 6c501f5fc184cc31f8646d13aa6079d557c9d1ca Mon Sep 17 00:00:00 2001
+From e45bc500c1fed0ea0212b31153696a681dcf2d11 Mon Sep 17 00:00:00 2001
 From: Fabio Estevam <fabio.estevam@freescale.com>
 Date: Fri, 26 Jul 2013 00:17:36 -0300
-Subject: [PATCH 139/143] ARM: mx53: Allow suspend/resume
+Subject: [PATCH 139/161] ARM: mx53: Allow suspend/resume
 
 Current imx53_pm_init() implementation is incomplete as it lacks calling
 suspend_set_ops().

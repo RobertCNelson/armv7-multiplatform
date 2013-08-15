@@ -1,7 +1,7 @@
-From a66548ca331e857c8ff3ee41046dac2d4781eac6 Mon Sep 17 00:00:00 2001
+From 1746a603251e797eadeb6d4dc1d0a063e6ba3a7d Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Tue, 2 Jul 2013 20:02:26 +0400
-Subject: [PATCH 046/143] ARM: dts: imx27-phytec-phycore-som: Add WEIM node
+Subject: [PATCH 046/161] ARM: dts: imx27-phytec-phycore-som: Add WEIM node
 
 This patch adds WEIM node for Phytec PCM-038 module.
 Migrate existing on-module NOR-flash as children of WEIM CS0.

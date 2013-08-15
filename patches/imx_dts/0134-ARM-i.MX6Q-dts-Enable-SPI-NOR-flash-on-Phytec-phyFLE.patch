@@ -1,7 +1,7 @@
-From ee02a3747fe650d594d21791d1d1dd0c6d9f7a93 Mon Sep 17 00:00:00 2001
+From 6dbac0b208c0182c13ec2ed337f7db917240c793 Mon Sep 17 00:00:00 2001
 From: Philipp Zabel <p.zabel@pengutronix.de>
 Date: Wed, 24 Jul 2013 18:35:28 +0200
-Subject: [PATCH 134/143] ARM i.MX6Q: dts: Enable SPI NOR flash on Phytec
+Subject: [PATCH 134/161] ARM i.MX6Q: dts: Enable SPI NOR flash on Phytec
  phyFLEX-i.MX6 Ouad module
 
 Signed-off-by: Philipp Zabel <p.zabel@pengutronix.de>

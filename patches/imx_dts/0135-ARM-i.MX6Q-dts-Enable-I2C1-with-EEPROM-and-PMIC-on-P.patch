@@ -1,7 +1,7 @@
-From bbbc0b08ec3b38ee700d5af435197f37b490f2e5 Mon Sep 17 00:00:00 2001
+From 19d0e77e745bc476b310d251d8a8f0da812000cd Mon Sep 17 00:00:00 2001
 From: Philipp Zabel <p.zabel@pengutronix.de>
 Date: Wed, 24 Jul 2013 18:35:29 +0200
-Subject: [PATCH 135/143] ARM i.MX6Q: dts: Enable I2C1 with EEPROM and PMIC on
+Subject: [PATCH 135/161] ARM i.MX6Q: dts: Enable I2C1 with EEPROM and PMIC on
  Phytec phyFLEX-i.MX6 Ouad module
 
 This patch enables I2C1 and adds device tree nodes for the EEPROM and the

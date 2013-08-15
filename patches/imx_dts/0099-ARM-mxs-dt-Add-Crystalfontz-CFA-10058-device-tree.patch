@@ -1,7 +1,7 @@
-From e03873c4b69abdfebd893746596748e9e1175463 Mon Sep 17 00:00:00 2001
+From 21657c7fd3d19958308035459153439c8db97eba Mon Sep 17 00:00:00 2001
 From: Brian Lilly <brian@crystalfontz.com>
 Date: Mon, 1 Jul 2013 15:23:24 +0200
-Subject: [PATCH 099/143] ARM: mxs: dt: Add Crystalfontz CFA-10058 device tree
+Subject: [PATCH 099/161] ARM: mxs: dt: Add Crystalfontz CFA-10058 device tree
 
 The CFA-10058 is a breakout board for the CFA-10036 that has Ethernet, USB and a
 5" LCD screen on it.

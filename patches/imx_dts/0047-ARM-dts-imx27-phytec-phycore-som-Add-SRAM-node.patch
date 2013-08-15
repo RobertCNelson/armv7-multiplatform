@@ -1,7 +1,7 @@
-From 491b0fa97fdfdd467b3aedfec4c9984ba602e98d Mon Sep 17 00:00:00 2001
+From 1f25a0d349fba9436b2a2f7afab3adea8d725fbd Mon Sep 17 00:00:00 2001
 From: Alexander Shiyan <shc_work@mail.ru>
 Date: Tue, 2 Jul 2013 20:02:27 +0400
-Subject: [PATCH 047/143] ARM: dts: imx27-phytec-phycore-som: Add SRAM node
+Subject: [PATCH 047/161] ARM: dts: imx27-phytec-phycore-som: Add SRAM node
 
 This patch adds SRAM node for Phytec PCM-038 module.
 

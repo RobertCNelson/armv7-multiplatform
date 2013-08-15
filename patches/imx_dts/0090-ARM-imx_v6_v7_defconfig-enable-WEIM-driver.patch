@@ -1,7 +1,7 @@
-From d72d3ecd747aec1344e32fd68b5b403c2f4d9b5a Mon Sep 17 00:00:00 2001
+From 6d20e0674d2b87d8a384e52e563849fd397d4118 Mon Sep 17 00:00:00 2001
 From: Huang Shijie <b32955@freescale.com>
 Date: Mon, 8 Jul 2013 15:16:03 +0800
-Subject: [PATCH 090/143] ARM: imx_v6_v7_defconfig: enable WEIM driver
+Subject: [PATCH 090/161] ARM: imx_v6_v7_defconfig: enable WEIM driver
 
 enable the weim driver.
 Since the NOR is connected to the WEIM for imx6q{dl}-sabreauto,

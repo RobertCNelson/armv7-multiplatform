@@ -1,7 +1,7 @@
-From 68ef20034dd8c98ec7e8d0503dd2dd4b1bcf81ae Mon Sep 17 00:00:00 2001
+From 708951495d0ef5aeb7834dda3d382a5be08c49f0 Mon Sep 17 00:00:00 2001
 From: Shawn Guo <shawn.guo@linaro.org>
 Date: Tue, 16 Jul 2013 22:15:18 +0800
-Subject: [PATCH 116/143] ARM: dts: imx: add LVDS panel for imx6qdl-sabresd
+Subject: [PATCH 116/161] ARM: dts: imx: add LVDS panel for imx6qdl-sabresd
 
 Add HannStar HSD100PXN1 XGA panel support on LVDS1 port of
 imx6qdl-sabresd board.

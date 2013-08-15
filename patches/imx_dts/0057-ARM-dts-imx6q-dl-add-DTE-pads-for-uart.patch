@@ -1,7 +1,7 @@
-From 0a57fb8919b8d28efc737b821838e9344b4bfdb5 Mon Sep 17 00:00:00 2001
+From 642f1d53b22b3768b23a10f7959717d79e66fd45 Mon Sep 17 00:00:00 2001
 From: Huang Shijie <b32955@freescale.com>
 Date: Mon, 8 Jul 2013 17:14:20 +0800
-Subject: [PATCH 057/143] ARM: dts: imx6q{dl}: add DTE pads for uart
+Subject: [PATCH 057/161] ARM: dts: imx6q{dl}: add DTE pads for uart
 
 The uart2 in the imx6q-arm2 board is used as a DTE uart,
 this patch adds the necessary DTE pads for uart2.
