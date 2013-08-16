@@ -1,8 +1,8 @@
-From f4922386116e7a0d70a9ce43c33e0ad379a2f3eb Mon Sep 17 00:00:00 2001
+From d5e0dfad23895984c5679e5c8ac9cbdda44ad2db Mon Sep 17 00:00:00 2001
 From: Teknoman117 <linux.robotdude@gmail.com>
 Date: Wed, 24 Jul 2013 17:25:46 -0700
-Subject: [PATCH] [PATCH] hack: omap: clockk: dpll5: apply sprz319e 2.1
- erratum (compatible with v3.11-rc2)
+Subject: [PATCH] hack: omap: clockk: dpll5: apply sprz319e 2.1 erratum
+ (compatible with v3.11-rc2)
 
 Signed-off-by: Teknoman117 <linux.robotdude@gmail.com>
 ---
@@ -13,7 +13,7 @@ Signed-off-by: Teknoman117 <linux.robotdude@gmail.com>
  4 files changed, 96 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm/mach-omap2/cclock3xxx_data.c b/arch/arm/mach-omap2/cclock3xxx_data.c
-index 334b767..e076e3e 100644
+index 334b767..60fa6bd 100644
 --- a/arch/arm/mach-omap2/cclock3xxx_data.c
 +++ b/arch/arm/mach-omap2/cclock3xxx_data.c
 @@ -250,7 +250,9 @@ static struct dpll_data dpll1_dd = {
@@ -44,18 +44,18 @@ index 334b767..e076e3e 100644
  static struct clk_hw_omap dpll1_ck_hw = {
  	.hw = {
  		.clk = &dpll1_ck,
-@@ -3559,6 +3571,11 @@ int __init omap3xxx_clk_init(void)
- 		dpll4_dd = dpll4_dd_3630;
+@@ -3560,6 +3572,11 @@ int __init omap3xxx_clk_init(void)
  	else
  		dpll4_dd = dpll4_dd_34xx;
-+ 
+ 
 +	if (cpu_is_omap3630())
 +		dpll1_ck_ops = dpll5_ck_ops_3630;
 +	else
 +		dpll1_ck_ops = dpll1_ck_ops_34xx;
- 
++
  
  	/*
+ 	 * 3505 must be tested before 3517, since 3517 returns true
 diff --git a/arch/arm/mach-omap2/clkt_dpll.c b/arch/arm/mach-omap2/clkt_dpll.c
 index 924c230..5100d46 100644
 --- a/arch/arm/mach-omap2/clkt_dpll.c
