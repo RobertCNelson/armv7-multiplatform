@@ -60,9 +60,9 @@ drivers () {
 	${git} "${DIR}/patches/drivers/0001-thermal-add-imx-thermal-driver-support.patch"
 	${git} "${DIR}/patches/drivers/0002-ASoC-sglt5000-Provide-the-reg_stride-field.patch"
 	${git} "${DIR}/patches/drivers/0003-ASoC-imx-sgtl5000-fix-error-return-code-in-imx_sgtl5.patch"
-	${git} "${DIR}/patches/drivers/0005-ARM-i.MX6-Wandboard-add-wifi-bt-rfkill-driver.patch"
 #v3.11-rc3:
 #	${git} "${DIR}/patches/drivers/0004-ASoC-sgtl5000-defer-the-probe-if-clock-is-not-found.patch"
+	${git} "${DIR}/patches/drivers/0005-ARM-i.MX6-Wandboard-add-wifi-bt-rfkill-driver.patch"
 }
 
 imx_dts () {
@@ -287,60 +287,6 @@ imx () {
 	${git} "${DIR}/patches/imx/0005-chipidea-core-Move-hw_phymode_configure-into-probe.patch"
 }
 
-omap_fixes () {
-	echo "dir: omap_fixes"
-#	${git} "${DIR}/patches/omap_fixes/0001-ARM-dts-omap3-beagle-xm-fix-compatible-property.patch"
-}
-
-omap_usb_beagle () {
-	echo "dir: omap_usb_beagle"
-	#Still needs: CONFIG_NOP_USB_XCEIV=m but works with rc3
-	${git} "${DIR}/patches/omap_usb_beagle/0001-ARM-dts-omap3-beagle-xm-Add-USB-Host-support.patch"
-	${git} "${DIR}/patches/omap_usb_beagle/0002-ARM-dts-omap3-beagle-Make-USB-host-pin-naming-consis.patch"
-	${git} "${DIR}/patches/omap_usb_beagle/0003-pinctrl-single-Prepare-for-supporting-SoC-specific-f.patch"
-	${git} "${DIR}/patches/omap_usb_beagle/0004-pinctrl-single-Add-hardware-specific-hooks-for-IRQ-a.patch"
-	${git} "${DIR}/patches/omap_usb_beagle/0005-pinctrl-single-omap-Add-SoC-specific-module-for-wake.patch"
-	${git} "${DIR}/patches/omap_usb_beagle/0006-ARM-OMAP-Move-DT-wake-up-event-handling-over-to-use-.patch"
-#v3.11-rc3
-#	${git} "${DIR}/patches/omap_usb_beagle/0007-USB-EHCI-Fix-resume-signalling-on-remote-wakeup.patch"
-	${git} "${DIR}/patches/omap_usb_beagle/0008-ARM-OMAP3-Enable-Hardware-Save-and-Restore-for-USB-H.patch"
-	${git} "${DIR}/patches/omap_usb_beagle/0009-ARM-dts-omap3beagle-xm-Add-idle-state-pins-for-USB-h.patch"
-	${git} "${DIR}/patches/omap_usb_beagle/0010-mfd-omap-usb-host-move-initialization-to-module_init.patch"
-	${git} "${DIR}/patches/omap_usb_beagle/0011-mfd-omap-usb-host-Put-pins-in-IDLE-state-on-suspend.patch"
-	${git} "${DIR}/patches/omap_usb_beagle/0012-USB-Support-wakeup-IRQ-for-suspended-controllers.patch"
-	${git} "${DIR}/patches/omap_usb_beagle/0013-USB-ehci-omap-Implement-suspend-resume.patch"
-	${git} "${DIR}/patches/omap_usb_beagle/0014-temp-omap-usb-host-configre-wakeup-based-on-children.patch"
-}
-
-omap_usb () {
-	echo "dir: omap_usb"
-#v3.11-rc3
-	#fix panda/omap4 usb host...
-#	${git} "${DIR}/patches/omap_usb/0001-ARM-OMAP2-Provide-alias-to-USB-PHY-clock.patch"
-
-	#[PATCH v11] reset: Add driver for gpio-controlled reset pins
-	${git} "${DIR}/patches/omap_usb/0002-reset-Add-driver-for-gpio-controlled-reset-pins.patch"
-	${git} "${DIR}/patches/omap_usb/0003-usb-phy-nop-Use-RESET-Controller-for-managing-the-re.patch"
-	${git} "${DIR}/patches/omap_usb/0004-ARM-dts-omap3-beagle-Use-reset-gpio-driver-for-hsusb.patch"
-	${git} "${DIR}/patches/omap_usb/0005-ARM-dts-omap4-panda-Use-reset-gpio-driver-for-hsusb1.patch"
-	${git} "${DIR}/patches/omap_usb/0006-ARM-dts-omap5-uevm-Use-reset-gpio-driver-for-hsusb2_.patch"
-	${git} "${DIR}/patches/omap_usb/0007-ARM-dts-omap3-beagle-xm-Add-USB-Host-support.patch"
-	${git} "${DIR}/patches/omap_usb/0008-ARM-dts-omap3-beagle-Make-USB-host-pin-naming-consis.patch"
-}
-
-omap_usb_reset () {
-	echo "dir: omap_usb_reset"
-	${git} "${DIR}/patches/omap_usb_reset/0001-usb-phy-nop-Add-gpio_reset-to-platform-data.patch"
-	${git} "${DIR}/patches/omap_usb_reset/0002-usb-phy-nop-Don-t-use-regulator-framework-for-RESET-.patch"
-	${git} "${DIR}/patches/omap_usb_reset/0003-ARM-OMAP2-omap-usb-host-Get-rid-of-platform_data-fro.patch"
-	${git} "${DIR}/patches/omap_usb_reset/0004-ARM-OMAP2-usb-host-Adapt-to-USB-phy-nop-RESET-line-c.patch"
-	${git} "${DIR}/patches/omap_usb_reset/0005-ARM-dts-omap3-beagle-Use-reset-gpios-for-hsusb2_rese.patch"
-	${git} "${DIR}/patches/omap_usb_reset/0006-ARM-dts-omap4-panda-Use-reset-gpios-for-hsusb1_reset.patch"
-	${git} "${DIR}/patches/omap_usb_reset/0007-ARM-dts-omap5-uevm-Use-reset-gpios-for-hsusb2_reset.patch"
-	${git} "${DIR}/patches/omap_usb_reset/0008-ARM-dts-omap3-beagle-Make-USB-host-pin-naming-consis.patch"
-	${git} "${DIR}/patches/omap_usb_reset/0009-ARM-dts-omap3-beagle-xm-Add-USB-Host-support.patch"
-}
-
 omap_usb_phy_reset () {
 	echo "dir: omap_usb_phy_reset"
 	${git} "${DIR}/patches/omap_usb_phy_reset/0001-usb-phy-nop-Add-gpio_reset-to-platform-data.patch"
@@ -411,6 +357,7 @@ imx_video () {
 
 omap3_beagle_xm_rework () {
 	echo "dir: omap3_beagle_xm_rework"
+	#Still needs: CONFIG_NOP_USB_XCEIV=m but ehci works
 	#cp omap3-beagle-xm.dts omap3-beagle-xm-c.dts
 	#cp omap3-beagle-xm.dts omap3-beagle-xm-ab.dts
 	#edit Makefile add ^
@@ -432,10 +379,6 @@ drivers
 imx_dts
 omap_next
 imx
-omap_fixes
-#omap_usb_beagle
-#omap_usb
-#omap_usb_reset
 omap_usb_phy_reset
 omap_video
 omap_clock
