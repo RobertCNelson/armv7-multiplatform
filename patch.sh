@@ -237,6 +237,39 @@ imx_dts () {
 	${git} "${DIR}/patches/imx_dts/0161-phy-micrel-Add-definitions-for-common-Micrel-PHY-reg.patch"
 }
 
+omap_next () {
+	echo "dir: omap_next"
+	#from: https://git.kernel.org/cgit/linux/kernel/git/bcousson/linux-omap-dt.git/log/?h=for_3.12/dts
+	${git} "${DIR}/patches/omap_next/0001-ARM-dts-omap3-beagle-xm-fix-string-error-in-compatib.patch"
+	${git} "${DIR}/patches/omap_next/0002-ARM-dts-N900-Add-device-tree.patch"
+	${git} "${DIR}/patches/omap_next/0003-ARM-dts-omap3-igep-add-pinmux-node-for-GPIO-LED-conf.patch"
+	${git} "${DIR}/patches/omap_next/0004-ARM-dts-omap3-igep0020-add-mux-conf-for-GPIO-LEDs.patch"
+	${git} "${DIR}/patches/omap_next/0005-ARM-dts-omap3-igep0030-add-mux-conf-for-GPIO-LED.patch"
+	${git} "${DIR}/patches/omap_next/0006-ARM-dts-AM33XX-Add-PMU-support.patch"
+	${git} "${DIR}/patches/omap_next/0007-ARM-dts-AM33xx-Correct-gpio-interrupt-cells-property.patch"
+	${git} "${DIR}/patches/omap_next/0008-ARM-dts-omap5-uevm-Split-SMPS10-in-two-nodes.patch"
+	${git} "${DIR}/patches/omap_next/0009-ARM-dts-Remove-0x-s-from-OMAP2420-H4-DTS-file.patch"
+	${git} "${DIR}/patches/omap_next/0010-ARM-dts-Remove-0x-s-from-OMAP3-IGEP0020-DTS-file.patch"
+	${git} "${DIR}/patches/omap_next/0011-ARM-dts-Remove-0x-s-from-OMAP3-IGEP0030-DTS-file.patch"
+	${git} "${DIR}/patches/omap_next/0012-ARM-dts-Remove-0x-s-from-OMAP3-DTS-file.patch"
+	${git} "${DIR}/patches/omap_next/0013-ARM-dts-Remove-0x-s-from-OMAP3430-SDP-DTS-file.patch"
+	${git} "${DIR}/patches/omap_next/0014-ARM-dts-Remove-0x-s-from-OMAP4-DTS-file.patch"
+	${git} "${DIR}/patches/omap_next/0015-ARM-dts-Remove-0x-s-from-OMAP5-DTS-file.patch"
+	${git} "${DIR}/patches/omap_next/0016-ARM-dts-twl6030-Move-common-configuration-for-OMAP4-.patch"
+	${git} "${DIR}/patches/omap_next/0017-ARM-dts-omap4-var-som-configure-connection-to-PMIC-o.patch"
+	${git} "${DIR}/patches/omap_next/0018-ARM-dts-DRA7-Add-the-dts-files-for-dra7-SoC-and-dra7.patch"
+	${git} "${DIR}/patches/omap_next/0019-ARM-dts-omap3-beagle-Use-reset-gpios-for-hsusb2_rese.patch"
+	${git} "${DIR}/patches/omap_next/0020-ARM-dts-omap4-panda-Use-reset-gpios-for-hsusb1_reset.patch"
+	${git} "${DIR}/patches/omap_next/0021-ARM-dts-omap5-uevm-Use-reset-gpios-for-hsusb2_reset.patch"
+	${git} "${DIR}/patches/omap_next/0022-ARM-dts-omap3-beagle-Make-USB-host-pin-naming-consis.patch"
+	${git} "${DIR}/patches/omap_next/0023-ARM-dts-omap3-beagle-xm-Add-USB-Host-support.patch"
+	${git} "${DIR}/patches/omap_next/0024-ARM-dts-AM4372-cpu-s-node-per-latest-binding.patch"
+	${git} "${DIR}/patches/omap_next/0025-ARM-dts-AM4372-add-few-nodes.patch"
+	${git} "${DIR}/patches/omap_next/0026-ARM-dts-Add-devicetree-for-gta04-board.patch"
+	${git} "${DIR}/patches/omap_next/0027-ARM-dts-AM33XX-use-pinmux-node-defined-in-included-f.patch"
+	${git} "${DIR}/patches/omap_next/0028-ARM-dts-AM33XX-don-t-redefine-OCP-bus-and-device-nod.patch"
+}
+
 imx () {
 	echo "dir: imx"
 #v3.11-rc3
@@ -256,7 +289,7 @@ imx () {
 
 omap_fixes () {
 	echo "dir: omap_fixes"
-	${git} "${DIR}/patches/omap_fixes/0001-ARM-dts-omap3-beagle-xm-fix-compatible-property.patch"
+#	${git} "${DIR}/patches/omap_fixes/0001-ARM-dts-omap3-beagle-xm-fix-compatible-property.patch"
 }
 
 omap_usb_beagle () {
@@ -306,6 +339,14 @@ omap_usb_reset () {
 	${git} "${DIR}/patches/omap_usb_reset/0007-ARM-dts-omap5-uevm-Use-reset-gpios-for-hsusb2_reset.patch"
 	${git} "${DIR}/patches/omap_usb_reset/0008-ARM-dts-omap3-beagle-Make-USB-host-pin-naming-consis.patch"
 	${git} "${DIR}/patches/omap_usb_reset/0009-ARM-dts-omap3-beagle-xm-Add-USB-Host-support.patch"
+}
+
+omap_usb_phy_reset () {
+	echo "dir: omap_usb_phy_reset"
+	${git} "${DIR}/patches/omap_usb_phy_reset/0001-usb-phy-nop-Add-gpio_reset-to-platform-data.patch"
+	${git} "${DIR}/patches/omap_usb_phy_reset/0002-usb-phy-nop-Don-t-use-regulator-framework-for-RESET-.patch"
+	${git} "${DIR}/patches/omap_usb_phy_reset/0003-ARM-OMAP2-omap-usb-host-Get-rid-of-platform_data-fro.patch"
+	${git} "${DIR}/patches/omap_usb_phy_reset/0004-ARM-OMAP2-usb-host-Adapt-to-USB-phy-nop-RESET-line-c.patch"
 }
 
 omap_video () {
@@ -378,8 +419,6 @@ omap3_beagle_xm_rework () {
 	${git} "${DIR}/patches/omap3_beagle_xm_rework/0002-ARM-dts-omap3-beagle-xm-ab-usb-host-is-active-high-t.patch"
 }
 
-
-
 saucy () {
 	echo "dir: saucy"
 	#Ubuntu Saucy: so Ubuntu decided to enable almost every Warning -> Error option...
@@ -391,11 +430,13 @@ saucy () {
 arm
 drivers
 imx_dts
+omap_next
 imx
 omap_fixes
 #omap_usb_beagle
 #omap_usb
-omap_usb_reset
+#omap_usb_reset
+omap_usb_phy_reset
 omap_video
 omap_clock
 omap_board
