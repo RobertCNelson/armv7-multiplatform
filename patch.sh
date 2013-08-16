@@ -60,6 +60,7 @@ drivers () {
 	${git} "${DIR}/patches/drivers/0001-thermal-add-imx-thermal-driver-support.patch"
 	${git} "${DIR}/patches/drivers/0002-ASoC-sglt5000-Provide-the-reg_stride-field.patch"
 	${git} "${DIR}/patches/drivers/0003-ASoC-imx-sgtl5000-fix-error-return-code-in-imx_sgtl5.patch"
+	${git} "${DIR}/patches/drivers/0005-ARM-i.MX6-Wandboard-add-wifi-bt-rfkill-driver.patch"
 #v3.11-rc3:
 #	${git} "${DIR}/patches/drivers/0004-ASoC-sgtl5000-defer-the-probe-if-clock-is-not-found.patch"
 }
@@ -354,6 +355,8 @@ dts () {
 	${git} "${DIR}/patches/dts/0002-ARM-dts-imx6qdl-wandboard-add-gpio-lines-to-wandboar.patch"
 	${git} "${DIR}/patches/dts/0003-ARM-dts-imx6qdl-wandboard-Add-support-for-i2c1.patch"
 	${git} "${DIR}/patches/dts/0004-ARM-dts-imx6qdl-wandboard-Add-support-for-i2c3.patch"
+	${git} "${DIR}/patches/dts/0005-ARM-dts-imx6qdl-wandboard-add-bluetooth-control-line.patch"
+	${git} "${DIR}/patches/dts/0006-ARM-dts-wandboard-add-binding-for-wand-rfkill-driver.patch"
 
 #	${git} "${DIR}/patches/dts/0003-ARM-dts-imx6qdl-wandboard-add-debug-led-for-headless.patch"
 }
