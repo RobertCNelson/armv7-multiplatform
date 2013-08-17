@@ -285,6 +285,7 @@ imx () {
 	#usb for the imx53-qsb
 #	${git} "${DIR}/patches/imx/0004-ARM-dts-imx53-qsb-Make-USBH1-functional.patch"
 	${git} "${DIR}/patches/imx/0005-chipidea-core-Move-hw_phymode_configure-into-probe.patch"
+	${git} "${DIR}/patches/imx/0006-ARM-imx6q-add-SDMA-firmware-from-SDK.patch"
 }
 
 omap_usb_phy_reset () {

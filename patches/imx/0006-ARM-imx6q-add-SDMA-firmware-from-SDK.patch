@@ -1,0 +1,50 @@
+From fbe4d115c3b396675c68a615aeae910c1f627879 Mon Sep 17 00:00:00 2001
+From: Vladimir Ermakov <vooon341@gmail.com>
+Date: Sun, 18 Aug 2013 03:22:28 +0400
+Subject: [PATCH] ARM: imx6q: add SDMA firmware from SDK
+
+SDMA firmware sdma-imx6q-to1.bin from wandboard.org SDK
+linux kernel v3.0.35.
+
+Signed-off-by: Vladimir Ermakov <vooon341@gmail.com>
+---
+ firmware/imx/sdma/sdma-imx6q.bin | Bin 0 -> 1838 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 firmware/imx/sdma/sdma-imx6q.bin
+
+diff --git a/firmware/imx/sdma/sdma-imx6q.bin b/firmware/imx/sdma/sdma-imx6q.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..f3a1cff11ad262d84da8403f8510e44d175815f9
+GIT binary patch
+literal 1838
+zcmZ`(PfQ$T6#wSi`Li<%@=t`&E?}e!7As0qjY>$W9ymZX1H)2eaUI3Nz%F=lTj!fe
+zjM3IA9N;jsgk%p*JecaGCI%bJvWLzA4}?%eLOiTdBT*07M7xLeeKWf(By=Wk=DlCu
+zpWplDz3G3o?>vJLqH+=>1ab@H3Xjl-7@<5|V7hOrKkU*PJfA&?`L5p6{jB$1@g0r-
+zvXJ+KLwGOv#tZ(a5Kn8-+SFD-9)lYE352rgopAQeY<OR0v^lhi81gwvaeI*j>m!%h
+zr^s{qWwuHGYY<gLd5(x<uNabg-e|TYwc8NKx{PYBn!Aakf{)~sjaa*tQ`q1}%+Web
+zrpecgdVbOS0o#hzA}%4Sjz(oGCKoV@N`O!~j8Z%R7?rJ<sQ(-jOoa9n)F+S!>1>#{
+z1hh6@HeRzTt@^C(bg7HSk93h6^!hkWo`pV|^_f7GZ?7ME@zGwMhhEMZA44yl(91Ii
+zy<nXmp0z^5t%V+bcjIdMzqV=-3tjNTq8b|h3M^_%U`q!!MFM~X01<SLGw*Vq0L~uc
+zcP+}JrhiIc^zC$R^izJ))%HhsE^Z9XF_lck3)fLsx}B^HJ8xV_x9V4Y*ZAy6zPyUd
+z2XAxT0_v+LGyW=M2qGZ@CT;Ss*1z)3z-_#SMO}B1zX93s5Q5lU>pEJIo&JmIdj#Ph
+zti1mYGKE@ll`VbqIb02Q{>7g-tal6b_6@v?F`?Qh$ev=sT<pua0Zj-I;7$~KQV8o4
+z0!zlBBJ)UxJwJ30CTJGTD=BV1lHzd!D{LgFqYHlU^AW7n8C^CTdDOhd&%cg(7}9E|
+z>{`UTey<5wX^C{eS)}YbG!1X2d0tsU0{UY6zO^w`s`SpWm7G|`p-Q6hp6$f=gGwV%
+zDQRc4QkGAS$>NN$kx~|COf(jNZz+ojSv*epDar~qXn@Woqu;l7Evo0GDx7aH1+1sI
+zTlNzAj9cbXTqRy+Z?Xd{?`~X9&S?8GcVt$*No^;MFsWzVjms%fIM+;U(`JL2n4`XA
+zM0rdq;TwtCIg>s+-Dh#ve$&NdPPq%aMsF_Rr~!@2-I)IXr>F#|bO@!G2$%?%sJCgw
+zUE^SGcfxn<_g4p4X?5B5_UtI{;)Xp*nt=DydNwixQ~IX@I|kf&xicA(&l*v#$oq`T
+z__X^h?$;lBR*57%)@*{816l}V#6_qrfi1Z<wM4K)t;lmHjQTvDCz2k|`Xv1uP?ovD
+zS-jAYfzBpy3t4E)#5dxO+JhZ!A!HS-Ua+iCCQfZfrCJm=$Wh}EA!>~#a|-pHA|EB&
+zw0e_OudIHX%*N-?kDT|Pq<)p)Cz(w1e{ga<{H0J|xqEK$q<~npO#236AGonY@crAg
+ze@tn0GFduHk0q8Ta1c21au4Q*DL-EB1<i7`D3)|9#LIE~1XK&UtXjxAWUg~F<HZsu
+z>h&;A=>n(xF`T|nGV#D$9Y#PsV+7uAH_FQESb8t9{@@zN=w;>W8mf3%aHe;sPnxr6
+z2{Ge=OLfNPB<sfsXS!Ob(gT+&jG`s!yVHJieS)c=5k8Y)5L>+{pgjDy5w2eRA5gZD
+ASpWb4
+
+literal 0
+HcmV?d00001
+
+-- 
+1.8.1.2
+
