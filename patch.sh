@@ -336,10 +336,10 @@ dts () {
 	${git} "${DIR}/patches/dts/0003-ARM-dts-imx6qdl-wandboard-Add-support-for-i2c1.patch"
 	${git} "${DIR}/patches/dts/0004-ARM-dts-imx6qdl-wandboard-Add-support-for-i2c3.patch"
 	${git} "${DIR}/patches/dts/0005-ARM-dts-imx6qdl-wandboard-add-bluetooth-control-line.patch"
-	${git} "${DIR}/patches/dts/0006-ARM-dts-wandboard-add-binding-for-wand-rfkill-driver.patch"
-	${git} "${DIR}/patches/dts/0007-ARM-dts-imx6qdl-wandboard-Add-usbotg-support.patch"
-	${git} "${DIR}/patches/dts/0008-ARM-dts-imx28-evk-Allow-usb-peripheral-mode-to-work.patch"
-	${git} "${DIR}/patches/dts/0009-ARM-dts-imx53-qsb-Allow-usb-peripheral-mode-to-work.patch"
+#	${git} "${DIR}/patches/dts/0006-ARM-dts-wandboard-add-binding-for-wand-rfkill-driver.patch"
+#	${git} "${DIR}/patches/dts/0007-ARM-dts-imx6qdl-wandboard-Add-usbotg-support.patch"
+#	${git} "${DIR}/patches/dts/0008-ARM-dts-imx28-evk-Allow-usb-peripheral-mode-to-work.patch"
+#	${git} "${DIR}/patches/dts/0009-ARM-dts-imx53-qsb-Allow-usb-peripheral-mode-to-work.patch"
 
 #	${git} "${DIR}/patches/dts/0003-ARM-dts-imx6qdl-wandboard-add-debug-led-for-headless.patch"
 }
