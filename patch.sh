@@ -400,6 +400,6 @@ saucy
 #Fixes the dpll5 instability which usually results in the hard crash of the USB ports on Beagleboard xM.
 #Uncomment to enable
 omap_sprz319_erratum
-omap_sgx
+#omap_sgx
 
 echo "patch.sh ran successful"
