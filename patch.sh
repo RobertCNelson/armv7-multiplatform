@@ -351,6 +351,12 @@ imx_video () {
 	${git} "${DIR}/patches/imx_video/0002-imx-enable-hdmi-video-for-imx6q-sabrelite-imx6q-sabr.patch"
 }
 
+imx_audio () {
+	echo "dir: imx_audio"
+	${git} "${DIR}/patches/imx_audio/0001-ASoC-fsl-Add-S-PDIF-machine-driver.patch"
+	${git} "${DIR}/patches/imx_audio/0002-ARM-imx6qdl-wandboard-Add-spdif-support.patch"
+}
+
 omap3_beagle_xm_rework () {
 	echo "dir: omap3_beagle_xm_rework"
 	#Still needs: CONFIG_NOP_USB_XCEIV=m but ehci works
@@ -394,6 +400,7 @@ omap_board
 
 dts
 imx_video
+imx_audio
 omap3_beagle_xm_rework
 saucy
 
