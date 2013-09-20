@@ -382,6 +382,11 @@ omap_sprz319_erratum () {
 	${git} "${DIR}/patches/omap_sprz319_erratum_v2.1/0001-hack-omap-clockk-dpll5-apply-sprz319e-2.1-erratum-co.patch"
 }
 
+fixes () {
+	echo "dir: fixes"
+	${git} "${DIR}/patches/fixes/0001-beagle-twl_gpio-make-sure-bit-2-is-pulled-high-for-d.patch"
+}
+
 omap_sgx () {
 	echo "dir omap_sgx"
 	${git} "${DIR}/patches/omap_sgx/0001-arm-Export-cache-flush-management-symbols-when-MULTI.patch"
@@ -407,6 +412,7 @@ saucy
 #Fixes the dpll5 instability which usually results in the hard crash of the USB ports on Beagleboard xM.
 #Uncomment to enable
 omap_sprz319_erratum
+fixes
 #omap_sgx
 
 echo "patch.sh ran successful"

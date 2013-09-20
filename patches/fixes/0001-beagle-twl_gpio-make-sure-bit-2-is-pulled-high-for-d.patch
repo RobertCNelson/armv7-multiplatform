@@ -1,0 +1,85 @@
+From e40c0cbd8b249dcae378b71264e422ca08b26c3a Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Fri, 20 Sep 2013 11:54:14 -0500
+Subject: [PATCH] beagle: twl_gpio make sure bit 2 is pulled high for
+ dvi_enable
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/boot/dts/omap3-beagle-xm-ab.dts | 8 ++++----
+ arch/arm/boot/dts/omap3-beagle-xm-c.dts  | 8 ++++----
+ arch/arm/boot/dts/omap3-beagle-xm.dts    | 8 ++++----
+ 3 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/arch/arm/boot/dts/omap3-beagle-xm-ab.dts b/arch/arm/boot/dts/omap3-beagle-xm-ab.dts
+index b4d182f..f8d52f0 100644
+--- a/arch/arm/boot/dts/omap3-beagle-xm-ab.dts
++++ b/arch/arm/boot/dts/omap3-beagle-xm-ab.dts
+@@ -207,14 +207,14 @@
+ 
+ &twl_gpio {
+ 	ti,use-leds;
+-	/* pullups: BIT(1) */
+-	ti,pullups = <0x000002>;
++	/* pullups: BIT(1), BIT(2)  */
++	ti,pullups = <0x000006>;
+ 	/*
+ 	 * pulldowns:
+-	 * BIT(2), BIT(6), BIT(7), BIT(8), BIT(13)
++	 * BIT(6), BIT(7), BIT(8), BIT(13)
+ 	 * BIT(15), BIT(16), BIT(17)
+ 	 */
+-	ti,pulldowns = <0x03a1c4>;
++	ti,pulldowns = <0x03a1c0>;
+ };
+ 
+ &usb_otg_hs {
+diff --git a/arch/arm/boot/dts/omap3-beagle-xm-c.dts b/arch/arm/boot/dts/omap3-beagle-xm-c.dts
+index 5f8ab16..d2721c0 100644
+--- a/arch/arm/boot/dts/omap3-beagle-xm-c.dts
++++ b/arch/arm/boot/dts/omap3-beagle-xm-c.dts
+@@ -206,14 +206,14 @@
+ 
+ &twl_gpio {
+ 	ti,use-leds;
+-	/* pullups: BIT(1) */
+-	ti,pullups = <0x000002>;
++	/* pullups: BIT(1), BIT(2)  */
++	ti,pullups = <0x000006>;
+ 	/*
+ 	 * pulldowns:
+-	 * BIT(2), BIT(6), BIT(7), BIT(8), BIT(13)
++	 * BIT(6), BIT(7), BIT(8), BIT(13)
+ 	 * BIT(15), BIT(16), BIT(17)
+ 	 */
+-	ti,pulldowns = <0x03a1c4>;
++	ti,pulldowns = <0x03a1c0>;
+ };
+ 
+ &usb_otg_hs {
+diff --git a/arch/arm/boot/dts/omap3-beagle-xm.dts b/arch/arm/boot/dts/omap3-beagle-xm.dts
+index 5f8ab16..d2721c0 100644
+--- a/arch/arm/boot/dts/omap3-beagle-xm.dts
++++ b/arch/arm/boot/dts/omap3-beagle-xm.dts
+@@ -206,14 +206,14 @@
+ 
+ &twl_gpio {
+ 	ti,use-leds;
+-	/* pullups: BIT(1) */
+-	ti,pullups = <0x000002>;
++	/* pullups: BIT(1), BIT(2)  */
++	ti,pullups = <0x000006>;
+ 	/*
+ 	 * pulldowns:
+-	 * BIT(2), BIT(6), BIT(7), BIT(8), BIT(13)
++	 * BIT(6), BIT(7), BIT(8), BIT(13)
+ 	 * BIT(15), BIT(16), BIT(17)
+ 	 */
+-	ti,pulldowns = <0x03a1c4>;
++	ti,pulldowns = <0x03a1c0>;
+ };
+ 
+ &usb_otg_hs {
+-- 
+1.8.4.rc3
+
