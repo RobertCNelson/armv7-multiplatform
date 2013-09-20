@@ -1,0 +1,65 @@
+From c25ade330a023da5ffb699fe93294c5411a97e7c Mon Sep 17 00:00:00 2001
+From: Philipp Zabel <p.zabel at pengutronix.de>
+Date: Fri, 20 Sep 2013 15:50:13 -0500
+Subject: [PATCH 2/2] ARM i.MX53: dts: Add TVE to i.MX53-QSB device tree
+
+rebased on v3.11.1
+
+Signed-off-by: Philipp Zabel <p.zabel at pengutronix.de>
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/boot/dts/imx53-qsb.dts | 24 ++++++++++++++++++++++--
+ 1 file changed, 22 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx53-qsb.dts b/arch/arm/boot/dts/imx53-qsb.dts
+index e97ddae..70ba2b5 100644
+--- a/arch/arm/boot/dts/imx53-qsb.dts
++++ b/arch/arm/boot/dts/imx53-qsb.dts
+@@ -164,6 +164,14 @@
+ 				MX53_PAD_PATA_DA_1__GPIO7_7 0x80000000
+ 			>;
+ 		};
++
++		pinctrl_vga_sync_1: vgasync-grp1 {
++			fsl,pins = <
++				/* VGA_HSYNC, VSYNC with max drive strength */
++				MX53_PAD_EIM_OE__IPU_DI1_PIN7 0x80000000
++				MX53_PAD_EIM_RW__IPU_DI1_PIN8 0x80000000
++			>;
++		};
+ 	};
+ 
+ };
+@@ -273,8 +281,8 @@
+ 			};
+ 
+ 			ldo8_reg: ldo8 {
+-				regulator-min-microvolt = <1200000>;
+-				regulator-max-microvolt = <3600000>;
++				regulator-min-microvolt = <2750000>;
++				regulator-max-microvolt = <2750000>;
+ 				regulator-always-on;
+ 			};
+ 
+@@ -307,6 +315,18 @@
+ 	status = "okay";
+ };
+ 
++&tve {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_vga_sync_1>;
++	ddc = <&i2c2>;
++	fsl,tve-mode = "vga";
++	status = "okay";
++	dac-supply = <&ldo7_reg>;
++
++	fsl,hsync-pin = <7>; /* IPU DI1 PIN7 via EIM_OE */
++	fsl,vsync-pin = <8>; /* IPU DI1 PIN8 via EIM_RW */
++};
++
+ &vpu {
+ 	status = "okay";
+ };
+-- 
+1.8.4.rc3
+
