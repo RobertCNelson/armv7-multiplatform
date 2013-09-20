@@ -1,36 +1,35 @@
-From c25ade330a023da5ffb699fe93294c5411a97e7c Mon Sep 17 00:00:00 2001
-From: Philipp Zabel <p.zabel at pengutronix.de>
-Date: Fri, 20 Sep 2013 15:50:13 -0500
-Subject: [PATCH 2/2] ARM i.MX53: dts: Add TVE to i.MX53-QSB device tree
+From 4926e69ad5b49280286fc526d7575c532f04562c Mon Sep 17 00:00:00 2001
+From: Philipp Zabel <p.zabel@pengutronix.de>
+Date: Wed, 11 Sep 2013 11:51:07 +0200
+Subject: [PATCH 2/2] ARM: dts: imx53-qsb: add TVE entry
 
-rebased on v3.11.1
-
-Signed-off-by: Philipp Zabel <p.zabel at pengutronix.de>
-Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+Signed-off-by: Philipp Zabel <p.zabel@pengutronix.de>
+Signed-off-by: Lucas Stach <l.stach@pengutronix.de>
 ---
- arch/arm/boot/dts/imx53-qsb.dts | 24 ++++++++++++++++++++++--
- 1 file changed, 22 insertions(+), 2 deletions(-)
+ arch/arm/boot/dts/imx53-qsb.dts | 25 +++++++++++++++++++++++--
+ 1 file changed, 23 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm/boot/dts/imx53-qsb.dts b/arch/arm/boot/dts/imx53-qsb.dts
-index e97ddae..70ba2b5 100644
+index e97ddae..156e4cf 100644
 --- a/arch/arm/boot/dts/imx53-qsb.dts
 +++ b/arch/arm/boot/dts/imx53-qsb.dts
-@@ -164,6 +164,14 @@
- 				MX53_PAD_PATA_DA_1__GPIO7_7 0x80000000
- 			>;
+@@ -166,6 +166,15 @@
  		};
-+
+ 	};
+ 
++	tve {
 +		pinctrl_vga_sync_1: vgasync-grp1 {
 +			fsl,pins = <
 +				/* VGA_HSYNC, VSYNC with max drive strength */
-+				MX53_PAD_EIM_OE__IPU_DI1_PIN7 0x80000000
-+				MX53_PAD_EIM_RW__IPU_DI1_PIN8 0x80000000
++				MX53_PAD_EIM_OE__IPU_DI1_PIN7     0xe6
++				MX53_PAD_EIM_RW__IPU_DI1_PIN8     0xe6
 +			>;
 +		};
- 	};
- 
++	};
  };
-@@ -273,8 +281,8 @@
+ 
+ &uart1 {
+@@ -273,8 +282,8 @@
  			};
  
  			ldo8_reg: ldo8 {
@@ -41,7 +40,7 @@ index e97ddae..70ba2b5 100644
  				regulator-always-on;
  			};
  
-@@ -307,6 +315,18 @@
+@@ -311,6 +320,18 @@
  	status = "okay";
  };
  
@@ -57,9 +56,9 @@ index e97ddae..70ba2b5 100644
 +	fsl,vsync-pin = <8>; /* IPU DI1 PIN8 via EIM_RW */
 +};
 +
- &vpu {
- 	status = "okay";
- };
+ &usbh1 {
+ 	vbus-supply = <&reg_usb_vbus>;
+ 	phy_type = "utmi";
 -- 
 1.8.4.rc3
 

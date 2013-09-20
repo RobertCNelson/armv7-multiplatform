@@ -385,7 +385,7 @@ omap_sprz319_erratum () {
 fixes () {
 	echo "dir: fixes"
 	${git} "${DIR}/patches/fixes/0001-beagle-twl_gpio-make-sure-bit-2-is-pulled-high-for-d.patch"
-	${git} "${DIR}/patches/fixes/0002-ARM-i.MX53-dts-Add-TVE-to-i.MX53-QSB-device-tree.patch"
+	${git} "${DIR}/patches/fixes/0002-ARM-dts-imx53-qsb-add-TVE-entry.patch"
 }
 
 omap_sgx () {
