@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 3.12.0-rc1 Kernel Configuration
+# Linux/arm 3.12.0-rc2 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_SYS_SUPPORTS_APM_EMULATION=y
@@ -390,18 +390,6 @@ CONFIG_WAND_RFKILL=m
 # CONFIG_ARCH_SUNXI is not set
 # CONFIG_ARCH_SIRF is not set
 # CONFIG_ARCH_TEGRA is not set
-
-#
-# ST-Ericsson AB U300/U335 Platform
-#
-
-#
-# ST-Ericsson Mobile Platform Products
-#
-
-#
-# ST-Ericsson U300/U335 Feature Selections
-#
 # CONFIG_ARCH_U8500 is not set
 # CONFIG_ARCH_VEXPRESS is not set
 # CONFIG_ARCH_VIRT is not set
@@ -2165,6 +2153,7 @@ CONFIG_USB_STORAGE=y
 #
 # CONFIG_USB_MDC800 is not set
 # CONFIG_USB_MICROTEK is not set
+# CONFIG_USB_DWC3 is not set
 CONFIG_USB_CHIPIDEA=y
 CONFIG_USB_CHIPIDEA_HOST=y
 # CONFIG_USB_CHIPIDEA_DEBUG is not set
