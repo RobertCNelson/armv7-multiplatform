@@ -255,11 +255,6 @@ omap_sprz319_erratum () {
 
 fixes () {
 	echo "dir: fixes"
-#v3.12-rc2
-#	${git} "${DIR}/patches/fixes/0001-cpufreq-cpufreq-cpu0-assign-cpu_dev-correctly-to-cpu.patch"
-#	${git} "${DIR}/patches/fixes/0002-cpufreq-imx6q-cpufreq-assign-cpu_dev-correctly-to-cp.patch"
-#	${git} "${DIR}/patches/fixes/0003-ARM-i.MX-change-dev_id-to-cpu0-while-registering-cpu.patch"
-#	${git} "${DIR}/patches/fixes/0004-ARM-shmobile-change-dev_id-to-cpu0-while-registering.patch"
 }
 
 saucy () {
@@ -283,7 +278,7 @@ dts
 imx_video
 omap3_beagle_xm_rework
 omap_sprz319_erratum
-fixes
+#fixes
 
 saucy
 
