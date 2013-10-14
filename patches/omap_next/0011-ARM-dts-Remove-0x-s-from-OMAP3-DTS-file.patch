@@ -1,7 +1,7 @@
-From e401ef73b00896b4cde1f547826932db0cf17abd Mon Sep 17 00:00:00 2001
+From 110a01a14f0f05bad80676f2c3aec73dd64a8443 Mon Sep 17 00:00:00 2001
 From: Lee Jones <lee.jones@linaro.org>
 Date: Mon, 22 Jul 2013 11:52:34 +0100
-Subject: [PATCH 11/40] ARM: dts: Remove '0x's from OMAP3 DTS file
+Subject: [PATCH 11/58] ARM: dts: Remove '0x's from OMAP3 DTS file
 
 Cc: Tony Lindgren <tony@atomide.com>
 Signed-off-by: Lee Jones <lee.jones@linaro.org>
@@ -11,11 +11,11 @@ Signed-off-by: Benoit Cousson <bcousson@baylibre.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/arm/boot/dts/omap3.dtsi b/arch/arm/boot/dts/omap3.dtsi
-index 7d95cda..16420ae 100644
+index b41bd57..b87d6d3 100644
 --- a/arch/arm/boot/dts/omap3.dtsi
 +++ b/arch/arm/boot/dts/omap3.dtsi
 @@ -111,7 +111,7 @@
- 			pinctrl-single,function-mask = <0x7f1f>;
+ 			pinctrl-single,function-mask = <0xff1f>;
  		};
  
 -		omap3_pmx_wkup: pinmux@0x48002a00 {

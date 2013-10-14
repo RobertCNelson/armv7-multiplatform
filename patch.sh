@@ -111,7 +111,19 @@ imx_next () {
 	${git} "${DIR}/patches/imx_next/0044-ARM-dts-imx6qdl-wandboard-Provide-phy-reset-gpios.patch"
 	${git} "${DIR}/patches/imx_next/0045-ARM-imx_v6_v7_defconfig-Add-SPDIF-support.patch"
 	${git} "${DIR}/patches/imx_next/0046-ARM-imx_v6_v7_defconfig-Add-CHIPIDEA_UDC-support.patch"
-
+	${git} "${DIR}/patches/imx_next/0047-ARM-dts-mxs-Add-MSR-M28CU3-board.patch"
+	${git} "${DIR}/patches/imx_next/0048-ARM-imx-Include-linux-err.h.patch"
+	${git} "${DIR}/patches/imx_next/0049-ARM-mxs_defconfig-Add-CHIPIDEA_UDC-support.patch"
+	${git} "${DIR}/patches/imx_next/0050-ARM-mach-imx-clk-imx51-imx53-Retrieve-base-address-a.patch"
+	${git} "${DIR}/patches/imx_next/0051-ARM-mach-imx-mm-imx5-Retrieve-tzic-base-address-from.patch"
+	${git} "${DIR}/patches/imx_next/0052-ARM-mach-imx-mm-imx5-Retrieve-iomuxc-base-address-fr.patch"
+	${git} "${DIR}/patches/imx_next/0053-ARM-dts-imx53-qsb-SDHC3-is-connected-in-8-bit-mode.patch"
+	${git} "${DIR}/patches/imx_next/0054-ARM-dts-imx53-qsb-SDHC1-does-not-have-cd-gpios.patch"
+	${git} "${DIR}/patches/imx_next/0055-ARM-dts-imx53-qsb-Do-not-use-GPIO1_8-as-wakeup-sourc.patch"
+	${git} "${DIR}/patches/imx_next/0056-ARM-imx51-apf51dev-Add-parallel-display-support.patch"
+	${git} "${DIR}/patches/imx_next/0057-ARM-imx27-apf27dev-Add-framebuffer-support.patch"
+	${git} "${DIR}/patches/imx_next/0058-ARM-dts-imx51-babbage-Make-DVI-and-WVGA-panel-functi.patch"
+	${git} "${DIR}/patches/imx_next/0059-ARM-imx-replace-imx6q_restart-with-mxc_restart.patch"
 }
 
 omap_next () {
@@ -159,6 +171,24 @@ omap_next () {
 	${git} "${DIR}/patches/omap_next/0038-ARM-dts-omap5-uevm-Use-reset-gpios-for-hsusb2-3_rese.patch"
 	${git} "${DIR}/patches/omap_next/0039-ARM-dts-omap3-beagle-xm-Add-USB-Host-support.patch"
 	${git} "${DIR}/patches/omap_next/0040-ARM-dts-omap3-beagle-Add-USB-OTG-PHY-details.patch"
+	${git} "${DIR}/patches/omap_next/0041-ARM-dts-am335x-boneblack-move-fixed-regulator-to-boa.patch"
+	${git} "${DIR}/patches/omap_next/0042-ARM-dts-AM33XX-Add-support-for-IGEP-COM-AQUILA.patch"
+	${git} "${DIR}/patches/omap_next/0043-ARM-dts-AM33XX-Add-support-for-IGEP-AQUILA-EXPANSION.patch"
+	${git} "${DIR}/patches/omap_next/0044-ARM-dts-am335x-bone-common-correct-mux-mode-for-cmd-.patch"
+	${git} "${DIR}/patches/omap_next/0045-ARM-dts-am335x-evm-sdk-switch-mmc1-to-4-bit-mode.patch"
+	${git} "${DIR}/patches/omap_next/0046-ARM-dts-OMAP4-Add-AES-node.patch"
+	${git} "${DIR}/patches/omap_next/0047-ARM-dts-OMAP4-Add-DES3DES-node.patch"
+	${git} "${DIR}/patches/omap_next/0048-ARM-dts-AM33XX-Add-SHAM-data-and-documentation.patch"
+	${git} "${DIR}/patches/omap_next/0049-ARM-dts-AM33XX-Add-AES-data-and-documentation.patch"
+	${git} "${DIR}/patches/omap_next/0050-ARM-dts-AM33XX-Fix-AES-interrupt-number.patch"
+	${git} "${DIR}/patches/omap_next/0051-ARM-dts-AM437X-Add-AES-node.patch"
+	${git} "${DIR}/patches/omap_next/0052-ARM-dts-AM437X-Add-DES-node.patch"
+	${git} "${DIR}/patches/omap_next/0053-ARM-dts-AM33XX-Add-LCDC-info-into-am335x-evm.patch"
+	${git} "${DIR}/patches/omap_next/0054-ARM-dts-AM33XX-beagle-black-add-pinmux-and-hdmi-node.patch"
+	${git} "${DIR}/patches/omap_next/0055-ARM-dts-omap3-igep-Add-USB-OTG-support.patch"
+	${git} "${DIR}/patches/omap_next/0056-ARM-dts-omap3-igep0020-Add-HS-USB-Host-support.patch"
+	${git} "${DIR}/patches/omap_next/0057-ARM-dts-omap3-igep0020-use-standard-constant-for-IRQ.patch"
+	${git} "${DIR}/patches/omap_next/0058-ARM-dts-omap5-uevm-mark-TWL6037-as-system-power-cont.patch"
 }
 
 omap_dt_dss () {
@@ -250,9 +280,9 @@ imx_video () {
 omap3_beagle_xm_rework () {
 	echo "dir: omap3_beagle_xm_rework"
 	#Still needs: CONFIG_NOP_USB_XCEIV=m but ehci works
-	#cp omap3-beagle-xm.dts omap3-beagle-xm-c.dts
-	#cp omap3-beagle-xm.dts omap3-beagle-xm-ab.dts
-	#edit Makefile add ^
+	#cp arch/arm/boot/dts/omap3-beagle-xm.dts arch/arm/boot/dts/omap3-beagle-xm-c.dts
+	#cp arch/arm/boot/dts/omap3-beagle-xm.dts arch/arm/boot/dts/omap3-beagle-xm-ab.dts
+	#nano arch/arm/boot/dts/Makefile add ^
 	${git} "${DIR}/patches/omap3_beagle_xm_rework/0001-ARM-dts-split-omap3-beagle-xm-to-ab-and-c-variant.patch"
 	#xm-ab has active high usb host power on...
 	${git} "${DIR}/patches/omap3_beagle_xm_rework/0002-ARM-dts-omap3-beagle-xm-ab-usb-host-is-active-high-t.patch"
