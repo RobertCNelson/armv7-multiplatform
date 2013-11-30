@@ -53,7 +53,7 @@ cleanup () {
 revert () {
 	echo "dir: revert"
 	#needed for rc2...
-	#${git} "${DIR}/patches/revert/0001-Revert-gpio-twl4030-Fix-regression-for-twl-gpio-outp.patch"
+	${git} "${DIR}/patches/revert/0001-Revert-gpio-twl4030-Fix-regression-for-twl-gpio-outp.patch"
 }
 
 arm () {

@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 3.13.0-rc1 Kernel Configuration
+# Linux/arm 3.13.0-rc2 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_MIGHT_HAVE_PCI=y
@@ -1332,6 +1332,7 @@ CONFIG_TOUCHSCREEN_TSC2007=y
 # CONFIG_TOUCHSCREEN_W90X900 is not set
 # CONFIG_TOUCHSCREEN_ST1232 is not set
 CONFIG_TOUCHSCREEN_STMPE=y
+# CONFIG_TOUCHSCREEN_SUR40 is not set
 # CONFIG_TOUCHSCREEN_TPS6507X is not set
 # CONFIG_TOUCHSCREEN_ZFORCE is not set
 CONFIG_INPUT_MISC=y

@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 3.13.0-rc1 Kernel Configuration
+# Linux/arm 3.13.0-rc2 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_MIGHT_HAVE_PCI=y
@@ -1299,6 +1299,7 @@ CONFIG_HW_RANDOM=y
 # CONFIG_HW_RANDOM_TIMERIOMEM is not set
 # CONFIG_HW_RANDOM_ATMEL is not set
 CONFIG_HW_RANDOM_OMAP=y
+CONFIG_HW_RANDOM_OMAP3_ROM=y
 # CONFIG_HW_RANDOM_EXYNOS is not set
 # CONFIG_R3964 is not set
 # CONFIG_RAW_DRIVER is not set
