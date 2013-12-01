@@ -1,7 +1,7 @@
-From 9213c2d51b03b93132323898acc62eba68832a37 Mon Sep 17 00:00:00 2001
-From: Robert Nelson <robertcnelson@gmail.com>
-Date: Fri, 29 Nov 2013 17:36:36 -0600
-Subject: [PATCH] imx-drm: Add mx6 hdmi transmitter support
+From 13039cb506f5e773d0f8eb467ec5dfd794506be2 Mon Sep 17 00:00:00 2001
+From: Fabio Estevam <fabio.estevam@freescale.com>
+Date: Wed, 30 Oct 2013 22:51:44 -0200
+Subject: [PATCH 1/5] imx-drm: Add mx6 hdmi transmitter support
 
 Add mx6 hdmi transmitter support.
 
