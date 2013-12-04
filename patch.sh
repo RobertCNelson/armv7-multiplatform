@@ -50,6 +50,12 @@ cleanup () {
 	exit
 }
 
+revert () {
+	echo "dir: revert"
+	#FIXME: a better fix is the pull the stuff from v3.13-rc2/linux-dev, but for now this is back to v3.12.2
+	${git} "${DIR}/patches/revert/0001-Revert-gpio-twl4030-Fix-regression-for-twl-gpio-outp.patch"
+}
+
 arm () {
 	echo "dir: arm"
 	${git} "${DIR}/patches/arm/0001-deb-pkg-Simplify-architecture-matching-for-cross-bui.patch"
@@ -316,6 +322,7 @@ saucy () {
 	${git} "${DIR}/patches/saucy/0003-saucy-disable-stack-protector.patch"
 }
 
+revert
 arm
 drivers
 imx_next
