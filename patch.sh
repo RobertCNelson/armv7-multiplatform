@@ -220,7 +220,7 @@ omap_dt_dss () {
 	${git} "${DIR}/patches/omap_dt_dss/0024-OMAPDSS-hdmi-connector-Add-DT-support.patch"
 	${git} "${DIR}/patches/omap_dt_dss/0025-OMAPDSS-panel-dpi-Add-DT-support.patch"
 	${git} "${DIR}/patches/omap_dt_dss/0026-OMAPDSS-connector-analog-tv-Add-DT-support.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0027-ARM-dts-omap3-beagle-Fix-USB-host-on-beagle-boards-f.patch"
+#	${git} "${DIR}/patches/omap_dt_dss/0027-ARM-dts-omap3-beagle-Fix-USB-host-on-beagle-boards-f.patch"
 	${git} "${DIR}/patches/omap_dt_dss/0028-omap4-sdp.dts-add-power-supply-for-backlight.patch"
 }
 
@@ -256,14 +256,6 @@ omap_clock () {
 
 	#beagleboard-xm: add abb bindings and OPP1G operating point for 1 GHz operation
 	${git} "${DIR}/patches/omap_clock/0004-Now-this-one-is-mine-lol.-Reading-through-the-ti-abb.patch"
-}
-
-omap_board () {
-	echo "dir: omap_board"
-	#Note: the plan is to move to device tree, so these will be dropped at some point..
-	#omap3430: lockup on reset fix...
-	${git} "${DIR}/patches/omap_board/0001-omap2-twl-common-Add-default-power-configuration.patch"
-	${git} "${DIR}/patches/omap_board/0002-ARM-OMAP-Beagle-use-TWL4030-generic-reset-script.patch"
 }
 
 dts () {
@@ -304,6 +296,7 @@ omap_sprz319_erratum () {
 fixes () {
 	echo "dir: fixes"
 	${git} "${DIR}/patches/fixes/0001-imx6q-work-around-fec-tx-queue-timeouts-when-SATA-SD.patch"
+	${git} "${DIR}/patches/fixes/0002-crypto-omap-aes-add-error-check-for-pm_runtime_get_s.patch"
 }
 
 saucy () {
@@ -325,7 +318,6 @@ imx
 omap_usb
 omap_video
 omap_clock
-omap_board
 
 dts
 imx_video_staging
