@@ -83,6 +83,8 @@ config="CONFIG_ARCH_BERLIN"
 check_if_set_then_disable
 config="CONFIG_ARCH_BCM"
 check_if_set_then_disable
+config="CONFIG_ARCH_HI3xxx"
+check_if_set_then_disable
 config="CONFIG_ARCH_KEYSTONE"
 check_if_set_then_disable
 config="CONFIG_ARCH_HIGHBANK"
@@ -129,6 +131,8 @@ check_if_set_then_set
 config="CONFIG_SMP_ON_UP"
 check_if_set_then_set
 config="CONFIG_SWP_EMULATE"
+check_if_set_then_set
+config="CONFIG_THUMB2_KERNEL"
 check_if_set_then_set
 
 if_config="CONFIG_ARCH_MULTI_V7"
@@ -202,7 +206,4 @@ check_config_builtin
 config="CONFIG_ZRAM"
 check_config_module
 
-#ancient...
-config="CONFIG_OABI_COMPAT"
-check_config_disabled
 #
