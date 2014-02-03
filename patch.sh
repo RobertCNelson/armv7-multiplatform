@@ -54,11 +54,6 @@ revert () {
 	echo "dir: revert"
 }
 
-arm () {
-	echo "dir: arm"
-	${git} "${DIR}/patches/arm/0001-deb-pkg-Simplify-architecture-matching-for-cross-bui.patch"
-}
-
 drivers () {
 	echo "dir: drivers"
 	${git} "${DIR}/patches/drivers/0001-ARM-i.MX6-Wandboard-add-wifi-bt-rfkill-driver.patch"
@@ -69,40 +64,40 @@ imx_next () {
 	#From: https://git.linaro.org/people/shawn.guo/linux-2.6.git
 	#git pull --no-edit git://git.linaro.org/people/shawn.guo/linux-2.6.git for-next
 
-	${git} "${DIR}/patches/imx_next/0001-sh-pfc-r8a7791-Fix-DU-pin-groups-organisation.patch"
-	${git} "${DIR}/patches/imx_next/0002-pinctrl-nomadik-always-display-IRQ-in-debugfs.patch"
-	${git} "${DIR}/patches/imx_next/0003-pinctrl-imx-drop-redundant-OF-dependency.patch"
-	${git} "${DIR}/patches/imx_next/0004-pinctrl-imx1-core-populate-subdevices.patch"
-	${git} "${DIR}/patches/imx_next/0005-ARM-imx-add-PCI-fixup-for-PEX860X-on-Gateworks-board.patch"
-	${git} "${DIR}/patches/imx_next/0006-ARM-imx_v4_v5_defconfig-Enable-gpio-regulator-and-gp.patch"
-	${git} "${DIR}/patches/imx_next/0007-ARM-imx-add-debug-uart-support-for-IMX50-SoC.patch"
-	${git} "${DIR}/patches/imx_next/0008-ARM-imx-add-clocking-support-code-for-the-IMX50-SoC.patch"
-	${git} "${DIR}/patches/imx_next/0009-ARM-imx-allow-configuration-of-the-IMX50-SoC.patch"
-	${git} "${DIR}/patches/imx_next/0010-ARM-imx_v6_v7_defconfig-Enable-tsc2007-support.patch"
-	${git} "${DIR}/patches/imx_next/0011-ARM-imx-remove-mxc_iomux_v3_init-call-from-imx53_ini.patch"
-	${git} "${DIR}/patches/imx_next/0012-ARM-imx-drop-support-for-irq-priorisation.patch"
-	${git} "${DIR}/patches/imx_next/0013-ARM-imx-add-support-code-for-IMX50-based-machines.patch"
-	${git} "${DIR}/patches/imx_next/0014-ARM-i.MX53-remove-duplicated-include-from-clk-imx51-.patch"
-	${git} "${DIR}/patches/imx_next/0015-ARM-i.MX25-build-in-pinctrl-support.patch"
-	${git} "${DIR}/patches/imx_next/0016-ARM-i.MX5x-Add-SAHARA-clock-for-i.MX5x-CPUs.patch"
-	${git} "${DIR}/patches/imx_next/0017-ARM-imx-Add-DMAMUX-clock-for-Vybrid-vf610-SoC.patch"
-	${git} "${DIR}/patches/imx_next/0018-ARM-imx27-enable-pinctrl.patch"
-	${git} "${DIR}/patches/imx_next/0019-ARM-imx_v6_v7_defconfig-Select-CONFIG_HIGHMEM.patch"
-	${git} "${DIR}/patches/imx_next/0020-clk-imx5-introduce-DT-includes-for-clock-provider.patch"
-	${git} "${DIR}/patches/imx_next/0021-ARM-imx-clk-correct-arm-clock-usecount.patch"
-	${git} "${DIR}/patches/imx_next/0022-ARM-imx-select-PINCTRL-at-sub-architecure-level.patch"
-	${git} "${DIR}/patches/imx_next/0023-ARM-imx-rename-IMX6SL_CLK_CLK_END-to-IMX6SL_CLK_END.patch"
-	${git} "${DIR}/patches/imx_next/0024-ARM-imx_v6_v7_defconfig-Enable-STMPE-touchscreen.patch"
-	${git} "${DIR}/patches/imx_next/0025-ARM-imx-imx53-Add-SATA-PHY-clock.patch"
-	${git} "${DIR}/patches/imx_next/0026-ARM-i.MX5-fix-shift-value-for-lp_apm_sel-on-i.MX50-a.patch"
-	${git} "${DIR}/patches/imx_next/0027-ARM-imx-pllv1-Fix-PLL-calculation-for-i.MX27.patch"
+#	${git} "${DIR}/patches/imx_next/0001-sh-pfc-r8a7791-Fix-DU-pin-groups-organisation.patch"
+#	${git} "${DIR}/patches/imx_next/0002-pinctrl-nomadik-always-display-IRQ-in-debugfs.patch"
+#	${git} "${DIR}/patches/imx_next/0003-pinctrl-imx-drop-redundant-OF-dependency.patch"
+#	${git} "${DIR}/patches/imx_next/0004-pinctrl-imx1-core-populate-subdevices.patch"
+#	${git} "${DIR}/patches/imx_next/0005-ARM-imx-add-PCI-fixup-for-PEX860X-on-Gateworks-board.patch"
+#	${git} "${DIR}/patches/imx_next/0006-ARM-imx_v4_v5_defconfig-Enable-gpio-regulator-and-gp.patch"
+#	${git} "${DIR}/patches/imx_next/0007-ARM-imx-add-debug-uart-support-for-IMX50-SoC.patch"
+#	${git} "${DIR}/patches/imx_next/0008-ARM-imx-add-clocking-support-code-for-the-IMX50-SoC.patch"
+#	${git} "${DIR}/patches/imx_next/0009-ARM-imx-allow-configuration-of-the-IMX50-SoC.patch"
+#	${git} "${DIR}/patches/imx_next/0010-ARM-imx_v6_v7_defconfig-Enable-tsc2007-support.patch"
+#	${git} "${DIR}/patches/imx_next/0011-ARM-imx-remove-mxc_iomux_v3_init-call-from-imx53_ini.patch"
+#	${git} "${DIR}/patches/imx_next/0012-ARM-imx-drop-support-for-irq-priorisation.patch"
+#	${git} "${DIR}/patches/imx_next/0013-ARM-imx-add-support-code-for-IMX50-based-machines.patch"
+#	${git} "${DIR}/patches/imx_next/0014-ARM-i.MX53-remove-duplicated-include-from-clk-imx51-.patch"
+#	${git} "${DIR}/patches/imx_next/0015-ARM-i.MX25-build-in-pinctrl-support.patch"
+#	${git} "${DIR}/patches/imx_next/0016-ARM-i.MX5x-Add-SAHARA-clock-for-i.MX5x-CPUs.patch"
+#	${git} "${DIR}/patches/imx_next/0017-ARM-imx-Add-DMAMUX-clock-for-Vybrid-vf610-SoC.patch"
+#	${git} "${DIR}/patches/imx_next/0018-ARM-imx27-enable-pinctrl.patch"
+#	${git} "${DIR}/patches/imx_next/0019-ARM-imx_v6_v7_defconfig-Select-CONFIG_HIGHMEM.patch"
+#	${git} "${DIR}/patches/imx_next/0020-clk-imx5-introduce-DT-includes-for-clock-provider.patch"
+#	${git} "${DIR}/patches/imx_next/0021-ARM-imx-clk-correct-arm-clock-usecount.patch"
+#	${git} "${DIR}/patches/imx_next/0022-ARM-imx-select-PINCTRL-at-sub-architecure-level.patch"
+#	${git} "${DIR}/patches/imx_next/0023-ARM-imx-rename-IMX6SL_CLK_CLK_END-to-IMX6SL_CLK_END.patch"
+#	${git} "${DIR}/patches/imx_next/0024-ARM-imx_v6_v7_defconfig-Enable-STMPE-touchscreen.patch"
+#	${git} "${DIR}/patches/imx_next/0025-ARM-imx-imx53-Add-SATA-PHY-clock.patch"
+#	${git} "${DIR}/patches/imx_next/0026-ARM-i.MX5-fix-shift-value-for-lp_apm_sel-on-i.MX50-a.patch"
+#	${git} "${DIR}/patches/imx_next/0027-ARM-imx-pllv1-Fix-PLL-calculation-for-i.MX27.patch"
 	${git} "${DIR}/patches/imx_next/0028-ARM-dts-i.MX53-Add-alternate-pinmux-option-for-i2c_3.patch"
 	${git} "${DIR}/patches/imx_next/0029-ARM-dts-i.MX53-Internal-keyboard-controller.patch"
 	${git} "${DIR}/patches/imx_next/0030-ARM-dts-disable-flexcan-by-default.patch"
 	${git} "${DIR}/patches/imx_next/0031-ARM-dts-added-several-new-imx-pinmux-groups.patch"
 	${git} "${DIR}/patches/imx_next/0032-ARM-dts-add-Gateworks-Ventana-support.patch"
 	${git} "${DIR}/patches/imx_next/0033-ARM-dts-mxs-add-auart2-pinmux-to-imx28.dtsi.patch"
-	${git} "${DIR}/patches/imx_next/0034-of-add-vendor-prefix-for-Eukrea-Electromatique.patch"
+#	${git} "${DIR}/patches/imx_next/0034-of-add-vendor-prefix-for-Eukrea-Electromatique.patch"
 	${git} "${DIR}/patches/imx_next/0035-ARM-dts-i.MX25-Add-ssi-clocks-and-DMA-events.patch"
 	${git} "${DIR}/patches/imx_next/0036-ARM-dts-i.MX25-Add-sdma-script-path.patch"
 	${git} "${DIR}/patches/imx_next/0037-ARM-dts-imx25.dtsi-Add-a-label-for-the-Audio-Multipl.patch"
@@ -126,7 +121,7 @@ imx_next () {
 	${git} "${DIR}/patches/imx_next/0055-ARM-dts-imx-use-generic-node-name-for-fixed-regulato.patch"
 	${git} "${DIR}/patches/imx_next/0056-ARM-dts-imx25-Add-pinctrl-functions-and-groups.patch"
 	${git} "${DIR}/patches/imx_next/0057-ARM-dts-imx25.dtsi-label-the-iomuxc.patch"
-	${git} "${DIR}/patches/imx_next/0058-DT-Add-Data-Modul-vendor-prefix.patch"
+#	${git} "${DIR}/patches/imx_next/0058-DT-Add-Data-Modul-vendor-prefix.patch"
 	${git} "${DIR}/patches/imx_next/0059-ARM-dts-imx6-Add-support-for-imx6q-dmo-edmqmx6.patch"
 	${git} "${DIR}/patches/imx_next/0060-ARM-mxs-add-support-for-I2SE-s-duckbill-series.patch"
 	${git} "${DIR}/patches/imx_next/0061-ARM-dts-i.MX51-Update-CPU-node.patch"
@@ -193,11 +188,11 @@ imx_next () {
 	${git} "${DIR}/patches/imx_next/0122-ARM-dts-imx27-phytec-phycore-som-trivial-Typo-fix.patch"
 	${git} "${DIR}/patches/imx_next/0123-ARM-dts-imx27-phytec-phycore-som-Add-pinctrl-for-CSP.patch"
 	${git} "${DIR}/patches/imx_next/0124-ARM-dts-imx27-phytec-phycore-som-Rename-file-to-.dts.patch"
-	${git} "${DIR}/patches/imx_next/0125-ARM-i.MX5-set-CAN-peripheral-clock-to-24-MHz-parent.patch"
+#	${git} "${DIR}/patches/imx_next/0125-ARM-i.MX5-set-CAN-peripheral-clock-to-24-MHz-parent.patch"
 	${git} "${DIR}/patches/imx_next/0126-ARM-dts-mbimxsd25-Add-sound-support.patch"
 	${git} "${DIR}/patches/imx_next/0127-ARM-dts-mbimxsd51-Add-sound-support.patch"
-	${git} "${DIR}/patches/imx_next/0128-ARM-i.MX5-fix-obvious-typo-in-ldb_di0_gate-clk-defin.patch"
-	${git} "${DIR}/patches/imx_next/0129-ARM-imx-use-__initconst-for-const-init-definition.patch"
+#	${git} "${DIR}/patches/imx_next/0128-ARM-i.MX5-fix-obvious-typo-in-ldb_di0_gate-clk-defin.patch"
+#	${git} "${DIR}/patches/imx_next/0129-ARM-imx-use-__initconst-for-const-init-definition.patch"
 	${git} "${DIR}/patches/imx_next/0130-ARM-dts-vf610-make-pinctrl-nodes-board-specific.patch"
 	${git} "${DIR}/patches/imx_next/0131-ARM-dts-imx6q-sabrelite-Enable-PCI-express.patch"
 	${git} "${DIR}/patches/imx_next/0132-ARM-dts-imx6qdl-add-aliases-for-can-interfaces.patch"
@@ -206,9 +201,9 @@ imx_next () {
 	${git} "${DIR}/patches/imx_next/0135-ARM-dts-imx-sabrelite-add-Dual-Lite-Solo-support.patch"
 	${git} "${DIR}/patches/imx_next/0136-ARM-dts-imx6qdl-sabrelite-Add-uart1-support.patch"
 	${git} "${DIR}/patches/imx_next/0137-ARM-dts-imx6qdl-sabrelite-remove-usdhc4-wp-gpio.patch"
-	${git} "${DIR}/patches/imx_next/0138-ARM-imx6-Derive-spdif-clock-from-pll3_pfd3_454m.patch"
-	${git} "${DIR}/patches/imx_next/0139-ARM-imx6sl-Add-missing-pll4_audio_div-to-the-clock-t.patch"
-	${git} "${DIR}/patches/imx_next/0140-ARM-imx6sl-Add-missing-spba-clock-to-clock-tree.patch"
+#	${git} "${DIR}/patches/imx_next/0138-ARM-imx6-Derive-spdif-clock-from-pll3_pfd3_454m.patch"
+#	${git} "${DIR}/patches/imx_next/0139-ARM-imx6sl-Add-missing-pll4_audio_div-to-the-clock-t.patch"
+#	${git} "${DIR}/patches/imx_next/0140-ARM-imx6sl-Add-missing-spba-clock-to-clock-tree.patch"
 }
 
 omap_next () {
@@ -217,74 +212,86 @@ omap_next () {
 	#git pull --no-edit git://git.kernel.org/pub/scm/linux/kernel/git/bcousson/linux-omap-dt.git for_3.13/dts
 }
 
-omap_dt_dss () {
-	echo "dir: omap_dt_dss"
-	#From: https://git.kernel.org/cgit/linux/kernel/git/tomba/linux.git/log/?h=work/dss-dt
+omap_dt_dss_v3 () {
+	echo "dir: omap_dt_dss_v3"
+	#From: https://git.kernel.org/cgit/linux/kernel/git/tomba/linux.git/log/?h=work/dss-dt-review-3
 
-	${git} "${DIR}/patches/omap_dt_dss/0001-Revert-ARM-OMAP4-hwmod-data-add-DSS-data-back.patch"
-	#${git} "${DIR}/patches/omap_dt_dss/0002-gpio-twl4030-Fix-regression-for-twl-gpio-LED-output.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0003-omap4-sdp.dts-add-power-supply-for-backlight.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0004-OMAPDSS-rename-display-sysfs-name-entry.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0005-OMAPDSS-DSI-fix-fifosize.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0006-ARM-OMAP-remove-DSS-DT-hack.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0007-OMAPDSS-remove-DT-hacks-for-regulators.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0008-Revert-ARM-dts-omap3-igep0020-name-twl4030-VPLL2-reg.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0009-ARM-OMAP2-add-omapdss_init_of.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0010-OMAPDSS-if-dssdev-name-NULL-use-alias.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0011-OMAPDSS-get-dssdev-alias-from-DT-alias.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0012-OMAPFB-clean-up-default-display-search.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0013-OMAPFB-search-for-default-display-with-DT-alias.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0014-OMAPDSS-add-of-helpers.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0015-OMAPDSS-Add-DT-support-to-DSS-DISPC-DPI-HDMI-VENC.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0016-OMAPDSS-Add-DT-support-to-DSI.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0017-ARM-omap3.dtsi-add-omapdss-information.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0018-ARM-omap4.dtsi-add-omapdss-information.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0019-ARM-omap4-panda.dts-add-display-information.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0020-ARM-omap4-sdp.dts-add-display-information.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0021-ARM-omap3-tobi.dts-add-lcd-TEST.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0022-ARM-omap3-beagle.dts-add-display-information.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0023-ARM-omap3-beagle-xm.dts-add-display-information.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0024-ARM-omap3-igep0020.dts-add-display-information.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0025-OMAPDSS-panel-dsi-cm-Add-DT-support.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0026-OMAPDSS-encoder-tfp410-Add-DT-support.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0027-OMAPDSS-connector-dvi-Add-DT-support.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0028-OMAPDSS-encoder-tpd12s015-Add-DT-support.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0029-OMAPDSS-hdmi-connector-Add-DT-support.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0030-OMAPDSS-panel-dpi-Add-DT-support.patch"
-	${git} "${DIR}/patches/omap_dt_dss/0031-OMAPDSS-connector-analog-tv-Add-DT-support.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0001-OMAPDSS-fix-missing-EXPORT_SYMBOL-s.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0002-OMAPDSS-fix-debug-prints.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0003-OMAPDSS-apply-fixes.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0004-OMAPDSS-DISPC-Add-MFLAG-defines.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0005-OMAPDSS-rename-display-sysfs-name-entry.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0006-OMAPDSS-DSI-fix-fifosize.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0007-OMAPDSS-HDMI4-Accept-non-standard-timings.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0008-OMAPDSS-HDMI4-remove-useless-func-calls.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0009-OMAPDSS-DISPC-fix-context-restore.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0010-OMAPDSS-HDMI-fix-hdmi_wait_for_bit_change.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0011-OMAPDSS-HDMI-fix-HDMI_WP_CLK-name.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0012-OMAPDSS-HDMI-add-missing-core-irq.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0013-OMAPDSS-DSI-split-DSI-memory-map-to-smaller-blocks.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0014-OMAPDSS-HDMI-rename-resource-names.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0015-OMAPFB-give-informative-print-when-probe-succeeds.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0016-OMAPDSS-don-t-print-errors-on-EPROBE_DEFER.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0017-OMAPFB-disable-overlays-on-driver-removal.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0018-OMAPDSS-DISPC-Preload-more-data-in-pipeline-DMAs-for.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0019-OMAPDSS-panel-acx565akm-clean-up-locking.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0020-OMAPDSS-DISPC-Fix-34xx-overlay-scaling-calculation.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0021-ARM-OMAP2-add-omapdss_init_of.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0022-ARM-OMAP2-DT-compatible-tweak-for-displays.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0023-OMAPDSS-add-label-support-for-DT.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0024-OMAPDSS-get-dssdev-alias-from-DT-alias.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0025-OMAPFB-clean-up-default-display-search.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0026-OMAPFB-search-for-default-display-with-DT-alias.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0027-OMAPDSS-add-of-helpers.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0028-OMAPDSS-Improve-regulator-names-for-DT.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0029-OMAPDSS-Add-DT-support-to-DSS.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0030-OMAPDSS-Add-DT-support-to-DISPC.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0031-OMAPDSS-Add-DT-support-to-HDMI.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0032-OMAPDSS-Add-DT-support-to-VENC.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0033-OMAPDSS-Add-DT-support-to-DSI.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0034-OMAPDSS-panel-dsi-cm-Add-DT-support.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0035-OMAPDSS-encoder-tfp410-Add-DT-support.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0036-OMAPDSS-connector-dvi-Add-DT-support.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0037-OMAPDSS-encoder-tpd12s015-Add-DT-support.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0038-OMAPDSS-hdmi-connector-Add-DT-support.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0039-OMAPDSS-panel-dpi-Add-DT-support.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0040-OMAPDSS-connector-analog-tv-Add-DT-support.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0041-OMAPDSS-acx565akm-Add-DT-support.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0042-ARM-omap2.dtsi-add-omapdss-information.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0043-ARM-omap3.dtsi-add-omapdss-information.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0044-ARM-omap4.dtsi-add-omapdss-information.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0045-ARM-omap4-panda.dts-add-display-information.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0046-ARM-omap4-sdp.dts-add-display-information.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0047-ARM-omap3-beagle.dts-add-display-information.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0048-ARM-omap3-beagle-xm.dts-add-display-information.patch"
+#	${git} "${DIR}/patches/omap_dt_dss_v3/0049-ARM-omap3-igep0020.dts-add-display-information.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0050-ARM-omap3-n900.dts-add-display-information.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0051-OMAPDSS-remove-DT-hacks-for-regulators.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0052-ARM-OMAP2-remove-pdata-quirks-for-displays.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0053-Doc-DT-Add-OMAP-DSS-DT-Bindings.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0054-Doc-DT-Add-DT-binding-documentation-for-Analog-TV-Co.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0055-Doc-DT-Add-DT-binding-documentation-for-DVI-Connecto.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0056-Doc-DT-Add-DT-binding-documentation-for-HDMI-Connect.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0057-Doc-DT-Add-DT-binding-documentation-for-MIPI-DPI-Pan.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0058-Doc-DT-Add-DT-binding-documentation-for-MIPI-DSI-CM-.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0059-Doc-DT-Add-DT-binding-documentation-for-Sony-acx565a.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0060-Doc-DT-Add-DT-binding-documentation-for-TFP410-encod.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0061-Doc-DT-Add-DT-binding-documentation-for-tpd12s015-en.patch"
+	${git} "${DIR}/patches/omap_dt_dss_v3/0062-ARM-OMAP2-clock-fix-clkoutx2-with-CLK_SET_RATE_PAREN.patch"
 }
 
-imx () {
-	echo "dir: imx"
-	#${git} "${DIR}/patches/imx/0001-ahci-imx-Explicitly-clear-IMX6Q_GPR13_SATA_MPLL_CLK_.patch"
-	${git} "${DIR}/patches/imx/0002-ahci-imx-Pull-out-the-clock-enable-disable-calls.patch"
-	${git} "${DIR}/patches/imx/0003-ahci-imx-Add-i.MX53-support.patch"
-}
+clock () {
+	echo "dir: clock"
+	${git} "${DIR}/patches/clock/0001-clk-ti-am335x-remove-unecessary-cpu0-clk-node.patch"
+	${git} "${DIR}/patches/clock/0002-ARM-dts-OMAP3-add-clock-nodes-for-CPU.patch"
 
-omap_usb () {
-	echo "dir: omap_usb"
-	#${git} "${DIR}/patches/omap_usb/0001-ARM-dts-omap3-beagle-Fix-USB-host-on-beagle-boards-f.patch"
-#	${git} "${DIR}/patches/omap_usb/0002-gpio-twl4030-Fix-regression-for-twl-gpio-LED-output.patch"
-#	${git} "${DIR}/patches/omap_usb/0003-ARM-OMAP4-hwmod-data-Don-t-prevent-RESET-of-USB-Host.patch"
-#	${git} "${DIR}/patches/omap_usb/0004-ARM-OMAP2-hwmod-Fix-RESET-logic.patch"
-#	${git} "${DIR}/patches/omap_usb/0005-ARM-OMAP3-hwmod-data-Don-t-prevent-RESET-of-USB-Host.patch"
-}
+	${git} "${DIR}/patches/clock/0003-ARM-dts-OMAP36xx-Add-device-node-for-ABB.patch"
+	${git} "${DIR}/patches/clock/0004-ARM-dts-OMAP4-Add-device-nodes-for-ABB.patch"
+	${git} "${DIR}/patches/clock/0005-ARM-dts-OMAP5-Add-device-nodes-for-ABB.patch"
+	${git} "${DIR}/patches/clock/0006-ARM-dts-DRA7-Add-device-nodes-for-ABB.patch"
 
-omap_video () {
-	echo "dir: omap_video"
-	${git} "${DIR}/patches/omap_video/0001-dts-omap3-beagle-add-i2c2-i2c3.patch"
-}
-
-omap_clock () {
-	echo "dir: omap_clock"
-	#TI omap dts clock bindings driver
-	${git} "${DIR}/patches/omap_clock/0001-Added-the-Texas-Instruments-OMAP-Clock-driver-origin.patch"
-
-	#omap3: add device tree clock binding support
-	${git} "${DIR}/patches/omap_clock/0002-Add-the-clock-bindings-to-omap3.dtsi-that-were-made-.patch"
-
-	#beagleboard-xm: add abb bindings and OPP1G operating point for 1 GHz operation
-	${git} "${DIR}/patches/omap_clock/0003-Now-this-one-is-mine-lol.-Reading-through-the-ti-abb.patch"
+	#wip:
+	${git} "${DIR}/patches/clock/0007-beagle-xm-use-ti-abb-for-1Ghz-operation.patch"
 }
 
 dts () {
@@ -293,44 +300,41 @@ dts () {
 	${git} "${DIR}/patches/dts/0002-ARM-dts-imx6qdl-wandboard-Add-support-for-i2c1.patch"
 	${git} "${DIR}/patches/dts/0003-ARM-dts-imx6qdl-wandboard-add-bluetooth-control-line.patch"
 	${git} "${DIR}/patches/dts/0004-ARM-dts-wandboard-add-binding-for-wand-rfkill-driver.patch"
-}
 
-bone () {
-	echo "dir: bone"
-	${git} "${DIR}/patches/bone/0001-arm-dts-am335x-boneblack-lcdc-add-panel-info.patch"
-	${git} "${DIR}/patches/bone/0002-arm-dts-am335x-boneblack-add-cpu0-opp-points.patch"
-	${git} "${DIR}/patches/bone/0003-arm-dts-am335x-bone-common-enable-and-use-i2c2.patch"
-	${git} "${DIR}/patches/bone/0004-arm-dts-am335x-bone-common-setup-default-pinmux-http.patch"
+	${git} "${DIR}/patches/dts/0005-dts-omap3-beagle-add-i2c2-i2c3.patch"
+
+	${git} "${DIR}/patches/dts/0006-arm-dts-am335x-boneblack-lcdc-add-panel-info.patch"
+	${git} "${DIR}/patches/dts/0007-arm-dts-am335x-boneblack-add-cpu0-opp-points.patch"
+	${git} "${DIR}/patches/dts/0008-arm-dts-am335x-bone-common-enable-and-use-i2c2.patch"
+	${git} "${DIR}/patches/dts/0009-arm-dts-am335x-bone-common-setup-default-pinmux-http.patch"
 }
 
 imx_video_staging () {
 	echo "dir: imx_video_staging"
-	${git} "${DIR}/patches/imx_video_staging/0001-imx-drm-Add-mx6-hdmi-transmitter-support.patch"
-	${git} "${DIR}/patches/imx_video_staging/0002-ARM-dts-mx6qdl-Add-HDMI-support.patch"
-	${git} "${DIR}/patches/imx_video_staging/0003-ARM-dts-imx6qdl-wandboard-Add-HDMI-support.patch"
-}
-
-omap3_beagle_xm_rework () {
-	echo "dir: omap3_beagle_xm_rework"
-	#cp arch/arm/boot/dts/omap3-beagle-xm.dts arch/arm/boot/dts/omap3-beagle-xm-c.dts
-	#cp arch/arm/boot/dts/omap3-beagle-xm.dts arch/arm/boot/dts/omap3-beagle-xm-ab.dts
-	#gedit arch/arm/boot/dts/Makefile add ^
-	${git} "${DIR}/patches/omap3_beagle_xm_rework/0001-ARM-dts-split-omap3-beagle-xm-to-ab-and-c-variant.patch"
-	#xm-ab has active high usb host power on...
-	${git} "${DIR}/patches/omap3_beagle_xm_rework/0002-ARM-dts-omap3-beagle-xm-ab-usb-host-is-active-high-t.patch"
-	${git} "${DIR}/patches/omap3_beagle_xm_rework/0003-ARM-dts-beagle-xm-make-sure-dvi-is-enabled.patch"
+	${git} "${DIR}/patches/imx_video_staging/0001-ARM-dts-mx6qdl-Add-HDMI-support.patch"
+	${git} "${DIR}/patches/imx_video_staging/0002-ARM-dts-imx6qdl-wandboard-Add-HDMI-support.patch"
 }
 
 omap_sprz319_erratum () {
 	echo "dir: omap_sprz319_erratum"
 	# Apply the modified sprz319 erratum for the v3.11-rc2 kernel
-	${git} "${DIR}/patches/omap_sprz319_erratum_v2.1/0001-hack-omap-clockk-dpll5-apply-sprz319e-2.1-erratum-co.patch"
+	#${git} "${DIR}/patches/omap_sprz319_erratum_v2.1/0001-hack-omap-clockk-dpll5-apply-sprz319e-2.1-erratum-co.patch"
+}
+
+omap3_beagle_xm_rework () {
+	echo "dir: omap3_beagle_xm_rework"
+	${git} "${DIR}/patches/omap3_beagle_xm_rework/0001-ARM-dts-beagle-xm-make-sure-dvi-is-enabled.patch"
+
+	#cp arch/arm/boot/dts/omap3-beagle-xm.dts arch/arm/boot/dts/omap3-beagle-xm-ab.dts
+	${git} "${DIR}/patches/omap3_beagle_xm_rework/0002-ARM-dts-omap3-beagle-xm-ab.dtb-copy-from-omap3-beagl.patch"
+	${git} "${DIR}/patches/omap3_beagle_xm_rework/0003-ARM-dts-omap3-beagle-xm-ab.dtb-build.patch"
+	${git} "${DIR}/patches/omap3_beagle_xm_rework/0004-ARM-dts-omap3-beagle-xm-ab.dtb-invert-usb-host.patch"
 }
 
 fixes () {
 	echo "dir: fixes"
 	${git} "${DIR}/patches/fixes/0001-imx6q-work-around-fec-tx-queue-timeouts-when-SATA-SD.patch"
-	${git} "${DIR}/patches/fixes/0002-crypto-omap-aes-add-error-check-for-pm_runtime_get_s.patch"
+	${git} "${DIR}/patches/fixes/0002-fix-compilation-of-imx-hdmi.patch"
 }
 
 vivante () {
@@ -351,7 +355,7 @@ vivante () {
 
 saucy () {
 	echo "dir: saucy"
-	#need to be re-tested with v3.13-rcX
+	#need to be re-tested with v3.14-rcX
 	#Ubuntu Saucy: so Ubuntu decided to enable almost every Warning -> Error option...
 	${git} "${DIR}/patches/saucy/0001-saucy-error-variable-ilace-set-but-not-used-Werror-u.patch"
 	${git} "${DIR}/patches/saucy/0002-saucy-disable-Werror-pointer-sign.patch"
@@ -359,24 +363,22 @@ saucy () {
 }
 
 #revert
-arm
 drivers
 imx_next
 omap_next
-omap_dt_dss
-imx
-omap_usb
-omap_video
-omap_clock
+
+omap_dt_dss_v3
+clock
 
 dts
-bone
+
 imx_video_staging
-omap3_beagle_xm_rework
 omap_sprz319_erratum
+
+omap3_beagle_xm_rework
+
 fixes
 vivante
-
-saucy
+#saucy
 
 echo "patch.sh ran successful"

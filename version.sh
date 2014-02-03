@@ -23,19 +23,19 @@ config="multi_v7_defconfig"
 #toolchain="gcc_arm_embedded_4_8"
 #toolchain="cortex_gcc_4_6"
 #toolchain="cortex_gcc_4_7"
-toolchain="cortex_gcc_4_8"
-#toolchain="gcc_linaro_gnueabihf_4_8"
+#toolchain="cortex_gcc_4_8"
+toolchain="gcc_linaro_gnueabihf_4_8"
 
 #Kernel/Build
-KERNEL_REL=3.13
-KERNEL_TAG=${KERNEL_REL}.1
-BUILD=armv7-x9
+KERNEL_REL=3.14
+KERNEL_TAG=${KERNEL_REL}-rc1
+BUILD=armv7-x0
 
 #v3.X-rcX + upto SHA
 #KERNEL_SHA=""
 
 #git branch
-BRANCH="v3.13.x"
+BRANCH="v3.14.x"
 
 BUILDREV=1.0
 DISTRO=cross
