@@ -86,25 +86,8 @@ check_if_set_then_disable () {
 # Linux/arm 3.12.8 Kernel Configuration
 
 #
-# IRQ subsystem
-#
-
-config="CONFIG_IRQ_DOMAIN_DEBUG"
-check_config_builtin
-
-#
-# Timers subsystem
-#
-
-config="CONFIG_NO_HZ"
-check_config_builtin
-
-#
 # RCU Subsystem
 #
-
-config="CONFIG_RCU_FAST_NO_HZ"
-check_config_disable
 config="CONFIG_IKCONFIG"
 check_config_builtin
 config="CONFIG_IKCONFIG_PROC"
@@ -149,17 +132,16 @@ check_config_builtin
 
 config="CONFIG_ARCH_MVEBU"
 check_config_disable
-config="CONFIG_ARCH_HIGHBANK"
-check_config_disable
 config="CONFIG_GPIO_PCA953X"
 check_config_module
 config="CONFIG_KEYBOARD_GPIO_POLLED"
 check_config_module
+config="CONFIG_ARCH_HIGHBANK"
+check_config_disable
 
 #
 # i.MX51 machines:
 #
-
 config="CONFIG_MACH_MX51_BABBAGE"
 check_config_disable
 config="CONFIG_MACH_EUKREA_CPUIMX51SD"
@@ -294,12 +276,6 @@ check_config_disable
 #
 # Boot options
 #
-config="CONFIG_ZBOOT_ROM_TEXT"
-value="0"
-check_config_value
-config="CONFIG_ZBOOT_ROM_BSS"
-value="0"
-check_config_value
 config="CONFIG_ARM_APPENDED_DTB"
 check_config_disable
 
@@ -452,8 +428,6 @@ check_config_module
 #
 config="CONFIG_NET_CLS_BPF"
 check_config_module
-config="CONFIG_DNS_RESOLVER"
-check_config_builtin
 config="CONFIG_HSR"
 check_config_module
 
@@ -1610,8 +1584,6 @@ check_config_module
 #
 # Webcam, TV (analog/digital) USB devices
 #
-config="CONFIG_VIDEO_DM6446_CCDC"
-check_config_module
 config="CONFIG_VIDEO_OMAP3"
 check_config_module
 config="CONFIG_VIDEO_OMAP3_DEBUG"
@@ -1920,14 +1892,10 @@ check_config_builtin
 #
 config="CONFIG_HID_APPLEIR"
 check_config_module
-config="CONFIG_HID_ELO"
-check_config_module
 config="CONFIG_HID_PICOLCD_LCD"
 check_config_builtin
 config="CONFIG_SONY_FF"
 check_config_builtin
-config="CONFIG_HID_XINMO"
-check_config_module
 
 #
 # I2C HID support
@@ -1940,8 +1908,6 @@ check_config_builtin
 #
 config="CONFIG_USB_DEFAULT_PERSIST"
 check_config_builtin
-config="CONFIG_USB_DYNAMIC_MINORS"
-check_config_disable
 config="CONFIG_USB_WUSB_CBAF"
 check_config_disable
 
@@ -2375,12 +2341,6 @@ config="CONFIG_ZRAM_DEBUG"
 check_config_disable
 
 #
-# Speakup console speech
-#
-config="CONFIG_SPEAKUP"
-check_config_disable
-
-#
 # Android
 #
 config="CONFIG_ANDROID"
@@ -2715,17 +2675,9 @@ config="CONFIG_BTRFS_FS"
 check_config_builtin
 config="CONFIG_FANOTIFY_ACCESS_PERMISSIONS"
 check_config_builtin
-config="CONFIG_PRINT_QUOTA_WARNING"
-check_config_disable
 config="CONFIG_AUTOFS4_FS"
 check_config_builtin
 config="CONFIG_FUSE_FS"
-check_config_builtin
-
-#
-# Caches
-#
-config="CONFIG_FSCACHE_HISTOGRAM"
 check_config_builtin
 
 #
@@ -2744,10 +2696,6 @@ check_config_value
 #
 # Pseudo filesystems
 #
-config="CONFIG_ADFS_FS"
-check_config_disable
-config="CONFIG_AFFS_FS"
-check_config_disable
 config="CONFIG_ECRYPT_FS_MESSAGING"
 check_config_builtin
 config="CONFIG_HFS_FS"
