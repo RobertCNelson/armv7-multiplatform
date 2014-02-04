@@ -2873,4 +2873,7 @@ check_config_builtin
 config="CONFIG_DEFAULT_SECURITY_DAC"
 check_config_disable
 
+echo "#Bugs:"
+config="CONFIG_CRYPTO_MANAGER_DISABLE_TESTS"
+check_config_builtin
 #
