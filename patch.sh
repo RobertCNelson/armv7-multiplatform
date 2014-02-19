@@ -320,8 +320,7 @@ omap3_beagle_xm_rework () {
 	${git} "${DIR}/patches/omap3_beagle_xm_rework/0002-ARM-dts-omap3-beagle-xm-ab-usb-host-is-active-high-t.patch"
 	${git} "${DIR}/patches/omap3_beagle_xm_rework/0003-ARM-dts-beagle-xm-make-sure-dvi-is-enabled.patch"
 
-	#TESTING
-	#${git} "${DIR}/patches/omap3_beagle_xm_rework/0004-ARM-dts-beagle-xm-enable-spidev.patch"
+	${git} "${DIR}/patches/omap3_beagle_xm_rework/0004-ARM-dts-beagle-xm-enable-spidev.patch"
 }
 
 omap_sprz319_erratum () {

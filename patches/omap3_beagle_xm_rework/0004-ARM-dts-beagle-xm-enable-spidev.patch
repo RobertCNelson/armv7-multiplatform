@@ -1,17 +1,17 @@
-From a63be069eeaa5292f4eb6d96fe5c5f1f98c24f2e Mon Sep 17 00:00:00 2001
+From d5508327ad34100e29c0bc522862eaaa04022cd7 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Tue, 18 Feb 2014 11:09:20 -0600
+Date: Wed, 19 Feb 2014 09:21:40 -0600
 Subject: [PATCH 4/4] ARM: dts: beagle-xm: enable spidev
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
- arch/arm/boot/dts/omap3-beagle-xm-ab.dts | 51 ++++++++++++++++++++++++++++++++
- arch/arm/boot/dts/omap3-beagle-xm-c.dts  | 51 ++++++++++++++++++++++++++++++++
- arch/arm/boot/dts/omap3-beagle-xm.dts    | 51 ++++++++++++++++++++++++++++++++
- 3 files changed, 153 insertions(+)
+ arch/arm/boot/dts/omap3-beagle-xm-ab.dts | 49 ++++++++++++++++++++++++++++++++
+ arch/arm/boot/dts/omap3-beagle-xm-c.dts  | 49 ++++++++++++++++++++++++++++++++
+ arch/arm/boot/dts/omap3-beagle-xm.dts    | 49 ++++++++++++++++++++++++++++++++
+ 3 files changed, 147 insertions(+)
 
 diff --git a/arch/arm/boot/dts/omap3-beagle-xm-ab.dts b/arch/arm/boot/dts/omap3-beagle-xm-ab.dts
-index 368ef3a..8419be3 100644
+index 368ef3a..20d514f 100644
 --- a/arch/arm/boot/dts/omap3-beagle-xm-ab.dts
 +++ b/arch/arm/boot/dts/omap3-beagle-xm-ab.dts
 @@ -148,6 +148,25 @@
@@ -40,7 +40,7 @@ index 368ef3a..8419be3 100644
  	hsusbb2_pins: pinmux_hsusbb2_pins {
  		pinctrl-single,pins = <
  			0x5c0 (PIN_OUTPUT | MUX_MODE3)		/* etk_d10.hsusb2_clk */
-@@ -245,6 +264,38 @@
+@@ -245,6 +264,36 @@
  	status = "disabled";
  };
  
@@ -53,7 +53,6 @@ index 368ef3a..8419be3 100644
 +		compatible = "spidev";
 +		reg = <0>;
 +		spi-max-frequency = <48000000>;
-+		spi-cpha;
 +	};
 +
 +	spidev1: spi@1 {
@@ -72,7 +71,6 @@ index 368ef3a..8419be3 100644
 +		compatible = "spidev";
 +		reg = <0>;
 +		spi-max-frequency = <48000000>;
-+		spi-cpha;
 +	};
 +};
 +
@@ -80,7 +78,7 @@ index 368ef3a..8419be3 100644
  	ti,use-leds;
  	/* pullups: BIT(1), BIT(2)  */
 diff --git a/arch/arm/boot/dts/omap3-beagle-xm-c.dts b/arch/arm/boot/dts/omap3-beagle-xm-c.dts
-index d08645e..db6ee18 100644
+index d08645e..181a9d6 100644
 --- a/arch/arm/boot/dts/omap3-beagle-xm-c.dts
 +++ b/arch/arm/boot/dts/omap3-beagle-xm-c.dts
 @@ -147,6 +147,25 @@
@@ -109,7 +107,7 @@ index d08645e..db6ee18 100644
  	hsusbb2_pins: pinmux_hsusbb2_pins {
  		pinctrl-single,pins = <
  			0x5c0 (PIN_OUTPUT | MUX_MODE3)		/* etk_d10.hsusb2_clk */
-@@ -244,6 +263,38 @@
+@@ -244,6 +263,36 @@
  	status = "disabled";
  };
  
@@ -122,7 +120,6 @@ index d08645e..db6ee18 100644
 +		compatible = "spidev";
 +		reg = <0>;
 +		spi-max-frequency = <48000000>;
-+		spi-cpha;
 +	};
 +
 +	spidev1: spi@1 {
@@ -141,7 +138,6 @@ index d08645e..db6ee18 100644
 +		compatible = "spidev";
 +		reg = <0>;
 +		spi-max-frequency = <48000000>;
-+		spi-cpha;
 +	};
 +};
 +
@@ -149,7 +145,7 @@ index d08645e..db6ee18 100644
  	ti,use-leds;
  	/* pullups: BIT(1), BIT(2)  */
 diff --git a/arch/arm/boot/dts/omap3-beagle-xm.dts b/arch/arm/boot/dts/omap3-beagle-xm.dts
-index d08645e..db6ee18 100644
+index d08645e..181a9d6 100644
 --- a/arch/arm/boot/dts/omap3-beagle-xm.dts
 +++ b/arch/arm/boot/dts/omap3-beagle-xm.dts
 @@ -147,6 +147,25 @@
@@ -178,7 +174,7 @@ index d08645e..db6ee18 100644
  	hsusbb2_pins: pinmux_hsusbb2_pins {
  		pinctrl-single,pins = <
  			0x5c0 (PIN_OUTPUT | MUX_MODE3)		/* etk_d10.hsusb2_clk */
-@@ -244,6 +263,38 @@
+@@ -244,6 +263,36 @@
  	status = "disabled";
  };
  
@@ -191,7 +187,6 @@ index d08645e..db6ee18 100644
 +		compatible = "spidev";
 +		reg = <0>;
 +		spi-max-frequency = <48000000>;
-+		spi-cpha;
 +	};
 +
 +	spidev1: spi@1 {
@@ -210,7 +205,6 @@ index d08645e..db6ee18 100644
 +		compatible = "spidev";
 +		reg = <0>;
 +		spi-max-frequency = <48000000>;
-+		spi-cpha;
 +	};
 +};
 +
