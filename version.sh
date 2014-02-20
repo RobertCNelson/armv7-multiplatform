@@ -28,7 +28,7 @@ toolchain="cortex_gcc_4_8"
 
 #Kernel/Build
 KERNEL_REL=3.13
-KERNEL_TAG=${KERNEL_REL}.3
+KERNEL_TAG=${KERNEL_REL}.4
 BUILD=armv7-x11
 
 #v3.X-rcX + upto SHA
