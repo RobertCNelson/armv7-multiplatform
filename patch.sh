@@ -333,6 +333,7 @@ fixes () {
 	echo "dir: fixes"
 	${git} "${DIR}/patches/fixes/0001-imx6q-work-around-fec-tx-queue-timeouts-when-SATA-SD.patch"
 	${git} "${DIR}/patches/fixes/0002-crypto-omap-aes-add-error-check-for-pm_runtime_get_s.patch"
+	${git} "${DIR}/patches/fixes/0003-deb-pkg-sync-with-v3.14.patch"
 }
 
 vivante () {
@@ -361,7 +362,7 @@ saucy () {
 }
 
 #revert
-arm
+#arm
 drivers
 imx_next
 omap_next
