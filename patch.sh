@@ -441,8 +441,7 @@ omap3_beagle_xm_rework () {
 fixes () {
 	echo "dir: fixes"
 	${git} "${DIR}/patches/fixes/0001-imx6q-work-around-fec-tx-queue-timeouts-when-SATA-SD.patch"
-#	${git} "${DIR}/patches/fixes/0002-fix-compilation-of-imx-hdmi.patch"
-#	${git} "${DIR}/patches/fixes/0003-Makefile-extra.patch"
+	${git} "${DIR}/patches/fixes/0002-imx51-disable-cpufreq.patch"
 }
 
 vivante () {
