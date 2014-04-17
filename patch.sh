@@ -424,8 +424,7 @@ imx_video_staging () {
 
 omap_sprz319_erratum () {
 	echo "dir: omap_sprz319_erratum"
-	# Apply the modified sprz319 erratum for the v3.11-rc2 kernel
-	#${git} "${DIR}/patches/omap_sprz319_erratum_v2.1/0001-hack-omap-clockk-dpll5-apply-sprz319e-2.1-erratum-co.patch"
+	${git} "${DIR}/patches/omap_sprz319_erratum_v2.1/0001-hack-omap-clockk-dpll5-apply-sprz319e-2.1-erratum-co.patch"
 }
 
 omap3_beagle_xm_rework () {
