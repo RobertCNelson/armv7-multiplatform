@@ -92,17 +92,18 @@ dts () {
 	${git} "${DIR}/patches/dts/0014-arch-omap3-add-xm-ab-variant.patch"
 
 	${git} "${DIR}/patches/dts/0015-arm-dts-vf610-twr-Add-support-for-sdhc1.patch"
+	${git} "${DIR}/patches/dts/0016-ARM-DTS-omap3-beagle-xm-disable-powerdown-gpios.patch"
 }
 
 omap_sprz319_erratum () {
 	echo "dir: omap_sprz319_erratum"
-	# Apply the modified sprz319 erratum for the v3.11-rc2 kernel
-	#${git} "${DIR}/patches/omap_sprz319_erratum_v2.1/0001-hack-omap-clockk-dpll5-apply-sprz319e-2.1-erratum-co.patch"
+	${git} "${DIR}/patches/omap_sprz319_erratum_v2.1/0001-hack-omap-clockk-dpll5-apply-sprz319e-2.1-erratum-co.patch"
 }
 
 fixes () {
 	echo "dir: fixes"
 	${git} "${DIR}/patches/fixes/0001-imx6q-work-around-fec-tx-queue-timeouts-when-SATA-SD.patch"
+	${git} "${DIR}/patches/fixes/0002-arm-add-CLKSRC_OF.patch"
 }
 
 vivante () {
@@ -141,7 +142,7 @@ drivers
 #omap_next
 
 dts
-#omap_sprz319_erratum
+omap_sprz319_erratum
 
 fixes
 vivante
