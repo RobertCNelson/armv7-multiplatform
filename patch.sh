@@ -443,6 +443,7 @@ fixes () {
 	${git} "${DIR}/patches/fixes/0002-imx51-disable-cpufreq.patch"
 	${git} "${DIR}/patches/fixes/0003-ARM-dts-imx51-babbage-Add-USB-Host1-support.patch"
 	${git} "${DIR}/patches/fixes/0004-ARM-dts-imx51-babbage-Add-USB-OTG-support.patch"
+	${git} "${DIR}/patches/fixes/0005-arm-dts-imx6dl-udoo.patch"
 }
 
 vivante () {
