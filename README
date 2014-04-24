@@ -37,7 +37,7 @@ Install Kernel Image to SD card: (requires MMC set in system.sh)
 
 Install Kernel Image to local system (built on arm board):
 
-./tools/install_local.sh
+./tools/local_install.sh
 
 Development/Hacking:
 
