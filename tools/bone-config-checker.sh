@@ -2,6 +2,18 @@
 
 DIR=$PWD
 
+check_config_value () {
+	unset test_config
+	test_config=$(grep "${config}=" ${DIR}/patches/defconfig || true)
+	if [ "x${test_config}" = "x" ] ; then
+		echo "echo ${config}=${value} >> ./KERNEL/.config"
+	else
+		if [ ! "x${test_config}" = "x${config}=${value}" ] ; then
+			echo "sed -i -e 's:${test_config}:${config}=${value}:g' ./KERNEL/.config"
+		fi
+	fi
+}
+
 check_config_builtin () {
 	unset test_config
 	test_config=$(grep "${config}=y" ${DIR}/patches/defconfig || true)
@@ -33,7 +45,7 @@ check_config () {
 	fi
 }
 
-check_config_disabled () {
+check_config_disable () {
 	unset test_config
 	test_config=$(grep "${config} is not set" ${DIR}/patches/defconfig || true)
 	if [ "x${test_config}" = "x" ] ; then
@@ -67,18 +79,8 @@ check_if_set_then_disable () {
 	unset test_config
 	test_config=$(grep "${if_config}=y" ${DIR}/patches/defconfig || true)
 	if [ "x${test_config}" = "x${if_config}=y" ] ; then
-		check_config_disabled
+		check_config_disable
 	fi
 }
 
-#thumb2 bugs with omap3-beagle-xm (v3.13.x/v3.14.x)
-if_config="CONFIG_ARCH_OMAP3"
-config="CONFIG_ARM_ERRATA_430973"
-check_if_set_then_set
-config="CONFIG_THUMB2_KERNEL"
-check_if_set_then_disable
-
-#Never ever enable:
-config="CONFIG_USB_GADGET_DEBUG"
-check_config_disabled
 #
