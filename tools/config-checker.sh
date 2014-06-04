@@ -2759,18 +2759,4 @@ echo "#Bugs:"
 config="CONFIG_CRYPTO_MANAGER_DISABLE_TESTS"
 check_config_builtin
 
-config="CONFIG_DRM_VIVANTE"
-check_config_disable
-
-config="CONFIG_ATH9K_HW"
-check_config_disable
-config="CONFIG_ATH9K_COMMON"
-check_config_disable
-config="CONFIG_ATH9K_BTCOEX_SUPPORT"
-check_config_disable
-config="CONFIG_ATH9K"
-check_config_disable
-config="CONFIG_ATH9K_HTC"
-check_config_disable
-
 #
