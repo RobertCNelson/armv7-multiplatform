@@ -1,0 +1,32 @@
+From 607a9e6c82db33da0ae03d3d3a16c53706eb8639 Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Wed, 2 Apr 2014 10:03:15 -0500
+Subject: [PATCH 3/3] imx51: disable cpufreq
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/mach-imx/imx51-dt.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/mach-imx/imx51-dt.c b/arch/arm/mach-imx/imx51-dt.c
+index 0230d78..838da01 100644
+--- a/arch/arm/mach-imx/imx51-dt.c
++++ b/arch/arm/mach-imx/imx51-dt.c
+@@ -21,12 +21,12 @@
+ 
+ static void __init imx51_dt_init(void)
+ {
+-	struct platform_device_info devinfo = { .name = "cpufreq-cpu0", };
++	//struct platform_device_info devinfo = { .name = "cpufreq-cpu0", };
+ 
+ 	mxc_arch_reset_init_dt();
+ 
+ 	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
+-	platform_device_register_full(&devinfo);
++	//platform_device_register_full(&devinfo);
+ }
+ 
+ static const char *imx51_dt_board_compat[] __initconst = {
+-- 
+2.0.0
+
