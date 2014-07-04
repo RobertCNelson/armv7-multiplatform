@@ -35,6 +35,6 @@ BUILD=armv7-x3
 #git branch
 BRANCH="v3.15.x"
 
-BUILDREV=1.0
 DISTRO=cross
 DEBARCH=armhf
+#
