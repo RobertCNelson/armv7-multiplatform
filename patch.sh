@@ -118,7 +118,7 @@ dts () {
 
 	${git} "${DIR}/patches/dts/0008-ARM-dts-omap3-beagle-add-i2c2.patch"
 
-	${git} "${DIR}/patches/dts/0009-beagle-xm-use-ti-abb-for-1Ghz-operation.patch"
+#	${git} "${DIR}/patches/dts/0009-beagle-xm-use-ti-abb-for-1Ghz-operation.patch"
 	${git} "${DIR}/patches/dts/0010-ARM-dts-omap3-beagle-xm-spidev.patch"
 	${git} "${DIR}/patches/dts/0011-ARM-dts-beagle-xm-make-sure-dvi-is-enabled.patch"
 
@@ -162,7 +162,7 @@ vivante () {
 #revert
 drivers
 #imx_next
-omap_next
+#omap_next
 #tegra_next
 
 dts
@@ -180,10 +180,10 @@ packaging_setup () {
 
 packaging () {
 	echo "dir: packaging"
-	${git} "${DIR}/patches/packaging/0001-packaging-sync-with-mainline.patch"
+	#${git} "${DIR}/patches/packaging/0001-packaging-sync-with-mainline.patch"
 	${git} "${DIR}/patches/packaging/0002-deb-pkg-install-dtbs-in-linux-image-package.patch"
 }
 
 #packaging_setup
-#packaging
+packaging
 echo "patch.sh ran successful"
