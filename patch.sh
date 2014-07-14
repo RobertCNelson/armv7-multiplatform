@@ -527,5 +527,5 @@ packaging () {
 }
 
 #packaging_setup
-#packaging
+packaging
 echo "patch.sh ran successful"

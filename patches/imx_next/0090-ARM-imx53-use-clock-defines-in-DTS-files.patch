@@ -55,7 +55,7 @@ index 5e40902..8eadaf8 100644
  };
  
 diff --git a/arch/arm/boot/dts/imx53.dtsi b/arch/arm/boot/dts/imx53.dtsi
-index 7f06203..c64ecf3 100644
+index 6a5491b..feb297b 100644
 --- a/arch/arm/boot/dts/imx53.dtsi
 +++ b/arch/arm/boot/dts/imx53.dtsi
 @@ -12,6 +12,7 @@
@@ -68,7 +68,7 @@ index 7f06203..c64ecf3 100644
  	aliases {
 @@ -89,7 +90,9 @@
  			compatible = "fsl,imx53-ipu";
- 			reg = <0x18000000 0x080000000>;
+ 			reg = <0x18000000 0x08000000>;
  			interrupts = <11 10>;
 -			clocks = <&clks 59>, <&clks 110>, <&clks 61>;
 +			clocks = <&clks IMX5_CLK_IPU_GATE>,
@@ -486,5 +486,5 @@ index 7f06203..c64ecf3 100644
  	};
  };
 -- 
-1.8.5.3
+2.0.1
 
