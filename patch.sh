@@ -286,6 +286,7 @@ fixes () {
 	${git} "${DIR}/patches/fixes/0001-imx6q-work-around-fec-tx-queue-timeouts-when-SATA-SD.patch"
 	${git} "${DIR}/patches/fixes/0002-saucy-error-variable-ilace-set-but-not-used-Werror-u.patch"
 	${git} "${DIR}/patches/fixes/0003-imx51-disable-cpufreq.patch"
+	${git} "${DIR}/patches/fixes/0004-arm-dts-omap4-move-emif-so-panda-es-b3-now-boots.patch"
 }
 
 vivante () {
