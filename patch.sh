@@ -82,7 +82,7 @@ imx_next () {
 	#git pull --no-edit git://git.kernel.org/pub/scm/linux/kernel/git/shawnguo/linux.git for-next
 
 	${git} "${DIR}/patches/imx_next/0001-ARM-dts-mbimxsd35-Add-sound-support.patch"
-	${git} "${DIR}/patches/imx_next/0002-ARM-dts-imx-Add-alias-for-ethernet-controller.patch"
+#	${git} "${DIR}/patches/imx_next/0002-ARM-dts-imx-Add-alias-for-ethernet-controller.patch"
 	${git} "${DIR}/patches/imx_next/0003-ARM-dts-imx27-phytec-phycore-rdk-Add-missing-pinctrl.patch"
 	${git} "${DIR}/patches/imx_next/0004-ARM-dts-imx27-phytec-phycore-som-Enable-SSI1.patch"
 	${git} "${DIR}/patches/imx_next/0005-ARM-dts-imx6qdl-sabresd.dtsi-Add-red-led.patch"
