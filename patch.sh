@@ -344,6 +344,7 @@ fixes () {
 	echo "dir: fixes"
 	${git} "${DIR}/patches/fixes/0001-saucy-error-variable-ilace-set-but-not-used-Werror-u.patch"
 	${git} "${DIR}/patches/fixes/0002-mach-imx51-disable-cpufreq-still-locks-up.patch"
+	${git} "${DIR}/patches/fixes/0003-omap3-beagle-xm-ehci-works-again.patch"
 }
 
 vivante () {
