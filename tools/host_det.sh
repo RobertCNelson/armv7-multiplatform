@@ -43,6 +43,8 @@ redhat_reqs () {
 	check_rpm
 	pkg="gcc"
 	check_rpm
+	pkg="lzop"
+	check_rpm
 	pkg="ncurses-devel"
 	check_rpm
 	pkg="wget"
@@ -191,7 +193,6 @@ debian_regs () {
 
 			#http://docs.kali.org/kali-policy/kali-linux-relationship-with-debian
 			#lsb_release -a
-			#No LSB modules are available.
 			#Distributor ID:    Debian
 			#Description:    Debian GNU/Linux Kali Linux 1.0
 			#Release:    Kali Linux 1.0
@@ -202,7 +203,6 @@ debian_regs () {
 
 			#Debian "testing"
 			#lsb_release -a
-			#No LSB modules are available.
 			#Distributor ID: Debian
 			#Description:    Debian GNU/Linux testing/unstable
 			#Release:        testing/unstable
@@ -218,7 +218,6 @@ debian_regs () {
 
 			#http://solydxk.com/about/solydxk/
 			#lsb_release -a
-			#No LSB modules are available.
 			#Distributor ID: SolydXK
 			#Description:    SolydXK
 			#Release:        1
@@ -231,11 +230,20 @@ debian_regs () {
 		if [ "x${deb_distro}" = "xluna" ] ; then
 			#http://distrowatch.com/table.php?distribution=elementary
 			#lsb_release -a
-			#No LSB modules are available.
 			#Distributor ID:    elementary OS
 			#Description:    elementary OS Luna
 			#Release:    0.2
 			#Codename:    luna
+			deb_distro="precise"
+		fi
+
+		if [ "x${deb_distro}" = "xtoutatis" ] ; then
+			#http://listas.trisquel.info/pipermail/trisquel-announce/2013-March/000014.html
+			#lsb_release -a
+			#Distributor ID:    Trisquel
+			#Description:    Trisquel GNU/Linux 6.0.1, Toutatis
+			#Release:    6.0.1
+			#Codename:    toutatis
 			deb_distro="precise"
 		fi
 
@@ -288,13 +296,14 @@ debian_regs () {
 			#14.04: lts: trusty -> xyz
 			unset warn_eol_distro
 			;;
-		quantal|saucy)
-			#12.10|13.10
+		saucy)
+			#13.10
 			unset warn_eol_distro
 			;;
-		raring)
-			#13.04
+		quantal|raring)
+			#12.10|13.04
 			warn_eol_distro=1
+			stop_pkg_search=1
 			;;
 		precise)
 			#12.04: lts: precise -> trusty
@@ -357,7 +366,7 @@ debian_regs () {
 				pkg="ia32-libs"
 				check_dpkg
 				;;
-			wheezy|jessie|sid|quantal|raring|saucy|trusty|utopic)
+			wheezy|jessie|sid|saucy|trusty|utopic)
 				pkg="libc6:i386"
 				check_dpkg
 				pkg="libncurses5:i386"

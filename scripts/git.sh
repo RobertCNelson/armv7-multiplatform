@@ -31,7 +31,7 @@ git_kernel_stable () {
 git_kernel_torvalds () {
 	echo "-----------------------------"
 	echo "scripts/git: pulling from: ${torvalds_linux}"
-	git pull ${GIT_OPTS} ${torvalds_linux} master --tags || true
+	git pull ${git_opts} ${torvalds_linux} master --tags || true
 	git tag | grep v${KERNEL_TAG} >/dev/null 2>&1 || git_kernel_stable
 }
 
@@ -110,6 +110,10 @@ git_kernel () {
 
 	cd ${DIR}/KERNEL/
 
+	#Debian Jessie: git version 2.0.0.rc0
+	#Disable git's default setting of running `git gc --auto` in the background as the patch.sh script can fail.
+	git config --local --list | grep gc.autodetach >/dev/null 2>&1 || git config --local gc.autodetach 0
+
 	if [ "${RUN_BISECT}" ] ; then
 		git bisect reset || true
 	fi
@@ -121,7 +125,7 @@ git_kernel () {
 	git reset --hard HEAD
 	git checkout master -f
 
-	git pull ${GIT_OPTS} || true
+	git pull ${git_opts} || true
 
 	git tag | grep v${KERNEL_TAG} | grep -v rc >/dev/null 2>&1 || git_kernel_torvalds
 
@@ -149,8 +153,8 @@ git_kernel () {
 	fi
 
 	if [ "${TOPOFTREE}" ] ; then
-		git pull ${GIT_OPTS} ${torvalds_linux} master || true
-		git pull ${GIT_OPTS} ${torvalds_linux} master --tags || true
+		git pull ${git_opts} ${torvalds_linux} master || true
+		git pull ${git_opts} ${torvalds_linux} master --tags || true
 	fi
 
 	git describe
