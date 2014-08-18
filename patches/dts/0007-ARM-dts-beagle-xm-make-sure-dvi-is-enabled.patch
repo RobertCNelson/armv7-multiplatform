@@ -1,0 +1,36 @@
+From 7c4095c06dc2422ce26b0f30e9b39baafea972bf Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Thu, 13 Feb 2014 10:09:08 -0600
+Subject: [PATCH 07/10] ARM: dts: beagle-xm: make sure dvi is enabled
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/boot/dts/omap3-beagle-xm.dts | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm/boot/dts/omap3-beagle-xm.dts b/arch/arm/boot/dts/omap3-beagle-xm.dts
+index 35eb562..9544ec1 100644
+--- a/arch/arm/boot/dts/omap3-beagle-xm.dts
++++ b/arch/arm/boot/dts/omap3-beagle-xm.dts
+@@ -335,14 +335,14 @@
+ 
+ &twl_gpio {
+ 	ti,use-leds;
+-	/* pullups: BIT(1) */
+-	ti,pullups = <0x000002>;
++	/* pullups: BIT(1), BIT(2)  */
++	ti,pullups = <0x000006>;
+ 	/*
+ 	 * pulldowns:
+-	 * BIT(2), BIT(6), BIT(7), BIT(8), BIT(13)
++	 * BIT(6), BIT(7), BIT(8), BIT(13)
+ 	 * BIT(15), BIT(16), BIT(17)
+ 	 */
+-	ti,pulldowns = <0x03a1c4>;
++	ti,pulldowns = <0x03a1c0>;
+ };
+ 
+ &usb_otg_hs {
+-- 
+2.1.0.rc1
+
