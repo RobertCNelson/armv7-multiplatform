@@ -102,6 +102,12 @@ dts () {
 	${git} "${DIR}/patches/dts/0014-imx-add-udoo.patch"
 }
 
+wand () {
+	echo "dir: wand"
+	${git} "${DIR}/patches/wand/0001-ARM-i.MX6-Wandboard-add-wifi-bt-rfkill-driver.patch"
+	${git} "${DIR}/patches/wand/0002-ARM-dts-wandboard-add-binding-for-wand-rfkill-driver.patch"
+}
+
 omap_sprz319_erratum () {
 	echo "dir: omap_sprz319_erratum"
 	${git} "${DIR}/patches/omap_sprz319_erratum_v2.1/0001-hack-omap-clockk-dpll5-apply-sprz319e-2.1-erratum-co.patch"
@@ -131,6 +137,7 @@ vivante () {
 #tegra_next
 
 dts
+wand
 #omap_sprz319_erratum
 
 vivante
