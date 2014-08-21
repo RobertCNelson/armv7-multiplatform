@@ -86,20 +86,20 @@ tegra_next () {
 
 dts () {
 	echo "dir: dts"
-	${git} "${DIR}/patches/dts/0001-arm-dts-am335x-boneblack-lcdc-add-panel-info.patch"
-	${git} "${DIR}/patches/dts/0002-arm-dts-am335x-boneblack-add-cpu0-opp-points.patch"
-	${git} "${DIR}/patches/dts/0003-arm-dts-am335x-bone-common-enable-and-use-i2c2.patch"
-	${git} "${DIR}/patches/dts/0004-arm-dts-am335x-bone-common-setup-default-pinmux-http.patch"
-	${git} "${DIR}/patches/dts/0005-ARM-dts-omap3-beagle-add-i2c2.patch"
-	${git} "${DIR}/patches/dts/0006-ARM-dts-omap3-beagle-xm-spidev.patch"
-	${git} "${DIR}/patches/dts/0007-ARM-dts-beagle-xm-make-sure-dvi-is-enabled.patch"
-	${git} "${DIR}/patches/dts/0008-ARM-DTS-omap3-beagle-xm-disable-powerdown-gpios.patch"
-	${git} "${DIR}/patches/dts/0009-ARM-DTS-omap3-beagle.dts-enable-twl4030-power-reset.patch"
-	${git} "${DIR}/patches/dts/0010-arm-dts-omap4-move-emif-so-panda-es-b3-now-boots.patch"
-	${git} "${DIR}/patches/dts/0011-mach-imx51-disable-cpufreq-still-locks-up.patch"
-	${git} "${DIR}/patches/dts/0012-omap3-beagle-xm-ehci-works-again.patch"
-	${git} "${DIR}/patches/dts/0013-ARM-dts-omap3-beagle-ddc-i2c-bus-is-not-responding-d.patch"
-	${git} "${DIR}/patches/dts/0014-imx-add-udoo.patch"
+#start_cleanup
+	${git} "${DIR}/patches/dts/0001-ARM-dts-omap3-beagle-add-i2c2.patch"
+	${git} "${DIR}/patches/dts/0002-ARM-dts-omap3-beagle-xm-spidev.patch"
+	${git} "${DIR}/patches/dts/0003-ARM-dts-beagle-xm-make-sure-dvi-is-enabled.patch"
+	${git} "${DIR}/patches/dts/0004-ARM-DTS-omap3-beagle-xm-disable-powerdown-gpios.patch"
+	${git} "${DIR}/patches/dts/0005-ARM-DTS-omap3-beagle.dts-enable-twl4030-power-reset.patch"
+	${git} "${DIR}/patches/dts/0006-arm-dts-omap4-move-emif-so-panda-es-b3-now-boots.patch"
+	${git} "${DIR}/patches/dts/0007-mach-imx51-disable-cpufreq-still-locks-up.patch"
+	${git} "${DIR}/patches/dts/0008-omap3-beagle-xm-ehci-works-again.patch"
+	${git} "${DIR}/patches/dts/0009-ARM-dts-omap3-beagle-ddc-i2c-bus-is-not-responding-d.patch"
+	${git} "${DIR}/patches/dts/0010-imx-add-udoo.patch"
+	${git} "${DIR}/patches/dts/0011-ARM-sun7i-Add-support-for-Olimex-A20-OLinuXino-LIME.patch"
+#number=11
+#cleanup
 }
 
 wand () {
@@ -132,6 +132,333 @@ vivante () {
 	${git} "${DIR}/patches/vivante/0004-Fixed-vivante-driver-for-kernel-3.14.x.patch"
 }
 
+dtb_makefile_append () {
+	sed -i -e 's:am335x-boneblack.dtb \\:am335x-boneblack.dtb \\\n\t'$device' \\:g' arch/arm/boot/dts/Makefile
+}
+
+dtsi_append () {
+	wfile="arch/arm/boot/dts/${base_dts}-${cape}.dts"
+	cp arch/arm/boot/dts/${base_dts}.dts ${wfile}
+	echo "" >> ${wfile}
+	echo "#include \"am335x-bone-${cape}.dtsi\"" >> ${wfile}
+	git add ${wfile}
+}
+
+dtsi_append_custom () {
+	wfile="arch/arm/boot/dts/${dtb_name}.dts"
+	cp arch/arm/boot/dts/${base_dts}.dts ${wfile}
+	echo "" >> ${wfile}
+	echo "#include \"am335x-bone-${cape}.dtsi\"" >> ${wfile}
+	git add ${wfile}
+}
+
+dtsi_append_hdmi_no_audio () {
+	dtsi_append
+	echo "#include \"am335x-boneblack-nxp-hdmi-no-audio.dtsi\"" >> ${wfile}
+	git add ${wfile}
+}
+
+dtsi_drop_nxp_hdmi_audio () {
+	sed -i -e 's:#include "am335x-boneblack-nxp-hdmi-audio.dtsi":/* #include "am335x-boneblack-nxp-hdmi-audio.dtsi" */:g' ${wfile}
+	git add ${wfile}
+}
+
+dtsi_drop_emmc () {
+	sed -i -e 's:#include "am335x-boneblack-emmc.dtsi":/* #include "am335x-boneblack-emmc.dtsi" */:g' ${wfile}
+	git add ${wfile}
+}
+
+dts_drop_clkout2_pin () {
+	sed -i -e 's:pinctrl-0 = <\&clkout2_pin>;:/* pinctrl-0 = <\&clkout2_pin>; */:g' ${wfile}
+	git add ${wfile}
+}
+
+beaglebone () {
+	echo "dir: beaglebone/pinmux"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		start_cleanup
+	fi
+	# cp arch/arm/boot/dts/am335x-bone-common.dtsi arch/arm/boot/dts/am335x-bone-common-pinmux.dtsi
+	# gedit arch/arm/boot/dts/am335x-bone-common.dtsi arch/arm/boot/dts/am335x-bone-common-pinmux.dtsi &
+	# gedit arch/arm/boot/dts/am335x-boneblack.dts arch/arm/boot/dts/am335x-bone.dts &
+	# git add arch/arm/boot/dts/am335x-bone-common-pinmux.dtsi
+	# git commit -a -m 'am335x-bone-common: split out am33xx_pinmux' -s
+
+	${git} "${DIR}/patches/beaglebone/pinmux/0001-am335x-bone-common-split-out-am33xx_pinmux.patch"
+
+	# meld arch/arm/boot/dts/am335x-bone-common-pinmux.dtsi arch/arm/boot/dts/am335x-boneblack.dts
+	# git commit -a -m 'am335x-boneblack: split out am33xx_pinmux' -s
+
+	${git} "${DIR}/patches/beaglebone/pinmux/0002-am335x-boneblack-split-out-am33xx_pinmux.patch"
+
+	# cp arch/arm/boot/dts/am335x-boneblack.dts arch/arm/boot/dts/am335x-boneblack-emmc.dtsi
+	# gedit arch/arm/boot/dts/am335x-boneblack.dts arch/arm/boot/dts/am335x-boneblack-emmc.dtsi &
+	# git add arch/arm/boot/dts/am335x-boneblack-emmc.dtsi
+	# git commit -a -m 'am335x-boneblack: split out emmc' -s
+
+	${git} "${DIR}/patches/beaglebone/pinmux/0003-am335x-boneblack-split-out-emmc.patch"
+
+	# cp arch/arm/boot/dts/am335x-boneblack.dts arch/arm/boot/dts/am335x-boneblack-nxp-hdmi-no-audio.dtsi
+	# gedit arch/arm/boot/dts/am335x-boneblack.dts arch/arm/boot/dts/am335x-boneblack-nxp-hdmi-no-audio.dtsi &
+	# git add arch/arm/boot/dts/am335x-boneblack-nxp-hdmi-no-audio.dtsi
+	# git commit -a -m 'am335x-boneblack: split out nxp hdmi no audio' -s
+
+	${git} "${DIR}/patches/beaglebone/pinmux/0004-am335x-boneblack-split-out-nxp-hdmi-no-audio.patch"
+
+	${git} "${DIR}/patches/beaglebone/pinmux/0005-am335x-bone-common-pinmux-i2c2.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0006-am335x-bone-common-pinmux-uart.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0007-am335x-bone-common-pinmux-spi0-spidev.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0008-am335x-bone-common-pinmux-mcasp0.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0009-am335x-bone-common-pinmux-lcd.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0010-am335x-bone-common-pinmux-tscadc-4-wire.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0011-am335x-bone-common-pinmux-hdmi-audio.patch"
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		number=11
+		cleanup
+	fi
+
+	echo "dir: beaglebone/dts"
+	${git} "${DIR}/patches/beaglebone/dts/0001-am335x-boneblack-add-cpu0-opp-points.patch"
+
+	echo "dir: beaglebone/capes"
+	${git} "${DIR}/patches/beaglebone/capes/0001-cape-basic-proto-cape.patch"
+	${git} "${DIR}/patches/beaglebone/capes/0002-cape-Argus-UPS-cape-support.patch"
+
+	#regenerate="enable"
+	echo "dir: beaglebone/generated"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		base_dts="am335x-bone"
+		cape="ttyO1"
+		dtsi_append
+
+		cape="ttyO2"
+		dtsi_append
+
+		cape="ttyO4"
+		dtsi_append
+
+		cape="ttyO5"
+		dtsi_append
+
+		base_dts="am335x-boneblack"
+		cape="ttyO1"
+		dtsi_append
+
+		cape="ttyO2"
+		dtsi_append
+
+		cape="ttyO4"
+		dtsi_append
+
+		cape="ttyO5"
+		dtsi_append
+		dtsi_drop_nxp_hdmi_audio
+
+		git commit -a -m 'auto generated: cape: uarts' -s
+		git format-patch -1 -o ../patches/beaglebone/generated/
+	else
+		${git} "${DIR}/patches/beaglebone/generated/0001-auto-generated-cape-uarts.patch"
+	fi
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		base_dts="am335x-bone"
+		cape="audio"
+		dtsi_append
+
+		base_dts="am335x-boneblack"
+		cape="audio"
+		dtsi_append_hdmi_no_audio
+		dtsi_drop_nxp_hdmi_audio
+
+		git commit -a -m 'auto generated: cape: audio' -s
+		git format-patch -2 -o ../patches/beaglebone/generated/
+	else
+		${git} "${DIR}/patches/beaglebone/generated/0002-auto-generated-cape-audio.patch"
+	fi
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		base_dts="am335x-bone"
+		cape="lcd3-01-00a2"
+		dtsi_append
+
+		cape="lcd4-01-00a0"
+		dtsi_append
+		cape="lcd4-01-00a1"
+		dtsi_append
+
+		cape="lcd7-01-00a2"
+		dtsi_append
+		cape="lcd7-01-00a3"
+		dtsi_append
+
+		base_dts="am335x-boneblack"
+		#lcd3 a2+
+		cape="lcd3-01-00a2"
+		dtsi_append
+		dtsi_drop_nxp_hdmi_audio
+
+		#lcd4 a1+
+		cape="lcd4-01-00a1"
+		dtsi_append
+		dtsi_drop_nxp_hdmi_audio
+
+		#drop emmc:
+		cape="lcd7-01-00a2"
+		dtsi_append
+		dtsi_drop_nxp_hdmi_audio
+		dtsi_drop_emmc
+
+		#lcd4 a3+
+		cape="lcd7-01-00a3"
+		dtsi_append
+		dtsi_drop_nxp_hdmi_audio
+
+		git commit -a -m 'auto generated: cape: lcd' -s
+		git format-patch -3 -o ../patches/beaglebone/generated/
+	else
+		${git} "${DIR}/patches/beaglebone/generated/0003-auto-generated-cape-lcd.patch"
+	fi
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		cape="argus"
+
+		base_dts="am335x-bone"
+		dtb_name="${base_dts}-cape-bone-${cape}"
+		dtsi_append_custom
+		dts_drop_clkout2_pin
+
+		base_dts="am335x-boneblack"
+		dtb_name="${base_dts}-cape-bone-${cape}"
+		dtsi_append_custom
+		dts_drop_clkout2_pin
+
+		git commit -a -m 'auto generated: cape: argus' -s
+		git format-patch -4 -o ../patches/beaglebone/generated/
+	else
+		${git} "${DIR}/patches/beaglebone/generated/0004-auto-generated-cape-argus.patch"
+	fi
+
+	#last beaglebone/beaglebone black default
+	if [ "x${regenerate}" = "xenable" ] ; then
+		wfile="arch/arm/boot/dts/am335x-bone.dts"
+		echo "" >> ${wfile}
+		echo "/* http://elinux.org/CircuitCo:Basic_Proto_Cape */" >> ${wfile}
+		echo "#include \"am335x-bone-basic-proto-cape.dtsi\"" >> ${wfile}
+
+		wfile="arch/arm/boot/dts/am335x-boneblack.dts"
+		echo "" >> ${wfile}
+		echo "/* http://elinux.org/CircuitCo:Basic_Proto_Cape */" >> ${wfile}
+		echo "#include \"am335x-bone-basic-proto-cape.dtsi\"" >> ${wfile}
+
+		git commit -a -m 'auto generated: cape: basic-proto-cape' -s
+		git format-patch -5 -o ../patches/beaglebone/generated/
+	else
+		${git} "${DIR}/patches/beaglebone/generated/0005-auto-generated-cape-basic-proto-cape.patch"
+	fi
+
+	#dtb makefile
+	if [ "x${regenerate}" = "xenable" ] ; then
+		device="am335x-bone-audio.dtb"
+		dtb_makefile_append
+
+		device="am335x-bone-cape-bone-argus.dtb"
+		dtb_makefile_append
+
+		device="am335x-bone-lcd3-01-00a2.dtb"
+		dtb_makefile_append
+
+		device="am335x-bone-lcd4-01-00a0.dtb"
+		dtb_makefile_append
+
+		device="am335x-bone-lcd4-01-00a1.dtb"
+		dtb_makefile_append
+
+		device="am335x-bone-lcd7-01-00a2.dtb"
+		dtb_makefile_append
+
+		device="am335x-bone-lcd7-01-00a3.dtb"
+		dtb_makefile_append
+
+		device="am335x-bone-ttyO1.dtb"
+		dtb_makefile_append
+
+		device="am335x-bone-ttyO2.dtb"
+		dtb_makefile_append
+
+		device="am335x-bone-ttyO4.dtb"
+		dtb_makefile_append
+
+		device="am335x-bone-ttyO5.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-audio.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-cape-bone-argus.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-lcd3-01-00a2.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-lcd4-01-00a1.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-lcd7-01-00a2.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-lcd7-01-00a3.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-ttyO1.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-ttyO2.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-ttyO4.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-ttyO5.dtb"
+		dtb_makefile_append
+
+		git commit -a -m 'auto generated: capes: add dtbs to makefile' -s
+		git format-patch -6 -o ../patches/beaglebone/generated/
+		exit
+	else
+		${git} "${DIR}/patches/beaglebone/generated/0006-auto-generated-capes-add-dtbs-to-makefile.patch"
+	fi
+
+	echo "dir: beaglebone/power"
+	${git} "${DIR}/patches/beaglebone/power/0001-tps65217-Enable-KEY_POWER-press-on-AC-loss-PWR_BUT.patch"
+	${git} "${DIR}/patches/beaglebone/power/0002-am335x-bone-common-enable-ti-pmic-shutdown-controlle.patch"
+	${git} "${DIR}/patches/beaglebone/power/0003-dt-bone-common-Add-interrupt-for-PMIC.patch"
+
+	echo "dir: beaglebone/phy"
+	${git} "${DIR}/patches/beaglebone/phy/0001-cpsw-Add-support-for-byte-queue-limits.patch"
+	${git} "${DIR}/patches/beaglebone/phy/0002-cpsw-napi-polling-of-64-is-good-for-gigE-less-good-f.patch"
+	${git} "${DIR}/patches/beaglebone/phy/0003-cpsw-search-for-phy.patch"
+
+	echo "dir: beaglebone/mac"
+	#[PATCH v4 0/7] net: cpsw: Support for am335x chip MACIDs
+	${git} "${DIR}/patches/beaglebone/mac/0001-DT-doc-net-cpsw-mac-address-is-optional.patch"
+	${git} "${DIR}/patches/beaglebone/mac/0002-net-cpsw-Add-missing-return-value.patch"
+	${git} "${DIR}/patches/beaglebone/mac/0003-net-cpsw-header-Add-missing-include.patch"
+	${git} "${DIR}/patches/beaglebone/mac/0004-net-cpsw-Replace-pr_err-by-dev_err.patch"
+	${git} "${DIR}/patches/beaglebone/mac/0005-net-cpsw-Add-am33xx-MACID-readout.patch"
+	${git} "${DIR}/patches/beaglebone/mac/0006-am33xx-define-syscon-control-module-device-node.patch"
+	${git} "${DIR}/patches/beaglebone/mac/0007-arm-dts-am33xx-Add-syscon-phandle-to-cpsw-node.patch"
+
+	echo "dir: beaglebone/hdmi_audio"
+	#[PATCH v2 0/8] Beaglebone-Black HDMI audio
+	${git} "${DIR}/patches/beaglebone/hdmi_audio/0001-clk-ti-add-gpio-controlled-clock.patch"
+	${git} "${DIR}/patches/beaglebone/hdmi_audio/0002-drm-tilcdc-Add-I2S-HDMI-audio-config-for-tda998x.patch"
+	${git} "${DIR}/patches/beaglebone/hdmi_audio/0003-ASoC-davinci-evm-HDMI-audio-support-for-TDA998x-trou.patch"
+	${git} "${DIR}/patches/beaglebone/hdmi_audio/0004-ASoC-davinci-HDMI-audio-build-for-AM33XX-and-TDA998x.patch"
+	${git} "${DIR}/patches/beaglebone/hdmi_audio/0005-ARM-dts-am33xx-Add-external-clock-provider.patch"
+}
+
 #imx_next
 #omap_next
 #tegra_next
@@ -139,8 +466,9 @@ vivante () {
 dts
 wand
 errata
-
 vivante
+
+beaglebone
 
 packaging_setup () {
 	cp -v "${DIR}/3rdparty/packaging/builddeb" "${DIR}/KERNEL/scripts/package"
