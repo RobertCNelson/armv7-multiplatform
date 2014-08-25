@@ -213,9 +213,15 @@ beaglebone () {
 	${git} "${DIR}/patches/beaglebone/pinmux/0009-am335x-bone-common-pinmux-lcd.patch"
 	${git} "${DIR}/patches/beaglebone/pinmux/0010-am335x-bone-common-pinmux-tscadc-4-wire.patch"
 	${git} "${DIR}/patches/beaglebone/pinmux/0011-am335x-bone-common-pinmux-hdmi-audio.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0012-am335x-bone-common-pinmux-led-keys-lcd4-01-00a1-lcd7.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0013-am335x-bone-common-pinmux-i2c1-rtc-01-00a1.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0014-am335x-bone-common-pinmux-led-keys-lcd7-01-00a2.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0015-am335x-bone-common-pinmux-cryptocape.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0016-cape-lcd-4dcape-43-lcd-4dcape-43t.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0017-cape-lcd3-01-00a2-backlight-keys-led.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=11
+		number=17
 		cleanup
 	fi
 
@@ -340,7 +346,56 @@ beaglebone () {
 		${git} "${DIR}/patches/beaglebone/generated/0004-auto-generated-cape-argus.patch"
 	fi
 
+	if [ "x${regenerate}" = "xenable" ] ; then
+		base_dts="am335x-bone"
+		cape="rtc-01-00a1"
+		dtsi_append
+
+		base_dts="am335x-boneblack"
+		cape="rtc-01-00a1"
+		dtsi_append
+
+		git commit -a -m 'auto generated: cape: rtc-01-00a1' -s
+		git format-patch -5 -o ../patches/beaglebone/generated/
+	else
+		${git} "${DIR}/patches/beaglebone/generated/0005-auto-generated-cape-rtc-01-00a1.patch"
+	fi
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		base_dts="am335x-bone"
+		cape="crypto-00a0"
+		dtsi_append
+
+		base_dts="am335x-boneblack"
+		cape="crypto-00a0"
+		dtsi_append
+
+		git commit -a -m 'auto generated: cape: crypto-00a0' -s
+		git format-patch -6 -o ../patches/beaglebone/generated/
+	else
+		${git} "${DIR}/patches/beaglebone/generated/0006-auto-generated-cape-crypto-00a0.patch"
+	fi
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		base_dts="am335x-boneblack"
+		cape="lcd-4dcape-43"
+		dtsi_append
+		dtsi_drop_nxp_hdmi_audio
+
+		base_dts="am335x-boneblack"
+		cape="lcd-4dcape-43t"
+		dtsi_append
+		dtsi_drop_nxp_hdmi_audio
+
+		git commit -a -m 'auto generated: cape: 4dcape-43' -s
+		git format-patch -7 -o ../patches/beaglebone/generated/
+	else
+		${git} "${DIR}/patches/beaglebone/generated/0007-auto-generated-cape-4dcape-43.patch"
+	fi
+
+	####
 	#last beaglebone/beaglebone black default
+	echo "dir: beaglebone/generated/last"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		wfile="arch/arm/boot/dts/am335x-bone.dts"
 		echo "" >> ${wfile}
@@ -353,9 +408,9 @@ beaglebone () {
 		echo "#include \"am335x-bone-basic-proto-cape.dtsi\"" >> ${wfile}
 
 		git commit -a -m 'auto generated: cape: basic-proto-cape' -s
-		git format-patch -5 -o ../patches/beaglebone/generated/
+		git format-patch -1 -o ../patches/beaglebone/generated/last/
 	else
-		${git} "${DIR}/patches/beaglebone/generated/0005-auto-generated-cape-basic-proto-cape.patch"
+		${git} "${DIR}/patches/beaglebone/generated/last/0001-auto-generated-cape-basic-proto-cape.patch"
 	fi
 
 	#dtb makefile
@@ -364,6 +419,9 @@ beaglebone () {
 		dtb_makefile_append
 
 		device="am335x-bone-cape-bone-argus.dtb"
+		dtb_makefile_append
+
+		device="am335x-bone-crypto-00a0.dtb"
 		dtb_makefile_append
 
 		device="am335x-bone-lcd3-01-00a2.dtb"
@@ -379,6 +437,9 @@ beaglebone () {
 		dtb_makefile_append
 
 		device="am335x-bone-lcd7-01-00a3.dtb"
+		dtb_makefile_append
+
+		device="am335x-bone-rtc-01-00a1.dtb"
 		dtb_makefile_append
 
 		device="am335x-bone-ttyO1.dtb"
@@ -399,6 +460,15 @@ beaglebone () {
 		device="am335x-boneblack-cape-bone-argus.dtb"
 		dtb_makefile_append
 
+		device="am335x-boneblack-crypto-00a0.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-lcd-4dcape-43.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-lcd-4dcape-43t.dtb"
+		dtb_makefile_append
+
 		device="am335x-boneblack-lcd3-01-00a2.dtb"
 		dtb_makefile_append
 
@@ -409,6 +479,9 @@ beaglebone () {
 		dtb_makefile_append
 
 		device="am335x-boneblack-lcd7-01-00a3.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-rtc-01-00a1.dtb"
 		dtb_makefile_append
 
 		device="am335x-boneblack-ttyO1.dtb"
@@ -424,10 +497,10 @@ beaglebone () {
 		dtb_makefile_append
 
 		git commit -a -m 'auto generated: capes: add dtbs to makefile' -s
-		git format-patch -6 -o ../patches/beaglebone/generated/
+		git format-patch -2 -o ../patches/beaglebone/generated/last/
 		exit
 	else
-		${git} "${DIR}/patches/beaglebone/generated/0006-auto-generated-capes-add-dtbs-to-makefile.patch"
+		${git} "${DIR}/patches/beaglebone/generated/last/0002-auto-generated-capes-add-dtbs-to-makefile.patch"
 	fi
 
 	echo "dir: beaglebone/power"
@@ -441,7 +514,7 @@ beaglebone () {
 	${git} "${DIR}/patches/beaglebone/phy/0003-cpsw-search-for-phy.patch"
 
 	echo "dir: beaglebone/mac"
-	#[PATCH v4 0/7] net: cpsw: Support for am335x chip MACIDs
+	#[PATCH v5 0/7] net: cpsw: Support for am335x chip MACIDs
 	${git} "${DIR}/patches/beaglebone/mac/0001-DT-doc-net-cpsw-mac-address-is-optional.patch"
 	${git} "${DIR}/patches/beaglebone/mac/0002-net-cpsw-Add-missing-return-value.patch"
 	${git} "${DIR}/patches/beaglebone/mac/0003-net-cpsw-header-Add-missing-include.patch"

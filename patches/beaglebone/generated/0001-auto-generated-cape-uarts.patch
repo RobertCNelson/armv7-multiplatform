@@ -1,19 +1,19 @@
-From cbde3ac85fcd3fe9c42f8b3b62e42398a8e3ffc3 Mon Sep 17 00:00:00 2001
+From 1aa86041d16ab34070c89639b03ca4a89f5027a4 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Thu, 21 Aug 2014 14:58:48 -0500
-Subject: [PATCH 1/6] auto generated: cape: uarts
+Date: Mon, 25 Aug 2014 18:37:27 -0500
+Subject: [PATCH 1/7] auto generated: cape: uarts
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
- arch/arm/boot/dts/am335x-bone-ttyO1.dts      | 65 ++++++++++++++++++++++++++
- arch/arm/boot/dts/am335x-bone-ttyO2.dts      | 65 ++++++++++++++++++++++++++
- arch/arm/boot/dts/am335x-bone-ttyO4.dts      | 65 ++++++++++++++++++++++++++
- arch/arm/boot/dts/am335x-bone-ttyO5.dts      | 65 ++++++++++++++++++++++++++
- arch/arm/boot/dts/am335x-boneblack-ttyO1.dts | 70 ++++++++++++++++++++++++++++
- arch/arm/boot/dts/am335x-boneblack-ttyO2.dts | 70 ++++++++++++++++++++++++++++
- arch/arm/boot/dts/am335x-boneblack-ttyO4.dts | 70 ++++++++++++++++++++++++++++
- arch/arm/boot/dts/am335x-boneblack-ttyO5.dts | 70 ++++++++++++++++++++++++++++
- 8 files changed, 540 insertions(+)
+ arch/arm/boot/dts/am335x-bone-ttyO1.dts      | 75 ++++++++++++++++++++++++
+ arch/arm/boot/dts/am335x-bone-ttyO2.dts      | 75 ++++++++++++++++++++++++
+ arch/arm/boot/dts/am335x-bone-ttyO4.dts      | 75 ++++++++++++++++++++++++
+ arch/arm/boot/dts/am335x-bone-ttyO5.dts      | 75 ++++++++++++++++++++++++
+ arch/arm/boot/dts/am335x-boneblack-ttyO1.dts | 86 ++++++++++++++++++++++++++++
+ arch/arm/boot/dts/am335x-boneblack-ttyO2.dts | 86 ++++++++++++++++++++++++++++
+ arch/arm/boot/dts/am335x-boneblack-ttyO4.dts | 86 ++++++++++++++++++++++++++++
+ arch/arm/boot/dts/am335x-boneblack-ttyO5.dts | 86 ++++++++++++++++++++++++++++
+ 8 files changed, 644 insertions(+)
  create mode 100644 arch/arm/boot/dts/am335x-bone-ttyO1.dts
  create mode 100644 arch/arm/boot/dts/am335x-bone-ttyO2.dts
  create mode 100644 arch/arm/boot/dts/am335x-bone-ttyO4.dts
@@ -25,10 +25,10 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 
 diff --git a/arch/arm/boot/dts/am335x-bone-ttyO1.dts b/arch/arm/boot/dts/am335x-bone-ttyO1.dts
 new file mode 100644
-index 0000000..5b589f7
+index 0000000..0fc29b0
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-bone-ttyO1.dts
-@@ -0,0 +1,65 @@
+@@ -0,0 +1,75 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -92,14 +92,24 @@ index 0000000..5b589f7
 +/* http://elinux.org/CircuitCo:BeagleBone_LCD7 */
 +/* #include "am335x-bone-lcd7-01-00a2.dtsi" */
 +/* #include "am335x-bone-lcd7-01-00a3.dtsi" */
++
++/* http://elinux.org/CircuitCo:RTC_Cape */
++/* i2c1: P9.17, P9.18 */
++/* gpio: P8.26 (mfp: wakeup) */
++/* #include "am335x-bone-rtc-01-00a1.dtsi" */
++
++/* http://elinux.org/Cryptotronix:CryptoCape */
++/* uart4: P9.11, P9.13 */
++/* gpio: gpio1 13 gpio1 17 (gpio NOT IMPLEMENTED YET) */
++/* #include "am335x-bone-crypto-00a0.dtsi" */
 +
 +#include "am335x-bone-ttyO1.dtsi"
 diff --git a/arch/arm/boot/dts/am335x-bone-ttyO2.dts b/arch/arm/boot/dts/am335x-bone-ttyO2.dts
 new file mode 100644
-index 0000000..f06db52
+index 0000000..1f5801c
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-bone-ttyO2.dts
-@@ -0,0 +1,65 @@
+@@ -0,0 +1,75 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -163,14 +173,24 @@ index 0000000..f06db52
 +/* http://elinux.org/CircuitCo:BeagleBone_LCD7 */
 +/* #include "am335x-bone-lcd7-01-00a2.dtsi" */
 +/* #include "am335x-bone-lcd7-01-00a3.dtsi" */
++
++/* http://elinux.org/CircuitCo:RTC_Cape */
++/* i2c1: P9.17, P9.18 */
++/* gpio: P8.26 (mfp: wakeup) */
++/* #include "am335x-bone-rtc-01-00a1.dtsi" */
++
++/* http://elinux.org/Cryptotronix:CryptoCape */
++/* uart4: P9.11, P9.13 */
++/* gpio: gpio1 13 gpio1 17 (gpio NOT IMPLEMENTED YET) */
++/* #include "am335x-bone-crypto-00a0.dtsi" */
 +
 +#include "am335x-bone-ttyO2.dtsi"
 diff --git a/arch/arm/boot/dts/am335x-bone-ttyO4.dts b/arch/arm/boot/dts/am335x-bone-ttyO4.dts
 new file mode 100644
-index 0000000..a6e33de
+index 0000000..97085e4
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-bone-ttyO4.dts
-@@ -0,0 +1,65 @@
+@@ -0,0 +1,75 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -234,14 +254,24 @@ index 0000000..a6e33de
 +/* http://elinux.org/CircuitCo:BeagleBone_LCD7 */
 +/* #include "am335x-bone-lcd7-01-00a2.dtsi" */
 +/* #include "am335x-bone-lcd7-01-00a3.dtsi" */
++
++/* http://elinux.org/CircuitCo:RTC_Cape */
++/* i2c1: P9.17, P9.18 */
++/* gpio: P8.26 (mfp: wakeup) */
++/* #include "am335x-bone-rtc-01-00a1.dtsi" */
++
++/* http://elinux.org/Cryptotronix:CryptoCape */
++/* uart4: P9.11, P9.13 */
++/* gpio: gpio1 13 gpio1 17 (gpio NOT IMPLEMENTED YET) */
++/* #include "am335x-bone-crypto-00a0.dtsi" */
 +
 +#include "am335x-bone-ttyO4.dtsi"
 diff --git a/arch/arm/boot/dts/am335x-bone-ttyO5.dts b/arch/arm/boot/dts/am335x-bone-ttyO5.dts
 new file mode 100644
-index 0000000..4549610
+index 0000000..6cfdd47
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-bone-ttyO5.dts
-@@ -0,0 +1,65 @@
+@@ -0,0 +1,75 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -306,13 +336,23 @@ index 0000000..4549610
 +/* #include "am335x-bone-lcd7-01-00a2.dtsi" */
 +/* #include "am335x-bone-lcd7-01-00a3.dtsi" */
 +
++/* http://elinux.org/CircuitCo:RTC_Cape */
++/* i2c1: P9.17, P9.18 */
++/* gpio: P8.26 (mfp: wakeup) */
++/* #include "am335x-bone-rtc-01-00a1.dtsi" */
++
++/* http://elinux.org/Cryptotronix:CryptoCape */
++/* uart4: P9.11, P9.13 */
++/* gpio: gpio1 13 gpio1 17 (gpio NOT IMPLEMENTED YET) */
++/* #include "am335x-bone-crypto-00a0.dtsi" */
++
 +#include "am335x-bone-ttyO5.dtsi"
 diff --git a/arch/arm/boot/dts/am335x-boneblack-ttyO1.dts b/arch/arm/boot/dts/am335x-boneblack-ttyO1.dts
 new file mode 100644
-index 0000000..db57880
+index 0000000..65d1988
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-boneblack-ttyO1.dts
-@@ -0,0 +1,70 @@
+@@ -0,0 +1,86 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -367,6 +407,12 @@ index 0000000..db57880
 +#include "am335x-boneblack-nxp-hdmi-audio.dtsi"
 +
 +/* Capes */
++/* http://elinux.org/4D_4.3_LCD_CAPE */
++/* 4DCAPE-43 (Non Touch version): */
++/* #include "am335x-bone-lcd-4dcape-43.dtsi" */
++/* 4DCAPE-43T (Resistive Touch version): */
++/* #include "am335x-bone-lcd-4dcape-43t.dtsi" */
++
 +/* http://elinux.org/CircuitCo:Audio_Cape_RevB */
 +/* Pins: P9.24, P9.28, P9.29, P9.31, P9.30 */
 +/* #include "am335x-bone-audio.dtsi" */
@@ -381,14 +427,24 @@ index 0000000..db57880
 +/* am335x-boneblack: emmc has to be disabled for lcd7-01-00a2 */
 +/* #include "am335x-bone-lcd7-01-00a2.dtsi" */
 +/* #include "am335x-bone-lcd7-01-00a3.dtsi" */
++
++/* http://elinux.org/CircuitCo:RTC_Cape */
++/* i2c1: P9.17, P9.18 */
++/* gpio: P8.26 (mfp: wakeup) */
++/* #include "am335x-bone-rtc-01-00a1.dtsi" */
++
++/* http://elinux.org/Cryptotronix:CryptoCape */
++/* uart4: P9.11, P9.13 */
++/* gpio: gpio1 13 gpio1 17 (gpio NOT IMPLEMENTED YET) */
++/* #include "am335x-bone-crypto-00a0.dtsi" */
 +
 +#include "am335x-bone-ttyO1.dtsi"
 diff --git a/arch/arm/boot/dts/am335x-boneblack-ttyO2.dts b/arch/arm/boot/dts/am335x-boneblack-ttyO2.dts
 new file mode 100644
-index 0000000..14270e0
+index 0000000..d0368c5
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-boneblack-ttyO2.dts
-@@ -0,0 +1,70 @@
+@@ -0,0 +1,86 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -443,6 +499,12 @@ index 0000000..14270e0
 +#include "am335x-boneblack-nxp-hdmi-audio.dtsi"
 +
 +/* Capes */
++/* http://elinux.org/4D_4.3_LCD_CAPE */
++/* 4DCAPE-43 (Non Touch version): */
++/* #include "am335x-bone-lcd-4dcape-43.dtsi" */
++/* 4DCAPE-43T (Resistive Touch version): */
++/* #include "am335x-bone-lcd-4dcape-43t.dtsi" */
++
 +/* http://elinux.org/CircuitCo:Audio_Cape_RevB */
 +/* Pins: P9.24, P9.28, P9.29, P9.31, P9.30 */
 +/* #include "am335x-bone-audio.dtsi" */
@@ -457,14 +519,24 @@ index 0000000..14270e0
 +/* am335x-boneblack: emmc has to be disabled for lcd7-01-00a2 */
 +/* #include "am335x-bone-lcd7-01-00a2.dtsi" */
 +/* #include "am335x-bone-lcd7-01-00a3.dtsi" */
++
++/* http://elinux.org/CircuitCo:RTC_Cape */
++/* i2c1: P9.17, P9.18 */
++/* gpio: P8.26 (mfp: wakeup) */
++/* #include "am335x-bone-rtc-01-00a1.dtsi" */
++
++/* http://elinux.org/Cryptotronix:CryptoCape */
++/* uart4: P9.11, P9.13 */
++/* gpio: gpio1 13 gpio1 17 (gpio NOT IMPLEMENTED YET) */
++/* #include "am335x-bone-crypto-00a0.dtsi" */
 +
 +#include "am335x-bone-ttyO2.dtsi"
 diff --git a/arch/arm/boot/dts/am335x-boneblack-ttyO4.dts b/arch/arm/boot/dts/am335x-boneblack-ttyO4.dts
 new file mode 100644
-index 0000000..8736b25
+index 0000000..7e64b47
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-boneblack-ttyO4.dts
-@@ -0,0 +1,70 @@
+@@ -0,0 +1,86 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -519,6 +591,12 @@ index 0000000..8736b25
 +#include "am335x-boneblack-nxp-hdmi-audio.dtsi"
 +
 +/* Capes */
++/* http://elinux.org/4D_4.3_LCD_CAPE */
++/* 4DCAPE-43 (Non Touch version): */
++/* #include "am335x-bone-lcd-4dcape-43.dtsi" */
++/* 4DCAPE-43T (Resistive Touch version): */
++/* #include "am335x-bone-lcd-4dcape-43t.dtsi" */
++
 +/* http://elinux.org/CircuitCo:Audio_Cape_RevB */
 +/* Pins: P9.24, P9.28, P9.29, P9.31, P9.30 */
 +/* #include "am335x-bone-audio.dtsi" */
@@ -534,13 +612,23 @@ index 0000000..8736b25
 +/* #include "am335x-bone-lcd7-01-00a2.dtsi" */
 +/* #include "am335x-bone-lcd7-01-00a3.dtsi" */
 +
++/* http://elinux.org/CircuitCo:RTC_Cape */
++/* i2c1: P9.17, P9.18 */
++/* gpio: P8.26 (mfp: wakeup) */
++/* #include "am335x-bone-rtc-01-00a1.dtsi" */
++
++/* http://elinux.org/Cryptotronix:CryptoCape */
++/* uart4: P9.11, P9.13 */
++/* gpio: gpio1 13 gpio1 17 (gpio NOT IMPLEMENTED YET) */
++/* #include "am335x-bone-crypto-00a0.dtsi" */
++
 +#include "am335x-bone-ttyO4.dtsi"
 diff --git a/arch/arm/boot/dts/am335x-boneblack-ttyO5.dts b/arch/arm/boot/dts/am335x-boneblack-ttyO5.dts
 new file mode 100644
-index 0000000..1a8e7ca
+index 0000000..c6749ee
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-boneblack-ttyO5.dts
-@@ -0,0 +1,70 @@
+@@ -0,0 +1,86 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -595,6 +683,12 @@ index 0000000..1a8e7ca
 +/* #include "am335x-boneblack-nxp-hdmi-audio.dtsi" */
 +
 +/* Capes */
++/* http://elinux.org/4D_4.3_LCD_CAPE */
++/* 4DCAPE-43 (Non Touch version): */
++/* #include "am335x-bone-lcd-4dcape-43.dtsi" */
++/* 4DCAPE-43T (Resistive Touch version): */
++/* #include "am335x-bone-lcd-4dcape-43t.dtsi" */
++
 +/* http://elinux.org/CircuitCo:Audio_Cape_RevB */
 +/* Pins: P9.24, P9.28, P9.29, P9.31, P9.30 */
 +/* #include "am335x-bone-audio.dtsi" */
@@ -609,6 +703,16 @@ index 0000000..1a8e7ca
 +/* am335x-boneblack: emmc has to be disabled for lcd7-01-00a2 */
 +/* #include "am335x-bone-lcd7-01-00a2.dtsi" */
 +/* #include "am335x-bone-lcd7-01-00a3.dtsi" */
++
++/* http://elinux.org/CircuitCo:RTC_Cape */
++/* i2c1: P9.17, P9.18 */
++/* gpio: P8.26 (mfp: wakeup) */
++/* #include "am335x-bone-rtc-01-00a1.dtsi" */
++
++/* http://elinux.org/Cryptotronix:CryptoCape */
++/* uart4: P9.11, P9.13 */
++/* gpio: gpio1 13 gpio1 17 (gpio NOT IMPLEMENTED YET) */
++/* #include "am335x-bone-crypto-00a0.dtsi" */
 +
 +#include "am335x-bone-ttyO5.dtsi"
 -- 
