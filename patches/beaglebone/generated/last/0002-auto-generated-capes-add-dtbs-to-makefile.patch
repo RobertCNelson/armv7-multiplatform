@@ -1,18 +1,18 @@
-From 92d2a4697031b668c529c6d24961f515020da115 Mon Sep 17 00:00:00 2001
+From 222eefc31aef041dfbcb7df88c0cdfe46a64fbed Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 25 Aug 2014 18:37:30 -0500
+Date: Sun, 31 Aug 2014 21:54:08 -0500
 Subject: [PATCH 2/2] auto generated: capes: add dtbs to makefile
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
- arch/arm/boot/dts/Makefile | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ arch/arm/boot/dts/Makefile | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 11dc511..d743b03 100644
+index 11dc511..daa47fb 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
-@@ -314,6 +314,33 @@ dtb-$(CONFIG_ARCH_OMAP3) += am3517-craneboard.dtb \
+@@ -314,6 +314,34 @@ dtb-$(CONFIG_ARCH_OMAP3) += am3517-craneboard.dtb \
  dtb-$(CONFIG_SOC_AM33XX) += am335x-base0033.dtb \
  	am335x-bone.dtb \
  	am335x-boneblack.dtb \
@@ -25,8 +25,10 @@ index 11dc511..d743b03 100644
 +	am335x-boneblack-lcd7-01-00a2.dtb \
 +	am335x-boneblack-lcd4-01-00a1.dtb \
 +	am335x-boneblack-lcd3-01-00a2.dtb \
-+	am335x-boneblack-lcd-4dcape-43t.dtb \
-+	am335x-boneblack-lcd-4dcape-43.dtb \
++	am335x-boneblack-4dcape-70t.dtb \
++	am335x-boneblack-4dcape-70.dtb \
++	am335x-boneblack-4dcape-43t.dtb \
++	am335x-boneblack-4dcape-43.dtb \
 +	am335x-boneblack-crypto-00a0.dtb \
 +	am335x-boneblack-cape-bone-argus.dtb \
 +	am335x-boneblack-audio.dtb \
@@ -38,7 +40,6 @@ index 11dc511..d743b03 100644
 +	am335x-bone-lcd7-01-00a3.dtb \
 +	am335x-bone-lcd7-01-00a2.dtb \
 +	am335x-bone-lcd4-01-00a1.dtb \
-+	am335x-bone-lcd4-01-00a0.dtb \
 +	am335x-bone-lcd3-01-00a2.dtb \
 +	am335x-bone-crypto-00a0.dtb \
 +	am335x-bone-cape-bone-argus.dtb \
@@ -47,5 +48,5 @@ index 11dc511..d743b03 100644
  	am335x-evmsk.dtb \
  	am335x-nano.dtb \
 -- 
-2.1.0.rc1
+2.1.0
 

@@ -1,7 +1,7 @@
-From 0459049fe8646531d7727aee964ef2471ae23340 Mon Sep 17 00:00:00 2001
+From 3477de7142788ed1e29e1ab837e72f55655bf6ff Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Tue, 19 Aug 2014 11:55:43 -0500
-Subject: [PATCH 04/17] am335x-boneblack: split out nxp hdmi no audio
+Subject: [PATCH 04/18] am335x-boneblack: split out nxp hdmi no audio
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
@@ -63,5 +63,5 @@ index 3b1ed82..b004d2ec 100644
 +/* Display */
 +#include "am335x-boneblack-nxp-hdmi-no-audio.dtsi"
 -- 
-2.1.0.rc1
+2.1.0
 

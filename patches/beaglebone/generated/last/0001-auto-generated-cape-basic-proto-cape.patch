@@ -1,6 +1,6 @@
-From f4de8231dc5050d10d32434f532f8c395f9f5dae Mon Sep 17 00:00:00 2001
+From 37467ad129326abe92a80a449bb36309b2ddd9ac Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 25 Aug 2014 18:37:30 -0500
+Date: Sun, 31 Aug 2014 21:54:08 -0500
 Subject: [PATCH 1/2] auto generated: cape: basic-proto-cape
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
@@ -10,10 +10,10 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  2 files changed, 6 insertions(+)
 
 diff --git a/arch/arm/boot/dts/am335x-bone.dts b/arch/arm/boot/dts/am335x-bone.dts
-index e64fed5..0357233 100644
+index 73d834e..cd0adcc 100644
 --- a/arch/arm/boot/dts/am335x-bone.dts
 +++ b/arch/arm/boot/dts/am335x-bone.dts
-@@ -71,3 +71,6 @@
+@@ -88,3 +88,6 @@
  /* uart4: P9.11, P9.13 */
  /* gpio: gpio1 13 gpio1 17 (gpio NOT IMPLEMENTED YET) */
  /* #include "am335x-bone-crypto-00a0.dtsi" */
@@ -21,10 +21,10 @@ index e64fed5..0357233 100644
 +/* http://elinux.org/CircuitCo:Basic_Proto_Cape */
 +#include "am335x-bone-basic-proto-cape.dtsi"
 diff --git a/arch/arm/boot/dts/am335x-boneblack.dts b/arch/arm/boot/dts/am335x-boneblack.dts
-index 68ba961..9eb1838 100644
+index 128b088..112bda2 100644
 --- a/arch/arm/boot/dts/am335x-boneblack.dts
 +++ b/arch/arm/boot/dts/am335x-boneblack.dts
-@@ -82,3 +82,6 @@
+@@ -104,3 +104,6 @@
  /* uart4: P9.11, P9.13 */
  /* gpio: gpio1 13 gpio1 17 (gpio NOT IMPLEMENTED YET) */
  /* #include "am335x-bone-crypto-00a0.dtsi" */
@@ -32,5 +32,5 @@ index 68ba961..9eb1838 100644
 +/* http://elinux.org/CircuitCo:Basic_Proto_Cape */
 +#include "am335x-bone-basic-proto-cape.dtsi"
 -- 
-2.1.0.rc1
+2.1.0
 
