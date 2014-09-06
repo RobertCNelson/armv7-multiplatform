@@ -10,7 +10,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/gpu/drm/omapdrm/omap_plane.c b/drivers/gpu/drm/omapdrm/omap_plane.c
-index 3cf31ee..54813ee 100644
+index 6af3398..2d4d2ae 100644
 --- a/drivers/gpu/drm/omapdrm/omap_plane.c
 +++ b/drivers/gpu/drm/omapdrm/omap_plane.c
 @@ -121,7 +121,8 @@ static void omap_plane_pre_apply(struct omap_drm_apply *apply)
@@ -24,7 +24,7 @@ index 3cf31ee..54813ee 100644
  
  	DBG("%s, enabled=%d", omap_plane->name, enabled);
 @@ -146,7 +147,7 @@ static void omap_plane_pre_apply(struct omap_drm_apply *apply)
- 			info->paddr, info->p_uv_addr);
+ 			&info->paddr, &info->p_uv_addr);
  
  	/* TODO: */
 -	ilace = false;
@@ -33,5 +33,5 @@ index 3cf31ee..54813ee 100644
  
  	/* and finally, update omapdss: */
 -- 
-2.0.0
+2.1.0
 
