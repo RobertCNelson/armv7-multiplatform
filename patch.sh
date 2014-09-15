@@ -106,6 +106,7 @@ wand () {
 	echo "dir: wand"
 	${git} "${DIR}/patches/wand/0001-ARM-i.MX6-Wandboard-add-wifi-bt-rfkill-driver.patch"
 	${git} "${DIR}/patches/wand/0002-ARM-dts-wandboard-add-binding-for-wand-rfkill-driver.patch"
+	${git} "${DIR}/patches/wand/0003-Vivante-v4-driver.patch"
 }
 
 errata () {
@@ -113,23 +114,34 @@ errata () {
 	${git} "${DIR}/patches/errata/0001-hack-omap-clockk-dpll5-apply-sprz319e-2.1-erratum-co.patch"
 }
 
-vivante () {
-	echo "dir: vivante"
-	#http://git.freescale.com/git/cgit.cgi/imx/linux-2.6-imx.git/
-	#git checkout v3.10.17 -b freescale
-	#git pull --no-edit git://git.freescale.com/imx/linux-2.6-imx.git imx_3.10.17_1.0.0_beta
-	#git format-patch -1 -o /opt/github/linux-dev/patches/vivante/ 3b934d57da5637f4edabb5504bd668debdbb03b3
-	#git format-patch -1 -o /opt/github/linux-dev/patches/vivante/ 2d570481f146218b5148930b573401070526cc1a
-	#git checkout master -f ; git branch -D freescale
-
-	${git} "${DIR}/patches/vivante/0001-ENGR00240988-drm-copy-vivante-driver-from-3.5.7-kern.patch"
-	${git} "${DIR}/patches/vivante/0002-ENGR00240988-drm-vivante-remove-reclaim_buffers-call.patch"
-
-	#fixes:
-	${git} "${DIR}/patches/vivante/0003-drm-vivante-build-fixes.patch"
-
-	#v3.14.x+
-	${git} "${DIR}/patches/vivante/0004-Fixed-vivante-driver-for-kernel-3.14.x.patch"
+freescale () {
+	echo "dir: freescale/ipu-v3"
+	${git} "${DIR}/patches/freescale/ipu-v3/0001-gpu-ipu-v3-Add-ipu-cpmem-unit.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0002-staging-imx-drm-Convert-to-new-ipu_cpmem-API.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0003-gpu-ipu-v3-Add-functions-to-set-CSI-IC-source-muxes.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0004-gpu-ipu-v3-Rename-and-add-IDMAC-channels.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0005-gpu-ipu-v3-Add-Camera-Sensor-Interface-unit.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0006-gpu-ipu-v3-Add-Image-Converter-unit.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0007-gpu-ipu-v3-smfc-Move-enable-disable-to-ipu-smfc.c.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0008-gpu-ipu-v3-smfc-Convert-to-per-channel.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0009-gpu-ipu-v3-smfc-Add-ipu_smfc_set_watermark.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0010-gpu-ipu-v3-Add-ipu_mbus_code_to_colorspace.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0011-gpu-ipu-v3-Add-rotation-mode-conversion-utilities.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0012-gpu-ipu-v3-Add-helper-function-checking-if-pixfmt-is.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0013-gpu-ipu-v3-Move-IDMAC-channel-names-to-imx-ipu-v3.h.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0014-gpu-ipu-v3-Add-ipu_idmac_buffer_is_ready.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0015-gpu-ipu-v3-Add-ipu_idmac_clear_buffer.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0016-gpu-ipu-v3-Add-__ipu_idmac_reset_current_buffer.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0017-gpu-ipu-v3-Add-ipu_stride_to_bytes.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0018-gpu-ipu-v3-Add-ipu_idmac_enable_watermark.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0019-gpu-ipu-v3-Add-ipu_idmac_lock_enable.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0020-gpu-ipu-cpmem-Add-ipu_cpmem_set_block_mode.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0021-gpu-ipu-cpmem-Add-ipu_cpmem_set_axi_id.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0022-gpu-ipu-cpmem-Add-ipu_cpmem_set_rotation.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0023-gpu-ipu-cpmem-Add-second-buffer-support-to-ipu_cpmem.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0024-gpu-ipu-v3-Add-more-planar-formats-support.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0025-gpu-ipu-cpmem-Add-ipu_cpmem_dump.patch"
+	${git} "${DIR}/patches/freescale/ipu-v3/0026-gpu-ipu-v3-Add-ipu_dump.patch"
 }
 
 dtb_makefile_append () {
@@ -220,18 +232,21 @@ beaglebone () {
 	${git} "${DIR}/patches/beaglebone/pinmux/0015-am335x-bone-cape-rtc-01-00a1.patch"
 	${git} "${DIR}/patches/beaglebone/pinmux/0016-am335x-bone-cape-crypto-00a0.patch"
 	${git} "${DIR}/patches/beaglebone/pinmux/0017-am335x-bone-common-pinmux-spi1-spidev.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0018-am335x-bone-cape-chipsee-bbb-exp-c.patch"
 
 	#last: (hdmi audio needs to be backported..)
-	${git} "${DIR}/patches/beaglebone/pinmux/0018-am335x-bone-common-pinmux-hdmi-audio.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux/0019-am335x-bone-common-pinmux-hdmi-audio.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=18
+		number=19
 		cleanup
 	fi
 
 	echo "dir: beaglebone/dts"
 	${git} "${DIR}/patches/beaglebone/dts/0001-am335x-boneblack-add-cpu0-opp-points.patch"
 	${git} "${DIR}/patches/beaglebone/dts/0002-dts-am335x-bone-common-fixup-leds-to-match-3.8.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0003-ARM-dts-am335x-bone-Fix-model-name-and-update-compat.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0004-ARM-dts-am335x-boneblack-dcdc1-set-to-1.35v-for-ddr3.patch"
 
 	echo "dir: beaglebone/capes"
 	${git} "${DIR}/patches/beaglebone/capes/0001-cape-basic-proto-cape.patch"
@@ -407,6 +422,18 @@ beaglebone () {
 		${git} "${DIR}/patches/beaglebone/generated/0007-auto-generated-cape-4dcape.patch"
 	fi
 
+	if [ "x${regenerate}" = "xenable" ] ; then
+		base_dts="am335x-boneblack"
+		cape="bbb-exp-c"
+		dtsi_append
+		dtsi_drop_nxp_hdmi_audio
+
+		git commit -a -m 'auto generated: cape: bbb-exp-c' -s
+		git format-patch -8 -o ../patches/beaglebone/generated/
+	else
+		${git} "${DIR}/patches/beaglebone/generated/0008-auto-generated-cape-bbb-exp-c.patch"
+	fi
+
 	####
 	#last beaglebone/beaglebone black default
 	echo "dir: beaglebone/generated/last"
@@ -414,12 +441,12 @@ beaglebone () {
 		wfile="arch/arm/boot/dts/am335x-bone.dts"
 		echo "" >> ${wfile}
 		echo "/* http://elinux.org/CircuitCo:Basic_Proto_Cape */" >> ${wfile}
-		echo "#include \"am335x-bone-basic-proto-cape.dtsi\"" >> ${wfile}
+		echo "/* #include \"am335x-bone-basic-proto-cape.dtsi\" */" >> ${wfile}
 
 		wfile="arch/arm/boot/dts/am335x-boneblack.dts"
 		echo "" >> ${wfile}
 		echo "/* http://elinux.org/CircuitCo:Basic_Proto_Cape */" >> ${wfile}
-		echo "#include \"am335x-bone-basic-proto-cape.dtsi\"" >> ${wfile}
+		echo "/* #include \"am335x-bone-basic-proto-cape.dtsi\" */" >> ${wfile}
 
 		git commit -a -m 'auto generated: cape: basic-proto-cape' -s
 		git format-patch -1 -o ../patches/beaglebone/generated/last/
@@ -484,6 +511,9 @@ beaglebone () {
 		dtb_makefile_append
 
 		device="am335x-boneblack-4dcape-70t.dtb"
+		dtb_makefile_append
+
+		device="am335x-boneblack-bbb-exp-c.dtb"
 		dtb_makefile_append
 
 		device="am335x-boneblack-lcd3-01-00a2.dtb"
@@ -556,7 +586,7 @@ beaglebone () {
 dts
 wand
 errata
-vivante
+freescale
 
 beaglebone
 

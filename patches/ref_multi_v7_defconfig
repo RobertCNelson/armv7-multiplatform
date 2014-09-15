@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 3.17.0-rc4 Kernel Configuration
+# Linux/arm 3.17.0-rc5 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -1592,7 +1592,6 @@ CONFIG_NET_VENDOR_REALTEK=y
 # CONFIG_8139CP is not set
 # CONFIG_8139TOO is not set
 CONFIG_R8169=y
-# CONFIG_SH_ETH is not set
 CONFIG_NET_VENDOR_RDC=y
 # CONFIG_R6040 is not set
 CONFIG_NET_VENDOR_SAMSUNG=y
@@ -2907,6 +2906,7 @@ CONFIG_MEDIA_SUBDRV_AUTOSELECT=y
 #
 CONFIG_VGA_ARB=y
 CONFIG_VGA_ARB_MAX_GPUS=16
+# CONFIG_GPU_VIVANTE_V4 is not set
 CONFIG_TEGRA_HOST1X=y
 CONFIG_TEGRA_HOST1X_FIREWALL=y
 # CONFIG_IMX_IPUV3_CORE is not set
@@ -2934,7 +2934,6 @@ CONFIG_DRM_KMS_FB_HELPER=y
 # CONFIG_DRM_MGA is not set
 # CONFIG_DRM_VIA is not set
 # CONFIG_DRM_SAVAGE is not set
-# CONFIG_DRM_VIVANTE is not set
 # CONFIG_DRM_EXYNOS is not set
 # CONFIG_DRM_VMWGFX is not set
 # CONFIG_DRM_UDL is not set
