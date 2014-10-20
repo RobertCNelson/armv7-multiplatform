@@ -1,7 +1,7 @@
-From 045899d1af63a45fffbe70334a9dcf5306467c9f Mon Sep 17 00:00:00 2001
+From 81555239014bfdf99db3482dbc7968eddbb78285 Mon Sep 17 00:00:00 2001
 From: Iain Paton <ipaton0@gmail.com>
 Date: Fri, 10 Oct 2014 14:15:24 +0100
-Subject: [PATCH 12/12] ARM: sun7i: add support for A20-OLinuXino-Lime2
+Subject: [PATCH 11/11] ARM: sun7i: add support for A20-OLinuXino-Lime2
 
 This adds support for the Olimex A20-OLinuXino-Lime2
 https://www.olimex.com/Products/OLinuXino/A20/A20-OLinuXIno-LIME2
@@ -16,11 +16,11 @@ Signed-off-by: Iain Paton <ipaton0@gmail.com>
  create mode 100644 arch/arm/boot/dts/sun7i-a20-olinuxino-lime2.dts
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 7af3f1c..70976d2 100644
+index 2bfe0f7..2dae264 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
-@@ -458,6 +458,7 @@ dtb-$(CONFIG_MACH_SUN7I) += \
- 	sun7i-a20-cubietruck.dtb \
+@@ -440,6 +440,7 @@ dtb-$(CONFIG_MACH_SUN7I) += \
+ 	sun7i-a20-hummingbird.dtb \
  	sun7i-a20-i12-tvbox.dtb \
  	sun7i-a20-olinuxino-lime.dtb \
 +	sun7i-a20-olinuxino-lime2.dtb \

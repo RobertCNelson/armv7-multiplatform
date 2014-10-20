@@ -144,6 +144,12 @@ config="CONFIG_SERIAL_FSL_LPUART"
 check_config_disable
 
 #
+# Input Device Drivers
+#
+config="CONFIG_TOUCHSCREEN_EDT_FT5X06"
+check_config_builtin
+
+#
 # Native drivers
 #
 config="CONFIG_IMX_THERMAL"
@@ -153,12 +159,6 @@ check_config_disable
 # Watchdog Device Drivers
 #
 config="CONFIG_DA9052_WATCHDOG"
-check_config_disable
-
-#
-# I2C encoder or helper chips
-#
-config="CONFIG_DRM_OMAP"
 check_config_disable
 
 #
@@ -314,9 +314,37 @@ config="CONFIG_RTC_DRV_OMAP"
 check_config_builtin
 
 #
+# Graphics support
+#
+config="CONFIG_GPU_VIVANTE_V4"
+check_config_disable
+config="CONFIG_IMX_IPUV3_CORE"
+check_config_disable
+
+#
+# I2C encoder or helper chips
+#
+config="CONFIG_DRM_OMAP"
+check_config_disable
+
+#
 # Android
 #
 config="CONFIG_DRM_IMX"
+check_config_disable
+
+#capes:
+config="CONFIG_CAPE_BONE_ARGUS"
+check_config_builtin
+
+#lcd4:
+config="CONFIG_BACKLIGHT_GPIO"
+check_config_builtin
+
+#Reset Controller:
+config="CONFIG_STMMAC_ETH"
+check_config_disable
+config="CONFIG_RESET_CONTROLLER"
 check_config_disable
 
 #

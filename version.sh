@@ -25,15 +25,15 @@ config="multi_v7_defconfig"
 toolchain="gcc_linaro_gnueabihf_4_9"
 
 #Kernel/Build
-KERNEL_REL=3.17
-KERNEL_TAG=${KERNEL_REL}.1
-BUILD=armv7-x3
+KERNEL_REL=3.18
+KERNEL_TAG=${KERNEL_REL}-rc1
+BUILD=armv7-x0
 
 #v3.X-rcX + upto SHA
 #KERNEL_SHA=""
 
 #git branch
-BRANCH="v3.17.x"
+BRANCH="v3.18.x"
 
 DISTRO=cross
 DEBARCH=armhf
