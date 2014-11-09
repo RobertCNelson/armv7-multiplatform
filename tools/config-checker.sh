@@ -486,6 +486,8 @@ check_config_builtin
 #
 config="CONFIG_EEPROM_AT24"
 check_config_builtin
+config="CONFIG_EEPROM_AT25"
+check_config_builtin
 config="CONFIG_EEPROM_93XX46"
 check_config_module
 config="CONFIG_EEPROM_SUNXI_SID"
@@ -2113,6 +2115,17 @@ check_config_builtin
 #
 # DEVFREQ Drivers
 #
+config="CONFIG_EXTCON"
+check_config_builtin
+
+#
+# Extcon Device Drivers
+#
+config="CONFIG_EXTCON_GPIO"
+check_config_builtin
+config="CONFIG_EXTCON_PALMAS"
+check_config_builtin
+
 config="CONFIG_MEMORY"
 check_config_builtin
 config="CONFIG_TI_EMIF"
