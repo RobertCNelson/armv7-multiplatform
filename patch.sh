@@ -67,6 +67,11 @@ local_patch () {
 #external_git
 #local_patch
 
+need_to_push_mainline () {
+	echo "dir: need_to_push_mainline"
+	${git} "${DIR}/patches/need_to_push_mainline/0001-ARM-dts-restructure-imx6q-udoo.dts-to-support-udoo-d.patch"
+}
+
 x15 () {
 	echo "dir: x15"
 	#regenerate="enable"
@@ -131,11 +136,11 @@ dts () {
 	${git} "${DIR}/patches/dts/0004-ARM-DTS-omap3-beagle-xm-disable-powerdown-gpios.patch"
 	${git} "${DIR}/patches/dts/0005-ARM-DTS-omap3-beagle.dts-enable-twl4030-power-reset.patch"
 	${git} "${DIR}/patches/dts/0006-arm-dts-omap4-move-emif-so-panda-es-b3-now-boots.patch"
-	${git} "${DIR}/patches/dts/0007-mach-imx51-disable-cpufreq-still-locks-up.patch"
+#	${git} "${DIR}/patches/dts/0007-mach-imx51-disable-cpufreq-still-locks-up.patch"
 	${git} "${DIR}/patches/dts/0008-omap3-beagle-xm-ehci-works-again.patch"
 	${git} "${DIR}/patches/dts/0009-ARM-dts-omap3-beagle-ddc-i2c-bus-is-not-responding-d.patch"
-	${git} "${DIR}/patches/dts/0010-imx-add-udoo.patch"
-	${git} "${DIR}/patches/dts/0011-ARM-sun7i-add-support-for-A20-OLinuXino-Lime2.patch"
+#	${git} "${DIR}/patches/dts/0010-imx-add-udoo.patch"
+#	${git} "${DIR}/patches/dts/0011-ARM-sun7i-add-support-for-A20-OLinuXino-Lime2.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 		number=11
@@ -702,7 +707,8 @@ beaglebone () {
 	${git} "${DIR}/patches/beaglebone/rtc/0019-ARM-dts-am33xx-update-rtc-node-compatible-property.patch"
 }
 
-x15
+need_to_push_mainline
+#x15
 #imx_next
 #omap_next
 #tegra_next
@@ -713,7 +719,7 @@ errata
 #freescale
 fixes
 
-beaglebone
+#beaglebone
 
 packaging_setup () {
 	cp -v "${DIR}/3rdparty/packaging/builddeb" "${DIR}/KERNEL/scripts/package"
