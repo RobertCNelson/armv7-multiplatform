@@ -119,7 +119,6 @@ wand () {
 	echo "dir: wand"
 	${git} "${DIR}/patches/wand/0001-ARM-i.MX6-Wandboard-add-wifi-bt-rfkill-driver.patch"
 	${git} "${DIR}/patches/wand/0002-ARM-dts-wandboard-add-binding-for-wand-rfkill-driver.patch"
-	${git} "${DIR}/patches/wand/0003-Vivante-v4-driver.patch"
 }
 
 errata () {
@@ -248,6 +247,14 @@ beaglebone () {
 	fi
 }
 
+etnaviv () {
+	echo "dir: etnaviv"
+	#https://github.com/austriancoder/linux
+	${git} "${DIR}/patches/etnaviv/0001-staging-etnaviv-add-drm-driver.patch"
+
+#	echo "dir: etnaviv/fixes"
+}
+
 need_to_push_mainline
 
 overlay
@@ -258,6 +265,7 @@ errata
 fixes
 
 beaglebone
+etnaviv
 
 packaging_setup () {
 	cp -v "${DIR}/3rdparty/packaging/builddeb" "${DIR}/KERNEL/scripts/package"
