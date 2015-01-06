@@ -664,7 +664,7 @@ config="CONFIG_SENSORS_DA9055" ; config_module
 config="CONFIG_SENSORS_F71805F" ; config_module
 config="CONFIG_SENSORS_GL518SM" ; config_module
 config="CONFIG_SENSORS_GL520SM" ; config_module
-config="CONFIG_SENSORS_GPIO_FAN" ; config_module
+config="CONFIG_SENSORS_GPIO_FAN" ; config_enable
 config="CONFIG_SENSORS_HIH6130" ; config_module
 config="CONFIG_SENSORS_IIO_HWMON" ; config_module
 config="CONFIG_SENSORS_IT87" ; config_module
@@ -891,6 +891,7 @@ config="CONFIG_DISPLAY_CONNECTOR_HDMI" ; config_enable
 config="CONFIG_DISPLAY_PANEL_DPI" ; config_enable
 
 config="CONFIG_FB_SSD1307" ; config_enable
+config="CONFIG_BACKLIGHT_PWM" ; config_enable
 config="CONFIG_BACKLIGHT_GPIO" ; config_enable
 
 #

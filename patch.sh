@@ -72,6 +72,11 @@ need_to_push_mainline () {
 	${git} "${DIR}/patches/need_to_push_mainline/0001-ARM-dts-restructure-imx6q-udoo.dts-to-support-udoo-d.patch"
 }
 
+overlay () {
+	echo "dir: overlay"
+#	${git} "${DIR}/patches/overlay/0001-OF-DT-Overlay-configfs-interface-v3.patch"
+}
+
 dt () {
 	echo "dir: dt/gpiohog"
 	#regenerate="enable"
@@ -124,8 +129,22 @@ errata () {
 
 fixes () {
 	echo "dir: fixes"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		start_cleanup
+	fi
+
 	${git} "${DIR}/patches/fixes/0001-trusty-gcc-4.8-4.8.2-19ubuntu1-has-fix.patch"
 	${git} "${DIR}/patches/fixes/0002-ARM-dts-Fix-missing-usb0_reset-for-sun4i-sun5i.patch"
+	${git} "${DIR}/patches/fixes/0003-ARM-dts-am57xx-beagle-x15-Add-GPIO-controlled-fan-no.patch"
+	${git} "${DIR}/patches/fixes/0004-net-ethernet-cpsw-fix-hangs-with-interrupts.patch"
+	${git} "${DIR}/patches/fixes/0005-tty-serial-8250-omap-add-ttySx-console-if-the-user-d.patch"
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		number=4
+		cleanup
+	fi
+
 }
 
 dtb_makefile_append () {
@@ -142,18 +161,23 @@ beaglebone () {
 	${git} "${DIR}/patches/beaglebone/dts/0001-am335x-boneblack-add-cpu0-opp-points.patch"
 	${git} "${DIR}/patches/beaglebone/dts/0002-dts-am335x-bone-common-fixup-leds-to-match-3.8.patch"
 	${git} "${DIR}/patches/beaglebone/dts/0003-bbb-force-usb0-to-perhiperal-mode-fixes-http-bugs.el.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0004-arm-dts-am335x-bone-common-add-collision-and-carrier.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=3
+		number=4
 		cleanup
 	fi
 
-	echo "dir: beaglebone/dtbs"
-	#exit
-	${git} "${DIR}/patches/beaglebone/dtbs/0001-sync-am335x-peripheral-pinmux.patch"
-
 	echo "dir: beaglebone/capes"
-	#${git} "${DIR}/patches/beaglebone/capes/0001-cape-Argus-UPS-cape-support.patch"
+	${git} "${DIR}/patches/beaglebone/capes/0001-cape-Argus-UPS-cape-support.patch"
+
+	echo "dir: beaglebone/dtbs"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		patch -p1 < "${DIR}/patches/beaglebone/dtbs/0001-sync-am335x-peripheral-pinmux.patch"
+		exit 2
+	fi
+	${git} "${DIR}/patches/beaglebone/dtbs/0001-sync-am335x-peripheral-pinmux.patch"
 
 	####
 	#dtb makefile
@@ -164,6 +188,8 @@ beaglebone () {
 
 		device="am335x-bone-can1.dtb"
 		dtb_makefile_append
+
+		device="am335x-bone-cape-bone-argus.dtb" ; dtb_makefile_append
 
 		device="am335x-bone-ttyO1.dtb"
 		dtb_makefile_append
@@ -177,11 +203,15 @@ beaglebone () {
 		device="am335x-bone-ttyO5.dtb"
 		dtb_makefile_append
 
+		device="am335x-boneblack-bbb-exp-c.dtb" ; dtb_makefile_append
+
 		device="am335x-boneblack-can0.dtb"
 		dtb_makefile_append
 
 		device="am335x-boneblack-can1.dtb"
 		dtb_makefile_append
+
+		device="am335x-boneblack-cape-bone-argus.dtb" ; dtb_makefile_append
 
 		device="am335x-boneblack-ttyO1.dtb"
 		dtb_makefile_append
@@ -197,7 +227,7 @@ beaglebone () {
 
 		git commit -a -m 'auto generated: capes: add dtbs to makefile' -s
 		git format-patch -1 -o ../patches/beaglebone/generated/
-		exit
+		exit 2
 	else
 		${git} "${DIR}/patches/beaglebone/generated/0001-auto-generated-capes-add-dtbs-to-makefile.patch"
 	fi
@@ -220,6 +250,7 @@ beaglebone () {
 
 need_to_push_mainline
 
+overlay
 dt
 dts
 wand
