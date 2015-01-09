@@ -136,9 +136,10 @@ dts () {
 	${git} "${DIR}/patches/dts/0009-ARM-dts-omap3-beagle-ddc-i2c-bus-is-not-responding-d.patch"
 	${git} "${DIR}/patches/dts/0010-imx-add-udoo.patch"
 	${git} "${DIR}/patches/dts/0011-ARM-sun7i-add-support-for-A20-OLinuXino-Lime2.patch"
+	${git} "${DIR}/patches/dts/0009-ARM-dts-imx51-babbage-Fix-ULPI-PHY-reset-modelling.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=11
+		number=12
 		cleanup
 	fi
 }
