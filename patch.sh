@@ -108,7 +108,7 @@ dts () {
 	${git} "${DIR}/patches/dts/0006-arm-dts-omap4-move-emif-so-panda-es-b3-now-boots.patch"
 	${git} "${DIR}/patches/dts/0007-omap3-beagle-xm-ehci-works-again.patch"
 	${git} "${DIR}/patches/dts/0008-ARM-dts-omap3-beagle-ddc-i2c-bus-is-not-responding-d.patch"
-	${git} "${DIR}/patches/dts/0009-ARM-dts-imx51-babbage-Fix-ULPI-PHY-reset-modelling.patch"
+#	${git} "${DIR}/patches/dts/0009-ARM-dts-imx51-babbage-Fix-ULPI-PHY-reset-modelling.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 		number=9
@@ -261,7 +261,7 @@ etnaviv () {
 		exit 2
 
 		#cd ~/linux-src
-		#git checkout v3.18-rc7 -b tmp
+		#git checkout v3.19-rc5 -b tmp
 		#git pull --no-edit https://github.com/austriancoder/linux master
 
 		meld KERNEL/drivers/staging/etnaviv/ ~/linux-src/drivers/staging/etnaviv/
@@ -270,6 +270,8 @@ etnaviv () {
 
 	${git} "${DIR}/patches/etnaviv/0001-staging-etnaviv-add-drm-driver.patch"
 	${git} "${DIR}/patches/etnaviv/0002-ARM-add-etnaviv-devices.patch"
+	${git} "${DIR}/patches/etnaviv/0003-drivers-of-Export-of_reserved_mem_device_-init-relea.patch"
+	${git} "${DIR}/patches/etnaviv/0004-temp-imx6qdl-disable-reserved-memory-locking-up-v3.1.patch"
 
 #	echo "dir: etnaviv/fixes"
 }

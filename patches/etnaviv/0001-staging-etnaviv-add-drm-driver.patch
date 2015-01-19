@@ -1,6 +1,6 @@
-From d3fb1929013c2ac28cd84a15c0950854fdbd0a82 Mon Sep 17 00:00:00 2001
+From 67fc8bbb6e9fb09bcc94e57e2fd30a386ba03f75 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Tue, 13 Jan 2015 10:43:44 -0600
+Date: Mon, 19 Jan 2015 09:09:12 -0600
 Subject: [PATCH] staging: etnaviv: add drm driver
 
 raw diff from: https://github.com/austriancoder/linux
@@ -14,7 +14,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  drivers/staging/etnaviv/cmdstream.xml.h       |  218 +++++
  drivers/staging/etnaviv/common.xml.h          |  253 ++++++
  drivers/staging/etnaviv/etnaviv_buffer.c      |  286 +++++++
- drivers/staging/etnaviv/etnaviv_drv.c         |  723 ++++++++++++++++
+ drivers/staging/etnaviv/etnaviv_drv.c         |  731 ++++++++++++++++
  drivers/staging/etnaviv/etnaviv_drv.h         |  156 ++++
  drivers/staging/etnaviv/etnaviv_gem.c         |  779 ++++++++++++++++++
  drivers/staging/etnaviv/etnaviv_gem.h         |  127 +++
@@ -32,7 +32,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  drivers/staging/etnaviv/state.xml.h           |  348 ++++++++
  drivers/staging/etnaviv/state_hi.xml.h        |  405 +++++++++
  include/uapi/drm/etnaviv_drm.h                |  223 +++++
- 25 files changed, 6216 insertions(+)
+ 25 files changed, 6224 insertions(+)
  create mode 100644 drivers/staging/etnaviv/Kconfig
  create mode 100644 drivers/staging/etnaviv/Makefile
  create mode 100644 drivers/staging/etnaviv/cmdstream.xml.h
@@ -903,10 +903,10 @@ index 0000000..ff61fc1
 +}
 diff --git a/drivers/staging/etnaviv/etnaviv_drv.c b/drivers/staging/etnaviv/etnaviv_drv.c
 new file mode 100644
-index 0000000..362678e
+index 0000000..f2eba54
 --- /dev/null
 +++ b/drivers/staging/etnaviv/etnaviv_drv.c
-@@ -0,0 +1,723 @@
+@@ -0,0 +1,731 @@
 +/*
 + * Copyright (C) 2013 Red Hat
 + * Author: Rob Clark <robdclark@gmail.com>
@@ -926,6 +926,7 @@ index 0000000..362678e
 +
 +#include <linux/component.h>
 +#include <linux/of_platform.h>
++#include <linux/of_reserved_mem.h>
 +
 +#include "etnaviv_drv.h"
 +#include "etnaviv_gpu.h"
@@ -1573,8 +1574,12 @@ index 0000000..362678e
 +{
 +	struct device *dev = &pdev->dev;
 +	struct device_node *node = dev->of_node;
++	int ret;
 +
 +	of_platform_populate(node, NULL, NULL, dev);
++	ret = of_reserved_mem_device_init(dev);
++	if (ret)
++		dev_warn(dev, "failed to assign reserved memory\n");
 +
 +	dma_set_coherent_mask(&pdev->dev, DMA_BIT_MASK(32));
 +
@@ -1583,7 +1588,10 @@ index 0000000..362678e
 +
 +static int etnaviv_pdev_remove(struct platform_device *pdev)
 +{
-+	component_master_del(&pdev->dev, &etnaviv_master_ops);
++	struct device *dev = &pdev->dev;
++
++	of_reserved_mem_device_release(dev);
++	component_master_del(dev, &etnaviv_master_ops);
 +
 +	return 0;
 +}
@@ -1794,7 +1802,7 @@ index 0000000..cc46bc3
 +#endif /* __ETNAVIV_DRV_H__ */
 diff --git a/drivers/staging/etnaviv/etnaviv_gem.c b/drivers/staging/etnaviv/etnaviv_gem.c
 new file mode 100644
-index 0000000..e2d9b8a
+index 0000000..856fa88
 --- /dev/null
 +++ b/drivers/staging/etnaviv/etnaviv_gem.c
 @@ -0,0 +1,779 @@
@@ -2025,7 +2033,7 @@ index 0000000..e2d9b8a
 +	struct etnaviv_gem_object *etnaviv_obj = to_etnaviv_bo(obj);
 +	int ret = 0;
 +
-+	if (!etnaviv_obj->iova  && !(etnaviv_obj->flags & ETNA_BO_CMDSTREAM)) {
++	if (!etnaviv_obj->iova && (etnaviv_obj->backend != ETNA_BO_BACKEND_DMA)) {
 +		struct etnaviv_drm_private *priv = obj->dev->dev_private;
 +		struct etnaviv_iommu *mmu = priv->mmu;
 +		struct page **pages = etnaviv_gem_get_pages(obj);
@@ -2426,7 +2434,7 @@ index 0000000..e2d9b8a
 +
 +	list_del(&etnaviv_obj->mm_list);
 +
-+	if (!(etnaviv_obj->flags & ETNA_BO_CMDSTREAM))
++	if (etnaviv_obj->backend != ETNA_BO_BACKEND_DMA)
 +		etnaviv_free_obj(obj);
 +
 +	drm_gem_free_mmap_offset(obj);
@@ -3240,7 +3248,7 @@ index 0000000..2760a71
 +}
 diff --git a/drivers/staging/etnaviv/etnaviv_gem_userptr.c b/drivers/staging/etnaviv/etnaviv_gem_userptr.c
 new file mode 100644
-index 0000000..b2a0f27
+index 0000000..62e9734
 --- /dev/null
 +++ b/drivers/staging/etnaviv/etnaviv_gem_userptr.c
 @@ -0,0 +1,210 @@
@@ -3274,7 +3282,7 @@ index 0000000..b2a0f27
 +static struct page **etnaviv_gem_userptr_do_get_pages(
 +	struct etnaviv_gem_object *etnaviv_obj, struct mm_struct *mm, struct task_struct *task)
 +{
-+	int ret, pinned, npages = etnaviv_obj->base.size >> PAGE_SHIFT;
++	int ret = 0, pinned, npages = etnaviv_obj->base.size >> PAGE_SHIFT;
 +	struct page **pvec;
 +	uintptr_t ptr;
 +
