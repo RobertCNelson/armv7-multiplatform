@@ -9,14 +9,14 @@ Signed-off-by: Nishanth Menon <nm@ti.com>
  1 file changed, 48 insertions(+), 5 deletions(-)
 
 diff --git a/arch/arm/configs/omap2plus_defconfig b/arch/arm/configs/omap2plus_defconfig
-index b3f8667..0e3de90 100644
+index a0e51bb..0e3de90 100644
 --- a/arch/arm/configs/omap2plus_defconfig
 +++ b/arch/arm/configs/omap2plus_defconfig
 @@ -68,7 +68,6 @@ CONFIG_CPU_FREQ_DEFAULT_GOV_ONDEMAND=y
  CONFIG_CPU_FREQ_GOV_POWERSAVE=y
  CONFIG_CPU_FREQ_GOV_USERSPACE=y
  CONFIG_CPU_FREQ_GOV_CONSERVATIVE=y
--CONFIG_GENERIC_CPUFREQ_CPU0=y
+-CONFIG_CPUFREQ_DT=y
  # CONFIG_ARM_OMAP2PLUS_CPUFREQ is not set
  CONFIG_CPU_IDLE=y
  CONFIG_BINFMT_MISC=y
@@ -164,5 +164,5 @@ index b3f8667..0e3de90 100644
  CONFIG_EXT3_FS=y
  # CONFIG_EXT3_FS_XATTR is not set
 -- 
-2.1.1
+2.1.4
 
