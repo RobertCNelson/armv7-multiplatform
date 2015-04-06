@@ -721,6 +721,7 @@ packaging_setup () {
 	git commit -a -m 'packaging: sync with mainline' -s
 
 	git format-patch -1 -o "${DIR}/patches/packaging"
+	exit 2
 }
 
 packaging () {
@@ -729,7 +730,8 @@ packaging () {
 	if [ "x${regenerate}" = "xenable" ] ; then
 		start_cleanup
 	fi
-	#${git} "${DIR}/patches/packaging/0001-packaging-sync-with-mainline.patch"
+
+	${git} "${DIR}/patches/packaging/0001-packaging-sync-with-mainline.patch"
 	${git} "${DIR}/patches/packaging/0002-deb-pkg-install-dtbs-in-linux-image-package.patch"
 	#${git} "${DIR}/patches/packaging/0003-deb-pkg-no-dtbs_install.patch"
 
