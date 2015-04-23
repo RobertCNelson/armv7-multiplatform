@@ -1,7 +1,7 @@
-From bb815e73147b56df28f420f09416dce3c8b78ad3 Mon Sep 17 00:00:00 2001
+From b3c3c0e4c0350aadfb43df0929809b86ec92c045 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Thu, 13 Feb 2014 10:03:57 -0600
-Subject: [PATCH 1/8] ARM: dts: omap3-beagle: add i2c2
+Subject: [PATCH 1/9] ARM: dts: omap3-beagle: add i2c2
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---

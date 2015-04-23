@@ -1,7 +1,7 @@
-From 29ae9f390fa18c78ce896866a15820903829ad06 Mon Sep 17 00:00:00 2001
+From 1a3fa69b4c0acd65748e9136f949f879154774e6 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Thu, 9 Oct 2014 11:49:11 -0500
-Subject: [PATCH 6/8] arm: dts: omap4: move emif so panda-es-b3 now boots
+Subject: [PATCH 6/9] arm: dts: omap4: move emif so panda-es-b3 now boots
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
@@ -17,10 +17,10 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  create mode 100644 arch/arm/boot/dts/omap4-panda-es-b3.dts
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 6a6ecdb..3773f6f 100644
+index a1c776b..976a2e3 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
-@@ -361,6 +361,7 @@ dtb-$(CONFIG_ARCH_OMAP4) += omap4-duovero-parlor.dtb \
+@@ -407,6 +407,7 @@ dtb-$(CONFIG_ARCH_OMAP4) += \
  	omap4-panda.dtb \
  	omap4-panda-a4.dtb \
  	omap4-panda-es.dtb \
@@ -213,7 +213,7 @@ index 3e1da43..d3466ef 100644
  
  &keypad {
 diff --git a/arch/arm/boot/dts/omap4.dtsi b/arch/arm/boot/dts/omap4.dtsi
-index 074147c..4b12c47 100644
+index 87401d9..62de4d8 100644
 --- a/arch/arm/boot/dts/omap4.dtsi
 +++ b/arch/arm/boot/dts/omap4.dtsi
 @@ -625,6 +625,7 @@

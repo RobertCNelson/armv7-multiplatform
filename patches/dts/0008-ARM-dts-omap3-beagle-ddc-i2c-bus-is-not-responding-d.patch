@@ -1,7 +1,7 @@
-From e1bbfb47370c22250f30fa303cbbe7ea64dbd7b3 Mon Sep 17 00:00:00 2001
+From d0aff0a7cdd373e981a31d9cd382f6eedf0a699d Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Wed, 6 Aug 2014 14:31:52 -0500
-Subject: [PATCH 8/8] ARM: dts: omap3-beagle: ddc-i2c-bus is not responding,
+Subject: [PATCH 8/9] ARM: dts: omap3-beagle: ddc-i2c-bus is not responding,
  disable ddc detection for the time being
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>

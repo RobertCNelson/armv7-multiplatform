@@ -1,7 +1,7 @@
-From c178b8b11ea17c76dd1b7edd52c32b9091401433 Mon Sep 17 00:00:00 2001
+From 540f244fbb22414db78a8896d308546d4cf5383c Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Wed, 19 Feb 2014 09:29:54 -0600
-Subject: [PATCH 2/8] ARM: dts: omap3-beagle-xm: spidev
+Subject: [PATCH 2/9] ARM: dts: omap3-beagle-xm: spidev
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---

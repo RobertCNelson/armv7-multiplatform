@@ -1,7 +1,7 @@
-From b5998cec315b6032edfa6632454c020942b5d528 Mon Sep 17 00:00:00 2001
+From e5a012f961d3162c3a18459cf5b25b5254f6da46 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Thu, 17 Apr 2014 09:40:11 -0500
-Subject: [PATCH 4/8] ARM: DTS: omap3-beagle-xm: disable powerdown-gpios
+Subject: [PATCH 4/9] ARM: DTS: omap3-beagle-xm: disable powerdown-gpios
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/arm/boot/dts/omap3-beagle-xm.dts b/arch/arm/boot/dts/omap3-beagle-xm.dts
-index 815257d..503bdc4 100644
+index 815257d..503bdc4c 100644
 --- a/arch/arm/boot/dts/omap3-beagle-xm.dts
 +++ b/arch/arm/boot/dts/omap3-beagle-xm.dts
 @@ -94,7 +94,7 @@
