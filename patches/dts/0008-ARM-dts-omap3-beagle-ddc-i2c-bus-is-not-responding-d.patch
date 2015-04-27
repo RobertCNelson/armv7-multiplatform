@@ -1,4 +1,4 @@
-From d0aff0a7cdd373e981a31d9cd382f6eedf0a699d Mon Sep 17 00:00:00 2001
+From b4b32b06a76ee449d20aa984df40cc22f31f1062 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Wed, 6 Aug 2014 14:31:52 -0500
 Subject: [PATCH 8/9] ARM: dts: omap3-beagle: ddc-i2c-bus is not responding,
@@ -10,10 +10,10 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  1 file changed, 2 deletions(-)
 
 diff --git a/arch/arm/boot/dts/omap3-beagle.dts b/arch/arm/boot/dts/omap3-beagle.dts
-index 5d8b592..5d64ed9 100644
+index fd792a4..869e365 100644
 --- a/arch/arm/boot/dts/omap3-beagle.dts
 +++ b/arch/arm/boot/dts/omap3-beagle.dts
-@@ -121,8 +121,6 @@
+@@ -120,8 +120,6 @@
  
  		digital;
  

@@ -74,18 +74,36 @@ local_patch () {
 #external_git
 #local_patch
 
-dt () {
-	echo "dir: dt/gpiohog"
+overlay () {
+	echo "dir: overlay"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		start_cleanup
 	fi
 
-	${git} "${DIR}/patches/dt/gpiohog/0001-gpio-add-GPIO-hogging-mechanism.patch"
-	${git} "${DIR}/patches/dt/gpiohog/0002-gpio-Document-GPIO-hogging-mechanism.patch"
+	${git} "${DIR}/patches/overlay/0001-of-Custom-printk-format-specifier-for-device-node.patch"
+	${git} "${DIR}/patches/overlay/0002-arm-of-Add-a-DT-quirk-method-after-unflattening.patch"
+	${git} "${DIR}/patches/overlay/0003-of-DT-quirks-infrastructure.patch"
+	${git} "${DIR}/patches/overlay/0004-arm-am33xx-DT-quirks-for-am33xx-based-beaglebone-var.patch"
+	${git} "${DIR}/patches/overlay/0005-arm-dts-Common-Black-White-Beaglebone-DTS-using-quir.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=2
+		number=5
+		cleanup
+	fi
+
+
+}
+
+dt () {
+	echo "dir: dt"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		start_cleanup
+	fi
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		number=0
 		cleanup
 	fi
 }
@@ -280,15 +298,17 @@ meld KERNEL/include/uapi/drm/etnaviv_drm.h ~/linux-src/include/uapi/drm/etnaviv_
 
 	${git} "${DIR}/patches/etnaviv/0001-staging-etnaviv-add-drm-driver.patch"
 	${git} "${DIR}/patches/etnaviv/0002-etnaviv-wheezy-build-fix.patch"
+	${git} "${DIR}/patches/etnaviv/0003-Revert-iommu-Remove-domain_init-and-domain_free-iomm.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=2
+		number=3
 		cleanup
 	fi
 
 #	echo "dir: etnaviv/fixes"
 }
 
+#overlay
 dt
 dts
 wand
