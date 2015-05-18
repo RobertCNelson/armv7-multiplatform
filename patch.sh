@@ -74,27 +74,6 @@ local_patch () {
 #external_git
 #local_patch
 
-overlay () {
-	echo "dir: overlay"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		start_cleanup
-	fi
-
-	${git} "${DIR}/patches/overlay/0001-of-Custom-printk-format-specifier-for-device-node.patch"
-	${git} "${DIR}/patches/overlay/0002-arm-of-Add-a-DT-quirk-method-after-unflattening.patch"
-	${git} "${DIR}/patches/overlay/0003-of-DT-quirks-infrastructure.patch"
-	${git} "${DIR}/patches/overlay/0004-arm-am33xx-DT-quirks-for-am33xx-based-beaglebone-var.patch"
-	${git} "${DIR}/patches/overlay/0005-arm-dts-Common-Black-White-Beaglebone-DTS-using-quir.patch"
-
-	if [ "x${regenerate}" = "xenable" ] ; then
-		number=5
-		cleanup
-	fi
-
-
-}
-
 dt () {
 	echo "dir: dt"
 	#regenerate="enable"
@@ -124,9 +103,12 @@ dts () {
 	${git} "${DIR}/patches/dts/0007-omap3-beagle-xm-ehci-works-again.patch"
 	${git} "${DIR}/patches/dts/0008-ARM-dts-omap3-beagle-ddc-i2c-bus-is-not-responding-d.patch"
 	${git} "${DIR}/patches/dts/0009-first-pass-imx6q-ccimx6sbc.patch"
+	${git} "${DIR}/patches/dts/0010-imx6-wl1835-base-boards.patch"
+	${git} "${DIR}/patches/dts/0011-imx6q-sabresd-add-support-for-wilink8-wlan-and-bluet.patch"
+	${git} "${DIR}/patches/dts/0012-imx6sl-evk-add-support-for-wilink8-wlan-and-bluetoot.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=9
+		number=12
 		cleanup
 	fi
 }
@@ -219,10 +201,14 @@ bbb_overlays () {
 	${git} "${DIR}/patches/bbb_overlays/0019-Documentation-ABI-sys-firmware-devicetree-overlays.patch"
 	${git} "${DIR}/patches/bbb_overlays/0020-of-Move-OF-flags-to-be-visible-even-when-CONFIG_OF.patch"
 	${git} "${DIR}/patches/bbb_overlays/0021-i2c-EEPROM-In-kernel-memory-accessor-interface.patch"
-	${git} "${DIR}/patches/bbb_overlays/0022-capemgr-Beaglebone-capemanager.patch"
+	${git} "${DIR}/patches/bbb_overlays/0022-misc-Beaglebone-capemanager.patch"
+	${git} "${DIR}/patches/bbb_overlays/0023-doc-dt-beaglebone-cape-manager-bindings.patch"
+	${git} "${DIR}/patches/bbb_overlays/0024-documentation-ABI-bone_capemgr-sysfs-API.patch"
+	${git} "${DIR}/patches/bbb_overlays/0025-arm-dts-Beaglebone-i2c-definitions.patch"
+	${git} "${DIR}/patches/bbb_overlays/0026-arm-dts-Enable-beaglebone-cape-manager.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=22
+		number=26
 		cleanup
 	fi
 }
@@ -241,9 +227,12 @@ beaglebone () {
 	${git} "${DIR}/patches/beaglebone/dts/0001-am335x-boneblack-add-cpu0-opp-points.patch"
 	${git} "${DIR}/patches/beaglebone/dts/0002-dts-am335x-bone-common-fixup-leds-to-match-3.8.patch"
 	${git} "${DIR}/patches/beaglebone/dts/0003-arm-dts-am335x-bone-common-add-collision-and-carrier.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0004-add-am335x-bonegreen.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0005-add-overlay-dtb.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0006-ARM-dts-AM33XX-Set-pmic-shutdown-controller-for-Beag.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=3
+		number=6
 		cleanup
 	fi
 
@@ -253,8 +242,8 @@ beaglebone () {
 		start_cleanup
 	fi
 
-#	${git} "${DIR}/patches/beaglebone/capes/0001-cape-Argus-UPS-cape-support.patch"
-#	${git} "${DIR}/patches/beaglebone/capes/0002-Added-support-for-Replicape.patch"
+	${git} "${DIR}/patches/beaglebone/capes/0001-cape-Argus-UPS-cape-support.patch"
+	${git} "${DIR}/patches/beaglebone/capes/0002-Added-support-for-Replicape.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 		number=2
@@ -268,7 +257,7 @@ beaglebone () {
 		patch -p1 < "${DIR}/patches/beaglebone/dtbs/0001-sync-am335x-peripheral-pinmux.patch"
 		exit 2
 	fi
-#	${git} "${DIR}/patches/beaglebone/dtbs/0001-sync-am335x-peripheral-pinmux.patch"
+	${git} "${DIR}/patches/beaglebone/dtbs/0001-sync-am335x-peripheral-pinmux.patch"
 
 	####
 	#dtb makefile
@@ -276,28 +265,18 @@ beaglebone () {
 	if [ "x${regenerate}" = "xenable" ] ; then
 
 		device="am335x-bone-can0.dtb" ; dtb_makefile_append
-		device="am335x-bone-can1.dtb" ; dtb_makefile_append
 		device="am335x-bone-cape-bone-argus.dtb" ; dtb_makefile_append
-		device="am335x-bone-ttyS1.dtb" ; dtb_makefile_append
-		device="am335x-bone-ttyS2.dtb" ; dtb_makefile_append
-		device="am335x-bone-ttyS4.dtb" ; dtb_makefile_append
-		device="am335x-bone-ttyS5.dtb" ; dtb_makefile_append
 
 		device="am335x-boneblack-bbb-exp-c.dtb" ; dtb_makefile_append
 		device="am335x-boneblack-can0.dtb" ; dtb_makefile_append
-		device="am335x-boneblack-can1.dtb" ; dtb_makefile_append
 		device="am335x-boneblack-cape-bone-argus.dtb" ; dtb_makefile_append
-		device="am335x-boneblack-ttyS1.dtb" ; dtb_makefile_append
-		device="am335x-boneblack-ttyS2.dtb" ; dtb_makefile_append
-		device="am335x-boneblack-ttyS4.dtb" ; dtb_makefile_append
-		device="am335x-boneblack-ttyS5.dtb" ; dtb_makefile_append
 		device="am335x-boneblack-replicape.dtb" ; dtb_makefile_append
 
 		git commit -a -m 'auto generated: capes: add dtbs to makefile' -s
 		git format-patch -1 -o ../patches/beaglebone/generated/
 		exit 2
-#	else
-#		${git} "${DIR}/patches/beaglebone/generated/0001-auto-generated-capes-add-dtbs-to-makefile.patch"
+	else
+		${git} "${DIR}/patches/beaglebone/generated/0001-auto-generated-capes-add-dtbs-to-makefile.patch"
 	fi
 
 	echo "dir: beaglebone/phy"
@@ -308,7 +287,7 @@ beaglebone () {
 
 	${git} "${DIR}/patches/beaglebone/phy/0001-cpsw-Add-support-for-byte-queue-limits.patch"
 	${git} "${DIR}/patches/beaglebone/phy/0002-cpsw-napi-polling-of-64-is-good-for-gigE-less-good-f.patch"
-	${git} "${DIR}/patches/beaglebone/phy/0003-cpsw-search-for-phy.patch"
+	#${git} "${DIR}/patches/beaglebone/phy/0003-cpsw-search-for-phy.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 		number=3
@@ -362,7 +341,6 @@ meld KERNEL/include/uapi/drm/etnaviv_drm.h ~/linux-src/include/uapi/drm/etnaviv_
 #	echo "dir: etnaviv/fixes"
 }
 
-#overlay
 dt
 dts
 wand
