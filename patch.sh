@@ -177,43 +177,63 @@ bbb_overlays () {
 		start_cleanup
 	fi
 
-	${git} "${DIR}/patches/bbb_overlays/0001-configfs-Implement-binary-attributes-v4.patch"
-	${git} "${DIR}/patches/bbb_overlays/0002-OF-DT-Overlay-configfs-interface-v4.patch"
-	${git} "${DIR}/patches/bbb_overlays/0003-gitignore-Ignore-DTB-files.patch"
+	${git} "${DIR}/patches/bbb_overlays/0001-regmap-Introduce-regmap_get_max_register.patch"
+	${git} "${DIR}/patches/bbb_overlays/0002-regmap-Introduce-regmap_get_reg_stride.patch"
+	${git} "${DIR}/patches/bbb_overlays/0003-nvmem-Add-a-simple-NVMEM-framework-for-nvmem-provide.patch"
+	${git} "${DIR}/patches/bbb_overlays/0004-nvmem-Add-a-simple-NVMEM-framework-for-consumers.patch"
+	${git} "${DIR}/patches/bbb_overlays/0005-nvmem-Add-nvmem_device-based-consumer-apis.patch"
+	${git} "${DIR}/patches/bbb_overlays/0006-nvmem-Add-bindings-for-simple-nvmem-framework.patch"
+	${git} "${DIR}/patches/bbb_overlays/0007-nvmem-Add-simple-nvmem-mmio-consumer-helper-function.patch"
+	${git} "${DIR}/patches/bbb_overlays/0008-nvmem-qfprom-Add-Qualcomm-QFPROM-support.patch"
+	${git} "${DIR}/patches/bbb_overlays/0009-nvmem-qfprom-Add-bindings-for-qfprom.patch"
+	${git} "${DIR}/patches/bbb_overlays/0010-nvmem-sunxi-Move-the-SID-driver-to-the-nvmem-framewo.patch"
+	${git} "${DIR}/patches/bbb_overlays/0011-configfs-Implement-binary-attributes-v4.patch"
+	${git} "${DIR}/patches/bbb_overlays/0012-OF-DT-Overlay-configfs-interface-v5.patch"
+	${git} "${DIR}/patches/bbb_overlays/0013-gitignore-Ignore-DTB-files.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-	${git} "${DIR}/patches/bbb_overlays/0004-add-PM-firmware.patch"
-	${git} "${DIR}/patches/bbb_overlays/0005-ARM-CUSTOM-Build-a-uImage-with-dtb-already-appended.patch"
+	${git} "${DIR}/patches/bbb_overlays/0014-add-PM-firmware.patch"
+	${git} "${DIR}/patches/bbb_overlays/0015-ARM-CUSTOM-Build-a-uImage-with-dtb-already-appended.patch"
 	fi
 
-	${git} "${DIR}/patches/bbb_overlays/0006-omap-Properly-handle-resources-for-omap_devices.patch"
-	${git} "${DIR}/patches/bbb_overlays/0007-pdev-Fix-platform-device-resource-linking.patch"
-	${git} "${DIR}/patches/bbb_overlays/0008-arm-omap-Proper-cleanups-for-omap_device.patch"
-	${git} "${DIR}/patches/bbb_overlays/0009-serial-omap-Fix-port-line-number-without-aliases.patch"
-	${git} "${DIR}/patches/bbb_overlays/0010-tty-omap-serial-Fix-up-platform-data-alloc.patch"
+	${git} "${DIR}/patches/bbb_overlays/0016-arm-omap-Proper-cleanups-for-omap_device.patch"
+	${git} "${DIR}/patches/bbb_overlays/0017-serial-omap-Fix-port-line-number-without-aliases.patch"
+	${git} "${DIR}/patches/bbb_overlays/0018-tty-omap-serial-Fix-up-platform-data-alloc.patch"
+	${git} "${DIR}/patches/bbb_overlays/0019-scripts-dtc-Update-to-upstream-version-with-overlay-.patch"
+	${git} "${DIR}/patches/bbb_overlays/0020-ARM-DT-Enable-symbols-when-CONFIG_OF_OVERLAY-is-used.patch"
+	${git} "${DIR}/patches/bbb_overlays/0021-of-Custom-printk-format-specifier-for-device-node.patch"
+	${git} "${DIR}/patches/bbb_overlays/0022-i2c-Mark-instantiated-device-nodes-with-OF_POPULATE.patch"
+	${git} "${DIR}/patches/bbb_overlays/0023-of-overlay-kobjectify-overlay-objects.patch"
+	${git} "${DIR}/patches/bbb_overlays/0024-of-overlay-global-sysfs-enable-attribute.patch"
+	${git} "${DIR}/patches/bbb_overlays/0025-of-overlay-add-per-overlay-sysfs-attributes.patch"
+	${git} "${DIR}/patches/bbb_overlays/0026-Documentation-ABI-sys-firmware-devicetree-overlays.patch"
+	${git} "${DIR}/patches/bbb_overlays/0027-of-Move-OF-flags-to-be-visible-even-when-CONFIG_OF.patch"
+	${git} "${DIR}/patches/bbb_overlays/0028-i2c-nvmem-at24-Provide-an-EEPROM-framework-interface.patch"
+	${git} "${DIR}/patches/bbb_overlays/0029-misc-Beaglebone-capemanager.patch"
+	${git} "${DIR}/patches/bbb_overlays/0030-doc-misc-Beaglebone-capemanager-documentation.patch"
+	${git} "${DIR}/patches/bbb_overlays/0031-doc-dt-beaglebone-cape-manager-bindings.patch"
+	${git} "${DIR}/patches/bbb_overlays/0032-doc-ABI-bone_capemgr-sysfs-API.patch"
+	${git} "${DIR}/patches/bbb_overlays/0033-MAINTAINERS-Beaglebone-capemanager-maintainer.patch"
+	${git} "${DIR}/patches/bbb_overlays/0034-arm-dts-Beaglebone-i2c-definitions.patch"
+	${git} "${DIR}/patches/bbb_overlays/0035-arm-dts-Enable-beaglebone-cape-manager.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-	${git} "${DIR}/patches/bbb_overlays/0011-boneblack-defconfig.patch"
+	${git} "${DIR}/patches/bbb_overlays/0036-boneblack-defconfig.patch"
 	fi
 
-	${git} "${DIR}/patches/bbb_overlays/0012-scripts-dtc-Update-to-upstream-version-with-overlay-.patch"
-	${git} "${DIR}/patches/bbb_overlays/0013-ARM-DT-Enable-symbols-when-CONFIG_OF_OVERLAY-is-used.patch"
-	${git} "${DIR}/patches/bbb_overlays/0014-of-Custom-printk-format-specifier-for-device-node.patch"
-	${git} "${DIR}/patches/bbb_overlays/0015-i2c-Mark-instantiated-device-nodes-with-OF_POPULATE.patch"
-	${git} "${DIR}/patches/bbb_overlays/0016-of-overlay-kobjectify-overlay-objects.patch"
-	${git} "${DIR}/patches/bbb_overlays/0017-of-overlay-global-sysfs-enable-attribute.patch"
-	${git} "${DIR}/patches/bbb_overlays/0018-of-overlay-add-per-overlay-sysfs-attributes.patch"
-	${git} "${DIR}/patches/bbb_overlays/0019-Documentation-ABI-sys-firmware-devicetree-overlays.patch"
-	${git} "${DIR}/patches/bbb_overlays/0020-of-Move-OF-flags-to-be-visible-even-when-CONFIG_OF.patch"
-	${git} "${DIR}/patches/bbb_overlays/0021-i2c-EEPROM-In-kernel-memory-accessor-interface.patch"
-	${git} "${DIR}/patches/bbb_overlays/0022-misc-Beaglebone-capemanager.patch"
-	${git} "${DIR}/patches/bbb_overlays/0023-doc-dt-beaglebone-cape-manager-bindings.patch"
-	${git} "${DIR}/patches/bbb_overlays/0024-documentation-ABI-bone_capemgr-sysfs-API.patch"
-	${git} "${DIR}/patches/bbb_overlays/0025-arm-dts-Beaglebone-i2c-definitions.patch"
-	${git} "${DIR}/patches/bbb_overlays/0026-arm-dts-Enable-beaglebone-cape-manager.patch"
+	${git} "${DIR}/patches/bbb_overlays/0037-gcl-Fix-resource-linking.patch"
+	${git} "${DIR}/patches/bbb_overlays/0038-of-overlay-Implement-indirect-target-support.patch"
+	${git} "${DIR}/patches/bbb_overlays/0039-of-unittest-Add-indirect-overlay-target-test.patch"
+	${git} "${DIR}/patches/bbb_overlays/0040-doc-dt-Document-the-indirect-overlay-method.patch"
+	${git} "${DIR}/patches/bbb_overlays/0041-of-overlay-Introduce-target-root-capability.patch"
+	${git} "${DIR}/patches/bbb_overlays/0042-of-unittest-Unit-tests-for-target-root-overlays.patch"
+	${git} "${DIR}/patches/bbb_overlays/0043-doc-dt-Document-the-target-root-overlay-method.patch"
+	${git} "${DIR}/patches/bbb_overlays/0044-of-dynamic-Add-__of_node_dupv.patch"
+	${git} "${DIR}/patches/bbb_overlays/0045-of-changesets-Introduce-changeset-helper-methods.patch"
+	${git} "${DIR}/patches/bbb_overlays/0046-RFC-Device-overlay-manager-PCI-USB-DT.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=26
+		number=46
 		cleanup
 	fi
 }
@@ -229,15 +249,14 @@ beaglebone () {
 		start_cleanup
 	fi
 
-	${git} "${DIR}/patches/beaglebone/dts/0001-ARM-dts-am335x-bone-enable-pmic-shutdown-controller.patch"
-	${git} "${DIR}/patches/beaglebone/dts/0002-am335x-boneblack-add-cpu0-opp-points.patch"
-	${git} "${DIR}/patches/beaglebone/dts/0003-dts-am335x-bone-common-fixup-leds-to-match-3.8.patch"
-	${git} "${DIR}/patches/beaglebone/dts/0004-arm-dts-am335x-bone-common-add-collision-and-carrier.patch"
-	${git} "${DIR}/patches/beaglebone/dts/0005-add-am335x-bonegreen.patch"
-	${git} "${DIR}/patches/beaglebone/dts/0006-add-overlay-dtb.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0001-am335x-boneblack-add-cpu0-opp-points.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0002-dts-am335x-bone-common-fixup-leds-to-match-3.8.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0003-arm-dts-am335x-bone-common-add-collision-and-carrier.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0004-add-am335x-bonegreen.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0005-add-overlay-dtb.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=6
+		number=5
 		cleanup
 	fi
 
@@ -255,6 +274,70 @@ beaglebone () {
 		number=3
 		cleanup
 	fi
+
+	echo "dir: beaglebone/pinmux-helper"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		start_cleanup
+	fi
+
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0001-BeagleBone-pinmux-helper.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0002-pinmux-helper-Add-runtime-configuration-capability.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0003-pinmux-helper-Switch-to-using-kmalloc.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0004-gpio-Introduce-GPIO-OF-helper.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0005-Add-dir-changeable-property-to-gpio-of-helper.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0006-am33xx.dtsi-add-ocp-label.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0007-beaglebone-added-expansion-header-to-dtb.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0008-bone-pinmux-helper-Add-support-for-mode-device-tree-.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0009-pinmux-helper-add-P8_37_pinmux-P8_38_pinmux.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0010-pinmux-helper-hdmi.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0011-pinmux-helper-can1.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0012-Remove-CONFIG_EXPERIMENTAL-dependency-on-CONFIG_GPIO.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0013-pinmux-helper-add-P9_19_pinmux-P9_20_pinmux.patch"
+	${git} "${DIR}/patches/beaglebone/pinmux-helper/0014-gpio-of-helper-idr_alloc.patch"
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		number=14
+		cleanup
+	fi
+
+	echo "dir: beaglebone/eqep"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		start_cleanup
+	fi
+
+	${git} "${DIR}/patches/beaglebone/eqep/0001-Provides-a-sysfs-interface-to-the-eQEP-hardware-on-t.patch"
+	${git} "${DIR}/patches/beaglebone/eqep/0002-tieqep.c-devres-remove-devm_request_and_ioremap.patch"
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		number=2
+		cleanup
+	fi
+
+#	echo "dir: beaglebone/hdmi-audio"
+#	#regenerate="enable"
+#	if [ "x${regenerate}" = "xenable" ] ; then
+#		start_cleanup
+#	fi
+
+#	${git} "${DIR}/patches/beaglebone/hdmi-audio/0001-ASoC-davinci-mcasp-Calculate-BCLK-using-TDM-slots-an.patch"
+#	${git} "${DIR}/patches/beaglebone/hdmi-audio/0002-ASoC-davinci-mcasp-Channel-count-constraints-for-mul.patch"
+#	${git} "${DIR}/patches/beaglebone/hdmi-audio/0003-ASoC-davinci-macsp-Optimize-implicit-BLCK-sample-rat.patch"
+#	${git} "${DIR}/patches/beaglebone/hdmi-audio/0004-drm-tilcdc-Fix-module-unloading.patch"
+#	${git} "${DIR}/patches/beaglebone/hdmi-audio/0005-drm-tilcdc-Remove-tilcdc-slave-support-for-tda998x-d.patch"
+#	${git} "${DIR}/patches/beaglebone/hdmi-audio/0006-drm-tilcdc-Add-support-for-external-tda998x-encoder.patch"
+#	${git} "${DIR}/patches/beaglebone/hdmi-audio/0007-drm-tilcdc-Add-DRM_TILCDC_SLAVE_COMPAT-for-ti-tilcdc.patch"
+#	${git} "${DIR}/patches/beaglebone/hdmi-audio/0008-drm-tilcdc-Force-building-of-DRM_TILCDC_SLAVE_COMPAT.patch"
+#	${git} "${DIR}/patches/beaglebone/hdmi-audio/0009-ARM-dts-am335x-boneblack-Use-new-binding-for-HDMI.patch"
+#	${git} "${DIR}/patches/beaglebone/hdmi-audio/0010-ARM-dts-am335x-boneblack-Add-HDMI-audio-support-HACK.patch"
+#	${git} "${DIR}/patches/beaglebone/hdmi-audio/0011-ASoC-hdmi-codec-lib-Add-hdmi-codec-lib-for-external-.patch"
+#	${git} "${DIR}/patches/beaglebone/hdmi-audio/0012-drm-i2c-tda998x-HACK-Implement-primitive-HDMI-audio-.patch"
+
+#	if [ "x${regenerate}" = "xenable" ] ; then
+#		number=12
+#		cleanup
+#	fi
 
 	#This has to be last...
 	echo "dir: beaglebone/dtbs"
@@ -276,10 +359,12 @@ beaglebone () {
 		device="am335x-bone-cape-bone-argus.dtb" ; dtb_makefile_append
 
 		device="am335x-boneblack-bbb-exp-c.dtb" ; dtb_makefile_append
+		device="am335x-boneblack-bbb-exp-r.dtb" ; dtb_makefile_append
 		device="am335x-boneblack-can0.dtb" ; dtb_makefile_append
 		device="am335x-boneblack-cape-bone-argus.dtb" ; dtb_makefile_append
 		device="am335x-boneblack-replicape.dtb" ; dtb_makefile_append
 		device="am335x-boneblack-wl1835mod.dtb" ; dtb_makefile_append
+		device="am335x-boneblack-universal.dtb" ; dtb_makefile_append
 
 		git commit -a -m 'auto generated: capes: add dtbs to makefile' -s
 		git format-patch -1 -o ../patches/beaglebone/generated/
