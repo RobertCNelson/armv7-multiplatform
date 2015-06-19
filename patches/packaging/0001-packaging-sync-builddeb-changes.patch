@@ -1,17 +1,26 @@
-From 744d55c6271652dc26cea39a2a12201ace9ef30e Mon Sep 17 00:00:00 2001
+From 16e10906386e35e59b481d63c828754df62469c2 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Wed, 2 Jul 2014 10:28:32 -0500
-Subject: [PATCH 2/3] deb-pkg: install dtbs in linux-image package
+Date: Fri, 19 Jun 2015 13:47:09 -0500
+Subject: [PATCH] packaging: sync builddeb changes
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
- scripts/package/builddeb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ scripts/package/builddeb | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/scripts/package/builddeb b/scripts/package/builddeb
-index 5972624..169a91e 100755
+index 88dbf23..9678058 100755
 --- a/scripts/package/builddeb
 +++ b/scripts/package/builddeb
+@@ -45,7 +45,7 @@ create_package() {
+ 	arm64)
+ 		debarch=arm64 ;;
+ 	arm*)
+-		debarch=arm$(grep -q CONFIG_AEABI=y $KCONFIG_CONFIG && echo el || true) ;;
++		debarch=arm$(grep -q CONFIG_AEABI=y $KCONFIG_CONFIG && echo hf || true) ;;
+ 	*)
+ 		echo "" >&2
+ 		echo "** ** **  WARNING  ** ** **" >&2
 @@ -165,6 +165,16 @@ if grep -q '^CONFIG_MODULES=y' $KCONFIG_CONFIG ; then
  	fi
  fi
@@ -30,5 +39,5 @@ index 5972624..169a91e 100755
  	$MAKE headers_check KBUILD_SRC=
  	$MAKE headers_install KBUILD_SRC= INSTALL_HDR_PATH="$libc_headers_dir/usr"
 -- 
-2.1.1
+2.1.4
 
