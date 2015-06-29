@@ -150,6 +150,7 @@ fixes () {
 	fi
 
 	${git} "${DIR}/patches/fixes/0001-trusty-gcc-4.8-4.8.2-19ubuntu1-has-fix.patch"
+	${git} "${DIR}/patches/fixes/0002-usb-ci_hdrc_imx-add-optional-hub-clock.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 		number=1
