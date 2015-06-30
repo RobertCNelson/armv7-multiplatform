@@ -85,9 +85,11 @@ reverts () {
 	${git} "${DIR}/patches/reverts/0001-Revert-ARM-dts-am335x-boneblack-disable-RTC-only-sle.patch"
 
 	${git} "${DIR}/patches/reverts/0002-Revert-spi-spidev-Warn-loudly-if-instantiated-from-D.patch"
+	#udoo:
+	${git} "${DIR}/patches/reverts/0003-Revert-usb-chipidea-usbmisc_imx-delete-clock-informa.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=2
+		number=3
 		cleanup
 	fi
 }
@@ -150,7 +152,6 @@ fixes () {
 	fi
 
 	${git} "${DIR}/patches/fixes/0001-trusty-gcc-4.8-4.8.2-19ubuntu1-has-fix.patch"
-	${git} "${DIR}/patches/fixes/0002-usb-ci_hdrc_imx-add-optional-hub-clock.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 		number=1
