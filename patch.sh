@@ -88,8 +88,11 @@ reverts () {
 	#udoo:
 	${git} "${DIR}/patches/reverts/0003-Revert-usb-chipidea-usbmisc_imx-delete-clock-informa.patch"
 
+	${git} "${DIR}/patches/reverts/0004-Revert-of-make-CONFIG_OF-user-selectable.patch"
+	${git} "${DIR}/patches/reverts/0005-Revert-of-make-unittest-select-OF_EARLY_FLATTREE-ins.patch"
+
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=3
+		number=5
 		cleanup
 	fi
 }
@@ -182,8 +185,11 @@ bbb_overlays () {
 		start_cleanup
 	fi
 
-	${git} "${DIR}/patches/bbb_overlays/0001-regmap-Introduce-regmap_get_max_register.patch"
-	${git} "${DIR}/patches/bbb_overlays/0002-regmap-Introduce-regmap_get_reg_stride.patch"
+	#mainline: 668abc729fcb9d034eccadf63166d2c76cd645d1
+	#${git} "${DIR}/patches/bbb_overlays/0001-regmap-Introduce-regmap_get_max_register.patch"
+	#mainline: a2f776cbb8271d7149784207da0b0c51e8b1847c
+	#${git} "${DIR}/patches/bbb_overlays/0002-regmap-Introduce-regmap_get_reg_stride.patch"
+
 	${git} "${DIR}/patches/bbb_overlays/0003-nvmem-Add-a-simple-NVMEM-framework-for-nvmem-provide.patch"
 	${git} "${DIR}/patches/bbb_overlays/0004-nvmem-Add-a-simple-NVMEM-framework-for-consumers.patch"
 	${git} "${DIR}/patches/bbb_overlays/0005-nvmem-Add-nvmem_device-based-consumer-apis.patch"
@@ -212,14 +218,17 @@ bbb_overlays () {
 	${git} "${DIR}/patches/bbb_overlays/0024-of-overlay-global-sysfs-enable-attribute.patch"
 	${git} "${DIR}/patches/bbb_overlays/0025-of-overlay-add-per-overlay-sysfs-attributes.patch"
 	${git} "${DIR}/patches/bbb_overlays/0026-Documentation-ABI-sys-firmware-devicetree-overlays.patch"
-	${git} "${DIR}/patches/bbb_overlays/0027-of-Move-OF-flags-to-be-visible-even-when-CONFIG_OF.patch"
+#	${git} "${DIR}/patches/bbb_overlays/0027-of-Move-OF-flags-to-be-visible-even-when-CONFIG_OF.patch"
 	${git} "${DIR}/patches/bbb_overlays/0028-i2c-nvmem-at24-Provide-an-EEPROM-framework-interface.patch"
 	${git} "${DIR}/patches/bbb_overlays/0029-misc-Beaglebone-capemanager.patch"
 	${git} "${DIR}/patches/bbb_overlays/0030-doc-misc-Beaglebone-capemanager-documentation.patch"
 	${git} "${DIR}/patches/bbb_overlays/0031-doc-dt-beaglebone-cape-manager-bindings.patch"
 	${git} "${DIR}/patches/bbb_overlays/0032-doc-ABI-bone_capemgr-sysfs-API.patch"
 	${git} "${DIR}/patches/bbb_overlays/0033-MAINTAINERS-Beaglebone-capemanager-maintainer.patch"
-	${git} "${DIR}/patches/bbb_overlays/0034-arm-dts-Beaglebone-i2c-definitions.patch"
+
+#	mainline: 5d1a2961adf906f965b00eb8059fd2e0585e0e09
+	#${git} "${DIR}/patches/bbb_overlays/0034-arm-dts-Beaglebone-i2c-definitions.patch"
+
 	${git} "${DIR}/patches/bbb_overlays/0035-arm-dts-Enable-beaglebone-cape-manager.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
@@ -367,9 +376,12 @@ beaglebone () {
 		device="am335x-boneblack-bbb-exp-r.dtb" ; dtb_makefile_append
 		device="am335x-boneblack-can0.dtb" ; dtb_makefile_append
 		device="am335x-boneblack-cape-bone-argus.dtb" ; dtb_makefile_append
+		device="am335x-boneblack-overlay.dtb" ; dtb_makefile_append
 		device="am335x-boneblack-replicape.dtb" ; dtb_makefile_append
 		device="am335x-boneblack-wl1835mod.dtb" ; dtb_makefile_append
 		device="am335x-boneblack-universal.dtb" ; dtb_makefile_append
+
+		device="am335x-bonegreen.dtb" ; dtb_makefile_append
 
 		git commit -a -m 'auto generated: capes: add dtbs to makefile' -s
 		git format-patch -1 -o ../patches/beaglebone/generated/
@@ -390,6 +402,39 @@ beaglebone () {
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 		number=3
+		cleanup
+	fi
+
+	echo "dir: beaglebone/firmware"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		start_cleanup
+	fi
+
+	#git clone git://git.ti.com/ti-cm3-pm-firmware/amx3-cm3.git
+	#cd amx3-cm3/
+	#git checkout origin/next-upstream -b tmp
+
+	#commit 277eef8611e260a5d73a9e3773fff8f767fe2b01
+	#Author: Dave Gerlach <d-gerlach@ti.com>
+	#Date:   Wed Mar 4 21:34:54 2015 -0600
+	#
+	#    CM3: Bump firmware release to 0x191
+	#    
+	#    This version, 0x191, includes the following changes:
+	#         - Add trace output on boot for kernel remoteproc driver
+	#         - Fix resouce table as RSC_INTMEM is no longer used in kernel
+	#    
+	#    Signed-off-by: Dave Gerlach <d-gerlach@ti.com>
+
+	#cp -v bin/am* /opt/github/bb-kernel/KERNEL/firmware/
+
+	#git add -f ./firmware/am*
+
+	${git} "${DIR}/patches/beaglebone/firmware/0001-add-am33x-firmware.patch"
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		number=1
 		cleanup
 	fi
 }
@@ -448,7 +493,7 @@ fixes
 pru
 bbb_overlays
 beaglebone
-etnaviv
+#etnaviv
 
 packaging () {
 	echo "dir: packaging"
