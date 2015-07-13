@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.1.1 Kernel Configuration
+# Linux/arm 4.1.2 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -4494,8 +4494,6 @@ CONFIG_NVEC_PAZ00=y
 # CONFIG_COMMON_CLK_XLNX_CLKWZRD is not set
 # CONFIG_FB_TFT is not set
 # CONFIG_I2O is not set
-CONFIG_DRM_ETNAVIV=y
-# CONFIG_DRM_ETNAVIV_REGISTER_LOGGING is not set
 # CONFIG_CHROME_PLATFORMS is not set
 CONFIG_CLKDEV_LOOKUP=y
 CONFIG_HAVE_CLK_PREPARE=y
@@ -4548,6 +4546,8 @@ CONFIG_COMMON_CLK_SAMSUNG=y
 # Hardware Spinlock drivers
 #
 # CONFIG_HWSPINLOCK_OMAP is not set
+# CONFIG_HWSPINLOCK_QCOM is not set
+# CONFIG_HWSPINLOCK_SIRF is not set
 # CONFIG_HSEM_U8500 is not set
 
 #
@@ -4612,6 +4612,7 @@ CONFIG_TEGRA_IOMMU_SMMU=y
 # Remoteproc drivers
 #
 # CONFIG_STE_MODEM_RPROC is not set
+# CONFIG_WKUP_M3_RPROC is not set
 
 #
 # Rpmsg drivers
