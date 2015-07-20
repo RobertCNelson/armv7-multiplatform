@@ -1,7 +1,7 @@
-From 17985ee7f73d1fbded600408f09151b2991c9d05 Mon Sep 17 00:00:00 2001
+From 04b002da5fbb447d200982e206cffc6e5343d529 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Wed, 22 Apr 2015 12:06:40 -0500
-Subject: [PATCH 06/15] arm: dts: omap4: move emif so panda-es-b3 now boots
+Subject: [PATCH 06/13] arm: dts: omap4: move emif so panda-es-b3 now boots
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
@@ -17,10 +17,10 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  create mode 100644 arch/arm/boot/dts/omap4-panda-es-b3.dts
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 992736b..a1f3687 100644
+index 246473a..b150e96 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
-@@ -420,6 +420,7 @@ dtb-$(CONFIG_ARCH_OMAP4) += \
+@@ -444,6 +444,7 @@ dtb-$(CONFIG_ARCH_OMAP4) += \
  	omap4-panda.dtb \
  	omap4-panda-a4.dtb \
  	omap4-panda-es.dtb \
@@ -213,10 +213,10 @@ index dac86ed..b68af5c 100644
  
  &keypad {
 diff --git a/arch/arm/boot/dts/omap4.dtsi b/arch/arm/boot/dts/omap4.dtsi
-index f884d6a..e4dc737 100644
+index 7d31c6f..2939c55 100644
 --- a/arch/arm/boot/dts/omap4.dtsi
 +++ b/arch/arm/boot/dts/omap4.dtsi
-@@ -677,6 +677,7 @@
+@@ -679,6 +679,7 @@
  			hw-caps-read-idle-ctrl;
  			hw-caps-ll-interface;
  			hw-caps-temp-alert;
@@ -224,7 +224,7 @@ index f884d6a..e4dc737 100644
  		};
  
  		emif2: emif@4d000000 {
-@@ -689,6 +690,7 @@
+@@ -691,6 +692,7 @@
  			hw-caps-read-idle-ctrl;
  			hw-caps-ll-interface;
  			hw-caps-temp-alert;

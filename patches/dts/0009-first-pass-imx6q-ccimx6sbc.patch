@@ -1,7 +1,7 @@
-From bb7a7ddb635506e3b1921c9b1c2242f32ddbd467 Mon Sep 17 00:00:00 2001
+From a41675293f0b1a31f74465daa601c161a595cab1 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Fri, 26 Jun 2015 19:58:47 -0500
-Subject: [PATCH 09/15] first pass: imx6q-ccimx6sbc
+Subject: [PATCH 09/13] first pass: imx6q-ccimx6sbc
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
