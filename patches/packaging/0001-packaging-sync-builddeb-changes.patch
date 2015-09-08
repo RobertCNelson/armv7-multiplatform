@@ -1,0 +1,96 @@
+From 4cbb704678ca37452f9e09ddc4d3c6d60b922cdb Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Tue, 8 Sep 2015 16:37:35 -0500
+Subject: [PATCH] packaging: sync builddeb changes
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ scripts/package/builddeb | 33 +++++++++++++++++++++++++++------
+ 1 file changed, 27 insertions(+), 6 deletions(-)
+
+diff --git a/scripts/package/builddeb b/scripts/package/builddeb
+index 7c0e6e4..9678058 100644
+--- a/scripts/package/builddeb
++++ b/scripts/package/builddeb
+@@ -37,7 +37,7 @@ create_package() {
+ 	s390*)
+ 		debarch=s390$(grep -q CONFIG_64BIT=y $KCONFIG_CONFIG && echo x || true) ;;
+ 	ppc*)
+-		debarch=powerpc ;;
++		debarch=$(grep -q CPU_LITTLE_ENDIAN=y $KCONFIG_CONFIG && echo ppc64el || echo powerpc) ;;
+ 	parisc*)
+ 		debarch=hppa ;;
+ 	mips*)
+@@ -45,7 +45,7 @@ create_package() {
+ 	arm64)
+ 		debarch=arm64 ;;
+ 	arm*)
+-		debarch=arm$(grep -q CONFIG_AEABI=y $KCONFIG_CONFIG && echo el || true) ;;
++		debarch=arm$(grep -q CONFIG_AEABI=y $KCONFIG_CONFIG && echo hf || true) ;;
+ 	*)
+ 		echo "" >&2
+ 		echo "** ** **  WARNING  ** ** **" >&2
+@@ -64,7 +64,7 @@ create_package() {
+ 	fi
+ 
+ 	# Create the package
+-	dpkg-gencontrol -isp $forcearch -Vkernel:debarch="${debarch:-$(dpkg --print-architecture)}" -p$pname -P"$pdir"
++	dpkg-gencontrol $forcearch -Vkernel:debarch="${debarch:-$(dpkg --print-architecture)}" -p$pname -P"$pdir"
+ 	dpkg --build "$pdir" ..
+ }
+ 
+@@ -165,6 +165,16 @@ if grep -q '^CONFIG_MODULES=y' $KCONFIG_CONFIG ; then
+ 	fi
+ fi
+ 
++if grep -q '^CONFIG_OF=y' $KCONFIG_CONFIG ; then
++	mkdir -p "$tmpdir/boot/dtbs/$version"
++	INSTALL_DTBS_PATH="$tmpdir/boot/dtbs/$version" $MAKE KBUILD_SRC= dtbs_install
++
++	#make dtbs_install seems to add an .old directory
++	if [ -d "$tmpdir/boot/dtbs/$version.old" ] ; then
++		rm -rf "$tmpdir/boot/dtbs/$version.old"
++	fi
++fi
++
+ if [ "$ARCH" != "um" ]; then
+ 	$MAKE headers_check KBUILD_SRC=
+ 	$MAKE headers_install KBUILD_SRC= INSTALL_HDR_PATH="$libc_headers_dir/usr"
+@@ -217,9 +227,20 @@ else
+ fi
+ maintainer="$name <$email>"
+ 
++# Try to determine distribution
++if [ -n "$KDEB_CHANGELOG_DIST" ]; then
++        distribution=$KDEB_CHANGELOG_DIST
++elif distribution=$(lsb_release -cs 2>/dev/null) && [ -n "$distribution" ]; then
++        : # nothing to do in this case
++else
++        distribution="unstable"
++        echo >&2 "Using default distribution of 'unstable' in the changelog"
++        echo >&2 "Install lsb-release or set \$KDEB_CHANGELOG_DIST explicitly"
++fi
++
+ # Generate a simple changelog template
+ cat <<EOF > debian/changelog
+-linux-upstream ($packageversion) unstable; urgency=low
++linux-upstream ($packageversion) $distribution; urgency=low
+ 
+   * Custom built Linux kernel.
+ 
+@@ -233,10 +254,10 @@ This is a packacked upstream version of the Linux kernel.
+ The sources may be found at most Linux ftp sites, including:
+ ftp://ftp.kernel.org/pub/linux/kernel
+ 
+-Copyright: 1991 - 2009 Linus Torvalds and others.
++Copyright: 1991 - 2015 Linus Torvalds and others.
+ 
+ The git repository for mainline kernel development is at:
+-git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
++git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+ 
+     This program is free software; you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+-- 
+2.5.1
+
