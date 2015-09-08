@@ -1,18 +1,44 @@
-From 055eae5323862ef4e989cf3fe7c287c3339f87f8 Mon Sep 17 00:00:00 2001
+From e9563cf9e657f0143fe6bdf2d681a7c61b123493 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Sat, 7 Mar 2015 13:09:51 -0600
-Subject: [PATCH] packaging: sync with mainline
+Date: Tue, 8 Sep 2015 15:18:19 -0500
+Subject: [PATCH] packaging: sync builddeb changes
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
- scripts/package/builddeb | 17 ++++++++++++++---
- 1 file changed, 14 insertions(+), 3 deletions(-)
+ scripts/package/builddeb | 29 +++++++++++++++++++++++++----
+ 1 file changed, 25 insertions(+), 4 deletions(-)
 
 diff --git a/scripts/package/builddeb b/scripts/package/builddeb
-index 5972624..88dbf23 100755
+index 5972624..9678058 100755
 --- a/scripts/package/builddeb
 +++ b/scripts/package/builddeb
-@@ -217,9 +217,20 @@ else
+@@ -45,7 +45,7 @@ create_package() {
+ 	arm64)
+ 		debarch=arm64 ;;
+ 	arm*)
+-		debarch=arm$(grep -q CONFIG_AEABI=y $KCONFIG_CONFIG && echo el || true) ;;
++		debarch=arm$(grep -q CONFIG_AEABI=y $KCONFIG_CONFIG && echo hf || true) ;;
+ 	*)
+ 		echo "" >&2
+ 		echo "** ** **  WARNING  ** ** **" >&2
+@@ -165,6 +165,16 @@ if grep -q '^CONFIG_MODULES=y' $KCONFIG_CONFIG ; then
+ 	fi
+ fi
+ 
++if grep -q '^CONFIG_OF=y' $KCONFIG_CONFIG ; then
++	mkdir -p "$tmpdir/boot/dtbs/$version"
++	INSTALL_DTBS_PATH="$tmpdir/boot/dtbs/$version" $MAKE KBUILD_SRC= dtbs_install
++
++	#make dtbs_install seems to add an .old directory
++	if [ -d "$tmpdir/boot/dtbs/$version.old" ] ; then
++		rm -rf "$tmpdir/boot/dtbs/$version.old"
++	fi
++fi
++
+ if [ "$ARCH" != "um" ]; then
+ 	$MAKE headers_check KBUILD_SRC=
+ 	$MAKE headers_install KBUILD_SRC= INSTALL_HDR_PATH="$libc_headers_dir/usr"
+@@ -217,9 +227,20 @@ else
  fi
  maintainer="$name <$email>"
  
@@ -34,7 +60,7 @@ index 5972624..88dbf23 100755
  
    * Custom built Linux kernel.
  
-@@ -233,10 +244,10 @@ This is a packacked upstream version of the Linux kernel.
+@@ -233,10 +254,10 @@ This is a packacked upstream version of the Linux kernel.
  The sources may be found at most Linux ftp sites, including:
  ftp://ftp.kernel.org/pub/linux/kernel
  
@@ -48,5 +74,5 @@ index 5972624..88dbf23 100755
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
 -- 
-2.1.4
+2.5.1
 
