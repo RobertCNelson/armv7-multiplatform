@@ -1,0 +1,118 @@
+From b5fb8fc502a3b9789a2bc5f513ba1d93275486ce Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Tue, 8 Sep 2015 17:09:39 -0500
+Subject: [PATCH] packaging: sync builddeb changes
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ scripts/package/builddeb | 55 ++++++++++++++++++++++++++++++++----------------
+ 1 file changed, 37 insertions(+), 18 deletions(-)
+
+diff --git a/scripts/package/builddeb b/scripts/package/builddeb
+index 35d5a58..9678058 100644
+--- a/scripts/package/builddeb
++++ b/scripts/package/builddeb
+@@ -37,7 +37,7 @@ create_package() {
+ 	s390*)
+ 		debarch=s390$(grep -q CONFIG_64BIT=y $KCONFIG_CONFIG && echo x || true) ;;
+ 	ppc*)
+-		debarch=powerpc ;;
++		debarch=$(grep -q CPU_LITTLE_ENDIAN=y $KCONFIG_CONFIG && echo ppc64el || echo powerpc) ;;
+ 	parisc*)
+ 		debarch=hppa ;;
+ 	mips*)
+@@ -45,7 +45,7 @@ create_package() {
+ 	arm64)
+ 		debarch=arm64 ;;
+ 	arm*)
+-		debarch=arm$(grep -q CONFIG_AEABI=y $KCONFIG_CONFIG && echo el || true) ;;
++		debarch=arm$(grep -q CONFIG_AEABI=y $KCONFIG_CONFIG && echo hf || true) ;;
+ 	*)
+ 		echo "" >&2
+ 		echo "** ** **  WARNING  ** ** **" >&2
+@@ -64,7 +64,7 @@ create_package() {
+ 	fi
+ 
+ 	# Create the package
+-	dpkg-gencontrol -isp $forcearch -Vkernel:debarch="${debarch:-$(dpkg --print-architecture)}" -p$pname -P"$pdir"
++	dpkg-gencontrol $forcearch -Vkernel:debarch="${debarch:-$(dpkg --print-architecture)}" -p$pname -P"$pdir"
+ 	dpkg --build "$pdir" ..
+ }
+ 
+@@ -152,18 +152,26 @@ if grep -q '^CONFIG_MODULES=y' $KCONFIG_CONFIG ; then
+ 		rmdir "$tmpdir/lib/modules/$version"
+ 	fi
+ 	if [ -n "$BUILD_DEBUG" ] ; then
+-		(
+-			cd $tmpdir
+-			for module in $(find lib/modules/ -name *.ko); do
+-				mkdir -p $(dirname $dbg_dir/usr/lib/debug/$module)
+-				# only keep debug symbols in the debug file
+-				$OBJCOPY --only-keep-debug $module $dbg_dir/usr/lib/debug/$module
+-				# strip original module from debug symbols
+-				$OBJCOPY --strip-debug $module
+-				# then add a link to those
+-				$OBJCOPY --add-gnu-debuglink=$dbg_dir/usr/lib/debug/$module $module
+-			done
+-		)
++		for module in $(find $tmpdir/lib/modules/ -name *.ko -printf '%P\n'); do
++			module=lib/modules/$module
++			mkdir -p $(dirname $dbg_dir/usr/lib/debug/$module)
++			# only keep debug symbols in the debug file
++			$OBJCOPY --only-keep-debug $tmpdir/$module $dbg_dir/usr/lib/debug/$module
++			# strip original module from debug symbols
++			$OBJCOPY --strip-debug $tmpdir/$module
++			# then add a link to those
++			$OBJCOPY --add-gnu-debuglink=$dbg_dir/usr/lib/debug/$module $tmpdir/$module
++		done
++	fi
++fi
++
++if grep -q '^CONFIG_OF=y' $KCONFIG_CONFIG ; then
++	mkdir -p "$tmpdir/boot/dtbs/$version"
++	INSTALL_DTBS_PATH="$tmpdir/boot/dtbs/$version" $MAKE KBUILD_SRC= dtbs_install
++
++	#make dtbs_install seems to add an .old directory
++	if [ -d "$tmpdir/boot/dtbs/$version.old" ] ; then
++		rm -rf "$tmpdir/boot/dtbs/$version.old"
+ 	fi
+ fi
+ 
+@@ -219,9 +227,20 @@ else
+ fi
+ maintainer="$name <$email>"
+ 
++# Try to determine distribution
++if [ -n "$KDEB_CHANGELOG_DIST" ]; then
++        distribution=$KDEB_CHANGELOG_DIST
++elif distribution=$(lsb_release -cs 2>/dev/null) && [ -n "$distribution" ]; then
++        : # nothing to do in this case
++else
++        distribution="unstable"
++        echo >&2 "Using default distribution of 'unstable' in the changelog"
++        echo >&2 "Install lsb-release or set \$KDEB_CHANGELOG_DIST explicitly"
++fi
++
+ # Generate a simple changelog template
+ cat <<EOF > debian/changelog
+-linux-upstream ($packageversion) unstable; urgency=low
++linux-upstream ($packageversion) $distribution; urgency=low
+ 
+   * Custom built Linux kernel.
+ 
+@@ -235,10 +254,10 @@ This is a packacked upstream version of the Linux kernel.
+ The sources may be found at most Linux ftp sites, including:
+ ftp://ftp.kernel.org/pub/linux/kernel
+ 
+-Copyright: 1991 - 2009 Linus Torvalds and others.
++Copyright: 1991 - 2015 Linus Torvalds and others.
+ 
+ The git repository for mainline kernel development is at:
+-git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
++git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+ 
+     This program is free software; you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+-- 
+2.5.1
+
