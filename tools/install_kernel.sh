@@ -142,33 +142,51 @@ mmc_write_boot () {
 }
 
 mmc_partition_discover () {
+	boot_written="false"
 	if [ -f "${DIR}/deploy/disk/uEnv.txt" ] ; then
 		echo "found: /uEnv.txt"
 		location="${DIR}/deploy/disk"
 		mmc_write_boot
+		boot_written="true"
 	fi
 
-	if [ -f "${DIR}/deploy/disk/boot/uEnv.txt" ] ; then
-		echo "found: /boot/uEnv.txt"
-		location="${DIR}/deploy/disk/boot"
-		test_uname=$(grep uname_r "${DIR}/deploy/disk/boot/uEnv.txt" | awk -F"=" '{print $2}' || true)
-		if [ ! "x${test_uname}" = "x" ] ; then
-			echo "info: ${test_uname} was installed"
-			mmc_write_boot_uname
-		else
-			mmc_write_boot
+	if [ "x${boot_written}" = "xfalse" ] ; then
+		if [ -f "${DIR}/deploy/disk/boot/uEnv.txt" ] ; then
+			echo "found: /boot/uEnv.txt"
+			location="${DIR}/deploy/disk/boot"
+			test_uname=$(grep uname_r "${DIR}/deploy/disk/boot/uEnv.txt" | awk -F"=" '{print $2}' || true)
+			if [ ! "x${test_uname}" = "x" ] ; then
+				echo "info: ${test_uname} was installed"
+				mmc_write_boot_uname
+			else
+				mmc_write_boot
+			fi
+			boot_written="true"
 		fi
 	fi
 
-	if [ -f "${DIR}/deploy/disk/boot/extlinux/extlinux.conf" ] ; then
-		echo "found: /boot/extlinux/extlinux.conf"
-		location="${DIR}/deploy/disk/boot"
-		test_uname=$(grep /boot/vmlinuz- "${DIR}/deploy/disk/boot/extlinux/extlinux.conf" | awk -F"/boot/vmlinuz-" '{print $2}' || true)
-		if [ ! "x${test_uname}" = "x" ] ; then
-			echo "info: ${test_uname} was installed"
-			mmc_write_boot_extlinux
-		else
+	if [ "x${boot_written}" = "xfalse" ] ; then
+		if [ -f "${DIR}/deploy/disk/boot/extlinux/extlinux.conf" ] ; then
+			echo "found: /boot/extlinux/extlinux.conf"
+			location="${DIR}/deploy/disk/boot"
+			test_uname=$(grep /boot/vmlinuz- "${DIR}/deploy/disk/boot/extlinux/extlinux.conf" | awk -F"/boot/vmlinuz-" '{print $2}' || true)
+			if [ ! "x${test_uname}" = "x" ] ; then
+				echo "info: ${test_uname} was installed"
+				mmc_write_boot_extlinux
+			else
+				mmc_write_boot
+			fi
+			boot_written="true"
+		fi
+	fi
+
+	if [ "x${boot_written}" = "xfalse" ] ; then
+		#Atmel: mmc 0:1: zImage /dtbs/*
+		if [ -f "${DIR}/deploy/disk/boot.bin" ] ; then
+			echo "found: Atmel: boot.bin"
+			location="${DIR}/deploy/disk"
 			mmc_write_boot
+			boot_written="true"
 		fi
 	fi
 
