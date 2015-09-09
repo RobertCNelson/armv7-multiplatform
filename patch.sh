@@ -74,6 +74,21 @@ local_patch () {
 #external_git
 #local_patch
 
+reverts () {
+	echo "dir: reverts"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		start_cleanup
+	fi
+
+	${git} "${DIR}/patches/reverts/0001-Revert-mfd-twl4030-power-Fix-PM-idle-pin-configurati.patch"
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		number=1
+		cleanup
+	fi
+}
+
 imx_next () {
 	echo "dir: imx_next"
 	#From: https://git.kernel.org/cgit/linux/kernel/git/shawnguo/linux.git/
@@ -664,6 +679,8 @@ beaglebone () {
 	${git} "${DIR}/patches/beaglebone/mac/0007-arm-dts-am33xx-Add-syscon-phandle-to-cpsw-node.patch"
 }
 
+###
+reverts
 #imx_next
 #omap_next
 #tegra_next

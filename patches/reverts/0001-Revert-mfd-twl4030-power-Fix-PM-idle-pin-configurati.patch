@@ -1,0 +1,69 @@
+From afb3c450eb197703cc8aef6a564827b26eaa17dc Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Wed, 9 Sep 2015 10:55:13 -0500
+Subject: [PATCH] Revert "mfd: twl4030-power: Fix PM idle pin configuration to
+ not conflict with regulators"
+
+This reverts commit daebabd578647440d41fc9b48d8c7a88dc2f7ab5.
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/boot/dts/omap3-n900.dts |  2 +-
+ drivers/mfd/twl4030-power.c      | 20 ++++++++++----------
+ 2 files changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/arch/arm/boot/dts/omap3-n900.dts b/arch/arm/boot/dts/omap3-n900.dts
+index 4361777..e25a56b 100644
+--- a/arch/arm/boot/dts/omap3-n900.dts
++++ b/arch/arm/boot/dts/omap3-n900.dts
+@@ -353,7 +353,7 @@
+ 	};
+ 
+ 	twl_power: power {
+-		compatible = "ti,twl4030-power-n900", "ti,twl4030-power-idle-osc-off";
++		compatible = "ti,twl4030-power-n900";
+ 		ti,use_poweroff;
+ 	};
+ };
+diff --git a/drivers/mfd/twl4030-power.c b/drivers/mfd/twl4030-power.c
+index 542f1a8..47f4230 100644
+--- a/drivers/mfd/twl4030-power.c
++++ b/drivers/mfd/twl4030-power.c
+@@ -776,24 +776,24 @@ static struct twl4030_script *omap3_idle_scripts[] = {
+  * above.
+  */
+ static struct twl4030_resconfig omap3_idle_rconfig[] = {
+-	TWL_REMAP_SLEEP(RES_VAUX1, TWL4030_RESCONFIG_UNDEF, 0, 0),
+-	TWL_REMAP_SLEEP(RES_VAUX2, TWL4030_RESCONFIG_UNDEF, 0, 0),
+-	TWL_REMAP_SLEEP(RES_VAUX3, TWL4030_RESCONFIG_UNDEF, 0, 0),
+-	TWL_REMAP_SLEEP(RES_VAUX4, TWL4030_RESCONFIG_UNDEF, 0, 0),
+-	TWL_REMAP_SLEEP(RES_VMMC1, TWL4030_RESCONFIG_UNDEF, 0, 0),
+-	TWL_REMAP_SLEEP(RES_VMMC2, TWL4030_RESCONFIG_UNDEF, 0, 0),
++	TWL_REMAP_SLEEP(RES_VAUX1, DEV_GRP_NULL, 0, 0),
++	TWL_REMAP_SLEEP(RES_VAUX2, DEV_GRP_NULL, 0, 0),
++	TWL_REMAP_SLEEP(RES_VAUX3, DEV_GRP_NULL, 0, 0),
++	TWL_REMAP_SLEEP(RES_VAUX4, DEV_GRP_NULL, 0, 0),
++	TWL_REMAP_SLEEP(RES_VMMC1, DEV_GRP_NULL, 0, 0),
++	TWL_REMAP_SLEEP(RES_VMMC2, DEV_GRP_NULL, 0, 0),
+ 	TWL_REMAP_OFF(RES_VPLL1, DEV_GRP_P1, 3, 1),
+ 	TWL_REMAP_SLEEP(RES_VPLL2, DEV_GRP_P1, 0, 0),
+-	TWL_REMAP_SLEEP(RES_VSIM, TWL4030_RESCONFIG_UNDEF, 0, 0),
+-	TWL_REMAP_SLEEP(RES_VDAC, TWL4030_RESCONFIG_UNDEF, 0, 0),
++	TWL_REMAP_SLEEP(RES_VSIM, DEV_GRP_NULL, 0, 0),
++	TWL_REMAP_SLEEP(RES_VDAC, DEV_GRP_NULL, 0, 0),
+ 	TWL_REMAP_SLEEP(RES_VINTANA1, TWL_DEV_GRP_P123, 1, 2),
+ 	TWL_REMAP_SLEEP(RES_VINTANA2, TWL_DEV_GRP_P123, 0, 2),
+ 	TWL_REMAP_SLEEP(RES_VINTDIG, TWL_DEV_GRP_P123, 1, 2),
+ 	TWL_REMAP_SLEEP(RES_VIO, TWL_DEV_GRP_P123, 2, 2),
+ 	TWL_REMAP_OFF(RES_VDD1, DEV_GRP_P1, 4, 1),
+ 	TWL_REMAP_OFF(RES_VDD2, DEV_GRP_P1, 3, 1),
+-	TWL_REMAP_SLEEP(RES_VUSB_1V5, TWL4030_RESCONFIG_UNDEF, 0, 0),
+-	TWL_REMAP_SLEEP(RES_VUSB_1V8, TWL4030_RESCONFIG_UNDEF, 0, 0),
++	TWL_REMAP_SLEEP(RES_VUSB_1V5, DEV_GRP_NULL, 0, 0),
++	TWL_REMAP_SLEEP(RES_VUSB_1V8, DEV_GRP_NULL, 0, 0),
+ 	TWL_REMAP_SLEEP(RES_VUSB_3V1, TWL_DEV_GRP_P123, 0, 0),
+ 	/* Resource #20 USB charge pump skipped */
+ 	TWL_REMAP_SLEEP(RES_REGEN, TWL_DEV_GRP_P123, 2, 1),
+-- 
+2.5.1
+
