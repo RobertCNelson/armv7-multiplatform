@@ -182,8 +182,8 @@ mmc_partition_discover () {
 
 	if [ "x${boot_written}" = "xfalse" ] ; then
 		#Atmel: mmc 0:1: zImage /dtbs/*
-		if [ -f "${DIR}/deploy/disk/boot.bin" ] ; then
-			echo "found: Atmel: boot.bin"
+		if [ -f "${DIR}/deploy/disk/BOOT.BIN" ] ; then
+			echo "found: Atmel: /BOOT.BIN"
 			location="${DIR}/deploy/disk"
 			mmc_write_boot
 			boot_written="true"

@@ -557,6 +557,7 @@ packaging () {
 		cp -v "${DIR}/3rdparty/packaging/builddeb" "${DIR}/KERNEL/scripts/package"
 		git commit -a -m 'packaging: sync builddeb changes' -s
 		git format-patch -1 -o "${DIR}/patches/packaging"
+		exit 2
 	else
 		${git} "${DIR}/patches/packaging/0001-packaging-sync-builddeb-changes.patch"
 	fi
