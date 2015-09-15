@@ -1,4 +1,4 @@
-From 61bf7a91a7ec580cf4c70082b2bad80086b3054c Mon Sep 17 00:00:00 2001
+From 9c7d08580344569d0284b7e13d337fb9a0b7b360 Mon Sep 17 00:00:00 2001
 From: Philipp Zabel <p.zabel@pengutronix.de>
 Date: Fri, 19 Jun 2015 16:38:51 +0200
 Subject: [PATCH 13/15] drm/imx: tve: fix media bus format for VGA output
@@ -26,5 +26,5 @@ index 214ecee..e671ad3 100644
  		break;
  	case TVE_MODE_TVOUT:
 -- 
-2.1.4
+2.5.1
 

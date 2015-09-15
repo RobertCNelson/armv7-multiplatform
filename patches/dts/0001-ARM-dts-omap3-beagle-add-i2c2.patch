@@ -1,4 +1,4 @@
-From e4df1b17e8876b1943df1d55adb99f2ba9858e2f Mon Sep 17 00:00:00 2001
+From 89c0e7e052c97666aca52a65e4df215ee61c6720 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Thu, 13 Feb 2014 10:03:57 -0600
 Subject: [PATCH 01/15] ARM: dts: omap3-beagle: add i2c2
@@ -24,5 +24,5 @@ index a547411..637c240 100644
  #include "twl4030_omap3.dtsi"
  
 -- 
-2.1.4
+2.5.1
 

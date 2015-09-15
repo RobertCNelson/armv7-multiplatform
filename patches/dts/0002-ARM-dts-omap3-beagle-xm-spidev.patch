@@ -1,4 +1,4 @@
-From e828d80d8455d4a05615894826249a64568a7857 Mon Sep 17 00:00:00 2001
+From 5a88b698581509fa5394ba049476b9f0f019d607 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Wed, 19 Feb 2014 09:29:54 -0600
 Subject: [PATCH 02/15] ARM: dts: omap3-beagle-xm: spidev
@@ -76,5 +76,5 @@ index 7c4dca1..4374a7e 100644
  	ti,use-leds;
  	/* pullups: BIT(1) */
 -- 
-2.1.4
+2.5.1
 

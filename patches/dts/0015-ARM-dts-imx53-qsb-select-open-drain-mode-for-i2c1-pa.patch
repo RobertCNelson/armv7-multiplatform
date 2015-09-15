@@ -1,4 +1,4 @@
-From ef8f008ba189081a399e30f5edcf39576e315d5a Mon Sep 17 00:00:00 2001
+From ef9ad859823eeb6f1c23f570cec6f2d87afdf38e Mon Sep 17 00:00:00 2001
 From: Lucas Stach <l.stach@pengutronix.de>
 Date: Fri, 19 Jun 2015 18:09:50 +0200
 Subject: [PATCH 15/15] ARM: dts: imx53-qsb: select open-drain mode for i2c1
@@ -66,5 +66,5 @@ index 82d623d..66e47de 100644
  		compatible = "fsl,mc34708";
  		pinctrl-names = "default";
 -- 
-2.1.4
+2.5.1
 
