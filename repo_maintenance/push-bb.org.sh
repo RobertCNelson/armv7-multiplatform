@@ -1,6 +1,6 @@
 #!/bin/sh -e
 #
-# Copyright (c) 2009-2014 Robert Nelson <robertcnelson@gmail.com>
+# Copyright (c) 2009-2015 Robert Nelson <robertcnelson@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -25,18 +25,20 @@
 DIR=$PWD
 
 repo="git@github.com:beagleboard/linux.git"
+example="bb.org"
 
 if [ -e ${DIR}/version.sh ]; then
 	unset BRANCH
 	. ${DIR}/version.sh
 
 	cd ${DIR}/KERNEL/
+	make ARCH=arm distclean
 
-	cp ${DIR}/patches/defconfig ${DIR}/KERNEL/arch/arm/configs/bb.org_defconfig
-	git add arch/arm/configs/bb.org_defconfig
+	cp ${DIR}/patches/defconfig ${DIR}/KERNEL/arch/arm/configs/${example}_defconfig
+	git add arch/arm/configs/${example}_defconfig
 
-	git commit -a -m "${KERNEL_TAG}-${BUILD} bb.org_defconfig" -s
-	git tag -a "${KERNEL_TAG}-${BUILD}" -m "${KERNEL_TAG}-${BUILD}"
+	git commit -a -m "${KERNEL_TAG}-${BUILD} ${example}_defconfig" -s
+	git tag -a "${KERNEL_TAG}-${BUILD}" -m "${KERNEL_TAG}-${BUILD}" -f
 
 	#push tag
 	git push -f ${repo} "${KERNEL_TAG}-${BUILD}"
@@ -45,6 +47,7 @@ if [ -e ${DIR}/version.sh ]; then
 	git branch -m v${KERNEL_TAG}-${BUILD} ${KERNEL_REL}
 
 	#push branch
+	echo "log: git push -f ${repo} ${KERNEL_REL}"
 	git push -f ${repo} ${KERNEL_REL}
 
 	cd ${DIR}/
