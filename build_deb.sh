@@ -69,7 +69,9 @@ make_deb () {
 	build_opts="${build_opts} LOCALVERSION=-${BUILD}"
 	build_opts="${build_opts} KDEB_CHANGELOG_DIST=${deb_distro}"
 	build_opts="${build_opts} KDEB_PKGVERSION=1${DISTRO}"
-	build_opts="${build_opts} KDEB_SOURCENAME=${sourcename}"
+	#Just use "linux-upstream"...
+	#https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/scripts/package/builddeb?id=3716001bcb7f5822382ac1f2f54226b87312cc6b
+	build_opts="${build_opts} KDEB_SOURCENAME=linux-upstream"
 
 	echo "-----------------------------"
 	echo "make ${build_opts} CROSS_COMPILE="${CC}" deb-pkg"
@@ -80,13 +82,6 @@ make_deb () {
 	mv ${DIR}/*.dsc ${DIR}/deploy/ || true
 	mv ${DIR}/*.changes ${DIR}/deploy/ || true
 	mv ${DIR}/*.orig.tar.gz ${DIR}/deploy/ || true
-
-	if grep -q dtbs "${DIR}/KERNEL/arch/arm/Makefile"; then
-		echo "make -j${CORES} ARCH=arm LOCALVERSION=-${BUILD} CROSS_COMPILE="${CC}" dtbs"
-		echo "-----------------------------"
-		make -j${CORES} ARCH=arm LOCALVERSION=-${BUILD} CROSS_COMPILE="${CC}" dtbs
-		echo "-----------------------------"
-	fi
 
 	KERNEL_UTS=$(cat ${DIR}/KERNEL/include/generated/utsrelease.h | awk '{print $3}' | sed 's/\"//g' )
 
@@ -133,17 +128,6 @@ fi
 
 . ${DIR}/version.sh
 export LINUX_GIT
-if [ "x${KERNEL_REL}" = "x${KERNEL_TAG}" ] ; then
-	sourcename="linux-${KERNEL_REL}.0-${BUILD}"
-else
-	testrc=$(echo ${KERNEL_TAG} | grep rc || true)
-	if [ ! "x${testrc}" = "x" ] ; then
-		RC=$(echo ${testrc} | awk -F '-' '{print $2}')
-		sourcename="linux-${KERNEL_REL}.0-${RC}-${BUILD}"
-	else
-	sourcename="linux-${KERNEL_TAG}-${BUILD}"
-	fi
-fi
 
 #unset FULL_REBUILD
 FULL_REBUILD=1
