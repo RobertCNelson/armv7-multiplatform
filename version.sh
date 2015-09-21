@@ -17,7 +17,7 @@ KERNEL_TAG=${KERNEL_REL}
 BUILD=armv7-x2
 kernel_rt=".X-rtY"
 
-#v3.X-rcX + upto SHA
+#v4.X-rcX + upto SHA
 #prev_KERNEL_SHA=""
 #KERNEL_SHA=""
 
