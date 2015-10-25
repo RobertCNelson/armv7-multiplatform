@@ -1,7 +1,7 @@
-From ef9ad859823eeb6f1c23f570cec6f2d87afdf38e Mon Sep 17 00:00:00 2001
+From 96414af0432e6a62914b04ec3aee0e0fee62a336 Mon Sep 17 00:00:00 2001
 From: Lucas Stach <l.stach@pengutronix.de>
 Date: Fri, 19 Jun 2015 18:09:50 +0200
-Subject: [PATCH 15/15] ARM: dts: imx53-qsb: select open-drain mode for i2c1
+Subject: [PATCH 14/15] ARM: dts: imx53-qsb: select open-drain mode for i2c1
  pads
 
 Both imx53-qsb and imx53-qsrb don't have external pull-up resistors
@@ -16,7 +16,7 @@ Signed-off-by: Philipp Zabel <p.zabel@pengutronix.de>
  2 files changed, 4 insertions(+), 15 deletions(-)
 
 diff --git a/arch/arm/boot/dts/imx53-qsb-common.dtsi b/arch/arm/boot/dts/imx53-qsb-common.dtsi
-index ab4ba39..c392c6a 100644
+index b0d5542..53fd75c 100644
 --- a/arch/arm/boot/dts/imx53-qsb-common.dtsi
 +++ b/arch/arm/boot/dts/imx53-qsb-common.dtsi
 @@ -228,10 +228,11 @@
@@ -66,5 +66,5 @@ index 82d623d..66e47de 100644
  		compatible = "fsl,mc34708";
  		pinctrl-names = "default";
 -- 
-2.5.1
+2.6.1
 

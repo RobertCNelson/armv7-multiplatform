@@ -1,4 +1,4 @@
-From 174fc18b275bddc99e0d1e30850328566092915b Mon Sep 17 00:00:00 2001
+From ab25567ea8d1c7b3aa3d7aa792b41c705c9c2ed1 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Thu, 17 Apr 2014 09:40:11 -0500
 Subject: [PATCH 04/15] ARM: DTS: omap3-beagle-xm: disable powerdown-gpios
@@ -22,5 +22,5 @@ index c200a4d..88b1048 100644
  		/* XXX pinctrl from twl */
  
 -- 
-2.5.1
+2.6.1
 

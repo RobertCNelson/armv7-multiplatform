@@ -1,4 +1,4 @@
-From 5ae5e453fb94fe7b7beb355c39cac44c3cc4d449 Mon Sep 17 00:00:00 2001
+From 8af3619ca722a4fe471c620dbb51544a4dc5b040 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Tue, 5 Aug 2014 11:52:45 -0500
 Subject: [PATCH 07/15] omap3-beagle-xm: ehci works again
@@ -25,5 +25,5 @@ index 88b1048..116e8d7 100644
  };
  
 -- 
-2.5.1
+2.6.1
 

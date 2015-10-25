@@ -1,4 +1,4 @@
-From bae772b44e6f08d6e39eadce2ac4b670844ca2f2 Mon Sep 17 00:00:00 2001
+From 77e4b6e45f4188afc0e8d08bf460eae337f67a69 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Fri, 2 May 2014 15:30:02 -0500
 Subject: [PATCH 05/15] ARM: DTS: omap3-beagle.dts: enable twl4030-power-reset
@@ -9,7 +9,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  1 file changed, 5 insertions(+)
 
 diff --git a/arch/arm/boot/dts/omap3-beagle.dts b/arch/arm/boot/dts/omap3-beagle.dts
-index 637c240..fd792a4 100644
+index 2e45844a..18b178b 100644
 --- a/arch/arm/boot/dts/omap3-beagle.dts
 +++ b/arch/arm/boot/dts/omap3-beagle.dts
 @@ -271,6 +271,11 @@
@@ -25,5 +25,5 @@ index 637c240..fd792a4 100644
  };
  
 -- 
-2.5.1
+2.6.1
 

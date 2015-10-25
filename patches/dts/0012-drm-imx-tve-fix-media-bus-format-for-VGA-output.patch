@@ -1,7 +1,7 @@
-From 9c7d08580344569d0284b7e13d337fb9a0b7b360 Mon Sep 17 00:00:00 2001
+From 81edc067b8a8facad493e4bd7774fc2ba97e7dd8 Mon Sep 17 00:00:00 2001
 From: Philipp Zabel <p.zabel@pengutronix.de>
 Date: Fri, 19 Jun 2015 16:38:51 +0200
-Subject: [PATCH 13/15] drm/imx: tve: fix media bus format for VGA output
+Subject: [PATCH 12/15] drm/imx: tve: fix media bus format for VGA output
 
 Commit a7c6e76feeb1 ("drm/imx: switch to use media bus formats")
 accidentally replaced IPU_PIX_FMT_GBR24 with MEDIA_BUS_FMT_YUV8_1X24
@@ -26,5 +26,5 @@ index 214ecee..e671ad3 100644
  		break;
  	case TVE_MODE_TVOUT:
 -- 
-2.5.1
+2.6.1
 

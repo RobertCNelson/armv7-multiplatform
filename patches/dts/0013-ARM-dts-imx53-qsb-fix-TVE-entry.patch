@@ -1,7 +1,7 @@
-From 229e1bfb35f2e55be6d493d800c0e78103e3740c Mon Sep 17 00:00:00 2001
+From e6c836651ff99d701c6969664311e4fda7947eb6 Mon Sep 17 00:00:00 2001
 From: Philipp Zabel <p.zabel@pengutronix.de>
 Date: Fri, 19 Jun 2015 16:38:39 +0200
-Subject: [PATCH 14/15] ARM: dts: imx53-qsb: fix TVE entry
+Subject: [PATCH 13/15] ARM: dts: imx53-qsb: fix TVE entry
 
 Correct HSYNC/VSYNC pins and add ddc-i2c-bus property
 
@@ -11,7 +11,7 @@ Signed-off-by: Philipp Zabel <p.zabel@pengutronix.de>
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm/boot/dts/imx53-qsb-common.dtsi b/arch/arm/boot/dts/imx53-qsb-common.dtsi
-index 181ae5e..ab4ba39 100644
+index 1f55187..b0d5542 100644
 --- a/arch/arm/boot/dts/imx53-qsb-common.dtsi
 +++ b/arch/arm/boot/dts/imx53-qsb-common.dtsi
 @@ -295,9 +295,10 @@
@@ -28,5 +28,5 @@ index 181ae5e..ab4ba39 100644
  };
  
 -- 
-2.5.1
+2.6.1
 
