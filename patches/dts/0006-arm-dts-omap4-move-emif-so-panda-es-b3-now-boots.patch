@@ -1,4 +1,4 @@
-From cc1f71c6b098f21a1b4bb77891f2c61f723b801e Mon Sep 17 00:00:00 2001
+From 6072ed1525ab031acb75f65092660afccfc839c3 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Wed, 22 Apr 2015 12:06:40 -0500
 Subject: [PATCH 06/15] arm: dts: omap4: move emif so panda-es-b3 now boots
@@ -233,5 +233,5 @@ index 84be9da..99a7ddc 100644
  
  		ocp2scp@4a0ad000 {
 -- 
-2.5.1
+2.6.1
 
