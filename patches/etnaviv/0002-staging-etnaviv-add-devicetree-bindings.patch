@@ -1,7 +1,7 @@
-From 5d4ce5080609a82352440509513f10abca87b029 Mon Sep 17 00:00:00 2001
+From 69f5a315980a0d6ccc28434ddaa0181ee8cacc10 Mon Sep 17 00:00:00 2001
 From: Lucas Stach <l.stach@pengutronix.de>
-Date: Tue, 23 Jun 2015 11:42:43 +0200
-Subject: [PATCH 002/139] staging: etnaviv: add devicetree bindings
+Date: Thu, 2 Apr 2015 17:29:04 +0200
+Subject: [PATCH 002/136] staging: etnaviv: add devicetree bindings
 
 Etnaviv follows the same priciple as imx-drm to have a virtual
 master device node to bind all the individual GPU cores together
@@ -65,5 +65,5 @@ index 0000000..e27082b
 +	clock-names = "bus", "core", "shader";
 +};
 -- 
-2.5.1
+2.6.1
 
