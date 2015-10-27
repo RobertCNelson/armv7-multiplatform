@@ -1,7 +1,7 @@
-From ba741f5f56075868f6e11ca4be1d8afa05a8a55d Mon Sep 17 00:00:00 2001
+From 4becdb6e4c767e86dd4c864364b1f86d968e9cbc Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Wed, 22 Apr 2015 12:06:40 -0500
-Subject: [PATCH 04/10] arm: dts: omap4: move emif so panda-es-b3 now boots
+Subject: [PATCH 4/9] arm: dts: omap4: move emif so panda-es-b3 now boots
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
@@ -233,5 +233,5 @@ index abc4473..092fbfc 100644
  
  		ocp2scp@4a0ad000 {
 -- 
-2.5.1
+2.6.1
 

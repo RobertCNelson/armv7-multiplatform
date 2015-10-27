@@ -1,7 +1,7 @@
-From 7a7a22ebf03debc611f313cc5a588875259636db Mon Sep 17 00:00:00 2001
+From cd740f2dd93f87470e911100450e29d94b5b9bfd Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Thu, 14 May 2015 10:01:51 -0500
-Subject: [PATCH 07/10] imx6: wl1835 base boards
+Subject: [PATCH 6/9] imx6: wl1835 base boards
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
@@ -1339,5 +1339,5 @@ index 0000000..945887d
 +	status = "okay";
 +};
 -- 
-2.5.1
+2.6.1
 
