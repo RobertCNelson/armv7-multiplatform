@@ -1,7 +1,7 @@
-From e339e42c116f6eb141c7d0cd4040ad98bf228d69 Mon Sep 17 00:00:00 2001
+From 3ea6b13771d1df1c923282418aeb2ca5af59851f Mon Sep 17 00:00:00 2001
 From: Russell King <rmk+kernel@arm.linux.org.uk>
 Date: Sun, 19 Oct 2014 22:43:16 +0100
-Subject: [PATCH 050/136] staging: etnaviv: move scatterlist map/unmap
+Subject: [PATCH 050/148] staging: etnaviv: move scatterlist map/unmap
 
 Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
 ---

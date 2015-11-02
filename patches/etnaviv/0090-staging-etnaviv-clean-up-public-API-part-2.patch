@@ -1,7 +1,7 @@
-From 804d0fd2d1a41d2027d37ca3cb2eb8d93c52476c Mon Sep 17 00:00:00 2001
+From f814c027ee15365d34dd026430ddde5c284641f2 Mon Sep 17 00:00:00 2001
 From: Russell King <rmk+kernel@arm.linux.org.uk>
 Date: Fri, 15 May 2015 19:22:45 +0100
-Subject: [PATCH 090/136] staging: etnaviv: clean up public API (part 2)
+Subject: [PATCH 090/148] staging: etnaviv: clean up public API (part 2)
 
 This fixes the preceding patch for updates I have in my tree.
 

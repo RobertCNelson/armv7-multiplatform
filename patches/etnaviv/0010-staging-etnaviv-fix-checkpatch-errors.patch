@@ -1,7 +1,7 @@
-From e28ccf1048c503c34c31b1d1f7424be67d5cbe2f Mon Sep 17 00:00:00 2001
+From 5f7f4a0c28172aaa717f11c828a9dbcc54638939 Mon Sep 17 00:00:00 2001
 From: Russell King <rmk+kernel@arm.linux.org.uk>
 Date: Mon, 29 Sep 2014 10:17:36 +0100
-Subject: [PATCH 010/136] staging: etnaviv: fix checkpatch errors
+Subject: [PATCH 010/148] staging: etnaviv: fix checkpatch errors
 
 ERROR: do not initialise statics to 0 or NULL
 +static bool reglog = false;

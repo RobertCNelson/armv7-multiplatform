@@ -1,7 +1,7 @@
-From 267c9cb57ee20d6ee41e2adc0318b844a17a39a5 Mon Sep 17 00:00:00 2001
+From 20d9a4bad6fbc8816d521d135f62f1e1e47c42b4 Mon Sep 17 00:00:00 2001
 From: Russell King <rmk+kernel@arm.linux.org.uk>
 Date: Mon, 12 Jan 2015 19:26:31 +0000
-Subject: [PATCH 072/136] staging: etnaviv: quiten down some further debugging
+Subject: [PATCH 072/148] staging: etnaviv: quiten down some further debugging
  messages
 
 Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
