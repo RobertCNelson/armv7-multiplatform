@@ -1,7 +1,7 @@
-From a863ffff500665e67b8e34af0f1361b60ef54e1b Mon Sep 17 00:00:00 2001
+From 1ec389dc4fa8a3714c724e25387599249872ae83 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Wed, 27 Aug 2014 13:56:37 -0500
-Subject: [PATCH 2/6] dts: am335x-bone-common: fixup leds to match 3.8
+Subject: [PATCH 2/7] dts: am335x-bone-common: fixup leds to match 3.8
 
 https://groups.google.com/d/msg/beagleboard/634Xm1m3XA8/B028x1FzAyAJ
 
@@ -33,5 +33,5 @@ index 07ee535..d6cc270 100644
  			linux,default-trigger = "mmc0";
  			default-state = "off";
 -- 
-2.5.3
+2.6.2
 

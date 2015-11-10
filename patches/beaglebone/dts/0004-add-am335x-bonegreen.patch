@@ -1,7 +1,7 @@
-From fdd02a2711712180a291935e26abca3fa4a23417 Mon Sep 17 00:00:00 2001
+From 47ab6e66db9599512ae20ecb0e3b8d5f5dadc3c9 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Thu, 21 May 2015 10:36:44 -0500
-Subject: [PATCH 4/6] add: am335x-bonegreen
+Subject: [PATCH 4/7] add: am335x-bonegreen
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
@@ -67,5 +67,5 @@ index 0000000..5de96f1
 +	status = "okay";
 +};
 -- 
-2.5.3
+2.6.2
 
