@@ -1,7 +1,7 @@
-From 385aecd3ef54c42b01d283fca30c5c3f4dd13b50 Mon Sep 17 00:00:00 2001
+From 4c83c67de08eb733bfc693f7ba0ff7493ad1fa3e Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Thu, 21 May 2015 10:37:56 -0500
-Subject: [PATCH 5/6] add overlay dtb
+Subject: [PATCH 5/7] add overlay dtb
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
@@ -46,5 +46,5 @@ index 0000000..8206843
 +	vmmc-supply = <&vmmcsd_fixed>;
 +};
 -- 
-2.6.1
+2.6.2
 
