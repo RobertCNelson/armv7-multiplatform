@@ -1,7 +1,7 @@
-From 04d88f030b3408f2ac2426b8727ede248f8087eb Mon Sep 17 00:00:00 2001
+From 082f69904304fce31c2c58f7020c5fba021c6b53 Mon Sep 17 00:00:00 2001
 From: Russell King <rmk+kernel@arm.linux.org.uk>
 Date: Sat, 16 May 2015 23:35:52 +0100
-Subject: [PATCH 102/148] staging: etnaviv: etnaviv_gem_fault: reduce
+Subject: [PATCH 102/149] staging: etnaviv: etnaviv_gem_fault: reduce
  struct_mutex exposure
 
 Reduce the exposure of struct_mutex to an absolute minimum.  We only
@@ -57,5 +57,5 @@ index 69360c8..522e5a6 100644
  	switch (ret) {
  	case -EAGAIN:
 -- 
-2.6.1
+2.6.2
 
