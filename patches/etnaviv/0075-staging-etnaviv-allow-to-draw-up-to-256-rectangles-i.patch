@@ -1,7 +1,7 @@
-From 588f3007c69e00fe8b1173084e26fb7986fc28e0 Mon Sep 17 00:00:00 2001
+From 82246885767e4916fd005959b5374714a27a55d7 Mon Sep 17 00:00:00 2001
 From: Lucas Stach <l.stach@pengutronix.de>
 Date: Thu, 2 Apr 2015 17:30:28 +0200
-Subject: [PATCH 075/148] staging: etnaviv: allow to draw up to 256 rectangles
+Subject: [PATCH 075/149] staging: etnaviv: allow to draw up to 256 rectangles
  in one draw call
 
 The hardware interprets a value of 0 as the maximium number of rectangles
@@ -27,5 +27,5 @@ index fbbea57..03552c5 100644
  			break;
  
 -- 
-2.6.1
+2.6.2
 

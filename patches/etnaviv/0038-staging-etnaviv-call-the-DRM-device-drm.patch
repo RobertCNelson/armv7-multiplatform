@@ -1,7 +1,7 @@
-From 759ecc3414610dfeb673a35590e72f959c6434b2 Mon Sep 17 00:00:00 2001
+From 6e6343f78d71c50c95adf7ada9ff09d44aa2809c Mon Sep 17 00:00:00 2001
 From: Russell King <rmk+kernel@arm.linux.org.uk>
 Date: Fri, 17 Oct 2014 12:15:57 +0100
-Subject: [PATCH 038/148] staging: etnaviv: call the DRM device 'drm'
+Subject: [PATCH 038/149] staging: etnaviv: call the DRM device 'drm'
 
 Call the DRM device 'drm' in the etnaviv_gpu structure, so that we can
 add a struct device pointer.
@@ -270,5 +270,5 @@ index 3a9b198..9d91adf 100644
  	long pipe;
  
 -- 
-2.6.1
+2.6.2
 
