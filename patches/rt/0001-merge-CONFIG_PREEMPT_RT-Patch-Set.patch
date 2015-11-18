@@ -1,6 +1,6 @@
-From a8b6ec4a4667e8216206cf4f938629fedfdb0520 Mon Sep 17 00:00:00 2001
+From 75d879cf60cbc7d0d50a6b0a410253b6c9b5dd5b Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 9 Nov 2015 19:56:01 -0600
+Date: Wed, 18 Nov 2015 10:20:02 -0600
 Subject: [PATCH] merge: CONFIG_PREEMPT_RT Patch Set
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
@@ -241,7 +241,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  include/linux/interrupt.h                          |   59 +-
  include/linux/io-mapping.h                         |    2 +
  include/linux/irq.h                                |    4 +-
- include/linux/irq_work.h                           |    1 +
+ include/linux/irq_work.h                           |    7 +
  include/linux/irqdesc.h                            |    1 +
  include/linux/irqflags.h                           |   29 +-
  include/linux/jbd_common.h                         |   24 +
@@ -320,7 +320,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  kernel/irq/manage.c                                |  260 +++-
  kernel/irq/settings.h                              |   12 +
  kernel/irq/spurious.c                              |    8 +
- kernel/irq_work.c                                  |   47 +-
+ kernel/irq_work.c                                  |   56 +-
  kernel/ksysfs.c                                    |   12 +
  kernel/locking/Makefile                            |    9 +-
  kernel/locking/lglock.c                            |   79 +-
@@ -366,7 +366,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  kernel/time/tick-sched.c                           |   35 +-
  kernel/time/timekeeping.c                          |    6 +-
  kernel/time/timekeeping.h                          |    3 +-
- kernel/time/timer.c                                |   97 +-
+ kernel/time/timer.c                                |   95 +-
  kernel/trace/Kconfig                               |  104 ++
  kernel/trace/Makefile                              |    4 +
  kernel/trace/latency_hist.c                        | 1178 +++++++++++++++++++
@@ -422,7 +422,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  sound/soc/intel/atom/sst/sst.c                     |    4 +-
  virt/kvm/async_pf.c                                |    4 +-
  virt/kvm/kvm_main.c                                |   16 +-
- 417 files changed, 11938 insertions(+), 2133 deletions(-)
+ 417 files changed, 11951 insertions(+), 2133 deletions(-)
  create mode 100644 Documentation/hwlat_detector.txt
  create mode 100644 Documentation/trace/histograms.txt
  create mode 100644 drivers/misc/hwlat_detector.c
@@ -10507,7 +10507,7 @@ index 3532dca..38ecc0c 100644
  #define IRQ_NO_BALANCING_MASK	(IRQ_PER_CPU | IRQ_NO_BALANCING)
  
 diff --git a/include/linux/irq_work.h b/include/linux/irq_work.h
-index 47b9ebd..0e427a9 100644
+index 47b9ebd..2543aab 100644
 --- a/include/linux/irq_work.h
 +++ b/include/linux/irq_work.h
 @@ -16,6 +16,7 @@
@@ -10518,6 +10518,17 @@ index 47b9ebd..0e427a9 100644
  
  struct irq_work {
  	unsigned long flags;
+@@ -51,4 +52,10 @@ static inline bool irq_work_needs_cpu(void) { return false; }
+ static inline void irq_work_run(void) { }
+ #endif
+ 
++#if defined(CONFIG_IRQ_WORK) && defined(CONFIG_PREEMPT_RT_FULL)
++void irq_work_tick_soft(void);
++#else
++static inline void irq_work_tick_soft(void) { }
++#endif
++
+ #endif /* _LINUX_IRQ_WORK_H */
 diff --git a/include/linux/irqdesc.h b/include/linux/irqdesc.h
 index dd1109f..9d97cd5 100644
 --- a/include/linux/irqdesc.h
@@ -15913,7 +15924,7 @@ index e2514b0..903a69c 100644
  	printk(KERN_WARNING "Misrouted IRQ fixup and polling support "
  				"enabled\n");
 diff --git a/kernel/irq_work.c b/kernel/irq_work.c
-index cbf9fb8..5a0f452 100644
+index cbf9fb8..58cf466 100644
 --- a/kernel/irq_work.c
 +++ b/kernel/irq_work.c
 @@ -17,6 +17,7 @@
@@ -16019,6 +16030,24 @@ index cbf9fb8..5a0f452 100644
  }
  EXPORT_SYMBOL_GPL(irq_work_run);
  
+@@ -179,8 +200,17 @@ void irq_work_tick(void)
+ 
+ 	if (!llist_empty(raised) && !arch_irq_work_has_interrupt())
+ 		irq_work_run_list(raised);
++
++	if (!IS_ENABLED(CONFIG_PREEMPT_RT_FULL))
++		irq_work_run_list(this_cpu_ptr(&lazy_list));
++}
++
++#if defined(CONFIG_IRQ_WORK) && defined(CONFIG_PREEMPT_RT_FULL)
++void irq_work_tick_soft(void)
++{
+ 	irq_work_run_list(this_cpu_ptr(&lazy_list));
+ }
++#endif
+ 
+ /*
+  * Synchronize against the irq_work @entry, ensures the entry is not
 diff --git a/kernel/ksysfs.c b/kernel/ksysfs.c
 index 6683cce..d6fc8ee 100644
 --- a/kernel/ksysfs.c
@@ -23169,7 +23198,7 @@ index ead8794..d7a9120 100644
  #define CS_NAME_LEN	32
  
 diff --git a/kernel/time/timer.c b/kernel/time/timer.c
-index 2ece3aa..adb1d82 100644
+index 2ece3aa..c68ba87 100644
 --- a/kernel/time/timer.c
 +++ b/kernel/time/timer.c
 @@ -78,6 +78,9 @@ struct tvec_root {
@@ -23326,7 +23355,7 @@ index 2ece3aa..adb1d82 100644
  	run_local_timers();
  	rcu_check_callbacks(user_tick);
 -#ifdef CONFIG_IRQ_WORK
-+#if defined(CONFIG_IRQ_WORK) && !defined(CONFIG_PREEMPT_RT_FULL)
++#if defined(CONFIG_IRQ_WORK)
  	if (in_irq())
  		irq_work_tick();
  #endif
@@ -23334,18 +23363,16 @@ index 2ece3aa..adb1d82 100644
  	run_posix_cpu_timers(p);
  }
  
-@@ -1411,6 +1471,10 @@ static void run_timer_softirq(struct softirq_action *h)
+@@ -1411,6 +1471,8 @@ static void run_timer_softirq(struct softirq_action *h)
  
  	hrtimer_run_pending();
  
-+#if defined(CONFIG_IRQ_WORK) && defined(CONFIG_PREEMPT_RT_FULL)
-+	irq_work_tick();
-+#endif
++	irq_work_tick_soft();
 +
  	if (time_after_eq(jiffies, base->timer_jiffies))
  		__run_timers(base);
  }
-@@ -1566,7 +1630,7 @@ static void migrate_timers(int cpu)
+@@ -1566,7 +1628,7 @@ static void migrate_timers(int cpu)
  
  	BUG_ON(cpu_online(cpu));
  	old_base = per_cpu(tvec_bases, cpu);
@@ -23354,7 +23381,7 @@ index 2ece3aa..adb1d82 100644
  	/*
  	 * The caller is globally serialized and nobody else
  	 * takes two locks at once, deadlock is not possible.
-@@ -1590,7 +1654,7 @@ static void migrate_timers(int cpu)
+@@ -1590,7 +1652,7 @@ static void migrate_timers(int cpu)
  
  	spin_unlock(&old_base->lock);
  	spin_unlock_irq(&new_base->lock);
@@ -23363,7 +23390,7 @@ index 2ece3aa..adb1d82 100644
  }
  
  static int timer_cpu_notify(struct notifier_block *self,
-@@ -1625,6 +1689,9 @@ static void __init init_timer_cpu(struct tvec_base *base, int cpu)
+@@ -1625,6 +1687,9 @@ static void __init init_timer_cpu(struct tvec_base *base, int cpu)
  	base->cpu = cpu;
  	per_cpu(tvec_bases, cpu) = base;
  	spin_lock_init(&base->lock);
