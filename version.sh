@@ -20,7 +20,7 @@ toolchain="gcc_linaro_gnueabihf_4_9"
 
 #Kernel/Build
 KERNEL_REL=4.1
-KERNEL_TAG=${KERNEL_REL}.13
+KERNEL_TAG=${KERNEL_REL}.14
 BUILD=armv7-rt-x6
 kernel_rt=".13-rt15"
 
