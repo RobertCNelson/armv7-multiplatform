@@ -22,14 +22,14 @@ toolchain="gcc_linaro_gnueabihf_5"
 KERNEL_REL=4.4
 KERNEL_TAG=${KERNEL_REL}
 BUILD=armv7-x3
-kernel_rt=".X-rtY"
+kernel_rt="-rc6-rt1"
 
 #v4.X-rcX + upto SHA
 #prev_KERNEL_SHA=""
 #KERNEL_SHA=""
 
 #git branch
-BRANCH="v4.4.x"
+BRANCH="v4.4.x-rt"
 
 DISTRO=cross
 DEBARCH=armhf
