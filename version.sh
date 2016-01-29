@@ -4,8 +4,9 @@ ARCH=$(uname -m)
 
 config="multi_v7_defconfig"
 
-build_prefix="armv7"
-branch_prefix=""
+build_prefix="armv7-x"
+branch_prefix="v"
+branch_postfix=".x"
 
 #arm
 KERNEL_ARCH=arm
@@ -24,7 +25,7 @@ toolchain="gcc_linaro_gnueabihf_5"
 #Kernel/Build
 KERNEL_REL=4.4
 KERNEL_TAG=${KERNEL_REL}
-BUILD=${build_prefix}-x4
+BUILD=${build_prefix}4
 kernel_rt="-rt2"
 
 #v4.X-rcX + upto SHA
@@ -32,7 +33,7 @@ kernel_rt="-rt2"
 #KERNEL_SHA=""
 
 #git branch
-BRANCH="v4.4.x${branch_prefix}"
+BRANCH="${branch_prefix}${KERNEL_REL}${branch_postfix}"
 
 DISTRO=cross
 DEBARCH=armhf
