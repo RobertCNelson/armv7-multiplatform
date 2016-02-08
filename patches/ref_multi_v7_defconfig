@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.5.0-rc2 Kernel Configuration
+# Linux/arm 4.5.0-rc3 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -3067,7 +3067,7 @@ CONFIG_ARM_SP805_WATCHDOG=y
 # CONFIG_CADENCE_WATCHDOG is not set
 CONFIG_HAVE_S3C2410_WATCHDOG=y
 # CONFIG_S3C2410_WATCHDOG is not set
-# CONFIG_DW_WATCHDOG is not set
+CONFIG_DW_WATCHDOG=y
 # CONFIG_OMAP_WATCHDOG is not set
 CONFIG_DAVINCI_WATCHDOG=m
 CONFIG_ORION_WATCHDOG=y
