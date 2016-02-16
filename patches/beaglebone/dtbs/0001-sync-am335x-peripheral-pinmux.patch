@@ -1,15 +1,16 @@
-From ecf976ce58adb51f90e3d0490524a80df55f53a4 Mon Sep 17 00:00:00 2001
+From fabe3d2fac99de7d22d9d1bd48c0a9a1de052aab Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Tue, 27 Oct 2015 11:54:06 -0500
+Date: Tue, 16 Feb 2016 11:19:59 -0600
 Subject: [PATCH] sync: am335x-peripheral/pinmux
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  arch/arm/boot/dts/am335x-arduino-tre.dts           | 566 +++++++++++++++++++++
  arch/arm/boot/dts/am335x-bone-argus.dtsi           |   4 +
- arch/arm/boot/dts/am335x-bone-can0.dts             |  52 ++
- arch/arm/boot/dts/am335x-bone-cape-bone-argus.dts  |  41 ++
+ arch/arm/boot/dts/am335x-bone-can0.dts             |  47 ++
+ arch/arm/boot/dts/am335x-bone-cape-bone-argus.dts  |  36 ++
  .../boot/dts/am335x-bone-common-no-capemgr.dtsi    | 351 +++++++++++++
+ arch/arm/boot/dts/am335x-bone-common.dtsi          |   9 -
  arch/arm/boot/dts/am335x-bone-emmc-in-reset.dtsi   |  18 +
  arch/arm/boot/dts/am335x-bone-pinmux-can0.dtsi     |  45 ++
  arch/arm/boot/dts/am335x-bone-pinmux-can1.dtsi     |  45 ++
@@ -24,10 +25,10 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  arch/arm/boot/dts/am335x-bone-pinmux-ttyS2.dtsi    |  48 ++
  arch/arm/boot/dts/am335x-bone-pinmux-ttyS4.dtsi    |  48 ++
  arch/arm/boot/dts/am335x-bone-pinmux-ttyS5.dtsi    |  48 ++
- arch/arm/boot/dts/am335x-boneblack-bbb-exp-c.dts   |  48 ++
- arch/arm/boot/dts/am335x-boneblack-bbb-exp-r.dts   |  48 ++
- arch/arm/boot/dts/am335x-boneblack-can0.dts        |  67 +++
- .../boot/dts/am335x-boneblack-cape-bone-argus.dts  |  48 ++
+ arch/arm/boot/dts/am335x-boneblack-bbb-exp-c.dts   |  43 ++
+ arch/arm/boot/dts/am335x-boneblack-bbb-exp-r.dts   |  43 ++
+ arch/arm/boot/dts/am335x-boneblack-can0.dts        |  62 +++
+ .../boot/dts/am335x-boneblack-cape-bone-argus.dts  |  43 ++
  arch/arm/boot/dts/am335x-boneblack-overlay.dts     |  14 +
  arch/arm/boot/dts/am335x-boneblack-universal.dts   |  36 ++
  arch/arm/boot/dts/am335x-boneblack-wl1835mod.dts   |   4 +
@@ -49,7 +50,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  arch/arm/boot/dts/am335x-peripheral-ttyS4.dtsi     |  13 +
  arch/arm/boot/dts/am335x-peripheral-ttyS5.dtsi     |  13 +
  include/dt-bindings/board/am335x-bbw-bbb-base.h    | 103 ++++
- 44 files changed, 2921 insertions(+)
+ 45 files changed, 2891 insertions(+), 9 deletions(-)
  create mode 100644 arch/arm/boot/dts/am335x-arduino-tre.dts
  create mode 100644 arch/arm/boot/dts/am335x-bone-can0.dts
  create mode 100644 arch/arm/boot/dts/am335x-bone-cape-bone-argus.dts
@@ -687,10 +688,10 @@ index 0bbe050..a44c7d1 100644
  		compatible = "argus-ups";
 diff --git a/arch/arm/boot/dts/am335x-bone-can0.dts b/arch/arm/boot/dts/am335x-bone-can0.dts
 new file mode 100644
-index 0000000..a5777c4
+index 0000000..42fbbe8
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-bone-can0.dts
-@@ -0,0 +1,52 @@
+@@ -0,0 +1,47 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -716,11 +717,6 @@ index 0000000..a5777c4
 +
 +&mmc1 {
 +	vmmc-supply = <&ldo3_reg>;
-+};
-+
-+&am33xx_pinmux {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&clkout2_pin>;
 +};
 +
 +#include "am335x-peripheral-can0.dtsi"
@@ -745,10 +741,10 @@ index 0000000..a5777c4
 +/* #include "am335x-bone-pinmux-ttyS5.dtsi" */
 diff --git a/arch/arm/boot/dts/am335x-bone-cape-bone-argus.dts b/arch/arm/boot/dts/am335x-bone-cape-bone-argus.dts
 new file mode 100644
-index 0000000..a92d891
+index 0000000..f0474b0
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-bone-cape-bone-argus.dts
-@@ -0,0 +1,41 @@
+@@ -0,0 +1,36 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -774,11 +770,6 @@ index 0000000..a92d891
 +
 +&mmc1 {
 +	vmmc-supply = <&ldo3_reg>;
-+};
-+
-+&am33xx_pinmux {
-+	pinctrl-names = "default";
-+	/* pinctrl-0 = <&clkout2_pin>; */
 +};
 +
 +&sham {
@@ -1147,6 +1138,33 @@ index 0000000..b18b855
 +&sham {
 +	status = "okay";
 +};
+diff --git a/arch/arm/boot/dts/am335x-bone-common.dtsi b/arch/arm/boot/dts/am335x-bone-common.dtsi
+index 7f3b2db..73e072c 100644
+--- a/arch/arm/boot/dts/am335x-bone-common.dtsi
++++ b/arch/arm/boot/dts/am335x-bone-common.dtsi
+@@ -62,9 +62,6 @@
+ };
+ 
+ &am33xx_pinmux {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&clkout2_pin>;
+-
+ 	user_leds_s0: user_leds_s0 {
+ 		pinctrl-single,pins = <
+ 			0x54 (PIN_OUTPUT_PULLDOWN | MUX_MODE7)	/* gpmc_a5.gpio1_21 */
+@@ -95,12 +92,6 @@
+ 		>;
+ 	};
+ 
+-	clkout2_pin: pinmux_clkout2_pin {
+-		pinctrl-single,pins = <
+-			0x1b4 (PIN_OUTPUT_PULLDOWN | MUX_MODE3)	/* xdma_event_intr1.clkout2 */
+-		>;
+-	};
+-
+ 	cpsw_default: cpsw_default {
+ 		pinctrl-single,pins = <
+ 			/* Slave 1 */
 diff --git a/arch/arm/boot/dts/am335x-bone-emmc-in-reset.dtsi b/arch/arm/boot/dts/am335x-bone-emmc-in-reset.dtsi
 new file mode 100644
 index 0000000..7d8f673
@@ -2081,10 +2099,10 @@ index 0000000..01d0aec
 +};
 diff --git a/arch/arm/boot/dts/am335x-boneblack-bbb-exp-c.dts b/arch/arm/boot/dts/am335x-boneblack-bbb-exp-c.dts
 new file mode 100644
-index 0000000..8c92446
+index 0000000..9bdf046
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-boneblack-bbb-exp-c.dts
-@@ -0,0 +1,48 @@
+@@ -0,0 +1,43 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -2114,11 +2132,6 @@ index 0000000..8c92446
 +
 +&mmc1 {
 +	vmmc-supply = <&vmmcsd_fixed>;
-+};
-+
-+&am33xx_pinmux {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&clkout2_pin>;
 +};
 +
 +#include "am335x-peripheral-emmc.dtsi"
@@ -2135,10 +2148,10 @@ index 0000000..8c92446
 +#include "am335x-cape-bbb-exp-c.dtsi"
 diff --git a/arch/arm/boot/dts/am335x-boneblack-bbb-exp-r.dts b/arch/arm/boot/dts/am335x-boneblack-bbb-exp-r.dts
 new file mode 100644
-index 0000000..521ad3b
+index 0000000..69cf77a
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-boneblack-bbb-exp-r.dts
-@@ -0,0 +1,48 @@
+@@ -0,0 +1,43 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -2168,11 +2181,6 @@ index 0000000..521ad3b
 +
 +&mmc1 {
 +	vmmc-supply = <&vmmcsd_fixed>;
-+};
-+
-+&am33xx_pinmux {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&clkout2_pin>;
 +};
 +
 +#include "am335x-peripheral-emmc.dtsi"
@@ -2189,10 +2197,10 @@ index 0000000..521ad3b
 +#include "am335x-cape-bbb-exp-r.dtsi"
 diff --git a/arch/arm/boot/dts/am335x-boneblack-can0.dts b/arch/arm/boot/dts/am335x-boneblack-can0.dts
 new file mode 100644
-index 0000000..a613db4
+index 0000000..4133c8c
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-boneblack-can0.dts
-@@ -0,0 +1,67 @@
+@@ -0,0 +1,62 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -2222,11 +2230,6 @@ index 0000000..a613db4
 +
 +&mmc1 {
 +	vmmc-supply = <&vmmcsd_fixed>;
-+};
-+
-+&am33xx_pinmux {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&clkout2_pin>;
 +};
 +
 +#include "am335x-peripheral-emmc.dtsi"
@@ -2262,10 +2265,10 @@ index 0000000..a613db4
 +/* #include "am335x-bone-pinmux-ttyS5.dtsi" */
 diff --git a/arch/arm/boot/dts/am335x-boneblack-cape-bone-argus.dts b/arch/arm/boot/dts/am335x-boneblack-cape-bone-argus.dts
 new file mode 100644
-index 0000000..f95ff5d
+index 0000000..900070a
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-boneblack-cape-bone-argus.dts
-@@ -0,0 +1,48 @@
+@@ -0,0 +1,43 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -2295,11 +2298,6 @@ index 0000000..f95ff5d
 +
 +&mmc1 {
 +	vmmc-supply = <&vmmcsd_fixed>;
-+};
-+
-+&am33xx_pinmux {
-+	pinctrl-names = "default";
-+	/* pinctrl-0 = <&clkout2_pin>; */
 +};
 +
 +#include "am335x-peripheral-emmc.dtsi"
@@ -3298,5 +3296,5 @@ index 0000000..35f6d57
 +
 +#endif
 -- 
-2.5.3
+2.7.0
 
