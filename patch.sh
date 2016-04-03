@@ -475,6 +475,11 @@ bbb_overlays () {
 		#merged in 4.5.0-rc0
 		${git} "${DIR}/patches/bbb_overlays/configfs/0001-configfs-implement-binary-attributes.patch"
 	fi
+	${git} "${DIR}/patches/bbb_overlays/configfs/0001-Revert-target-add-a-new-add_wwn_groups-fabrics-metho.patch"
+	${git} "${DIR}/patches/bbb_overlays/configfs/0002-Revert-target-initialize-the-nacl-base-CIT-begfore-i.patch"
+	${git} "${DIR}/patches/bbb_overlays/configfs/0003-Revert-target-remove-fabric_cleanup_nodeacl.patch"
+	${git} "${DIR}/patches/bbb_overlays/configfs/0001-Revert-dlm-config-Fix-ENOMEM-failures-in-make_cluste.patch"
+	${git} "${DIR}/patches/bbb_overlays/configfs/0001-Revert-configfs-switch-default-groups-to-a-linked-li.patch"
 
 	echo "dir: bbb_overlays/of"
 	#regenerate="enable"
@@ -663,16 +668,13 @@ beaglebone () {
 
 	${git} "${DIR}/patches/beaglebone/abbbi/0001-gpu-drm-i2c-add-alternative-adv7511-driver-with-audi.patch"
 	${git} "${DIR}/patches/beaglebone/abbbi/0002-gpu-drm-i2c-adihdmi-componentize-driver-and-huge-ref.patch"
-
-	if [ "x${merged_in_4_6}" = "xenable" ] ; then
-		${git} "${DIR}/patches/beaglebone/abbbi/0003-drm-adihdmi-Drop-dummy-save-restore-hooks.patch"
-		${git} "${DIR}/patches/beaglebone/abbbi/0004-drm-adihdmi-Pass-name-to-drm_encoder_init.patch"
-	fi
-
+	${git} "${DIR}/patches/beaglebone/abbbi/0003-drm-adihdmi-Drop-dummy-save-restore-hooks.patch"
+	${git} "${DIR}/patches/beaglebone/abbbi/0004-drm-adihdmi-Pass-name-to-drm_encoder_init.patch"
 	${git} "${DIR}/patches/beaglebone/abbbi/0005-ARM-dts-add-Arrow-BeagleBone-Black-Industrial-dts.patch"
+	${git} "${DIR}/patches/beaglebone/abbbi/0006-adihdmi_drv-reg_default-reg_sequence.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=5
+		number=6
 		cleanup
 	fi
 
@@ -709,9 +711,10 @@ beaglebone () {
 	fi
 
 	${git} "${DIR}/patches/beaglebone/sancloud/0001-add-sancloud-beaglebone-enhanced.patch"
+	${git} "${DIR}/patches/beaglebone/sancloud/0002-am335x-sancloud-bbe-update-lps331ap-mpu6050-irq-pins.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=1
+		number=2
 		cleanup
 	fi
 
