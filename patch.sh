@@ -81,6 +81,11 @@ rt_cleanup () {
 
 rt () {
 	echo "dir: rt"
+
+	#v4.1.21
+	git revert --no-edit 143cf26c48278bd438a97a8bd3e18b6460192981
+	git revert --no-edit 1a138f3e487026aede3642cbe09aee0f64c2f66b
+
 	rt_patch="${KERNEL_REL}${kernel_rt}"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
@@ -213,10 +218,9 @@ pru () {
 	fi
 
 	${git} "${DIR}/patches/pru/0001-Making-the-uio-pruss-driver-work.patch"
-	${git} "${DIR}/patches/pru/0002-Cleaned-up-error-reporting.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=2
+		number=1
 		cleanup
 	fi
 }
