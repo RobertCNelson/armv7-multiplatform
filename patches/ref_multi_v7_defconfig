@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.5.0 Kernel Configuration
+# Linux/arm 4.5.1 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -2344,12 +2344,11 @@ CONFIG_SERIAL_8250_RUNTIME_UARTS=4
 CONFIG_SERIAL_8250_FSL=y
 CONFIG_SERIAL_8250_DW=y
 CONFIG_SERIAL_8250_EM=y
-# CONFIG_SERIAL_8250_RT288X is not set
 # CONFIG_SERIAL_8250_OMAP is not set
 CONFIG_SERIAL_8250_MT6577=y
 CONFIG_SERIAL_8250_UNIPHIER=y
-# CONFIG_SERIAL_8250_INGENIC is not set
 # CONFIG_SERIAL_8250_MID is not set
+# CONFIG_SERIAL_8250_MOXA is not set
 CONFIG_SERIAL_OF_PLATFORM=y
 
 #
@@ -2380,6 +2379,7 @@ CONFIG_SERIAL_IMX_CONSOLE=y
 CONFIG_SERIAL_SH_SCI=y
 CONFIG_SERIAL_SH_SCI_NR_UARTS=20
 CONFIG_SERIAL_SH_SCI_CONSOLE=y
+# CONFIG_SERIAL_SH_SCI_EARLYCON is not set
 # CONFIG_SERIAL_SH_SCI_DMA is not set
 CONFIG_SERIAL_CORE=y
 CONFIG_SERIAL_CORE_CONSOLE=y
@@ -2407,6 +2407,7 @@ CONFIG_SERIAL_CONEXANT_DIGICOLOR_CONSOLE=y
 CONFIG_SERIAL_ST_ASC=y
 CONFIG_SERIAL_ST_ASC_CONSOLE=y
 # CONFIG_SERIAL_STM32 is not set
+# CONFIG_SERIAL_MVEBU_UART is not set
 CONFIG_SERIAL_MCTRL_GPIO=y
 # CONFIG_TTY_PRINTK is not set
 CONFIG_HVC_DRIVER=y
@@ -4893,12 +4894,6 @@ CONFIG_SENSORS_ISL29028=y
 # CONFIG_TSL2x7x is not set
 
 #
-# Magnetometer sensors
-#
-# CONFIG_SENSORS_HMC5843_I2C is not set
-# CONFIG_SENSORS_HMC5843_SPI is not set
-
-#
 # Active energy metering IC
 #
 # CONFIG_ADE7753 is not set
@@ -4917,7 +4912,6 @@ CONFIG_SENSORS_ISL29028=y
 #
 # Triggers - standalone
 #
-# CONFIG_IIO_PERIODIC_RTC_TRIGGER is not set
 # CONFIG_FB_SM750 is not set
 # CONFIG_FB_XGI is not set
 # CONFIG_USB_EMXX is not set
@@ -5203,6 +5197,7 @@ CONFIG_IIO_CONSUMERS_PER_TRIGGER=2
 # CONFIG_AD7923 is not set
 # CONFIG_AD799X is not set
 CONFIG_AT91_ADC=m
+# CONFIG_AT91_SAMA5D2_ADC is not set
 # CONFIG_AXP288_ADC is not set
 CONFIG_BERLIN2_ADC=m
 # CONFIG_CC10001_ADC is not set
@@ -5220,7 +5215,9 @@ CONFIG_EXYNOS_ADC=m
 # CONFIG_QCOM_SPMI_VADC is not set
 # CONFIG_ROCKCHIP_SARADC is not set
 # CONFIG_TI_ADC081C is not set
+# CONFIG_TI_ADC0832 is not set
 # CONFIG_TI_ADC128S052 is not set
+# CONFIG_TI_ADS1015 is not set
 # CONFIG_TI_ADS8688 is not set
 # CONFIG_TWL4030_MADC is not set
 # CONFIG_TWL6030_GPADC is not set
@@ -5235,6 +5232,7 @@ CONFIG_XILINX_XADC=y
 #
 # Chemical Sensors
 #
+# CONFIG_ATLAS_PH_SENSOR is not set
 # CONFIG_IAQCORE is not set
 # CONFIG_VZ89X is not set
 
@@ -5260,6 +5258,7 @@ CONFIG_XILINX_XADC=y
 # CONFIG_AD5624R_SPI is not set
 # CONFIG_AD5686 is not set
 # CONFIG_AD5755 is not set
+# CONFIG_AD5761 is not set
 # CONFIG_AD5764 is not set
 # CONFIG_AD5791 is not set
 # CONFIG_AD7303 is not set
@@ -5268,6 +5267,7 @@ CONFIG_XILINX_XADC=y
 # CONFIG_MAX5821 is not set
 # CONFIG_MCP4725 is not set
 # CONFIG_MCP4922 is not set
+# CONFIG_VF610_DAC is not set
 
 #
 # IIO dummy driver
@@ -5301,8 +5301,14 @@ CONFIG_XILINX_XADC=y
 # CONFIG_ITG3200 is not set
 
 #
-# Health sensors
+# Health Sensors
 #
+
+#
+# Heart Rate Monitors
+#
+# CONFIG_AFE4403 is not set
+# CONFIG_AFE4404 is not set
 # CONFIG_MAX30100 is not set
 
 #
@@ -5320,7 +5326,8 @@ CONFIG_XILINX_XADC=y
 # CONFIG_ADIS16400 is not set
 # CONFIG_ADIS16480 is not set
 # CONFIG_KMX61 is not set
-# CONFIG_INV_MPU6050_IIO is not set
+# CONFIG_INV_MPU6050_I2C is not set
+# CONFIG_INV_MPU6050_SPI is not set
 
 #
 # Light sensors
@@ -5358,6 +5365,8 @@ CONFIG_AK8975=y
 # CONFIG_MAG3110 is not set
 # CONFIG_MMC35240 is not set
 # CONFIG_IIO_ST_MAGN_3AXIS is not set
+# CONFIG_SENSORS_HMC5843_I2C is not set
+# CONFIG_SENSORS_HMC5843_SPI is not set
 
 #
 # Inclinometer sensors
@@ -5373,12 +5382,14 @@ CONFIG_AK8975=y
 # Digital potentiometers
 #
 # CONFIG_MCP4531 is not set
+# CONFIG_TPL0102 is not set
 
 #
 # Pressure sensors
 #
 # CONFIG_BMP280 is not set
-# CONFIG_MPL115 is not set
+# CONFIG_MPL115_I2C is not set
+# CONFIG_MPL115_SPI is not set
 # CONFIG_MPL3115 is not set
 # CONFIG_MS5611 is not set
 # CONFIG_MS5637 is not set
@@ -5655,6 +5666,7 @@ CONFIG_SQUASHFS_FRAGMENT_CACHE_SIZE=3
 # CONFIG_PSTORE is not set
 # CONFIG_SYSV_FS is not set
 # CONFIG_UFS_FS is not set
+# CONFIG_AUFS_FS is not set
 CONFIG_NETWORK_FILESYSTEMS=y
 CONFIG_NFS_FS=y
 CONFIG_NFS_V2=y
