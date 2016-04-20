@@ -174,6 +174,11 @@ rt_cleanup () {
 
 rt () {
 	echo "dir: rt"
+
+	#reverts...
+	#v4.4.8
+	git revert --no-edit f6dffe77180ba8ac38e94247cf2a323614f2e876
+
 	rt_patch="${KERNEL_REL}${kernel_rt}"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
@@ -255,7 +260,7 @@ patch_backports (){
 }
 
 lts44_backports () {
-	backport_tag="v4.6-rc3"
+	backport_tag="v4.6-rc4"
 
 	subsystem="tty"
 	#regenerate="enable"
