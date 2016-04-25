@@ -200,48 +200,6 @@ local_patch () {
 #rt
 #local_patch
 
-lts44_backports () {
-	echo "dir: lts44_backports"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		echo "dir: lts44_backports/fixes"
-		cherrypick_dir="lts44_backports/fixes"
-		SHA="d20313b2c407a90fb60eca99d73c47a75bb42e08" ; num="1" ; cherrypick
-
-		echo "dir: lts44_backports/dmtimer"
-		cherrypick_dir="lts44_backports/dmtimer"
-		SHA="6604c6556db9e41c85f2839f66bd9d617bcf9f87" ; num="1" ; cherrypick
-		SHA="074726402b82f14ca377da0b4a4767674c3d1ff8" ; cherrypick
-		SHA="20437f79f6627a31752f422688a6047c25cefcf1" ; cherrypick
-		SHA="f8caa792261c0edded20eba2b8fcc899a1b91819" ; cherrypick
-		SHA="cd378881426379a62a7fe67f34b8cbe738302022" ; cherrypick
-		SHA="7b0883f33809ff0aeca9848193c31629a752bb77" ; cherrypick
-		SHA="922201d129c8f9d0c3207dca90ea6ffd8e2242f0" ; cherrypick
-		exit 2
-	fi
-
-	echo "dir: lts44_backports/fixes"
-	if [ "x${merged_in_4_5}" = "xenable" ] ; then
-		#4.5.0-rc0
-		${git} "${DIR}/patches/lts44_backports/fixes/0001-dmaengine-edma-Fix-paRAM-slot-allocation-for-entry-c.patch"
-	fi
-
-	echo "dir: lts44_backports/dmtimer"
-	if [ "x${merged_in_4_5}" = "xenable" ] ; then
-		#4.5.0-rc0
-		${git} "${DIR}/patches/lts44_backports/dmtimer/0001-pwm-Add-PWM-driver-for-OMAP-using-dual-mode-timers.patch"
-		${git} "${DIR}/patches/lts44_backports/dmtimer/0002-pwm-omap-dmtimer-Potential-NULL-dereference-on-error.patch"
-		${git} "${DIR}/patches/lts44_backports/dmtimer/0003-ARM-OMAP-Add-PWM-dmtimer-platform-data-quirks.patch"
-	fi
-	if [ "x${merged_in_4_6}" = "xenable" ] ; then
-		#4.6.0-rc0
-		${git} "${DIR}/patches/lts44_backports/dmtimer/0004-pwm-omap-dmtimer-Fix-inaccurate-period-and-duty-cycl.patch"
-		${git} "${DIR}/patches/lts44_backports/dmtimer/0005-pwm-omap-dmtimer-Add-sanity-checking-for-load-and-ma.patch"
-		${git} "${DIR}/patches/lts44_backports/dmtimer/0006-pwm-omap-dmtimer-Round-load-and-match-values-rather-.patch"
-		${git} "${DIR}/patches/lts44_backports/dmtimer/0007-pwm-omap-dmtimer-Add-debug-message-for-effective-per.patch"
-	fi
-}
-
 reverts () {
 	echo "dir: reverts"
 	#regenerate="enable"
@@ -444,96 +402,13 @@ bbb_overlays () {
 		fi
 	fi
 
-	echo "dir: bbb_overlays/nvmem"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		cherrypick_dir="bbb_overlays/nvmem"
-		#merged in 4.6.0-rc0
-		SHA="092462c2b52259edba80a6748acb3305f7f70423" ; num="1" ; cherrypick
-		SHA="cb54ad6cddb606add2481b82901d69670b480d1b" ; cherrypick
-		SHA="c074abe02e5e3479b2dfd109fa2620d22d351c34" ; cherrypick
-		SHA="e1379b56e9e88653fcb58cbaa71cd6b1cc304918" ; cherrypick
-		SHA="3ca9b1ac28398c6fe0bed335d2d71a35e1c5f7c9" ; cherrypick
-		SHA="811b0d6538b9f26f3eb0f90fe4e6118f2480ec6f" ; cherrypick
-		SHA="b6c217ab9be6895384cf0b284ace84ad79e5c53b" ; cherrypick
-		SHA="57d155506dd5e8f8242d0310d3822c486f70dea7" ; cherrypick
-		SHA="3ccea0e1fdf896645f8cccddcfcf60cb289fdf76" ; cherrypick
-		SHA="5a99f570dab9f626d3b0b87a4ddf5de8c648aae8" ; cherrypick
-		SHA="1c4b6e2c7534b9b193f440f77dd47e420a150288" ; cherrypick
-		SHA="bec3c11bad0e7ac05fb90f204d0ab6f79945822b" ; cherrypick
-		exit 2
-	fi
-
-	if [ "x${merged_in_4_6}" = "xenable" ] ; then
-		#merged in 4.6.0-rc0
-		${git} "${DIR}/patches/bbb_overlays/nvmem/0001-misc-eeprom-use-kobj_to_dev.patch"
-		${git} "${DIR}/patches/bbb_overlays/nvmem/0002-misc-eeprom_93xx46-Fix-16-bit-read-and-write-accesse.patch"
-		${git} "${DIR}/patches/bbb_overlays/nvmem/0003-misc-eeprom_93xx46-Implement-eeprom_93xx46-DT-bindin.patch"
-		${git} "${DIR}/patches/bbb_overlays/nvmem/0004-misc-eeprom_93xx46-Add-quirks-to-support-Atmel-AT93C.patch"
-		${git} "${DIR}/patches/bbb_overlays/nvmem/0005-misc-eeprom_93xx46-Add-support-for-a-GPIO-select-lin.patch"
-		${git} "${DIR}/patches/bbb_overlays/nvmem/0006-nvmem-Add-flag-to-export-NVMEM-to-root-only.patch"
-		${git} "${DIR}/patches/bbb_overlays/nvmem/0007-nvmem-Add-backwards-compatibility-support-for-older-.patch"
-		${git} "${DIR}/patches/bbb_overlays/nvmem/0008-eeprom-at24-extend-driver-to-plug-into-the-NVMEM-fra.patch"
-		${git} "${DIR}/patches/bbb_overlays/nvmem/0009-eeprom-at25-Remove-in-kernel-API-for-accessing-the-E.patch"
-		${git} "${DIR}/patches/bbb_overlays/nvmem/0010-eeprom-at25-extend-driver-to-plug-into-the-NVMEM-fra.patch"
-		${git} "${DIR}/patches/bbb_overlays/nvmem/0011-eeprom-93xx46-extend-driver-to-plug-into-the-NVMEM-f.patch"
-		${git} "${DIR}/patches/bbb_overlays/nvmem/0012-misc-at24-replace-memory_accessor-with-nvmem_device_.patch"
-	fi
-
-	echo "dir: bbb_overlays/configfs"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		cherrypick_dir="bbb_overlays/configfs"
-		#merged in 4.5.0-rc0
-		SHA="03607ace807b414eab46323c794b6fb8fcc2d48c" ; num="1" ; cherrypick
-		exit 2
-	fi
-
-	if [ "x${merged_in_4_5}" = "xenable" ] ; then
-		#merged in 4.5.0-rc0
-		${git} "${DIR}/patches/bbb_overlays/configfs/0001-configfs-implement-binary-attributes.patch"
-	fi
-	${git} "${DIR}/patches/bbb_overlays/configfs/0001-Revert-target-add-a-new-add_wwn_groups-fabrics-metho.patch"
-	${git} "${DIR}/patches/bbb_overlays/configfs/0002-Revert-target-initialize-the-nacl-base-CIT-begfore-i.patch"
-	${git} "${DIR}/patches/bbb_overlays/configfs/0003-Revert-target-remove-fabric_cleanup_nodeacl.patch"
-	${git} "${DIR}/patches/bbb_overlays/configfs/0001-Revert-dlm-config-Fix-ENOMEM-failures-in-make_cluste.patch"
-	${git} "${DIR}/patches/bbb_overlays/configfs/0001-Revert-configfs-switch-default-groups-to-a-linked-li.patch"
-
-	echo "dir: bbb_overlays/of"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		cherrypick_dir="bbb_overlays/of"
-		#merged in 4.5.0-rc0
-		SHA="183223770ae8625df8966ed15811d1b3ee8720aa" ; num="1" ; cherrypick
-		exit 2
-	fi
-
-	if [ "x${merged_in_4_5}" = "xenable" ] ; then
-		#merged in 4.5.0-rc0
-		${git} "${DIR}/patches/bbb_overlays/of/0001-drivers-of-Export-OF-changeset-functions.patch"
-	fi
-
-	echo "dir: bbb_overlays/omap"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		cherrypick_dir="bbb_overlays/omap"
-		#merged in 4.5.0-rc6?
-		SHA="cf26f1137333251f3515dea31f95775b99df0fd5" ; num="1" ; cherrypick
-		exit 2
-	fi
-
-	if [ "x${merged_in_4_5}" = "xenable" ] ; then
-		#merged in 4.5.0-rc6?
-		${git} "${DIR}/patches/bbb_overlays/omap/0001-ARM-OMAP2-Fix-omap_device-for-module-reload-on-PM-ru.patch"
-	fi
-
 	echo "dir: bbb_overlays"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		start_cleanup
 	fi
 
-	${git} "${DIR}/patches/bbb_overlays/0001-OF-DT-Overlay-configfs-interface-v6.patch"
+	${git} "${DIR}/patches/bbb_overlays/0001-OF-DT-Overlay-configfs-interface-v7.patch"
 	${git} "${DIR}/patches/bbb_overlays/0002-gitignore-Ignore-DTB-files.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
@@ -585,20 +460,25 @@ bbb_overlays () {
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 	${git} "${DIR}/patches/bbb_overlays/0031-boneblack-defconfig.patch"
-	${git} "${DIR}/patches/bbb_overlays/0032-connector-wip.patch"
 	fi
 
-	${git} "${DIR}/patches/bbb_overlays/0033-of-remove-bogus-return-in-of_core_init.patch"
-	${git} "${DIR}/patches/bbb_overlays/0034-of-Maintainer-fixes-for-dynamic.patch"
+	${git} "${DIR}/patches/bbb_overlays/0032-of-remove-bogus-return-in-of_core_init.patch"
+	${git} "${DIR}/patches/bbb_overlays/0033-of-Maintainer-fixes-for-dynamic.patch"
 
 	#v4.5.0-rc0 (api change):183223770ae8625df8966ed15811d1b3ee8720aa
-	${git} "${DIR}/patches/bbb_overlays/0035-of-unittest-changeset-helpers.patch"
+	${git} "${DIR}/patches/bbb_overlays/0034-of-unittest-changeset-helpers.patch"
 
-	${git} "${DIR}/patches/bbb_overlays/0036-of-rename-_node_sysfs-to-_node_post.patch"
-	${git} "${DIR}/patches/bbb_overlays/0037-of-Support-hashtable-lookups-for-phandles.patch"
+	${git} "${DIR}/patches/bbb_overlays/0035-of-rename-_node_sysfs-to-_node_post.patch"
+	${git} "${DIR}/patches/bbb_overlays/0036-of-Support-hashtable-lookups-for-phandles.patch"
+	${git} "${DIR}/patches/bbb_overlays/0037-of-overlay-Pick-up-label-symbols-from-overlays.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=37
+	${git} "${DIR}/patches/bbb_overlays/0038-connector-wip.patch"
+	fi
+
+	if [ "x${regenerate}" = "xenable" ] ; then
+		wdir="bbb_overlays"
+		number=38
 		cleanup
 	fi
 }
@@ -616,13 +496,33 @@ beaglebone () {
 
 	${git} "${DIR}/patches/beaglebone/dts/0001-dts-am335x-bone-common-fixup-leds-to-match-3.8.patch"
 	${git} "${DIR}/patches/beaglebone/dts/0002-arm-dts-am335x-bone-common-add-collision-and-carrier.patch"
-	${git} "${DIR}/patches/beaglebone/dts/0003-tps65217-Enable-KEY_POWER-press-on-AC-loss-PWR_BUT.patch"
-	${git} "${DIR}/patches/beaglebone/dts/0004-am335x-bone-common-disable-default-clkout2_pin.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0003-am335x-bone-common-disable-default-clkout2_pin.patch"
+	${git} "${DIR}/patches/beaglebone/dts/0004-tps65217-Enable-KEY_POWER-press-on-AC-loss-PWR_BUT.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
+		wdir="beaglebone/dts"
 		number=4
 		cleanup
 	fi
+
+	#echo "dir: beaglebone/tps65217"
+	##regenerate="enable"
+	#if [ "x${regenerate}" = "xenable" ] ; then
+	#	start_cleanup
+	#fi
+
+	#${git} "${DIR}/patches/beaglebone/tps65217/0001-mfd-tps65217-Add-support-for-IRQs.patch"
+	#${git} "${DIR}/patches/beaglebone/tps65217/0002-power_supply-tps65217-charger-Fix-NULL-deref-during-.patch"
+	#${git} "${DIR}/patches/beaglebone/tps65217/0003-power_supply-tps65217-charger-Add-support-for-IRQs.patch"
+	#${git} "${DIR}/patches/beaglebone/tps65217/0004-mfd-tps65217-Add-power-button-as-subdevice.patch"
+	#${git} "${DIR}/patches/beaglebone/tps65217/0005-Input-Add-tps65217-power-button-driver.patch"
+	#${git} "${DIR}/patches/beaglebone/tps65217/0006-rtc-omap-Support-ext_wakeup-configuration.patch"
+
+	#if [ "x${regenerate}" = "xenable" ] ; then
+	#	wdir="beaglebone/tps65217"
+	#	number=6
+	#	cleanup
+	#fi
 
 	echo "dir: beaglebone/pinmux-helper"
 	#regenerate="enable"
@@ -791,15 +691,14 @@ beaglebone () {
 	if [ "x${regenerate}" = "xenable" ] ; then
 		start_cleanup
 	fi
-		#[RFC v2 0/5] tty/serial/8250: add MCTRL_GPIO support
-		${git} "${DIR}/patches/beaglebone/mctrl_gpio/0001-tty-serial-8250-fix-RS485-half-duplex-RX.patch"
-		${git} "${DIR}/patches/beaglebone/mctrl_gpio/0002-tty-serial-8250-make-UART_MCR-register-access-consis.patch"
-		${git} "${DIR}/patches/beaglebone/mctrl_gpio/0003-serial-mctrl_gpio-add-modem-control-read-routine.patch"
-		${git} "${DIR}/patches/beaglebone/mctrl_gpio/0004-serial-mctrl_gpio-add-IRQ-locking.patch"
-		${git} "${DIR}/patches/beaglebone/mctrl_gpio/0005-tty-serial-8250-use-mctrl_gpio-helpers.patch"
+		${git} "${DIR}/patches/beaglebone/mctrl_gpio/0001-tty-serial-8250-make-UART_MCR-register-access-consis.patch"
+		${git} "${DIR}/patches/beaglebone/mctrl_gpio/0002-serial-mctrl_gpio-add-modem-control-read-routine.patch"
+		${git} "${DIR}/patches/beaglebone/mctrl_gpio/0003-serial-mctrl_gpio-add-IRQ-locking.patch"
+		${git} "${DIR}/patches/beaglebone/mctrl_gpio/0004-tty-serial-8250-use-mctrl_gpio-helpers.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=5
+		wdir="beaglebone/mctrl_gpio"
+		number=4
 		cleanup
 	fi
 
@@ -1033,156 +932,6 @@ beaglebone () {
 	fi
 }
 
-etnaviv () {
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		cherrypick_dir="etnaviv/mainline"
-		#https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/log/?qt=grep&q=etnaviv
-
-		#merged in 4.5.0-rc0
-
-		#drm/etnaviv: add devicetree bindings
-		SHA="f04b205ac143413831b193f39fd9592665111d4b" ; num="1" ; cherrypick
-
-		#drm/etnaviv: add initial etnaviv DRM driver
-		SHA="a8c21a5451d831e67b7a6fb910f9ca8bc7b43554" ; cherrypick
-
-		#MAINTAINERS: add maintainer and reviewers for the etnaviv DRM driver
-		SHA="8bb0bce92ec9330b0ea931df90f719fb5c4a5224" ; cherrypick
-
-		#drm/etnaviv: unlock on error in etnaviv_gem_get_iova()
-		SHA="ed94add00e290e675c36cef6767d7d1f51a02f28" ; cherrypick
-
-		#drm/etnaviv: fix workaround for GC500
-		SHA="c33246d793b5bb9d8be7c67918136c310185c23d" ; cherrypick
-
-		#ARM: dts: imx6: add Vivante GPU nodes
-		SHA="419e202b260ba5913affd7cb3c36f129c036e8f7" ; cherrypick
-
-		#merged in 4.5.0-rc1
-
-		#drm/etnaviv: remove owner assignment from platform_driver
-		SHA="23a9d5dcb6ae114733fac4757b0b154571c21129" ; cherrypick
-
-		#drm/etnaviv: hold object lock while getting pages for coredump
-		SHA="339073ef77e45e87ec4cc8671b2d2328dcfd31f0" ; cherrypick
-
-		#drm/etnaviv: fix failure path if model is zero
-		SHA="f6427760a29ba3fd968e27ea567b1ebdd500740b" ; cherrypick
-
-		#drm/etnaviv: ignore VG GPUs with FE2.0
-		SHA="b98c66887ee1aec661dcb88fe17399d5d112ed98" ; cherrypick
-
-		#drm/etnaviv: update common and state_hi xml.h files
-		SHA="e2a2e263e06a0c153234b3e93fb85612d1c454d3" ; cherrypick
-
-		#drm/etnaviv: use defined constants for the chip model
-		SHA="507f899137f9e4f1405820b946063a6db78b2295" ; cherrypick
-
-		#drm/etnaviv: add helper to extract bitfields
-		SHA="52f36ba1d6134f5c1c45deb0da53442a5971358e" ; cherrypick
-
-		#drm/etnaviv: add helper for comparing model/revision IDs
-		SHA="472f79dcf21d34f4d667910002482efe3ca4ba34" ; cherrypick
-
-		#drm/etnaviv: add further minor features and varyings count
-		SHA="602eb48966d7b7f7e64dca8d9ea2842d83bfae73" ; cherrypick
-
-		#drm/etnaviv: fix memory leak in IOMMU init path
-		SHA="45d16a6d94580cd3c6baed69b5fe441ece599fc4" ; cherrypick
-
-		#drm/etnaviv: fix get pages error path in etnaviv_gem_vaddr
-		SHA="9f07bb0d4ada68f05b2e51c10720d4688e6adea4" ; cherrypick
-
-		#drm/etnaviv: rename etnaviv_gem_vaddr to etnaviv_gem_vmap
-		SHA="ce3088fdb51eda7b9ef3d119e7c302c08428f274" ; cherrypick
-
-		#drm/etnaviv: call correct function when trying to vmap a DMABUF
-		SHA="a0a5ab3e99b8e617221caabf074dcabd1659b9d8" ; cherrypick
-
-		#merged in 4.6.0-rc0
-
-		#drm/etnaviv: move runtime PM balance into retire worker
-		SHA="d9fd0c7d259e6e041890764f21f3033d248e0ac8" ; cherrypick
-
-		#drm/etnaviv: move GPU linear window to end of DMA window
-		SHA="471070abd2f53e579ebeb362e78ce62d04287f49" ; cherrypick
-
-		#drm: etnaviv: extract command ring reservation
-		SHA="584a13c6e65d9f986424594e41c6a7114d37391b" ; cherrypick
-
-		#drm: etnaviv: extract replacement of WAIT command
-		SHA="6e138f76b676b8c6dfa744db183776b0668ec272" ; cherrypick
-
-		#drm: etnaviv: extract arming of semaphore
-		SHA="18060f4d87665e974950cb36133bbbf5e1b350f3" ; cherrypick
-
-		#drm: etnaviv: track current execution state
-		SHA="f60863116b4026713fba1810927f8639bfd6ae80" ; cherrypick
-
-		#drm: etnaviv: flush all GPU caches when stopping GPU
-		SHA="8581d8149750e19fc363ad93327f4382b26959f9" ; cherrypick
-
-		#drm: etnaviv: use previous GPU pipe state when pipe switching
-		SHA="90747b9511d14a2eb6c7dbd78ea9251e3b2b092a" ; cherrypick
-
-		#drm: etnaviv: clean up GPU command submission
-		SHA="33b1be99fb4cfd0d7d483a9947f9c95d6d17ede9" ; cherrypick
-
-		#drm: etnaviv: improve readability of command insertion to ring buffer
-		SHA="41db12df64ace13c98865340b5c076cdf9a99a93" ; cherrypick
-
-		#drm: etnaviv: clean up vram_mapping submission/retire path
-		SHA="b6325f409959c7e1065ef1537f2e54cf4d7ab465" ; cherrypick
-
-		#drm: etnaviv: clean up submit_bo()
-		SHA="8779aa8f8b7fa397a0abe9e6af3334ea41e15836" ; cherrypick
-
-		exit 2
-	fi
-
-	if [ "x${merged_in_4_5}" = "xenable" ] ; then
-		echo "dir: etnaviv/mainline"
-		#merged in 4.5.0-rc0
-		${git} "${DIR}/patches/etnaviv/mainline/0001-drm-etnaviv-add-devicetree-bindings.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0002-drm-etnaviv-add-initial-etnaviv-DRM-driver.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0004-drm-etnaviv-unlock-on-error-in-etnaviv_gem_get_iova.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0003-MAINTAINERS-add-maintainer-and-reviewers-for-the-etn.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0005-drm-etnaviv-fix-workaround-for-GC500.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0006-ARM-dts-imx6-add-Vivante-GPU-nodes.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0007-drm-etnaviv-remove-owner-assignment-from-platform_dr.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0008-drm-etnaviv-hold-object-lock-while-getting-pages-for.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0009-drm-etnaviv-fix-failure-path-if-model-is-zero.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0010-drm-etnaviv-ignore-VG-GPUs-with-FE2.0.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0011-drm-etnaviv-update-common-and-state_hi-xml.h-files.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0012-drm-etnaviv-use-defined-constants-for-the-chip-model.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0013-drm-etnaviv-add-helper-to-extract-bitfields.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0014-drm-etnaviv-add-helper-for-comparing-model-revision-.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0015-drm-etnaviv-add-further-minor-features-and-varyings-.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0016-drm-etnaviv-fix-memory-leak-in-IOMMU-init-path.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0017-drm-etnaviv-fix-get-pages-error-path-in-etnaviv_gem_.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0018-drm-etnaviv-rename-etnaviv_gem_vaddr-to-etnaviv_gem_.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0019-drm-etnaviv-call-correct-function-when-trying-to-vma.patch"
-	fi
-
-	if [ "x${merged_in_4_6}" = "xenable" ] ; then
-		echo "dir: etnaviv/mainline"
-		#merged in 4.6.0-rc0
-		${git} "${DIR}/patches/etnaviv/mainline/0020-drm-etnaviv-move-runtime-PM-balance-into-retire-work.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0021-drm-etnaviv-move-GPU-linear-window-to-end-of-DMA-win.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0022-drm-etnaviv-extract-command-ring-reservation.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0023-drm-etnaviv-extract-replacement-of-WAIT-command.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0024-drm-etnaviv-extract-arming-of-semaphore.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0025-drm-etnaviv-track-current-execution-state.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0026-drm-etnaviv-flush-all-GPU-caches-when-stopping-GPU.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0027-drm-etnaviv-use-previous-GPU-pipe-state-when-pipe-sw.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0028-drm-etnaviv-clean-up-GPU-command-submission.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0029-drm-etnaviv-improve-readability-of-command-insertion.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0030-drm-etnaviv-clean-up-vram_mapping-submission-retire-.patch"
-		${git} "${DIR}/patches/etnaviv/mainline/0031-drm-etnaviv-clean-up-submit_bo.patch"
-	fi
-}
-
 quieter () {
 	echo "dir: quieter"
 	#regenerate="enable"
@@ -1200,7 +949,6 @@ quieter () {
 }
 
 ###
-lts44_backports
 reverts
 #fixes
 ti
@@ -1212,7 +960,6 @@ pru_uio
 pru_rpmsg
 bbb_overlays
 beaglebone
-etnaviv
 quieter
 
 packaging () {
