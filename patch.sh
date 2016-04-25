@@ -60,7 +60,12 @@ start_cleanup () {
 
 cleanup () {
 	if [ "${number}" ] ; then
-		git format-patch -${number} -o ${DIR}/patches/
+		if [ "x${wdir}" = "x" ] ; then
+			git format-patch -${number} -o ${DIR}/patches/
+		else
+			git format-patch -${number} -o ${DIR}/patches/${wdir}/
+			unset wdir
+		fi
 	fi
 	exit 2
 }
@@ -156,8 +161,8 @@ aufs4 () {
 	${git} "${DIR}/patches/aufs4/0005-merge-aufs4.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=5
-		cleanup
+		git format-patch -5 -o ../patches/aufs4/
+		exit 2
 	fi
 }
 
