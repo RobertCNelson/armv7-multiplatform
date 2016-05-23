@@ -1,6 +1,6 @@
-From 6e4fec90e579a78fc142626073c41692358d61e5 Mon Sep 17 00:00:00 2001
+From 4a1d010521f7c3e6be2710c5bc2c3cd302f01303 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Wed, 11 May 2016 17:05:50 -0500
+Date: Sun, 22 May 2016 19:41:00 -0500
 Subject: [PATCH] backports: tty: from: linux.git
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
