@@ -1,6 +1,6 @@
-From 5858ce5d656c08daa7ffcb4ab8810e974b1b0726 Mon Sep 17 00:00:00 2001
+From d838a71b21a9faf9e8dd7bd06030f60a5705d54e Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Sun, 22 May 2016 19:33:26 -0500
+Date: Wed, 1 Jun 2016 17:46:24 -0500
 Subject: [PATCH 2/5] merge: aufs4-base
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>

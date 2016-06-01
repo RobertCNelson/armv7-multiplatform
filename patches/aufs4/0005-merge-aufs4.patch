@@ -1,6 +1,6 @@
-From cdeeabf48c8c4f7504b0955e8160413300140d2c Mon Sep 17 00:00:00 2001
+From ab45f32f22f97881261423c8a2a96a55a6349239 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Sun, 22 May 2016 19:33:44 -0500
+Date: Wed, 1 Jun 2016 17:47:10 -0500
 Subject: [PATCH 5/5] merge: aufs4
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
@@ -32,7 +32,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  fs/aufs/dbgaufs.h                                  |   48 +
  fs/aufs/dcsub.c                                    |  224 +++
  fs/aufs/dcsub.h                                    |  136 ++
- fs/aufs/debug.c                                    |  441 +++++
+ fs/aufs/debug.c                                    |  442 +++++
  fs/aufs/debug.h                                    |  225 +++
  fs/aufs/dentry.c                                   | 1136 ++++++++++++
  fs/aufs/dentry.h                                   |  234 +++
@@ -41,14 +41,14 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  fs/aufs/dir.h                                      |  131 ++
  fs/aufs/dynop.c                                    |  369 ++++
  fs/aufs/dynop.h                                    |   74 +
- fs/aufs/export.c                                   |  835 +++++++++
+ fs/aufs/export.c                                   |  837 +++++++++
  fs/aufs/f_op.c                                     |  770 ++++++++
  fs/aufs/fhsm.c                                     |  426 +++++
  fs/aufs/file.c                                     |  844 +++++++++
  fs/aufs/file.h                                     |  291 +++
  fs/aufs/finfo.c                                    |  149 ++
  fs/aufs/fstype.h                                   |  400 +++++
- fs/aufs/hfsnotify.c                                |  288 +++
+ fs/aufs/hfsnotify.c                                |  287 +++
  fs/aufs/hfsplus.c                                  |   56 +
  fs/aufs/hnotify.c                                  |  710 ++++++++
  fs/aufs/i_op.c                                     | 1407 +++++++++++++++
@@ -73,10 +73,10 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  fs/aufs/procfs.c                                   |  169 ++
  fs/aufs/rdu.c                                      |  389 ++++
  fs/aufs/rwsem.h                                    |  198 +++
- fs/aufs/sbinfo.c                                   |  348 ++++
+ fs/aufs/sbinfo.c                                   |  353 ++++
  fs/aufs/spl.h                                      |  111 ++
  fs/aufs/super.c                                    | 1039 +++++++++++
- fs/aufs/super.h                                    |  624 +++++++
+ fs/aufs/super.h                                    |  638 +++++++
  fs/aufs/sysaufs.c                                  |  104 ++
  fs/aufs/sysaufs.h                                  |  101 ++
  fs/aufs/sysfs.c                                    |  376 ++++
@@ -87,12 +87,12 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  fs/aufs/wbr_policy.c                               |  765 ++++++++
  fs/aufs/whout.c                                    | 1060 +++++++++++
  fs/aufs/whout.h                                    |   85 +
- fs/aufs/wkq.c                                      |  213 +++
- fs/aufs/wkq.h                                      |   91 +
+ fs/aufs/wkq.c                                      |  218 +++
+ fs/aufs/wkq.h                                      |   93 +
  fs/aufs/xattr.c                                    |  344 ++++
  fs/aufs/xino.c                                     | 1317 ++++++++++++++
  include/uapi/linux/aufs_type.h                     |  419 +++++
- 87 files changed, 34237 insertions(+)
+ 87 files changed, 34265 insertions(+)
  create mode 100644 Documentation/ABI/testing/debugfs-aufs
  create mode 100644 Documentation/ABI/testing/sysfs-aufs
  create mode 100644 Documentation/filesystems/aufs/README
@@ -2261,7 +2261,7 @@ index 0000000..e48d268
 +#endif /* __AUFS_H__ */
 diff --git a/fs/aufs/branch.c b/fs/aufs/branch.c
 new file mode 100644
-index 0000000..0004faf
+index 0000000..9b1f7c8
 --- /dev/null
 +++ b/fs/aufs/branch.c
 @@ -0,0 +1,1406 @@
@@ -2846,7 +2846,7 @@ index 0000000..0004faf
 +static struct file **au_farray_alloc(struct super_block *sb,
 +				     unsigned long long *max)
 +{
-+	*max = atomic_long_read(&au_sbi(sb)->si_nfiles);
++	*max = au_nfiles(sb);
 +	return au_array_alloc(max, au_farray_cb, sb, /*arg*/NULL);
 +}
 +
@@ -3673,7 +3673,7 @@ index 0000000..0004faf
 +}
 diff --git a/fs/aufs/branch.h b/fs/aufs/branch.h
 new file mode 100644
-index 0000000..bbfa76b1
+index 0000000..bbfa76b
 --- /dev/null
 +++ b/fs/aufs/branch.h
 @@ -0,0 +1,309 @@
@@ -6381,10 +6381,10 @@ index 0000000..9f4a2b5
 +#endif /* __AUFS_DCSUB_H__ */
 diff --git a/fs/aufs/debug.c b/fs/aufs/debug.c
 new file mode 100644
-index 0000000..73886a4
+index 0000000..5fa12e9
 --- /dev/null
 +++ b/fs/aufs/debug.c
-@@ -0,0 +1,441 @@
+@@ -0,0 +1,442 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + *
@@ -6732,8 +6732,9 @@ index 0000000..73886a4
 +	sbinfo = au_sbi(sb);
 +	if (!sbinfo)
 +		return;
-+	dpri("nw %d, gen %u, kobj %d\n",
-+	     atomic_read(&sbinfo->si_nowait.nw_len), sbinfo->si_generation,
++	dpri("nw %lld, gen %u, kobj %d\n",
++	     percpu_counter_sum(&sbinfo->si_nowait.nw_len),
++	     sbinfo->si_generation,
 +	     atomic_read(&sbinfo->si_kobj.kref.refcount));
 +	for (bindex = 0; bindex <= sbinfo->si_bbot; bindex++)
 +		do_pri_br(bindex, sbinfo->si_branch[0 + bindex]);
@@ -10349,10 +10350,10 @@ index 0000000..92f61f4
 +#endif /* __AUFS_DYNOP_H__ */
 diff --git a/fs/aufs/export.c b/fs/aufs/export.c
 new file mode 100644
-index 0000000..78b3170
+index 0000000..dcdfe1d
 --- /dev/null
 +++ b/fs/aufs/export.c
-@@ -0,0 +1,835 @@
+@@ -0,0 +1,837 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + *
@@ -10868,9 +10869,11 @@ index 0000000..78b3170
 +	h_mnt = au_br_mnt(br);
 +	h_sb = h_mnt->mnt_sb;
 +	/* todo: call lower fh_to_dentry()? fh_to_parent()? */
++	lockdep_off();
 +	h_parent = exportfs_decode_fh(h_mnt, (void *)(fh + Fh_tail),
 +				      fh_len - Fh_tail, fh[Fh_h_type],
 +				      h_acceptable, /*context*/NULL);
++	lockdep_on();
 +	dentry = h_parent;
 +	if (unlikely(!h_parent || IS_ERR(h_parent))) {
 +		AuWarn1("%s decode_fh failed, %ld\n",
@@ -14106,10 +14109,10 @@ index 0000000..2842400
 +#endif /* __AUFS_FSTYPE_H__ */
 diff --git a/fs/aufs/hfsnotify.c b/fs/aufs/hfsnotify.c
 new file mode 100644
-index 0000000..6fa79b0
+index 0000000..501b551
 --- /dev/null
 +++ b/fs/aufs/hfsnotify.c
-@@ -0,0 +1,288 @@
+@@ -0,0 +1,287 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + *
@@ -14175,8 +14178,6 @@ index 0000000..6fa79b0
 +	lockdep_off();
 +	err = fsnotify_add_mark(mark, br->br_hfsn->hfsn_group, hinode->hi_inode,
 +				 /*mnt*/NULL, /*allow_dups*/1);
-+	/* even if err */
-+	fsnotify_put_mark(mark);
 +	lockdep_on();
 +
 +	return err;
@@ -14198,6 +14199,7 @@ index 0000000..6fa79b0
 +	spin_unlock(&mark->lock);
 +	lockdep_off();
 +	fsnotify_destroy_mark(mark, group);
++	fsnotify_put_mark(mark);
 +	fsnotify_put_group(group);
 +	lockdep_on();
 +
@@ -25592,10 +25594,10 @@ index 0000000..678fe6f
 +#endif /* __AUFS_RWSEM_H__ */
 diff --git a/fs/aufs/sbinfo.c b/fs/aufs/sbinfo.c
 new file mode 100644
-index 0000000..d46e9fb
+index 0000000..3dd9fd6
 --- /dev/null
 +++ b/fs/aufs/sbinfo.c
-@@ -0,0 +1,348 @@
+@@ -0,0 +1,353 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + *
@@ -25631,7 +25633,12 @@ index 0000000..d46e9fb
 +	sbinfo = container_of(kobj, struct au_sbinfo, si_kobj);
 +	for (i = 0; i < AuPlink_NHASH; i++)
 +		AuDebugOn(!hlist_empty(&sbinfo->si_plink[i].head));
-+	AuDebugOn(atomic_read(&sbinfo->si_nowait.nw_len));
++	au_nwt_fin(&sbinfo->si_nowait);
++
++	AuDebugOn(percpu_counter_sum(&sbinfo->si_ninodes));
++	percpu_counter_destroy(&sbinfo->si_ninodes);
++	AuDebugOn(percpu_counter_sum(&sbinfo->si_nfiles));
++	percpu_counter_destroy(&sbinfo->si_nfiles);
 +
 +	au_rw_write_lock(&sbinfo->si_rwsem);
 +	au_br_free(sbinfo);
@@ -25670,8 +25677,8 @@ index 0000000..d46e9fb
 +	au_rw_init_wlock(&sbinfo->si_rwsem);
 +	mutex_init(&sbinfo->au_si_pid.pid_mtx);
 +
-+	atomic_long_set(&sbinfo->si_ninodes, 0);
-+	atomic_long_set(&sbinfo->si_nfiles, 0);
++	percpu_counter_init(&sbinfo->si_ninodes, 0, GFP_NOFS);
++	percpu_counter_init(&sbinfo->si_nfiles, 0, GFP_NOFS);
 +
 +	sbinfo->si_bbot = -1;
 +	sbinfo->si_last_br_id = AUFS_BRANCH_MAX / 2;
@@ -26063,7 +26070,7 @@ index 0000000..945343a
 +#endif /* __AUFS_SPL_H__ */
 diff --git a/fs/aufs/super.c b/fs/aufs/super.c
 new file mode 100644
-index 0000000..1d0d329
+index 0000000..ff7e582
 --- /dev/null
 +++ b/fs/aufs/super.c
 @@ -0,0 +1,1039 @@
@@ -26604,7 +26611,7 @@ index 0000000..1d0d329
 +
 +struct inode **au_iarray_alloc(struct super_block *sb, unsigned long long *max)
 +{
-+	*max = atomic_long_read(&au_sbi(sb)->si_ninodes);
++	*max = au_ninodes(sb);
 +	return au_array_alloc(max, au_iarray_cb, sb, &sb->s_inodes);
 +}
 +
@@ -27108,10 +27115,10 @@ index 0000000..1d0d329
 +};
 diff --git a/fs/aufs/super.h b/fs/aufs/super.h
 new file mode 100644
-index 0000000..1c0c3bf
+index 0000000..4e6e5ab
 --- /dev/null
 +++ b/fs/aufs/super.h
-@@ -0,0 +1,624 @@
+@@ -0,0 +1,638 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + *
@@ -27218,7 +27225,7 @@ index 0000000..1c0c3bf
 +	 * dirty approach to protect sb->sb_inodes and ->s_files (gone) from
 +	 * remount.
 +	 */
-+	atomic_long_t		si_ninodes, si_nfiles;
++	struct percpu_counter	si_ninodes, si_nfiles;
 +
 +	/* branch management */
 +	unsigned int		si_generation;
@@ -27693,26 +27700,40 @@ index 0000000..1c0c3bf
 +	return au_sbi(sb)->si_generation;
 +}
 +
++static inline unsigned long long au_ninodes(struct super_block *sb)
++{
++	s64 n = percpu_counter_sum(&au_sbi(sb)->si_ninodes);
++
++	BUG_ON(n < 0);
++	return n;
++}
++
 +static inline void au_ninodes_inc(struct super_block *sb)
 +{
-+	atomic_long_inc(&au_sbi(sb)->si_ninodes);
++	percpu_counter_inc(&au_sbi(sb)->si_ninodes);
 +}
 +
 +static inline void au_ninodes_dec(struct super_block *sb)
 +{
-+	AuDebugOn(!atomic_long_read(&au_sbi(sb)->si_ninodes));
-+	atomic_long_dec(&au_sbi(sb)->si_ninodes);
++	percpu_counter_dec(&au_sbi(sb)->si_ninodes);
++}
++
++static inline unsigned long long au_nfiles(struct super_block *sb)
++{
++	s64 n = percpu_counter_sum(&au_sbi(sb)->si_nfiles);
++
++	BUG_ON(n < 0);
++	return n;
 +}
 +
 +static inline void au_nfiles_inc(struct super_block *sb)
 +{
-+	atomic_long_inc(&au_sbi(sb)->si_nfiles);
++	percpu_counter_inc(&au_sbi(sb)->si_nfiles);
 +}
 +
 +static inline void au_nfiles_dec(struct super_block *sb)
 +{
-+	AuDebugOn(!atomic_long_read(&au_sbi(sb)->si_nfiles));
-+	atomic_long_dec(&au_sbi(sb)->si_nfiles);
++	percpu_counter_dec(&au_sbi(sb)->si_nfiles);
 +}
 +
 +static inline struct au_branch *au_sbr(struct super_block *sb,
@@ -32528,10 +32549,10 @@ index 0000000..5a5c378
 +#endif /* __AUFS_WHOUT_H__ */
 diff --git a/fs/aufs/wkq.c b/fs/aufs/wkq.c
 new file mode 100644
-index 0000000..a4e1b92
+index 0000000..8c17dc7
 --- /dev/null
 +++ b/fs/aufs/wkq.c
-@@ -0,0 +1,213 @@
+@@ -0,0 +1,218 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + *
@@ -32692,7 +32713,7 @@ index 0000000..a4e1b92
 +	int err;
 +	struct au_wkinfo *wkinfo;
 +
-+	atomic_inc(&au_sbi(sb)->si_nowait.nw_len);
++	percpu_counter_inc(&au_sbi(sb)->si_nowait.nw_len);
 +
 +	/*
 +	 * wkq_func() must free this wkinfo.
@@ -32722,9 +32743,14 @@ index 0000000..a4e1b92
 +
 +void au_nwt_init(struct au_nowait_tasks *nwt)
 +{
-+	atomic_set(&nwt->nw_len, 0);
-+	/* smp_mb(); */ /* atomic_set */
++	percpu_counter_init(&nwt->nw_len, 0, GFP_NOFS);
 +	init_waitqueue_head(&nwt->nw_wq);
++}
++
++void au_nwt_fin(struct au_nowait_tasks *nwt)
++{
++	AuDebugOn(percpu_counter_sum(&nwt->nw_len));
++	percpu_counter_destroy(&nwt->nw_len);
 +}
 +
 +void au_wkq_fin(void)
@@ -32747,10 +32773,10 @@ index 0000000..a4e1b92
 +}
 diff --git a/fs/aufs/wkq.h b/fs/aufs/wkq.h
 new file mode 100644
-index 0000000..830123c
+index 0000000..7314558
 --- /dev/null
 +++ b/fs/aufs/wkq.h
-@@ -0,0 +1,91 @@
+@@ -0,0 +1,93 @@
 +/*
 + * Copyright (C) 2005-2016 Junjiro R. Okajima
 + *
@@ -32786,7 +32812,7 @@ index 0000000..830123c
 + * in the next operation, wait for the 'nowait' tasks in system-wide workqueue
 + */
 +struct au_nowait_tasks {
-+	atomic_t		nw_len;
++	struct percpu_counter	nw_len;
 +	wait_queue_head_t	nw_wq;
 +};
 +
@@ -32813,6 +32839,7 @@ index 0000000..830123c
 +int au_wkq_nowait(au_wkq_func_t func, void *args, struct super_block *sb,
 +		  unsigned int flags);
 +void au_nwt_init(struct au_nowait_tasks *nwt);
++void au_nwt_fin(struct au_nowait_tasks *nwt);
 +int __init au_wkq_init(void);
 +void au_wkq_fin(void);
 +
@@ -32830,13 +32857,14 @@ index 0000000..830123c
 +
 +static inline void au_nwt_done(struct au_nowait_tasks *nwt)
 +{
-+	if (atomic_dec_and_test(&nwt->nw_len))
++	percpu_counter_dec(&nwt->nw_len);
++	if (!percpu_counter_sum(&nwt->nw_len))
 +		wake_up_all(&nwt->nw_wq);
 +}
 +
 +static inline int au_nwt_flush(struct au_nowait_tasks *nwt)
 +{
-+	wait_event(nwt->nw_wq, !atomic_read(&nwt->nw_len));
++	wait_event(nwt->nw_wq, !percpu_counter_sum(&nwt->nw_len));
 +	return 0;
 +}
 +
@@ -34517,7 +34545,7 @@ index 0000000..ed7b243
 +}
 diff --git a/include/uapi/linux/aufs_type.h b/include/uapi/linux/aufs_type.h
 new file mode 100644
-index 0000000..cd6fb4bb
+index 0000000..166a6be
 --- /dev/null
 +++ b/include/uapi/linux/aufs_type.h
 @@ -0,0 +1,419 @@
@@ -34562,7 +34590,7 @@ index 0000000..cd6fb4bb
 +
 +#include <linux/limits.h>
 +
-+#define AUFS_VERSION	"4.5-20160523"
++#define AUFS_VERSION	"4.5-20160530"
 +
 +/* todo? move this to linux-2.6.19/include/magic.h */
 +#define AUFS_SUPER_MAGIC	('a' << 24 | 'u' << 16 | 'f' << 8 | 's')
