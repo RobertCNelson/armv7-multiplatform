@@ -13,15 +13,6 @@ diff --git a/arch/arm/boot/dts/sun4i-a10.dtsi b/arch/arm/boot/dts/sun4i-a10.dtsi
 index a03e56f..8ad2709 100644
 --- a/arch/arm/boot/dts/sun4i-a10.dtsi
 +++ b/arch/arm/boot/dts/sun4i-a10.dtsi
-@@ -1,6 +1,6 @@
- /*
-- * Copyright 2012 Stefan Roese
-- * Stefan Roese <sr@denx.de>
-+ * Copyright 2016 Stephen L Arnold <nerdboy@gentoo.org>
-+ * Based on previous work by Stefan Roese <sr@denx.de>
-  *
-  * This file is dual-licensed: you can use it either under the terms
-  * of the GPL or the X11 license, at your option. Note that this dual
 @@ -44,7 +44,6 @@
  #include "skeleton.dtsi"
  
