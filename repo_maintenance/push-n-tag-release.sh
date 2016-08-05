@@ -1,6 +1,6 @@
 #!/bin/sh -e
 #
-# Copyright (c) 2009-2014 Robert Nelson <robertcnelson@gmail.com>
+# Copyright (c) 2009-2016 Robert Nelson <robertcnelson@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -24,18 +24,34 @@
 
 DIR=$PWD
 
+repo="git@github.com:RobertCNelson/linux-stable-rcn-ee.git"
+example="rcn-ee"
+
 if [ -e ${DIR}/version.sh ]; then
 	unset BRANCH
 	. ${DIR}/version.sh
 
-	git commit -a -m "${KERNEL_TAG}-${BUILD} release" -s
-	git tag -a "${KERNEL_TAG}-${BUILD}" -m "${KERNEL_TAG}-${BUILD}"
+	git commit -a -m "${KERNEL_TAG}${BUILD} release" -s
+	git tag -a "${KERNEL_TAG}${BUILD}" -m "${KERNEL_TAG}${BUILD}"
 
 	git push origin ${BRANCH}
 	git push origin ${BRANCH} --tags
 
 	cd ${DIR}/KERNEL/
-	git push -f git@github.com:RobertCNelson/linux-stable-rcn-ee.git "v${KERNEL_TAG}-${BUILD}"
+	make ARCH=${KERNEL_ARCH} distclean
+
+	cp ${DIR}/patches/defconfig ${DIR}/KERNEL/.config
+	make ARCH=${KERNEL_ARCH} savedefconfig
+	cp ${DIR}/KERNEL/defconfig ${DIR}/KERNEL/arch/${KERNEL_ARCH}/configs/${example}_defconfig
+	git add arch/${KERNEL_ARCH}/configs/${example}_defconfig
+
+	git commit -a -m "${KERNEL_TAG}${BUILD} ${example}_defconfig" -s
+	git tag -a "${KERNEL_TAG}${BUILD}" -m "${KERNEL_TAG}${BUILD}"
+
+	#push tag
+	echo "log: git push -f ${repo} \"${KERNEL_TAG}${BUILD}\""
+	git push -f ${repo} "${KERNEL_TAG}${BUILD}"
+
 	cd ${DIR}/
 fi
 

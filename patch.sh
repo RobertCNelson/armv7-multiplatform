@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/sh -e
 #
-# Copyright (c) 2009-2014 Robert Nelson <robertcnelson@gmail.com>
+# Copyright (c) 2009-2016 Robert Nelson <robertcnelson@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,13 @@ if [ -f ${DIR}/system.sh ] ; then
 	. ${DIR}/system.sh
 fi
 
+#Debian 7 (Wheezy): git version 1.7.10.4 and later needs "--no-edit"
+unset git_opts
+git_no_edit=$(LC_ALL=C git help pull | grep -m 1 -e "--no-edit" || true)
+if [ ! "x${git_no_edit}" = "x" ] ; then
+	git_opts="--no-edit"
+fi
+
 git="git am"
 #git_patchset=""
 #git_opts
@@ -48,9 +55,22 @@ start_cleanup () {
 
 cleanup () {
 	if [ "${number}" ] ; then
-		git format-patch -${number} -o ${DIR}/patches/
+		if [ "x${wdir}" = "x" ] ; then
+			git format-patch -${number} -o ${DIR}/patches/
+		else
+			git format-patch -${number} -o ${DIR}/patches/${wdir}/
+			unset wdir
+		fi
 	fi
-	exit
+	exit 2
+}
+
+cherrypick () {
+	if [ ! -d ../patches/${cherrypick_dir} ] ; then
+		mkdir -p ../patches/${cherrypick_dir}
+	fi
+	git format-patch -1 ${SHA} --start-number ${num} -o ../patches/${cherrypick_dir}
+	num=$(($num+1))
 }
 
 external_git () {
@@ -399,20 +419,18 @@ vivante
 
 saucy
 
-packaging_setup () {
-	cp -v "${DIR}/3rdparty/packaging/builddeb" "${DIR}/KERNEL/scripts/package"
-	git commit -a -m 'packaging: sync with mainline' -s
-
-	git format-patch -1 -o "${DIR}/patches/packaging"
-}
-
 packaging () {
 	echo "dir: packaging"
-	${git} "${DIR}/patches/packaging/0001-packaging-sync-with-mainline.patch"
-	${git} "${DIR}/patches/packaging/0002-deb-pkg-install-dtbs-in-linux-image-package.patch"
-	${git} "${DIR}/patches/packaging/0003-deb-pkg-no-dtbs_install.patch"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		cp -v "${DIR}/3rdparty/packaging/builddeb" "${DIR}/KERNEL/scripts/package"
+		git commit -a -m 'packaging: sync builddeb changes' -s
+		git format-patch -1 -o "${DIR}/patches/packaging"
+		exit 2
+	else
+		${git} "${DIR}/patches/packaging/0001-packaging-sync-builddeb-changes.patch"
+	fi
 }
 
-#packaging_setup
 packaging
-echo "patch.sh ran successful"
+echo "patch.sh ran successfully"
