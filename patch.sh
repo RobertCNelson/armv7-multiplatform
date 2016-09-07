@@ -228,7 +228,7 @@ pre_backports_tty () {
 post_backports () {
 	if [ ! "x${backport_tag}" = "x" ] ; then
 		cd ~/linux-src/
-		${git_bin} checkout master -f ; git branch -D tmp
+		${git_bin} checkout master -f ; ${git_bin} branch -D tmp
 		cd -
 	fi
 
