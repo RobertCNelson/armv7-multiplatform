@@ -1,0 +1,66 @@
+From 9aaf591c5e7e1837b2a0ce317bb011d98023032f Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Thu, 15 Sep 2016 10:22:13 -0500
+Subject: [PATCH 15/15] omap3-beagle: fixes
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/boot/dts/omap3-beagle-xm.dts | 7 +++++++
+ arch/arm/boot/dts/omap3-beagle.dts    | 2 ++
+ 2 files changed, 9 insertions(+)
+
+diff --git a/arch/arm/boot/dts/omap3-beagle-xm.dts b/arch/arm/boot/dts/omap3-beagle-xm.dts
+index 116e8d7..86029d7 100644
+--- a/arch/arm/boot/dts/omap3-beagle-xm.dts
++++ b/arch/arm/boot/dts/omap3-beagle-xm.dts
+@@ -146,6 +146,7 @@
+ 	};
+ 
+ 	etb@5401b000 {
++		status = "disabled";
+ 		compatible = "arm,coresight-etb10", "arm,primecell";
+ 		reg = <0x5401b000 0x1000>;
+ 
+@@ -160,6 +161,7 @@
+ 	};
+ 
+ 	etm@54010000 {
++		status = "disabled";
+ 		compatible = "arm,coresight-etm3x", "arm,primecell";
+ 		reg = <0x54010000 0x1000>;
+ 
+@@ -296,6 +298,11 @@
+ 			codec {
+ 			};
+ 		};
++
++		twl_power: power {
++			compatible = "ti,twl4030-power-reset";
++			ti,use_poweroff;
++		};
+ 	};
+ };
+ 
+diff --git a/arch/arm/boot/dts/omap3-beagle.dts b/arch/arm/boot/dts/omap3-beagle.dts
+index 18b178b..0b96966 100644
+--- a/arch/arm/boot/dts/omap3-beagle.dts
++++ b/arch/arm/boot/dts/omap3-beagle.dts
+@@ -141,6 +141,7 @@
+ 	};
+ 
+ 	etb@540000000 {
++		status = "disabled";
+ 		compatible = "arm,coresight-etb10", "arm,primecell";
+ 		reg = <0x5401b000 0x1000>;
+ 
+@@ -155,6 +156,7 @@
+ 	};
+ 
+ 	etm@54010000 {
++		status = "disabled";
+ 		compatible = "arm,coresight-etm3x", "arm,primecell";
+ 		reg = <0x54010000 0x1000>;
+ 
+-- 
+2.9.3
+

@@ -165,6 +165,7 @@ dts () {
 	${git} "${DIR}/patches/dts/0012-drm-imx-tve-fix-media-bus-format-for-VGA-output.patch"
 	${git} "${DIR}/patches/dts/0013-ARM-dts-imx53-qsb-fix-TVE-entry.patch"
 	${git} "${DIR}/patches/dts/0014-ARM-dts-imx53-qsb-select-open-drain-mode-for-i2c1-pa.patch"
+	${git} "${DIR}/patches/dts/0015-omap3-beagle-fixes.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 		number=15
