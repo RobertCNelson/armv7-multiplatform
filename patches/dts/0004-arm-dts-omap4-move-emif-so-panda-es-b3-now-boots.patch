@@ -1,7 +1,7 @@
-From 3c6fb2654d999bc202b690b2d8fcaf2383e9c4d2 Mon Sep 17 00:00:00 2001
+From bdcc521fbb67e2941b2bee4597ce01d00ab89b3c Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Wed, 22 Apr 2015 12:06:40 -0500
-Subject: [PATCH 4/8] arm: dts: omap4: move emif so panda-es-b3 now boots
+Subject: [PATCH 4/9] arm: dts: omap4: move emif so panda-es-b3 now boots
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
@@ -17,10 +17,10 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  create mode 100644 arch/arm/boot/dts/omap4-panda-es-b3.dts
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index bb8fa02..ca4dbb0 100644
+index 30bbc37..1d2c23e 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
-@@ -459,6 +459,7 @@ dtb-$(CONFIG_ARCH_OMAP4) += \
+@@ -472,6 +472,7 @@ dtb-$(CONFIG_ARCH_OMAP4) += \
  	omap4-panda.dtb \
  	omap4-panda-a4.dtb \
  	omap4-panda-es.dtb \
@@ -52,7 +52,7 @@ index 133f1b7..072f0a0 100644
  &dss_hdmi_pins {
  	pinctrl-single,pins = <
 diff --git a/arch/arm/boot/dts/omap4-panda-common.dtsi b/arch/arm/boot/dts/omap4-panda-common.dtsi
-index f1507bc..a644bec 100644
+index 18d0966..d0b778c 100644
 --- a/arch/arm/boot/dts/omap4-panda-common.dtsi
 +++ b/arch/arm/boot/dts/omap4-panda-common.dtsi
 @@ -460,16 +460,6 @@
@@ -195,7 +195,7 @@ index a0e28b2..3ee41ef 100644
 +	status = "ok";
 +};
 diff --git a/arch/arm/boot/dts/omap4-sdp.dts b/arch/arm/boot/dts/omap4-sdp.dts
-index dac86ed..b68af5c 100644
+index f0bdc41..184f98e 100644
 --- a/arch/arm/boot/dts/omap4-sdp.dts
 +++ b/arch/arm/boot/dts/omap4-sdp.dts
 @@ -501,11 +501,13 @@
@@ -233,5 +233,5 @@ index 5a206c1..6fa8b82 100644
  
  		ocp2scp@4a0ad000 {
 -- 
-2.6.1
+2.9.3
 
