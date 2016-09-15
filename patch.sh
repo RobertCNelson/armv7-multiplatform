@@ -367,10 +367,11 @@ dts () {
 	${git} "${DIR}/patches/dts/0007-imx6q-sabresd-add-support-for-wilink8-wlan-and-bluet.patch"
 	${git} "${DIR}/patches/dts/0008-imx6sl-evk-add-support-for-wilink8-wlan-and-bluetoot.patch"
 	${git} "${DIR}/patches/dts/0009-mcimx6ul-bb-and-ism43362-b81-evb.patch"
+	${git} "${DIR}/patches/dts/0010-omap3-beagle-fixes.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 		wdir="dts"
-		number=9
+		number=10
 		cleanup
 	fi
 }
@@ -651,9 +652,10 @@ beaglebone () {
 	fi
 
 	${git} "${DIR}/patches/beaglebone/bbgw/0001-add-beaglebone-green-wireless.patch"
+	${git} "${DIR}/patches/beaglebone/bbgw/0002-bbgw-wlan0-fixes.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=1
+		number=2
 		cleanup
 	fi
 
