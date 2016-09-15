@@ -228,7 +228,7 @@ pre_backports_tty () {
 post_backports () {
 	if [ ! "x${backport_tag}" = "x" ] ; then
 		cd ~/linux-src/
-		${git_bin} checkout master -f ; git branch -D tmp
+		${git_bin} checkout master -f ; ${git_bin} branch -D tmp
 		cd -
 	fi
 
@@ -1222,10 +1222,6 @@ packaging () {
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		cp -v "${DIR}/3rdparty/packaging/builddeb" "${DIR}/KERNEL/scripts/package"
-		#v4.8.0-rc1+
-		if [ ! -d "${DIR}/KERNEL/scripts/gcc-plugins/" ] ; then
-			sed -i -e 's:(cd $objtree; find scripts/gcc-plugins:#(cd $objtree; find scripts/gcc-plugins:g' "${DIR}/KERNEL/scripts/package/builddeb"
-		fi
 		${git_bin} commit -a -m 'packaging: sync builddeb changes' -s
 		${git_bin} format-patch -1 -o "${DIR}/patches/packaging"
 		exit 2
