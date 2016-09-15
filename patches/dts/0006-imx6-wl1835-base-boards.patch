@@ -1,7 +1,7 @@
-From aa65af2e4f692aa8ea888c5564e34dbe402eb76d Mon Sep 17 00:00:00 2001
+From a88656e47858139118a1aca7193ff39cdcb1e2e8 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
 Date: Thu, 14 May 2015 10:01:51 -0500
-Subject: [PATCH 6/8] imx6: wl1835 base boards
+Subject: [PATCH 6/9] imx6: wl1835 base boards
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
@@ -17,10 +17,10 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  create mode 100644 arch/arm/boot/dts/imx6sl-evk-wl1835.dts
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 5af3a59..4865389 100644
+index 5aa3153..01ab9d3 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
-@@ -291,6 +291,7 @@ dtb-$(CONFIG_SOC_IMX6Q) += \
+@@ -302,6 +302,7 @@ dtb-$(CONFIG_SOC_IMX6Q) += \
  	imx6dl-sabreauto.dtb \
  	imx6dl-sabrelite.dtb \
  	imx6dl-sabresd.dtb \
@@ -28,7 +28,7 @@ index 5af3a59..4865389 100644
  	imx6dl-tx6dl-comtft.dtb \
  	imx6dl-tx6u-801x.dtb \
  	imx6dl-tx6u-811x.dtb \
-@@ -319,6 +320,7 @@ dtb-$(CONFIG_SOC_IMX6Q) += \
+@@ -331,6 +332,7 @@ dtb-$(CONFIG_SOC_IMX6Q) += \
  	imx6q-sabreauto.dtb \
  	imx6q-sabrelite.dtb \
  	imx6q-sabresd.dtb \
@@ -36,7 +36,7 @@ index 5af3a59..4865389 100644
  	imx6q-sbc6x.dtb \
  	imx6q-tbs2910.dtb \
  	imx6q-tx6q-1010.dtb \
-@@ -331,6 +333,7 @@ dtb-$(CONFIG_SOC_IMX6Q) += \
+@@ -343,6 +345,7 @@ dtb-$(CONFIG_SOC_IMX6Q) += \
  	imx6q-wandboard-revb1.dtb
  dtb-$(CONFIG_SOC_IMX6SL) += \
  	imx6sl-evk.dtb \
@@ -1339,5 +1339,5 @@ index 0000000..945887d
 +	status = "okay";
 +};
 -- 
-2.6.1
+2.9.3
 
