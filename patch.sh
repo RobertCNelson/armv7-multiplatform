@@ -291,7 +291,7 @@ lts44_backports () {
 	fi
 	patch_backports
 
-	backport_tag="v4.7.5"
+	backport_tag="v4.7.6"
 
 	subsystem="i2c"
 	#regenerate="enable"
