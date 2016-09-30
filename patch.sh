@@ -1196,11 +1196,10 @@ gcc6 () {
 	fi
 
 	${git} "${DIR}/patches/gcc6/0001-net-davinci_cpdma-use-dma_addr_t-for-DMA-address.patch"
-	${git} "${DIR}/patches/gcc6/0002-cgroup-kill-cgrp_ss_priv-CGROUP_CANFORK_COUNT-and-fr.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 		wdir="gcc6"
-		number=2
+		number=1
 		cleanup
 	fi
 }
