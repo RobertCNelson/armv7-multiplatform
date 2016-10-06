@@ -256,6 +256,7 @@ backports () {
 
 		cp -vr ~/linux-src/drivers/iio/* ./drivers/iio/
 		cp -vr ~/linux-src/drivers/staging/iio/* ./drivers/staging/iio/
+		cp -v  ~/linux-src/include/linux/hid-sensor-hub.h ./include/linux/
 		cp -vr ~/linux-src/include/linux/iio/* ./include/linux/iio/
 		cp -v  ~/linux-src/include/uapi/linux/iio/types.h ./include/uapi/linux/iio/types.h
 

@@ -1,6 +1,6 @@
-From 6c4a948aa154b32e5abaf655648cd6ccf000f4e2 Mon Sep 17 00:00:00 2001
+From 917d1f2c0ea2e8443e76721c3be0f74b759ef9ee Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Thu, 6 Oct 2016 11:23:34 -0500
+Date: Thu, 6 Oct 2016 12:20:14 -0500
 Subject: [PATCH] backports: iio: from: linux.git
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
@@ -84,11 +84,12 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  drivers/staging/iio/meter/ade7754.c                |   59 +-
  drivers/staging/iio/meter/ade7758_ring.c           |   10 +-
  drivers/staging/iio/meter/ade7854.c                |   40 +-
+ include/linux/hid-sensor-hub.h                     |    1 +
  include/linux/iio/consumer.h                       |   12 +
  include/linux/iio/iio.h                            |    3 +
  include/linux/iio/trigger.h                        |   26 +
  include/linux/iio/triggered_buffer.h               |    8 +
- 83 files changed, 8782 insertions(+), 639 deletions(-)
+ 84 files changed, 8783 insertions(+), 639 deletions(-)
  create mode 100644 drivers/iio/accel/dmard06.c
  create mode 100644 drivers/iio/accel/dmard09.c
  create mode 100644 drivers/iio/accel/kxsd9-i2c.c
@@ -11679,6 +11680,18 @@ index 75e8685..24edbc3 100644
  {
  	struct iio_dev_attr *this_attr = to_iio_dev_attr(attr);
  	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
+diff --git a/include/linux/hid-sensor-hub.h b/include/linux/hid-sensor-hub.h
+index c02b5ce..dd85f35 100644
+--- a/include/linux/hid-sensor-hub.h
++++ b/include/linux/hid-sensor-hub.h
+@@ -236,6 +236,7 @@ struct hid_sensor_common {
+ 	struct hid_sensor_hub_attribute_info report_state;
+ 	struct hid_sensor_hub_attribute_info power_state;
+ 	struct hid_sensor_hub_attribute_info sensitivity;
++	struct work_struct work;
+ };
+ 
+ /* Convert from hid unit expo to regular exponent */
 diff --git a/include/linux/iio/consumer.h b/include/linux/iio/consumer.h
 index 3d672f7..9edccfb 100644
 --- a/include/linux/iio/consumer.h
