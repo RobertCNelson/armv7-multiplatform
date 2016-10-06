@@ -193,7 +193,7 @@ local_patch () {
 
 #external_git
 #aufs4
-#rt
+rt
 #local_patch
 
 reverts () {
@@ -247,14 +247,17 @@ patch_backports (){
 }
 
 backports () {
-	backport_tag="v4.x-y"
+	backport_tag="8d370595811e13378243832006f8c52bbc9cca5e"
 
-	subsystem="xyz"
+	subsystem="iio"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		pre_backports
 
-		cp -v ~/linux-src/x/ ./x/
+		cp -vr ~/linux-src/drivers/iio/* ./drivers/iio/
+		cp -vr ~/linux-src/drivers/staging/iio/* ./drivers/staging/iio/
+		cp -vr ~/linux-src/include/linux/iio/* ./include/linux/iio/
+		cp -v  ~/linux-src/include/uapi/linux/iio/types.h ./include/uapi/linux/iio/types.h
 
 		post_backports
 	fi
@@ -851,7 +854,7 @@ more_fixes () {
 
 ###
 reverts
-#backports
+backports
 #fixes
 ti
 dts
