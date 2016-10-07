@@ -1,6 +1,6 @@
-From cab75082c99a3250eabf0a62aa1e531623e4871d Mon Sep 17 00:00:00 2001
+From 64f1c95e79c1fdaf80a49bc6382f4b6a29985d7e Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Fri, 7 Oct 2016 09:41:38 -0500
+Date: Fri, 7 Oct 2016 10:01:57 -0500
 Subject: [PATCH] backports: iio: from: linux.git
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
