@@ -1,6 +1,6 @@
-From 648c95515dce446e869642aef0a64adac971a0c8 Mon Sep 17 00:00:00 2001
+From 916a44c8dc031783c3e09d4d352199d160e2eab8 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Thu, 6 Oct 2016 11:21:58 -0500
+Date: Fri, 7 Oct 2016 09:39:59 -0500
 Subject: [PATCH] merge: CONFIG_PREEMPT_RT Patch Set
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
