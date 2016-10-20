@@ -40,11 +40,6 @@ fi
 
 echo "Starting patch.sh"
 
-#merged_in_4_5="enable"
-unset merged_in_4_5
-#merged_in_4_6="enable"
-unset merged_in_4_6
-
 git_add () {
 	${git_bin} add .
 	${git_bin} commit -a -m 'testing patchset'
@@ -172,9 +167,6 @@ rt_cleanup () {
 
 rt () {
 	echo "dir: rt"
-
-	#v4.8.1
-	${git_bin} revert --no-edit 0b09f2d43201472327b80f9978cd768b46353a34
 
 	rt_patch="${KERNEL_REL}${kernel_rt}"
 	#regenerate="enable"
@@ -771,7 +763,6 @@ beaglebone () {
 		device="am335x-boneblack-audio.dtb" ; dtb_makefile_append
 
 		device="am335x-bonegreen-wireless.dtb" ; dtb_makefile_append
-		device="am335x-bonegreen-wireless-led-hack.dtb" ; dtb_makefile_append
 
 		device="am335x-boneblack-wireless.dtb" ; dtb_makefile_append
 		device="am335x-boneblue.dtb" ; dtb_makefile_append
