@@ -294,7 +294,7 @@ lts44_backports () {
 	fi
 	patch_backports
 
-	backport_tag="v4.7.8"
+	backport_tag="v4.7.9"
 
 	subsystem="i2c"
 	#regenerate="enable"
@@ -328,7 +328,7 @@ lts44_backports () {
 	patch_backports
 	${git} "${DIR}/patches/backports/${subsystem}/0002-kernel-time-timekeeping.c-get_monotonic_coarse64.patch"
 
-	backport_tag="v4.8.2"
+	backport_tag="v4.8.3"
 
 	subsystem="touchscreen"
 	#regenerate="enable"
