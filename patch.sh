@@ -305,8 +305,8 @@ lts44_backports () {
 		post_backports
 	else
 		patch_backports
-		${git} "${DIR}/patches/backports/tty/rt-serial-warn-fix.patch"
 	fi
+	${git} "${DIR}/patches/backports/tty/rt-serial-warn-fix.patch"
 
 	subsystem="fbtft"
 	#regenerate="enable"
