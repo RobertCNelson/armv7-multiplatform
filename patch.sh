@@ -307,8 +307,6 @@ post_backports () {
 		mkdir -p ../patches/backports/${subsystem}/
 	fi
 	${git_bin} format-patch -1 -o ../patches/backports/${subsystem}/
-
-	exit 2
 }
 
 patch_backports (){
@@ -327,8 +325,10 @@ backports () {
 		cp -v ~/linux-src/x/ ./x/
 
 		post_backports
+		exit 2
+	else
+		patch_backports
 	fi
-	patch_backports
 }
 
 reverts () {
@@ -615,12 +615,6 @@ sync_mainline_dtc () {
 
 ###
 #backports
-reverts
-drivers
-soc
-beaglebone
-dir 'build/gcc'
-sync_mainline_dtc
 
 packaging () {
 	echo "dir: packaging"
