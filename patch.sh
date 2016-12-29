@@ -615,6 +615,12 @@ sync_mainline_dtc () {
 
 ###
 #backports
+reverts
+drivers
+soc
+beaglebone
+dir 'build/gcc'
+sync_mainline_dtc
 
 packaging () {
 	echo "dir: packaging"
