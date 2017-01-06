@@ -309,7 +309,6 @@ lts44_backports () {
 	${git} "${DIR}/patches/backports/tty/rt-serial-warn-fix.patch"
 
 	subsystem="fbtft"
-	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		pre_backports
 
@@ -324,7 +323,6 @@ lts44_backports () {
 	backport_tag="v4.7.10"
 
 	subsystem="i2c"
-	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		pre_backports
 
@@ -338,7 +336,6 @@ lts44_backports () {
 	fi
 
 	subsystem="iio"
-	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		pre_backports
 
@@ -357,10 +354,9 @@ lts44_backports () {
 	fi
 	${git} "${DIR}/patches/backports/${subsystem}/0002-kernel-time-timekeeping.c-get_monotonic_coarse64.patch"
 
-	backport_tag="v4.8.15"
+	backport_tag="v4.8.16"
 
 	subsystem="touchscreen"
-	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		pre_backports
 
@@ -748,8 +744,10 @@ bbb_overlays () {
 	${git} "${DIR}/patches/bbb_overlays/0036-of-rename-_node_sysfs-to-_node_post.patch"
 	${git} "${DIR}/patches/bbb_overlays/0037-of-Support-hashtable-lookups-for-phandles.patch"
 
+	${git} "${DIR}/patches/bbb_overlays/0038-bone_capemgr-uboot_capemgr_enabled-flag.patch"
+
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=37
+		number=38
 		cleanup
 	fi
 }
