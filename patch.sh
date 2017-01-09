@@ -200,6 +200,9 @@ rt_cleanup () {
 
 rt () {
 	echo "dir: rt"
+
+	${git_bin} revert --no-edit d78006d2345f87889918a8a7aa3764628ff84263
+
 	rt_patch="${KERNEL_REL}${kernel_rt}"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
@@ -354,7 +357,7 @@ lts44_backports () {
 	fi
 	${git} "${DIR}/patches/backports/${subsystem}/0002-kernel-time-timekeeping.c-get_monotonic_coarse64.patch"
 
-	backport_tag="v4.8.16"
+	backport_tag="v4.8.17"
 
 	subsystem="touchscreen"
 	if [ "x${regenerate}" = "xenable" ] ; then
@@ -1253,6 +1256,52 @@ gcc6 () {
 	fi
 }
 
+sync_mainline_dtc () {
+	echo "dir: dtc"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		cd ../
+		if [ ! -d ./dtc ] ; then
+			${git_bin} clone https://git.kernel.org/pub/scm/utils/dtc/dtc.git
+			cd ./dtc
+			${git_bin} checkout origin/master -b tmp
+			cd ../
+		else
+			rm -rf ./dtc || true
+			${git_bin} clone https://git.kernel.org/pub/scm/utils/dtc/dtc.git
+			cd ./dtc
+			${git_bin} checkout origin/master -b tmp
+			cd ../
+		fi
+		cd ./KERNEL/
+
+		sed -i -e 's:git commit:#git commit:g' ./scripts/dtc/update-dtc-source.sh
+		./scripts/dtc/update-dtc-source.sh
+		sed -i -e 's:#git commit:git commit:g' ./scripts/dtc/update-dtc-source.sh
+		git commit -a -m "scripts/dtc: Update to upstream version overlays" -s
+		git format-patch -1 -o ../patches/dtc/
+
+		rm -rf ../dtc/ || true
+
+		exit 2
+	else
+		#regenerate="enable"
+		if [ "x${regenerate}" = "xenable" ] ; then
+			start_cleanup
+		fi
+
+		${git} "${DIR}/patches/dtc/0001-scripts-dtc-Update-to-upstream-version-overlays.patch"
+		${git} "${DIR}/patches/dtc/0002-dtc-turn-off-dtc-unit-address-warnings-by-default.patch"
+		${git} "${DIR}/patches/dtc/0003-ARM-boot-Add-an-implementation-of-strnlen-for-libfdt.patch"
+
+		if [ "x${regenerate}" = "xenable" ] ; then
+			wdir="dtc"
+			number=3
+			cleanup
+		fi
+	fi
+}
+
 ###
 lts44_backports
 reverts
@@ -1269,6 +1318,7 @@ beaglebone
 etnaviv
 quieter
 gcc6
+sync_mainline_dtc
 
 packaging () {
 	echo "dir: packaging"
