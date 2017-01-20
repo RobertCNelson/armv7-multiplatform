@@ -169,7 +169,7 @@ aufs4 () {
 		${git_bin} commit -a -m 'merge: aufs4' -s
 		${git_bin} format-patch -5 -o ../patches/aufs4/
 
-		rm -rf ../aufs4-standalone || true
+		rm -rf ../aufs4-standalone/ || true
 
 		exit 2
 	fi
