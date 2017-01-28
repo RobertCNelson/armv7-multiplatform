@@ -21,7 +21,6 @@
 # THE SOFTWARE.
 
 DIR=$PWD
-CORES=$(getconf _NPROCESSORS_ONLN)
 git_bin=$(which git)
 
 mkdir -p "${DIR}/deploy/"
@@ -229,6 +228,10 @@ fi
 
 . "${DIR}/version.sh"
 export LINUX_GIT
+
+if [ ! "${CORES}" ] ; then
+	CORES=$(getconf _NPROCESSORS_ONLN)
+fi
 
 #unset FULL_REBUILD
 FULL_REBUILD=1
