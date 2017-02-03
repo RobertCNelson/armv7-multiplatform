@@ -1,7 +1,9 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 #opensuse support added by: Antonio Cavallo
 #https://launchpad.net/~a.cavallo
+
+git_bin=$(which git)
 
 warning () { echo "! $@" >&2; }
 error () { echo "* $@" >&2; exit 1; }
@@ -30,7 +32,7 @@ detect_host () {
 }
 
 check_rpm () {
-	pkg_test=$(LC_ALL=C rpm -q ${pkg})
+	pkg_test=$(LC_ALL=C rpm -q "${pkg}")
 	if [ "x${pkg_test}" = "xpackage ${pkg} is not installed" ] ; then
 		rpm_pkgs="${rpm_pkgs}${pkg} "
 	fi
@@ -56,20 +58,22 @@ redhat_reqs () {
 	if [ "x${arch}" = "xx86_64" ] ; then
 		pkg="ncurses-devel.x86_64"
 		check_rpm
-		pkg="ncurses-devel.i686"
-		check_rpm
-		pkg="libstdc++.i686"
-		check_rpm
-		pkg="zlib.i686"
-		check_rpm
+		if [ "x${ignore_32bit}" = "xfalse" ] ; then
+			pkg="ncurses-devel.i686"
+			check_rpm
+			pkg="libstdc++.i686"
+			check_rpm
+			pkg="zlib.i686"
+			check_rpm
+		fi
 	fi
 
-	if [ $(which lsb_release) ] ; then
+	if [ "$(which lsb_release)" ] ; then
 		rpm_distro=$(lsb_release -rs)
 		echo "RPM distro version: [${rpm_distro}]"
 
 		case "${rpm_distro}" in
-		22|23)
+		22|23|24|25)
 			pkgtool="dnf"
 			;;
 		esac
@@ -101,7 +105,7 @@ Missing /etc/SuSE-release file
 
 
 # --- patch ---
-    if [ ! $( which patch ) ]
+    if [ ! "$( which patch )" ]
     then
         cat >&2 <<@@
 Missing patch command,
@@ -122,12 +126,16 @@ check_dpkg () {
 
 debian_regs () {
 	unset deb_pkgs
+	pkg="bash"
+	check_dpkg
 	pkg="bc"
 	check_dpkg
 	pkg="build-essential"
 	check_dpkg
-	pkg="device-tree-compiler"
-	check_dpkg
+	if ! type dtc >/dev/null; then
+		pkg="device-tree-compiler"
+		check_dpkg
+	fi
 	pkg="fakeroot"
 	check_dpkg
 	pkg="lsb-release"
@@ -138,11 +146,14 @@ debian_regs () {
 	check_dpkg
 	pkg="man-db"
 	check_dpkg
+	#git
+	pkg="gettext"
+	check_dpkg
 
 	unset warn_dpkg_ia32
 	unset stop_pkg_search
 	#lsb_release might not be installed...
-	if [ $(which lsb_release) ] ; then
+	if [ "$(which lsb_release)" ] ; then
 		deb_distro=$(lsb_release -cs | sed 's/\//_/g')
 
 		if [ "x${deb_distro}" = "xn_a" ] ; then
@@ -195,6 +206,16 @@ debian_regs () {
 			deb_distro="precise"
 		fi
 
+		if [ "x${deb_distro}" = "xfreya" ] ; then
+			#http://distrowatch.com/table.php?distribution=elementary
+			#lsb_release -a
+			#Distributor ID: elementary OS
+			#Description:    elementary OS Freya
+			#Release:        0.3.1
+			#Codename:       freya
+			deb_distro="trusty"
+		fi
+
 		if [ "x${deb_distro}" = "xtoutatis" ] ; then
 			#http://listas.trisquel.info/pipermail/trisquel-announce/2013-March/000014.html
 			#lsb_release -a
@@ -226,11 +247,30 @@ debian_regs () {
 		fi
 
 		if [ "x${deb_distro}" = "xsana" ] ; then
+			#EOL: 15th of April 2016.
 			#lsb_release -a
 			#Distributor ID:    Kali
 			#Description:    Kali GNU/Linux 2.0
 			#Release:    2.0
 			#Codename:    sana
+			deb_distro="jessie"
+		fi
+
+		if [ "x${deb_distro}" = "xkali-rolling" ] ; then
+			#lsb_release -a:
+			#Distributor ID:    Kali
+			#Description:    Kali GNU/Linux Rolling
+			#Release:    kali-rolling
+			#Codename:    kali-rolling
+			deb_distro="stretch"
+		fi
+
+		#https://www.bunsenlabs.org/
+		if [ "x${deb_distro}" = "xbunsen-hydrogen" ] ; then
+			#Distributor ID:    BunsenLabs
+			#Description:    BunsenLabs GNU/Linux 8.5 (Hydrogen)
+			#Release:    8.5
+			#Codename:    bunsen-hydrogen
 			deb_distro="jessie"
 		fi
 
@@ -248,19 +288,19 @@ debian_regs () {
 			deb_distro="jessie"
 			;;
 		isadora)
-			#eol
+			#9
 			deb_distro="lucid"
 			;;
 		julia)
-			#eol
+			#10
 			deb_distro="maverick"
 			;;
 		katya)
-			#eol
+			#11
 			deb_distro="natty"
 			;;
 		lisa)
-			#eol
+			#12
 			deb_distro="oneiric"
 			;;
 		maya)
@@ -268,15 +308,15 @@ debian_regs () {
 			deb_distro="precise"
 			;;
 		nadia)
-			#eol
+			#14
 			deb_distro="quantal"
 			;;
 		olivia)
-			#eol
+			#15
 			deb_distro="raring"
 			;;
 		petra)
-			#eol
+			#16
 			deb_distro="saucy"
 			;;
 		qiana)
@@ -291,6 +331,20 @@ debian_regs () {
 			#17.2
 			deb_distro="trusty"
 			;;
+		rosa)
+			#17.3
+			deb_distro="trusty"
+			;;
+		sarah)
+			#18
+			#http://blog.linuxmint.com/?p=2975
+			deb_distro="xenial"
+			;;
+		serena)
+			#18.1
+			#http://packages.linuxmint.com/index.php
+			deb_distro="xenial"
+			;;
 		esac
 
 		#Future Debian Code names:
@@ -299,30 +353,44 @@ debian_regs () {
 			#Debian 10
 			deb_distro="sid"
 			;;
+		bullseye)
+			#Debian 11
+			deb_distro="sid"
+			;;
 		esac
 
 		#https://wiki.ubuntu.com/Releases
 		unset error_unknown_deb_distro
 		case "${deb_distro}" in
-		squeeze|wheezy|jessie|stretch|sid)
-			#6 squeeze: 2016-02-06 https://wiki.debian.org/DebianSqueeze
+		wheezy|jessie|stretch|sid)
 			#7 wheezy: https://wiki.debian.org/DebianWheezy
 			#8 jessie: https://wiki.debian.org/DebianJessie
 			#9 stretch: https://wiki.debian.org/DebianStretch
 			unset warn_eol_distro
 			;;
-		vivid|wily)
-			#15.04 vivid: (EOL: January 2016)
-			#15.10 wily: (EOL: July 2016)
+		squeeze)
+			#6 squeeze: 2016-02-06 https://wiki.debian.org/DebianSqueeze
+			warn_eol_distro=1
+			stop_pkg_search=1
+			;;
+		yakkety|zesty)
+			#16.10 yakkety: (EOL: July 2017)
+			#17.04 zesty: (EOL: January 2018)
 			unset warn_eol_distro
 			;;
-		utopic)
+		xenial)
+			#16.04 xenial: (EOL: April 2021) lts: xenial -> xyz
+			unset warn_eol_distro
+			;;
+		utopic|vivid|wily)
 			#14.10 utopic: (EOL: July 23, 2015)
+			#15.04 vivid: (EOL: February 4, 2016)
+			#15.10 wily: (EOL: July 28, 2016)
 			warn_eol_distro=1
 			stop_pkg_search=1
 			;;
 		trusty)
-			#14.04 trusty: (EOL: April 2019) lts: trusty -> xyz
+			#14.04 trusty: (EOL: April 2019) lts: trusty -> xenial
 			unset warn_eol_distro
 			;;
 		quantal|raring|saucy)
@@ -353,39 +421,61 @@ debian_regs () {
 		esac
 	fi
 
-	if [ $(which lsb_release) ] && [ ! "${stop_pkg_search}" ] ; then
+	if [ "$(which lsb_release)" ] && [ ! "${stop_pkg_search}" ] ; then
 		deb_arch=$(LC_ALL=C dpkg --print-architecture)
 		
 		#Libs; starting with jessie/sid, lib<pkg_name>-dev:<arch>
 		case "${deb_distro}" in
-		squeeze|wheezy|precise)
+		wheezy|precise)
 			pkg="libncurses5-dev"
 			check_dpkg
+			if [ "x${build_git}" = "xtrue" ] ; then
+				#git
+				pkg="libcurl4-gnutls-dev"
+				check_dpkg
+				pkg="libexpat1-dev"
+				check_dpkg
+				pkg="libssl-dev"
+				check_dpkg
+			fi
 			;;
 		*)
 			pkg="libncurses5-dev:${deb_arch}"
 			check_dpkg
+			if [ "x${build_git}" = "xtrue" ] ; then
+				#git
+				pkg="libcurl4-gnutls-dev:${deb_arch}"
+				check_dpkg
+				pkg="libexpat1-dev:${deb_arch}"
+				check_dpkg
+				pkg="libssl-dev:${deb_arch}"
+				check_dpkg
+			fi
 			;;
 		esac
-		
+
 		#pkg: ia32-libs
 		if [ "x${deb_arch}" = "xamd64" ] ; then
 			unset dpkg_multiarch
 			case "${deb_distro}" in
-			squeeze|precise)
-				pkg="ia32-libs"
-				check_dpkg
+			precise)
+				if [ "x${ignore_32bit}" = "xfalse" ] ; then
+					pkg="ia32-libs"
+					check_dpkg
+				fi
 				;;
 			*)
-				pkg="libc6:i386"
-				check_dpkg
-				pkg="libncurses5:i386"
-				check_dpkg
-				pkg="libstdc++6:i386"
-				check_dpkg
-				pkg="zlib1g:i386"
-				check_dpkg
-				dpkg_multiarch=1
+				if [ "x${ignore_32bit}" = "xfalse" ] ; then
+					pkg="libc6:i386"
+					check_dpkg
+					pkg="libncurses5:i386"
+					check_dpkg
+					pkg="libstdc++6:i386"
+					check_dpkg
+					pkg="zlib1g:i386"
+					check_dpkg
+					dpkg_multiarch=1
+				fi
 				;;
 			esac
 
@@ -415,9 +505,9 @@ debian_regs () {
 		echo "-----------------------------"
 		echo "Please cut, paste and email to: bugs@rcn-ee.com"
 		echo "-----------------------------"
-		echo "git: [`git rev-parse HEAD`]"
-		echo "git: [`cat .git/config | grep url | sed 's/\t//g' | sed 's/ //g'`]"
-		echo "uname -m: [`uname -m`]"
+		echo "git: [$(${git_bin} rev-parse HEAD)]"
+		echo "git: [$(cat .git/config | grep url | sed 's/\t//g' | sed 's/ //g')]"
+		echo "uname -m: [$(uname -m)]"
 		echo "lsb_release -a:"
 		lsb_release -a
 		echo "-----------------------------"
@@ -438,15 +528,67 @@ debian_regs () {
 }
 
 BUILD_HOST=${BUILD_HOST:="$( detect_host )"}
-if [ $(which lsb_release) ] ; then
-	info "Detected build host [`lsb_release -sd`]"
-	info "host: [`uname -m`]"
-	info "git HEAD commit: [`git rev-parse HEAD`]"
+if [ "$(which lsb_release)" ] ; then
+	info "Detected build host [$(lsb_release -sd)]"
+	info "host: [$(uname -m)]"
+	info "git HEAD commit: [$(${git_bin} rev-parse HEAD)]"
 else
 	info "Detected build host [$BUILD_HOST]"
-	info "host: [`uname -m`]"
-	info "git HEAD commit: [`git rev-parse HEAD`]"
+	info "host: [$(uname -m)]"
+	info "git HEAD commit: [$(${git_bin} rev-parse HEAD)]"
 fi
+
+DIR=$PWD
+. "${DIR}/version.sh"
+
+if [  -f "${DIR}/.yakbuild" ] ; then
+	. "${DIR}/recipe.sh"
+fi
+
+ARCH=$(uname -m)
+
+ignore_32bit="false"
+if [ "x${ARCH}" = "xx86_64" ] ; then
+	case "${toolchain}" in
+	gcc_linaro_eabi_5|gcc_linaro_gnueabihf_5|gcc_linaro_aarch64_gnu_5)
+		ignore_32bit="true"
+		;;
+	gcc_linaro_eabi_6|gcc_linaro_gnueabihf_6|gcc_linaro_aarch64_gnu_6)
+		ignore_32bit="true"
+		;;
+	*)
+		ignore_32bit="false"
+		;;
+	esac
+fi
+
+git_bin=$(which git)
+
+git_major=$(LC_ALL=C ${git_bin} --version | awk '{print $3}' | cut -d. -f1)
+git_minor=$(LC_ALL=C ${git_bin} --version | awk '{print $3}' | cut -d. -f2)
+git_sub=$(LC_ALL=C ${git_bin} --version | awk '{print $3}' | cut -d. -f3)
+
+#debian Stable:
+#https://packages.debian.org/stable/git -> 2.1.4
+
+compare_major="2"
+compare_minor="1"
+compare_sub="4"
+
+unset build_git
+
+if [ "${git_major}" -lt "${compare_major}" ] ; then
+	build_git="true"
+elif [ "${git_major}" -eq "${compare_major}" ] ; then
+	if [ "${git_minor}" -lt "${compare_minor}" ] ; then
+		build_git="true"
+	elif [ "${git_minor}" -eq "${compare_minor}" ] ; then
+		if [ "${git_sub}" -lt "${compare_sub}" ] ; then
+			build_git="true"
+		fi
+	fi
+fi
+
 case "$BUILD_HOST" in
     redhat*)
 	    redhat_reqs || error "Failed dependency check"
