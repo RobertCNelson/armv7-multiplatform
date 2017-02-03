@@ -25,18 +25,13 @@
 DIR=$PWD
 git_bin=$(which git)
 
-repo="git@github.com:RobertCNelson/linux-stable-rcn-ee.git"
-example="rcn-ee"
+repo="git@github.com:beagleboard/linux.git"
+example="bb.org"
+compare="https://github.com/RobertCNelson/ti-linux-kernel/compare"
 
 if [ -e ${DIR}/version.sh ]; then
 	unset BRANCH
 	. ${DIR}/version.sh
-
-	${git_bin} commit -a -m "${KERNEL_TAG}${BUILD} release" -s
-	${git_bin} tag -a "${KERNEL_TAG}${BUILD}" -m "${KERNEL_TAG}${BUILD}"
-
-	${git_bin} push origin ${BRANCH}
-	${git_bin} push origin ${BRANCH} --tags
 
 	cd ${DIR}/KERNEL/
 	make ARCH=${KERNEL_ARCH} distclean
@@ -46,12 +41,23 @@ if [ -e ${DIR}/version.sh ]; then
 	cp ${DIR}/KERNEL/defconfig ${DIR}/KERNEL/arch/${KERNEL_ARCH}/configs/${example}_defconfig
 	${git_bin} add arch/${KERNEL_ARCH}/configs/${example}_defconfig
 
-	${git_bin} commit -a -m "${KERNEL_TAG}${BUILD} ${example}_defconfig" -s
-	${git_bin} tag -a "${KERNEL_TAG}${BUILD}" -m "${KERNEL_TAG}${BUILD}"
+	if [ "x${ti_git_old_release}" = "x${ti_git_post}" ] ; then
+		${git_bin} commit -a -m "${KERNEL_TAG}${BUILD} ${example}_defconfig" -s
+	else
+		${git_bin} commit -a -m "${KERNEL_TAG}${BUILD} ${example}_defconfig" -m "${KERNEL_REL} TI Delta: ${compare}/${ti_git_old_release}...${ti_git_post}" -s
+	fi
+
+	${git_bin} tag -a "${KERNEL_TAG}${BUILD}" -m "${KERNEL_TAG}${BUILD}" -f
 
 	#push tag
-	echo "log: git push -f ${repo} \"${KERNEL_TAG}${BUILD}\""
 	${git_bin} push -f ${repo} "${KERNEL_TAG}${BUILD}"
+
+	${git_bin} branch -D ${KERNEL_REL} || true
+	${git_bin} branch -m v${KERNEL_TAG}${BUILD} ${KERNEL_REL}
+
+	#push branch
+	echo "log: git push -f ${repo} ${KERNEL_REL}"
+	${git_bin} push -f ${repo} ${KERNEL_REL}
 
 	cd ${DIR}/
 fi
