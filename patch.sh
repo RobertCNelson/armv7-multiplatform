@@ -1024,9 +1024,11 @@ beaglebone () {
 	fi
 
 	${git} "${DIR}/patches/beaglebone/dtbs/0001-sync-am335x-peripheral-pinmux.patch"
+	${git} "${DIR}/patches/beaglebone/dtbs/0002-dtc-fix-overlays.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=1
+		wdir="beaglebone/dtbs"
+		number=2
 		cleanup
 	fi
 
