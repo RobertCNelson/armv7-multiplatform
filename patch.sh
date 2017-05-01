@@ -292,6 +292,7 @@ reverts () {
 
 drivers () {
 	dir 'drivers/pm_bus'
+	dir 'drivers/pwm'
 	dir 'drivers/spi'
 	dir 'drivers/tsl2550'
 	dir 'drivers/tps65217'
@@ -448,9 +449,10 @@ beaglebone () {
 	fi
 
 	${git} "${DIR}/patches/beaglebone/dtbs/0001-sync-am335x-peripheral-pinmux.patch"
+	${git} "${DIR}/patches/beaglebone/dtbs/0002-dtc-fix-overlays.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=1
+		number=2
 		cleanup
 	fi
 
