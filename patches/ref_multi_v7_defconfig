@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.10.15 Kernel Configuration
+# Linux/arm 4.10.16 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -1387,7 +1387,6 @@ CONFIG_MTD_NAND_ATMEL=y
 CONFIG_MTD_NAND_BRCMNAND=y
 # CONFIG_MTD_NAND_PLATFORM is not set
 # CONFIG_MTD_NAND_ORION is not set
-# CONFIG_MTD_NAND_OXNAS is not set
 CONFIG_MTD_NAND_VF610_NFC=y
 # CONFIG_MTD_NAND_MXC is not set
 CONFIG_MTD_NAND_DAVINCI=y
