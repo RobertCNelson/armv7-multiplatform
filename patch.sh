@@ -419,7 +419,7 @@ soc () {
 	dir 'soc/imx/udoo'
 	dir 'soc/imx/wandboard'
 	dir 'soc/imx'
-	dir 'soc/sunxi'
+	#dir 'soc/sunxi'
 	dir 'soc/ti'
 	dir 'soc/ti/bone_common'
 	dir 'soc/ti/uboot'
@@ -449,10 +449,9 @@ beaglebone () {
 	fi
 
 	${git} "${DIR}/patches/beaglebone/dtbs/0001-sync-am335x-peripheral-pinmux.patch"
-	${git} "${DIR}/patches/beaglebone/dtbs/0002-dtc-fix-overlays.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		number=2
+		number=1
 		cleanup
 	fi
 
@@ -474,9 +473,6 @@ beaglebone () {
 		device="am335x-abbbi.dtb" ; dtb_makefile_append
 
 		device="am335x-olimex-som.dtb" ; dtb_makefile_append
-
-		device="am335x-bone-cape-bone-argus.dtb" ; dtb_makefile_append
-		device="am335x-boneblack-cape-bone-argus.dtb" ; dtb_makefile_append
 
 		device="am335x-boneblack-wl1835mod.dtb" ; dtb_makefile_append
 
@@ -503,44 +499,6 @@ soc
 beaglebone
 dir 'build/gcc'
 
-sync_mainline_dtc () {
-	echo "dir: dtc"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		cd ../
-		if [ -d ./dtc ] ; then
-			rm -rf ./dtc || true
-		fi
-
-		${git_bin} clone -b dtc-v1.4.4 https://github.com/RobertCNelson/dtc --depth=1
-
-		cd ./KERNEL/
-
-		sed -i -e 's:git commit:#git commit:g' ./scripts/dtc/update-dtc-source.sh
-		./scripts/dtc/update-dtc-source.sh
-		sed -i -e 's:#git commit:git commit:g' ./scripts/dtc/update-dtc-source.sh
-		git commit -a -m "scripts/dtc: Update to upstream version overlays" -s
-		git format-patch -1 -o ../patches/dtc/
-
-		rm -rf ../dtc/ || true
-
-		exit 2
-	else
-		#regenerate="enable"
-		if [ "x${regenerate}" = "xenable" ] ; then
-			start_cleanup
-		fi
-
-		${git} "${DIR}/patches/dtc/0001-scripts-dtc-Update-to-upstream-version-overlays.patch"
-
-		if [ "x${regenerate}" = "xenable" ] ; then
-			wdir="dtc"
-			number=1
-			cleanup
-		fi
-	fi
-}
-
 packaging () {
 	echo "dir: packaging"
 	#regenerate="enable"
@@ -554,6 +512,5 @@ packaging () {
 	fi
 }
 
-sync_mainline_dtc
 packaging
 echo "patch.sh ran successfully"
