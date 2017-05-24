@@ -1,6 +1,6 @@
-#!/bin/sh -e
+#!/bin/bash -e
 #
-# Copyright (c) 2009-2016 Robert Nelson <robertcnelson@gmail.com>
+# Copyright (c) 2009-2017 Robert Nelson <robertcnelson@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,8 @@
 # THE SOFTWARE.
 
 # Split out, so build_kernel.sh and build_deb.sh can share..
+
+shopt -s nullglob
 
 . ${DIR}/version.sh
 if [ -f ${DIR}/system.sh ] ; then
@@ -59,11 +61,36 @@ cleanup () {
 		if [ "x${wdir}" = "x" ] ; then
 			${git_bin} format-patch -${number} -o ${DIR}/patches/
 		else
+			if [ ! -d ${DIR}/patches/${wdir}/ ] ; then
+				mkdir -p ${DIR}/patches/${wdir}/
+			fi
 			${git_bin} format-patch -${number} -o ${DIR}/patches/${wdir}/
 			unset wdir
 		fi
 	fi
 	exit 2
+}
+
+dir () {
+	wdir="$1"
+	if [ -d "${DIR}/patches/$wdir" ]; then
+		echo "dir: $wdir"
+
+		if [ "x${regenerate}" = "xenable" ] ; then
+			start_cleanup
+		fi
+
+		number=
+		for p in "${DIR}/patches/$wdir/"*.patch; do
+			${git} "$p"
+			number=$(( $number + 1 ))
+		done
+
+		if [ "x${regenerate}" = "xenable" ] ; then
+			cleanup
+		fi
+	fi
+	unset wdir
 }
 
 cherrypick () {
@@ -78,6 +105,7 @@ external_git () {
 	git_tag=""
 	echo "pulling: ${git_tag}"
 	${git_bin} pull --no-edit ${git_patchset} ${git_tag}
+	${git_bin} describe
 }
 
 aufs_fail () {
@@ -114,24 +142,13 @@ aufs4 () {
 		${git_bin} commit -a -m 'merge: aufs4-standalone' -s
 
 		${git_bin} format-patch -4 -o ../patches/aufs4/
-		exit 2
-	fi
-
-	${git} "${DIR}/patches/aufs4/0001-merge-aufs4-kbuild.patch"
-	${git} "${DIR}/patches/aufs4/0002-merge-aufs4-base.patch"
-	${git} "${DIR}/patches/aufs4/0003-merge-aufs4-mmap.patch"
-	${git} "${DIR}/patches/aufs4/0004-merge-aufs4-standalone.patch"
-
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		echo "dir: aufs4"
 
 		cd ../
-		if [ ! -f ./aufs4-standalone ] ; then
-			${git_bin} clone https://github.com/sfjro/aufs4-standalone
-			cd ./aufs4-standalone
-			${git_bin} checkout origin/aufs${KERNEL_REL} -b tmp
-			cd ../
+		if [ ! -d ./aufs4-standalone ] ; then
+			${git_bin} clone -b aufs${KERNEL_REL} https://github.com/sfjro/aufs4-standalone --depth=1
+		else
+			rm -rf ./aufs4-standalone || true
+			${git_bin} clone -b aufs${KERNEL_REL} https://github.com/sfjro/aufs4-standalone --depth=1
 		fi
 		cd ./KERNEL/
 
@@ -146,6 +163,8 @@ aufs4 () {
 		${git_bin} commit -a -m 'merge: aufs4' -s
 		${git_bin} format-patch -5 -o ../patches/aufs4/
 
+		rm -rf ../aufs4-standalone/ || true
+
 		exit 2
 	fi
 
@@ -154,12 +173,17 @@ aufs4 () {
 		start_cleanup
 	fi
 
+	${git} "${DIR}/patches/aufs4/0001-merge-aufs4-kbuild.patch"
+	${git} "${DIR}/patches/aufs4/0002-merge-aufs4-base.patch"
+	${git} "${DIR}/patches/aufs4/0003-merge-aufs4-mmap.patch"
+	${git} "${DIR}/patches/aufs4/0004-merge-aufs4-standalone.patch"
 	${git} "${DIR}/patches/aufs4/0005-merge-aufs4.patch"
 	${git} "${DIR}/patches/aufs4/0006-aufs-call-mutex.owner-only-when-DEBUG_MUTEXES-or-MUT.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
-		${git_bin} format-patch -6 -o ../patches/aufs4/
-		exit 2
+		wdir="aufs4"
+		number=6
+		cleanup
 	fi
 }
 
@@ -1075,6 +1099,8 @@ packaging () {
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		cp -v "${DIR}/3rdparty/packaging/builddeb" "${DIR}/KERNEL/scripts/package"
+		#Needed for v4.11.x and less
+		patch -p1 < "${DIR}/patches/packaging/0002-Revert-deb-pkg-Remove-the-KBUILD_IMAGE-workaround.patch"
 		${git_bin} commit -a -m 'packaging: sync builddeb changes' -s
 		${git_bin} format-patch -1 -o "${DIR}/patches/packaging"
 		exit 2
