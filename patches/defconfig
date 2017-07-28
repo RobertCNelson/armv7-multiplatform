@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.4.78 Kernel Configuration
+# Linux/arm 4.4.79 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -555,9 +555,6 @@ CONFIG_ARM_ERRATA_798181=y
 # CONFIG_PCI is not set
 # CONFIG_PCI_DOMAINS_GENERIC is not set
 # CONFIG_PCI_SYSCALL is not set
-# CONFIG_PCIEASPM_DEFAULT is not set
-# CONFIG_PCIEASPM_POWERSAVE is not set
-# CONFIG_PCIEASPM_PERFORMANCE is not set
 # CONFIG_PCCARD is not set
 
 #
@@ -4176,7 +4173,6 @@ CONFIG_FB_UDL=m
 # CONFIG_FB_DA8XX is not set
 # CONFIG_FB_VIRTUAL is not set
 # CONFIG_FB_METRONOME is not set
-# CONFIG_FB_MB862XX_PCI_GDC is not set
 # CONFIG_FB_MX3 is not set
 # CONFIG_FB_BROADSHEET is not set
 # CONFIG_FB_AUO_K190X is not set
