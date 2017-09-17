@@ -211,7 +211,7 @@ local_patch () {
 }
 
 #external_git
-aufs4
+#aufs4
 #rt
 #local_patch
 
@@ -406,7 +406,6 @@ drivers () {
 	dir 'drivers/ti/etnaviv'
 	dir 'drivers/ti/eqep'
 	dir 'drivers/ti/mcasp'
-	dir 'drivers/ti/mmc'
 	dir 'drivers/ti/rpmsg'
 	dir 'drivers/ti/serial'
 	dir 'drivers/ti/uio'
@@ -428,7 +427,6 @@ soc () {
 	dir 'soc/ti/abbbi'
 	dir 'soc/ti/am335x_olimex_som'
 	dir 'soc/ti/beaglebone_capes'
-	dir 'soc/ti/x15'
 }
 
 dtb_makefile_append () {
