@@ -295,6 +295,7 @@ drivers () {
 	dir 'drivers/spi'
 	dir 'drivers/tsl2550'
 	dir 'drivers/tps65217'
+	dir 'drivers/opp'
 
 	#https://github.com/pantoniou/linux-beagle-track-mainline/tree/bbb-overlays
 	echo "dir: drivers/ti/bbb_overlays"
@@ -403,6 +404,7 @@ drivers () {
 	fi
 
 	dir 'drivers/ti/cpsw'
+#	dir 'drivers/ti/cpufreq'
 	dir 'drivers/ti/etnaviv'
 	dir 'drivers/ti/eqep'
 	dir 'drivers/ti/mcasp'
