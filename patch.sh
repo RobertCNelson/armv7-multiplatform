@@ -249,15 +249,15 @@ patch_backports (){
 }
 
 backports () {
-	backport_tag="v4.x-y"
+	backport_tag="v4.14-rc5"
 
-	subsystem="xyz"
+	subsystem="cpufreq"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		pre_backports
 
-		mkdir -p ./x/
-		cp -v ~/linux-src/x/* ./x/
+		cp -v ~/linux-src/drivers/cpufreq/* ./drivers/cpufreq/
+		cp -v ~/linux-src/include/linux/cpufreq.h ./include/linux/cpufreq.h
 
 		post_backports
 		exit 2
@@ -295,6 +295,8 @@ drivers () {
 	dir 'drivers/spi'
 	dir 'drivers/tsl2550'
 	dir 'drivers/tps65217'
+	dir 'drivers/opp'
+	dir 'drivers/wiznet'
 
 	#https://github.com/pantoniou/linux-beagle-track-mainline/tree/bbb-overlays
 	echo "dir: drivers/ti/bbb_overlays"
@@ -410,7 +412,6 @@ drivers () {
 	dir 'drivers/ti/rpmsg'
 	dir 'drivers/ti/serial'
 	dir 'drivers/ti/uio'
-
 	dir 'drivers/ti/gpio'
 }
 
@@ -419,7 +420,6 @@ soc () {
 #	dir 'soc/imx/udoo'
 	dir 'soc/imx/wandboard'
 	dir 'soc/imx'
-	#dir 'soc/sunxi'
 	dir 'soc/ti'
 	dir 'soc/ti/bone_common'
 	dir 'soc/ti/uboot'
@@ -429,6 +429,7 @@ soc () {
 	dir 'soc/ti/am335x_olimex_som'
 	dir 'soc/ti/beaglebone_capes'
 	dir 'soc/ti/x15'
+	dir 'soc/ti/pocketbeagle'
 }
 
 dtb_makefile_append () {
@@ -482,6 +483,8 @@ beaglebone () {
 
 		device="am335x-boneblack-audio.dtb" ; dtb_makefile_append
 
+		device="am335x-pocketbeagle.dtb" ; dtb_makefile_append
+
 		git commit -a -m 'auto generated: capes: add dtbs to makefile' -s
 		git format-patch -1 -o ../patches/beaglebone/generated/
 		exit 2
@@ -491,7 +494,7 @@ beaglebone () {
 }
 
 ###
-#backports
+backports
 reverts
 drivers
 soc
