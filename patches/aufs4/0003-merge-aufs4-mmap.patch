@@ -1,6 +1,6 @@
-From f7b7cc901db57420b3ee31b436fb314d2b676bad Mon Sep 17 00:00:00 2001
+From 00ff752a9dab2b075ef76e34f00c15d3e2a4e74a Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Fri, 27 Oct 2017 09:27:06 -0500
+Date: Thu, 2 Nov 2017 16:34:35 -0500
 Subject: [PATCH 3/5] merge: aufs4-mmap
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>

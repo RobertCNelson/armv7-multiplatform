@@ -1,6 +1,6 @@
-From 8ce2dfead2a4a2f1e37df2def466d0a3c2db4e0d Mon Sep 17 00:00:00 2001
+From 77c00b7495025c9c7a2233f1f12fad2ecff32ce1 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Fri, 27 Oct 2017 09:28:57 -0500
+Date: Thu, 2 Nov 2017 16:37:21 -0500
 Subject: [PATCH] backports: cpufreq: from: linux.git
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
