@@ -1311,6 +1311,7 @@ etnaviv
 quieter
 gcc6
 dir 'drivers/ti/mmc'
+dir 'drivers/gadget'
 
 sync_mainline_dtc () {
 	echo "dir: dtc"
