@@ -193,6 +193,7 @@ rt_cleanup () {
 rt () {
 	echo "dir: rt"
 
+	${git_bin} revert --no-edit df0c2d409e9d3159724b206da7e7e697fb5874eb
 	${git_bin} revert --no-edit 120ec1e4cdddfc16c31581c2c30511c6c16fe0fd
 
 	rt_patch="${KERNEL_REL}${kernel_rt}"
@@ -309,6 +310,7 @@ reverts () {
 }
 
 drivers () {
+	dir 'drivers/gadget'
 	dir 'drivers/pm_bus'
 
 	#[PATCH V5 00/10] PM / OPP: Multiple regulator support
