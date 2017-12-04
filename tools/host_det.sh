@@ -121,7 +121,7 @@ Missing patch command,
 }
 
 check_dpkg () {
-	LC_ALL=C dpkg --list | awk '{print $2}' | grep "^${pkg}$" >/dev/null || deb_pkgs="${deb_pkgs}${pkg} "
+	LC_ALL=C dpkg-query -s ${pkg} &> /dev/null || deb_pkgs="${deb_pkgs}${pkg} "
 }
 
 debian_regs () {
