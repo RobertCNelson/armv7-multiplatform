@@ -1,6 +1,6 @@
-From 357c814806c6944414dc1d55eb4c0310d569258e Mon Sep 17 00:00:00 2001
+From ca6aeb59b5a0483fcc69e862a8005c17fc4f240a Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Thu, 14 Dec 2017 09:52:52 -0600
+Date: Sun, 17 Dec 2017 13:21:27 -0600
 Subject: [PATCH] merge: WireGuard
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
