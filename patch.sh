@@ -298,7 +298,7 @@ local_patch () {
 #external_git
 #aufs4
 #rt
-#wireguard
+wireguard
 #local_patch
 
 pre_backports () {
@@ -377,8 +377,10 @@ reverts () {
 }
 
 drivers () {
+	dir 'drivers/ar1021_i2c'
 	dir 'drivers/pwm'
 	dir 'drivers/spi'
+	dir 'drivers/ssd1306'
 	dir 'drivers/tsl2550'
 	dir 'drivers/tps65217'
 	dir 'drivers/opp'
@@ -435,6 +437,7 @@ drivers () {
 	dir 'drivers/ti/mcasp'
 	dir 'drivers/ti/rpmsg'
 	dir 'drivers/ti/serial'
+	dir 'drivers/ti/tsc'
 	dir 'drivers/ti/uio'
 	dir 'drivers/ti/gpio'
 }
