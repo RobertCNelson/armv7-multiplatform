@@ -378,7 +378,7 @@ reverts () {
 
 drivers () {
 	dir 'drivers/ar1021_i2c'
-	dir 'drivers/pwm'
+#	dir 'drivers/pwm'
 	dir 'drivers/spi'
 	dir 'drivers/ssd1306'
 	dir 'drivers/tsl2550'
@@ -450,7 +450,7 @@ soc () {
 	dir 'soc/ti'
 	dir 'soc/ti/bone_common'
 	dir 'soc/ti/uboot'
-	dir 'soc/ti/blue'
+#	dir 'soc/ti/blue'
 	dir 'soc/ti/sancloud'
 	dir 'soc/ti/abbbi'
 	dir 'soc/ti/am335x_olimex_som'
