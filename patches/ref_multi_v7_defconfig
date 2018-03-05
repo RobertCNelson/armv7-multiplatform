@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.9.83 Kernel Configuration
+# Linux/arm 4.9.86 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -2675,7 +2675,6 @@ CONFIG_SPI_ATMEL=m
 CONFIG_SPI_BCM2835=y
 CONFIG_SPI_BCM2835AUX=y
 # CONFIG_SPI_BCM53XX is not set
-CONFIG_SPI_BCM_QSPI=y
 CONFIG_SPI_BITBANG=y
 CONFIG_SPI_CADENCE=y
 CONFIG_SPI_DAVINCI=y
