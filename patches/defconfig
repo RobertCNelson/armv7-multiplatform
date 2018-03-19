@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.15.10 Kernel Configuration
+# Linux/arm 4.15.11 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -4396,6 +4396,7 @@ CONFIG_DRM_IMX_TVE=y
 CONFIG_DRM_IMX_LDB=y
 CONFIG_DRM_IMX_HDMI=y
 CONFIG_DRM_ETNAVIV=y
+CONFIG_DRM_ETNAVIV_THERMAL=y
 # CONFIG_DRM_ETNAVIV_REGISTER_LOGGING is not set
 # CONFIG_DRM_ARCPGU is not set
 CONFIG_DRM_MXS=y
