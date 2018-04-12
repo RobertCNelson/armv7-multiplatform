@@ -538,7 +538,6 @@ reverts
 drivers
 soc
 beaglebone
-dir 'build/gcc'
 
 packaging () {
 	echo "dir: packaging"
