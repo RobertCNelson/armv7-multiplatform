@@ -191,12 +191,8 @@ rt () {
 	echo "dir: rt"
 	rt_patch="${KERNEL_REL}${kernel_rt}"
 
-	#v4.16.14
-	${git_bin} revert --no-edit cb43adab6f4c66bd01f503d6cbbddabfc8d3daa8
-	${git_bin} revert --no-edit 0ea40e76fb392a6926089ddfbbcba3c3a33de924
-
-	#v4.16.13
-	${git_bin} revert --no-edit f941ccc0a0dc93bbaeaa01e8f467a3f6f86e6448
+	#v4.16.16
+	${git_bin} revert --no-edit e3bb8f0fa2b3f362a0f8a4c1912555eafadd085a
 
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
@@ -360,18 +356,10 @@ reverts () {
 		start_cleanup
 	fi
 
-		#Breaks boot on am335x-boneblack
-		#debug: [bootz 0x82000000 - 88000000] ...
-		### Flattened Device Tree blob at 88000000
-		#   Booting using the fdt blob at 0x88000000
-		#   reserving fdt memory region: addr=88000000 size=88000
-		#   Loading Device Tree to 8ff75000, end 8fffffff ... OK
-		#
-		#Starting kernel ...
+	## notes
+	##git revert --no-edit xyz -s
 
-		#git revert --no-edit c083dc5f3738d394223baa0f90705397b0844acd
-
-		#${git} "${DIR}/patches/reverts/0001-Revert-clk-ti-am33xx-add-set-rate-parent-support-for.patch"
+	#${git} "${DIR}/patches/reverts/0001-Revert-xyz.patch"
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 		wdir="reverts"
@@ -396,6 +384,7 @@ drivers () {
 	dir 'drivers/ti/eqep'
 	dir 'drivers/ti/rpmsg'
 	dir 'drivers/ti/serial'
+	dir 'drivers/ti/spi'
 	dir 'drivers/ti/tsc'
 	dir 'drivers/ti/uio'
 	dir 'drivers/ti/gpio'
