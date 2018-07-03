@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.17.3 Kernel Configuration
+# Linux/arm 4.17.4 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -5495,7 +5495,6 @@ CONFIG_DMA_ENGINE_RAID=y
 CONFIG_SYNC_FILE=y
 # CONFIG_SW_SYNC is not set
 # CONFIG_AUXDISPLAY is not set
-# CONFIG_ARM_CHARLCD is not set
 # CONFIG_UIO is not set
 # CONFIG_VFIO is not set
 # CONFIG_VIRT_DRIVERS is not set
