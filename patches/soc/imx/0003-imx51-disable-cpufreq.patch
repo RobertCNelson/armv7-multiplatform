@@ -1,0 +1,30 @@
+From dcd50edd8e4e5b19371d449444c1dd395a938b7c Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Fri, 3 Aug 2018 10:34:29 -0500
+Subject: [PATCH 3/3] imx51: disable cpufreq
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/boot/dts/imx51.dtsi | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx51.dtsi b/arch/arm/boot/dts/imx51.dtsi
+index f46fe9bf0bcb..40e8f74b4162 100644
+--- a/arch/arm/boot/dts/imx51.dtsi
++++ b/arch/arm/boot/dts/imx51.dtsi
+@@ -84,12 +84,6 @@
+ 			clock-latency = <62500>;
+ 			clocks = <&clks IMX5_CLK_CPU_PODF>;
+ 			clock-names = "cpu";
+-			operating-points = <
+-				166000	1000000
+-				600000	1050000
+-				800000	1100000
+-			>;
+-			voltage-tolerance = <5>;
+ 		};
+ 	};
+ 
+-- 
+2.18.0
+
