@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.14.55 Kernel Configuration
+# Linux/arm 4.14.60 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -214,9 +214,7 @@ CONFIG_VM_EVENT_COUNTERS=y
 CONFIG_SLUB_DEBUG=y
 # CONFIG_SLUB_MEMCG_SYSFS_ON is not set
 # CONFIG_COMPAT_BRK is not set
-# CONFIG_SLAB is not set
 CONFIG_SLUB=y
-# CONFIG_SLOB is not set
 CONFIG_SLAB_MERGE_DEFAULT=y
 CONFIG_SLAB_FREELIST_RANDOM=y
 # CONFIG_SLAB_FREELIST_HARDENED is not set
