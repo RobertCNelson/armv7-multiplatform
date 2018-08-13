@@ -1,0 +1,40 @@
+From cd05204f0a174325e8ebf9a9c9c6c22577060eae Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Mon, 13 Aug 2018 12:12:46 -0500
+Subject: [PATCH 4/4] imx53: disable cpufreq
+
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/boot/dts/imx53.dtsi | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx53.dtsi b/arch/arm/boot/dts/imx53.dtsi
+index 0777b41cdfe8..8b615a72e1cc 100644
+--- a/arch/arm/boot/dts/imx53.dtsi
++++ b/arch/arm/boot/dts/imx53.dtsi
+@@ -54,14 +54,14 @@
+ 			clocks = <&clks IMX5_CLK_ARM>;
+ 			clock-latency = <61036>;
+ 			voltage-tolerance = <5>;
+-			operating-points = <
+-				/* kHz */
+-				 166666  850000
+-				 400000  900000
+-				 800000 1050000
+-				1000000 1200000
+-				1200000 1300000
+-			>;
++//			operating-points = <
++//				/* kHz */
++//				 166666  850000
++//				 400000  900000
++//				 800000 1050000
++//				1000000 1200000
++//				1200000 1300000
++//			>;
+ 		};
+ 	};
+ 
+-- 
+2.11.0
+
