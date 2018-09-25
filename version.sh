@@ -22,17 +22,19 @@ KERNEL_ARCH=arm
 #toolchain="gcc_linaro_gnueabihf_5"
 toolchain="gcc_linaro_gnueabihf_6"
 #toolchain="gcc_linaro_gnueabihf_7"
+#toolchain="gcc_arm_gnueabihf_8"
 #arm64
 #KERNEL_ARCH=arm64
 #toolchain="gcc_linaro_aarch64_gnu_5"
 #toolchain="gcc_linaro_aarch64_gnu_6"
 #toolchain="gcc_linaro_aarch64_gnu_7"
 
-#Kernel/Build
+#Kernel
 KERNEL_REL=4.11
 KERNEL_TAG=${KERNEL_REL}.12
-BUILD=${build_prefix}1
 kernel_rt=".9-rt7"
+#Kernel Build
+BUILD=${build_prefix}1
 
 #v4.X-rcX + upto SHA
 #prev_KERNEL_SHA=""
@@ -41,6 +43,6 @@ kernel_rt=".9-rt7"
 #git branch
 BRANCH="${branch_prefix}${KERNEL_REL}${branch_postfix}"
 
-DISTRO=cross
+DISTRO=xross
 DEBARCH=armhf
 #
