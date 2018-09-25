@@ -22,6 +22,7 @@ KERNEL_ARCH=arm
 #toolchain="gcc_linaro_gnueabihf_5"
 toolchain="gcc_linaro_gnueabihf_6"
 #toolchain="gcc_linaro_gnueabihf_7"
+#toolchain="gcc_arm_gnueabihf_8"
 #arm64
 #KERNEL_ARCH=arm64
 #toolchain="gcc_linaro_aarch64_gnu_5"
@@ -42,6 +43,6 @@ BUILD=${build_prefix}3
 #git branch
 BRANCH="${branch_prefix}${KERNEL_REL}${branch_postfix}"
 
-DISTRO=cross
+DISTRO=xross
 DEBARCH=armhf
 #
