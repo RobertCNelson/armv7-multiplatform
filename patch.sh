@@ -397,7 +397,7 @@ drivers () {
 
 soc () {
 	dir 'soc/exynos'
-#	dir 'soc/imx/udoo'
+	dir 'soc/imx/udoo'
 	dir 'soc/imx/wandboard'
 	dir 'soc/imx'
 	dir 'soc/ti'
