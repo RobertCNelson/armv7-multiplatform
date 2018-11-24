@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.19.2 Kernel Configuration
+# Linux/arm 4.19.4 Kernel Configuration
 #
 
 #
@@ -6289,6 +6289,7 @@ CONFIG_MESON_SARADC=y
 # CONFIG_STM32_ADC_CORE is not set
 # CONFIG_STM32_DFSDM_CORE is not set
 # CONFIG_STM32_DFSDM_ADC is not set
+# CONFIG_STMPE_ADC is not set
 # CONFIG_SUN4I_GPADC is not set
 # CONFIG_TI_ADC081C is not set
 # CONFIG_TI_ADC0832 is not set
