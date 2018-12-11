@@ -10,10 +10,10 @@ Signed-off-by: Steve Arnold <nerdboy@gentoo.org>
  1 file changed, 13 insertions(+)
 
 diff --git a/arch/arm/boot/dts/imx6qdl-udoo.dtsi b/arch/arm/boot/dts/imx6qdl-udoo.dtsi
-index c96c91d83678..8e8425d64d66 100644
+index a173de20ee73..5e6ad550d714 100644
 --- a/arch/arm/boot/dts/imx6qdl-udoo.dtsi
 +++ b/arch/arm/boot/dts/imx6qdl-udoo.dtsi
-@@ -186,6 +186,13 @@
+@@ -177,6 +177,13 @@
  			>;
  		};
  
@@ -26,8 +26,8 @@ index c96c91d83678..8e8425d64d66 100644
 +
  		pinctrl_usbh: usbhgrp {
  			fsl,pins = <
- 				MX6QDL_PAD_GPIO_17__GPIO7_IO12 0x80000000
-@@ -256,6 +263,12 @@
+ 				MX6QDL_PAD_GPIO_17__GPIO7_IO12	0x1b0b0
+@@ -247,6 +254,12 @@
  	status = "okay";
  };
  
@@ -41,5 +41,5 @@ index c96c91d83678..8e8425d64d66 100644
  	pinctrl-names = "default";
  	pinctrl-0 = <&pinctrl_usbh>;
 -- 
-2.19.1
+2.19.0
 
