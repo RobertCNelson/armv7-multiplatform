@@ -121,7 +121,7 @@ Missing patch command,
 }
 
 check_dpkg () {
-	LC_ALL=C dpkg --list | awk '{print $2}' | grep "^${pkg}$" >/dev/null || deb_pkgs="${deb_pkgs}${pkg} "
+	LC_ALL=C dpkg-query -s ${pkg} 2>&1 | grep Section: > /dev/null || deb_pkgs="${deb_pkgs}${pkg} "
 }
 
 debian_regs () {
@@ -132,10 +132,6 @@ debian_regs () {
 	check_dpkg
 	pkg="build-essential"
 	check_dpkg
-	if ! type dtc >/dev/null; then
-		pkg="device-tree-compiler"
-		check_dpkg
-	fi
 	pkg="fakeroot"
 	check_dpkg
 	pkg="lsb-release"
@@ -148,6 +144,14 @@ debian_regs () {
 	check_dpkg
 	#git
 	pkg="gettext"
+	check_dpkg
+	#v4.16-rc0
+	pkg="bison"
+	check_dpkg
+	pkg="flex"
+	check_dpkg
+	#v4.18-rc0
+	pkg="pkg-config"
 	check_dpkg
 
 	unset warn_dpkg_ia32
@@ -177,7 +181,7 @@ debian_regs () {
 			#Release:        testing/unstable
 			#Codename:       n/a
 			if [ "x${deb_lsb_rs}" = "xtesting_unstable" ] ; then
-				deb_distro="stretch"
+				deb_distro="buster"
 			fi
 		fi
 
@@ -345,16 +349,31 @@ debian_regs () {
 			#http://packages.linuxmint.com/index.php
 			deb_distro="xenial"
 			;;
+		sonya)
+			#18.2
+			#http://packages.linuxmint.com/index.php
+			deb_distro="xenial"
+			;;
+		sylvia)
+			#18.3
+			#http://packages.linuxmint.com/index.php
+			deb_distro="xenial"
+			;;
+		tara)
+			#19
+			#http://blog.linuxmint.com/?p=2975
+			deb_distro="bionic"
+			;;
 		esac
 
 		#Future Debian Code names:
 		case "${deb_distro}" in
-		buster)
-			#Debian 10
+		bullseye)
+			#11 bullseye: https://wiki.debian.org/DebianBullseye
 			deb_distro="sid"
 			;;
-		bullseye)
-			#Debian 11
+		bookworm)
+			#12 bookworm:
 			deb_distro="sid"
 			;;
 		esac
@@ -362,25 +381,34 @@ debian_regs () {
 		#https://wiki.ubuntu.com/Releases
 		unset error_unknown_deb_distro
 		case "${deb_distro}" in
-		wheezy|jessie|stretch|sid)
-			#7 wheezy: https://wiki.debian.org/DebianWheezy
+		jessie|stretch|buster|sid)
+			#https://wiki.debian.org/LTS
 			#8 jessie: https://wiki.debian.org/DebianJessie
 			#9 stretch: https://wiki.debian.org/DebianStretch
+			#10 buster: https://wiki.debian.org/DebianBuster
 			unset warn_eol_distro
 			;;
-		squeeze)
-			#6 squeeze: 2016-02-06 https://wiki.debian.org/DebianSqueeze
+		squeeze|wheezy)
+			#https://wiki.debian.org/LTS
+			#6 squeeze: 2016-02-29 https://wiki.debian.org/DebianSqueeze
+			#7 wheezy: 2018-05-31 https://wiki.debian.org/DebianWheezy
 			warn_eol_distro=1
 			stop_pkg_search=1
 			;;
-		yakkety|zesty|artful)
-			#16.10 yakkety: (EOL: July 2017)
-			#17.04 zesty: (EOL: January 2018)
-			#17.10 artful: (EOL: July 2019)
+		bionic|cosmic)
+			#18.04 bionic: (EOL: April 2023) lts: bionic -> xyz
+			#18.10 cosmic: (EOL: )
 			unset warn_eol_distro
 			;;
+		yakkety|zesty|artful)
+			#16.10 yakkety: (EOL: July 20, 2017)
+			#17.04 zesty: (EOL: January 2018)
+			#17.10 artful: (EOL: July 2018)
+			warn_eol_distro=1
+			stop_pkg_search=1
+			;;
 		xenial)
-			#16.04 xenial: (EOL: April 2021) lts: xenial -> xyz
+			#16.04 xenial: (EOL: April 2021) lts: xenial -> bionic
 			unset warn_eol_distro
 			;;
 		utopic|vivid|wily)
@@ -394,23 +422,16 @@ debian_regs () {
 			#14.04 trusty: (EOL: April 2019) lts: trusty -> xenial
 			unset warn_eol_distro
 			;;
-		quantal|raring|saucy)
-			#12.10 quantal: (EOL: May 16, 2014)
-			#13.04 raring: (EOL: January 27, 2014)
-			#13.10 saucy: (EOL: July 17, 2014)
-			warn_eol_distro=1
-			stop_pkg_search=1
-			;;
-		precise)
-			#12.04 precise: (EOL: April 2017) lts: precise -> trusty
-			unset warn_eol_distro
-			;;
-		hardy|lucid|maverick|natty|oneiric)
+		hardy|lucid|maverick|natty|oneiric|precise|quantal|raring|saucy)
 			#8.04 hardy: (EOL: May 2013) lts: hardy -> lucid
 			#10.04 lucid: (EOL: April 2015) lts: lucid -> precise
 			#10.10 maverick: (EOL: April 10, 2012)
 			#11.04 natty: (EOL: October 28, 2012)
 			#11.10 oneiric: (EOL: May 9, 2013)
+			#12.04 precise: (EOL: April 28 2017) lts: precise -> trusty
+			#12.10 quantal: (EOL: May 16, 2014)
+			#13.04 raring: (EOL: January 27, 2014)
+			#13.10 saucy: (EOL: July 17, 2014)
 			warn_eol_distro=1
 			stop_pkg_search=1
 			;;
@@ -424,61 +445,36 @@ debian_regs () {
 
 	if [ "$(which lsb_release)" ] && [ ! "${stop_pkg_search}" ] ; then
 		deb_arch=$(LC_ALL=C dpkg --print-architecture)
-		
-		#Libs; starting with jessie/sid, lib<pkg_name>-dev:<arch>
-		case "${deb_distro}" in
-		wheezy|precise)
-			pkg="libncurses5-dev"
+
+		pkg="libncurses5-dev:${deb_arch}"
+		check_dpkg
+		pkg="libssl-dev:${deb_arch}"
+		check_dpkg
+
+		if [ "x${build_git}" = "xtrue" ] ; then
+			#git
+			pkg="libcurl4-gnutls-dev:${deb_arch}"
 			check_dpkg
-			if [ "x${build_git}" = "xtrue" ] ; then
-				#git
-				pkg="libcurl4-gnutls-dev"
-				check_dpkg
-				pkg="libexpat1-dev"
-				check_dpkg
-				pkg="libssl-dev"
-				check_dpkg
-			fi
-			;;
-		*)
-			pkg="libncurses5-dev:${deb_arch}"
+			pkg="libelf-dev:${deb_arch}"
 			check_dpkg
-			if [ "x${build_git}" = "xtrue" ] ; then
-				#git
-				pkg="libcurl4-gnutls-dev:${deb_arch}"
-				check_dpkg
-				pkg="libexpat1-dev:${deb_arch}"
-				check_dpkg
-				pkg="libssl-dev:${deb_arch}"
-				check_dpkg
-			fi
-			;;
-		esac
+			pkg="libexpat1-dev:${deb_arch}"
+			check_dpkg
+		fi
 
 		#pkg: ia32-libs
 		if [ "x${deb_arch}" = "xamd64" ] ; then
 			unset dpkg_multiarch
-			case "${deb_distro}" in
-			precise)
-				if [ "x${ignore_32bit}" = "xfalse" ] ; then
-					pkg="ia32-libs"
-					check_dpkg
-				fi
-				;;
-			*)
-				if [ "x${ignore_32bit}" = "xfalse" ] ; then
-					pkg="libc6:i386"
-					check_dpkg
-					pkg="libncurses5:i386"
-					check_dpkg
-					pkg="libstdc++6:i386"
-					check_dpkg
-					pkg="zlib1g:i386"
-					check_dpkg
-					dpkg_multiarch=1
-				fi
-				;;
-			esac
+			if [ "x${ignore_32bit}" = "xfalse" ] ; then
+				pkg="libc6:i386"
+				check_dpkg
+				pkg="libncurses5:i386"
+				check_dpkg
+				pkg="libstdc++6:i386"
+				check_dpkg
+				pkg="zlib1g:i386"
+				check_dpkg
+				dpkg_multiarch=1
+			fi
 
 			if [ "${dpkg_multiarch}" ] ; then
 				unset check_foreign
@@ -555,6 +551,9 @@ if [ "x${ARCH}" = "xx86_64" ] ; then
 		ignore_32bit="true"
 		;;
 	gcc_linaro_eabi_6|gcc_linaro_gnueabihf_6|gcc_linaro_aarch64_gnu_6)
+		ignore_32bit="true"
+		;;
+	gcc_linaro_eabi_7|gcc_linaro_gnueabihf_7|gcc_linaro_aarch64_gnu_7)
 		ignore_32bit="true"
 		;;
 	*)

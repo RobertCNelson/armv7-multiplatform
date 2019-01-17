@@ -1,6 +1,6 @@
 #!/bin/bash -e
 #
-# Copyright (c) 2009-2017 Robert Nelson <robertcnelson@gmail.com>
+# Copyright (c) 2009-2018 Robert Nelson <robertcnelson@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -161,16 +161,24 @@ aufs4 () {
 
 		${git_bin} add .
 		${git_bin} commit -a -m 'merge: aufs4' -s
-		${git_bin} format-patch -5 -o ../patches/aufs4/
+		${git_bin} format-patch -6 -o ../patches/aufs4/
 
 		rm -rf ../aufs4-standalone/ || true
 
-		exit 2
-	fi
+		${git_bin} reset --hard HEAD~6
 
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
 		start_cleanup
+
+		${git} "${DIR}/patches/aufs4/0001-merge-aufs4-kbuild.patch"
+		${git} "${DIR}/patches/aufs4/0002-merge-aufs4-base.patch"
+		${git} "${DIR}/patches/aufs4/0003-merge-aufs4-mmap.patch"
+		${git} "${DIR}/patches/aufs4/0004-merge-aufs4-standalone.patch"
+		${git} "${DIR}/patches/aufs4/0005-merge-aufs4.patch"
+		${git} "${DIR}/patches/aufs4/0006-aufs-call-mutex.owner-only-when-DEBUG_MUTEXES-or-MUT.patch"
+
+		wdir="aufs4"
+		number=5
+		cleanup
 	fi
 
 	${git} "${DIR}/patches/aufs4/0001-merge-aufs4-kbuild.patch"
@@ -179,12 +187,6 @@ aufs4 () {
 	${git} "${DIR}/patches/aufs4/0004-merge-aufs4-standalone.patch"
 	${git} "${DIR}/patches/aufs4/0005-merge-aufs4.patch"
 	${git} "${DIR}/patches/aufs4/0006-aufs-call-mutex.owner-only-when-DEBUG_MUTEXES-or-MUT.patch"
-
-	if [ "x${regenerate}" = "xenable" ] ; then
-		wdir="aufs4"
-		number=6
-		cleanup
-	fi
 }
 
 rt_cleanup () {
