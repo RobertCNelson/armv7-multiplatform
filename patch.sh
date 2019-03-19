@@ -542,6 +542,7 @@ reverts
 drivers
 soc
 beaglebone
+dir 'fixes'
 
 packaging () {
 	echo "dir: packaging"
