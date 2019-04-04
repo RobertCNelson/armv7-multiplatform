@@ -579,6 +579,7 @@ drivers
 soc
 beaglebone
 dir 'build/gcc'
+dir 'drivers/ti/spi_symlink'
 
 sync_mainline_dtc () {
 	echo "dir: dtc"
