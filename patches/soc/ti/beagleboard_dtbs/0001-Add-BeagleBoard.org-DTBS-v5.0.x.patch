@@ -1,0 +1,58 @@
+From 3fe18e4f5fafa46e786cee9d15204a1e1be3334a Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Wed, 1 May 2019 16:46:34 -0500
+Subject: [PATCH] Add BeagleBoard.org DTBS: v5.0.x
+
+https://github.com/beagleboard/BeagleBoard-DeviceTrees/tree/v5.0.x
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ arch/arm/boot/dts/Makefile             | 6 ++++++
+ include/uapi/linux/input-event-codes.h | 6 ++++--
+ 2 files changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
+index bd40148a15b2..c1b1148d3c91 100644
+--- a/arch/arm/boot/dts/Makefile
++++ b/arch/arm/boot/dts/Makefile
+@@ -711,6 +711,11 @@ dtb-$(CONFIG_SOC_AM33XX) += \
+ 	am335x-base0033.dtb \
+ 	am335x-bone.dtb \
+ 	am335x-boneblack.dtb \
++	am335x-bonegreen-wireless-uboot-univ.dtb \
++	am335x-boneblack-uboot-univ.dtb \
++	am335x-bone-uboot-univ.dtb \
++	am335x-boneblack-uboot.dtb \
++	am335x-abbbi.dtb \
+ 	am335x-boneblack-wireless.dtb \
+ 	am335x-boneblue.dtb \
+ 	am335x-bonegreen.dtb \
+@@ -739,6 +744,7 @@ dtb-$(CONFIG_ARCH_OMAP4) += \
+ 	omap4-duovero-parlor.dtb \
+ 	omap4-kc1.dtb \
+ 	omap4-panda.dtb \
++	omap4-panda-es-b3.dtb \
+ 	omap4-panda-a4.dtb \
+ 	omap4-panda-es.dtb \
+ 	omap4-sdp.dtb \
+diff --git a/include/uapi/linux/input-event-codes.h b/include/uapi/linux/input-event-codes.h
+index 7f14d4a66c28..64cee116928e 100644
+--- a/include/uapi/linux/input-event-codes.h
++++ b/include/uapi/linux/input-event-codes.h
+@@ -439,10 +439,12 @@
+ #define KEY_TITLE		0x171
+ #define KEY_SUBTITLE		0x172
+ #define KEY_ANGLE		0x173
+-#define KEY_ZOOM		0x174
++#define KEY_FULL_SCREEN		0x174	/* AC View Toggle */
++#define KEY_ZOOM		KEY_FULL_SCREEN
+ #define KEY_MODE		0x175
+ #define KEY_KEYBOARD		0x176
+-#define KEY_SCREEN		0x177
++#define KEY_ASPECT_RATIO	0x177	/* HUTRR37: Aspect */
++#define KEY_SCREEN		KEY_ASPECT_RATIO
+ #define KEY_PC			0x178	/* Media Select Computer */
+ #define KEY_TV			0x179	/* Media Select TV */
+ #define KEY_TV2			0x17a	/* Media Select Cable */
+-- 
+2.20.1
+

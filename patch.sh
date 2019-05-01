@@ -227,6 +227,11 @@ wireguard () {
 			rm -rf ./WireGuard || true
 			${git_bin} clone https://git.zx2c4.com/WireGuard --depth=1
 		fi
+
+		#cd ./WireGuard/
+		#${git_bin}  revert --no-edit xyz
+		#cd ../
+
 		cd ./KERNEL/
 
 		../WireGuard/contrib/kernel-tree/create-patch.sh | patch -p1 || wireguard_fail
@@ -266,10 +271,11 @@ ti_pm_firmware () {
 		fi
 		cd ./KERNEL/
 
+		mkdir -p ./firmware/ || true
 		cp -v ../ti-amx3-cm3-pm-firmware/bin/am* ./firmware/
 
 		${git_bin} add -f ./firmware/am*
-		${git_bin} commit -a -m 'add am33x firmware' -s
+		${git_bin} commit -a -m 'Add AM335x CM3 Power Managment Firmware' -s
 		${git_bin} format-patch -1 -o ../patches/drivers/ti/firmware/
 
 		rm -rf ../ti-amx3-cm3-pm-firmware/ || true
@@ -278,14 +284,69 @@ ti_pm_firmware () {
 
 		start_cleanup
 
-		${git} "${DIR}/patches/drivers/ti/firmware/0001-add-am33x-firmware.patch"
+		${git} "${DIR}/patches/drivers/ti/firmware/0001-Add-AM335x-CM3-Power-Managment-Firmware.patch"
 
 		wdir="drivers/ti/firmware"
 		number=1
 		cleanup
 	fi
 
-	${git} "${DIR}/patches/drivers/ti/firmware/0001-add-am33x-firmware.patch"
+	dir 'drivers/ti/firmware'
+}
+dtb_makefile_append_omap4 () {
+	sed -i -e 's:omap4-panda.dtb \\:omap4-panda.dtb \\\n\t'$device' \\:g' arch/arm/boot/dts/Makefile
+}
+
+dtb_makefile_append () {
+	sed -i -e 's:am335x-boneblack.dtb \\:am335x-boneblack.dtb \\\n\t'$device' \\:g' arch/arm/boot/dts/Makefile
+}
+
+beagleboard_dtbs () {
+	bbdtbs="v5.0.x"
+	echo "dir: beagleboard_dtbs"
+	regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		cd ../
+		if [ ! -d ./BeagleBoard-DeviceTrees ] ; then
+			${git_bin} clone -b ${bbdtbs} https://github.com/beagleboard/BeagleBoard-DeviceTrees --depth=1
+		else
+			rm -rf ./BeagleBoard-DeviceTrees || true
+			${git_bin} clone -b ${bbdtbs} https://github.com/beagleboard/BeagleBoard-DeviceTrees --depth=1
+		fi
+		cd ./KERNEL/
+
+		cp -vr ../BeagleBoard-DeviceTrees/src/arm/* arch/arm/boot/dts/
+		cp -vr ../BeagleBoard-DeviceTrees/include/dt-bindings/* ./include/dt-bindings/
+
+		device="omap4-panda-es-b3.dtb" ; dtb_makefile_append_omap4
+
+		#device="am335x-abbbi.dtb" ; dtb_makefile_append
+
+		#device="am335x-boneblack-uboot.dtb" ; dtb_makefile_append
+
+		#device="am335x-bone-uboot-univ.dtb" ; dtb_makefile_append
+		#device="am335x-boneblack-uboot-univ.dtb" ; dtb_makefile_append
+		#device="am335x-bonegreen-wireless-uboot-univ.dtb" ; dtb_makefile_append
+
+		${git_bin} add -f arch/arm/boot/dts/
+		${git_bin} add -f include/dt-bindings/
+		${git_bin} commit -a -m "Add BeagleBoard.org DTBS: $bbdtbs" -m "https://github.com/beagleboard/BeagleBoard-DeviceTrees/tree/${bbdtbs}" -s
+		${git_bin} format-patch -1 -o ../patches/soc/ti/beagleboard_dtbs/
+
+		rm -rf ../BeagleBoard-DeviceTrees/ || true
+
+		${git_bin} reset --hard HEAD^
+
+		start_cleanup
+
+		${git} "${DIR}/patches/soc/ti/beagleboard_dtbs/0001-Add-BeagleBoard.org-DTBS-$bbdtbs.patch"
+
+		wdir="soc/ti/beagleboard_dtbs"
+		number=1
+		cleanup
+	fi
+
+	dir 'soc/ti/beagleboard_dtbs'
 }
 
 local_patch () {
@@ -298,6 +359,7 @@ aufs
 #rt
 wireguard
 ti_pm_firmware
+#beagleboard_dtbs
 #local_patch
 
 pre_backports () {
