@@ -1,6 +1,6 @@
-From 379ed2d9373ae019495e1bfef78d9078ca6d353e Mon Sep 17 00:00:00 2001
+From ef03c493494f4e7225d3c07a3367c3f420716947 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Thu, 2 May 2019 11:37:36 -0500
+Date: Thu, 2 May 2019 11:44:28 -0500
 Subject: [PATCH] Add BeagleBoard.org DTBS: v5.0.x
 
 https://github.com/beagleboard/BeagleBoard-DeviceTrees/tree/v5.0.x
