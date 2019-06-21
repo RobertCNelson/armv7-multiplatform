@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.1.10 Kernel Configuration
+# Linux/arm 5.1.12 Kernel Configuration
 #
 
 #
@@ -4240,6 +4240,7 @@ CONFIG_DRM_SCHED=m
 # AMD Library routines
 #
 CONFIG_DRM_NOUVEAU=m
+CONFIG_NOUVEAU_LEGACY_CTX_SUPPORT=y
 CONFIG_NOUVEAU_PLATFORM_DRIVER=y
 CONFIG_NOUVEAU_DEBUG=5
 CONFIG_NOUVEAU_DEBUG_DEFAULT=3
