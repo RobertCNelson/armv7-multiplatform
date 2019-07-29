@@ -17,7 +17,7 @@ if [ -e ${DIR}/version.sh ]; then
 		exit
 	fi
 
-	${git_bin} commit -a -m "kernel v${KERNEL_TAG} rebase with rt: ${kernel_rt} aufs/wireguard/etc" -s
+	${git_bin} commit -a -m "kernel v${KERNEL_TAG} rebase with rt: v${KERNEL_TAG}${kernel_rt} aufs/wireguard/etc" -s
 	echo "log: git push origin ${BRANCH}"
 	${git_bin} push origin ${BRANCH}
 fi
