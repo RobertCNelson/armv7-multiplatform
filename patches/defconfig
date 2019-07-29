@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.14.115 Kernel Configuration
+# Linux/arm 4.14.134 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -1514,6 +1514,7 @@ CONFIG_CAN=m
 CONFIG_CAN_RAW=m
 CONFIG_CAN_BCM=m
 CONFIG_CAN_GW=m
+CONFIG_CAN_ISOTP=m
 
 #
 # CAN Device Drivers
@@ -4490,8 +4491,8 @@ CONFIG_SND_SOC_FSL_UTILS=m
 CONFIG_SND_SOC_IMX_PCM_DMA=m
 CONFIG_SND_SOC_IMX_AUDMUX=m
 CONFIG_SND_IMX_SOC=m
-CONFIG_SND_SOC_IMX_SSI=m
 CONFIG_SND_SOC_IMX_PCM_FIQ=m
+CONFIG_SND_SOC_IMX_SSI=m
 
 #
 # SoC Audio support for Freescale i.MX boards:
