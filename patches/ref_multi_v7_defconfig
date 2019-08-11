@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.2.5 Kernel Configuration
+# Linux/arm 5.2.8 Kernel Configuration
 #
 
 #
@@ -339,6 +339,7 @@ CONFIG_SOC_EXYNOS5260=y
 CONFIG_SOC_EXYNOS5410=y
 CONFIG_SOC_EXYNOS5420=y
 CONFIG_SOC_EXYNOS5800=y
+CONFIG_EXYNOS_MCPM=y
 CONFIG_EXYNOS_CPU_SUSPEND=y
 CONFIG_PLAT_SAMSUNG=y
 
@@ -7605,6 +7606,7 @@ CONFIG_INIT_STACK_NONE=y
 # end of Kernel hardening options
 # end of Security options
 
+CONFIG_XOR_BLOCKS=m
 CONFIG_CRYPTO=y
 
 #
