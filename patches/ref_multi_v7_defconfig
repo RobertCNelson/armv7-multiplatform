@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.3.0-rc4 Kernel Configuration
+# Linux/arm 5.3.0-rc5 Kernel Configuration
 #
 
 #
@@ -1222,6 +1222,7 @@ CONFIG_CAN=y
 CONFIG_CAN_RAW=y
 CONFIG_CAN_BCM=y
 CONFIG_CAN_GW=y
+CONFIG_CAN_ISOTP=y
 
 #
 # CAN Device Drivers
