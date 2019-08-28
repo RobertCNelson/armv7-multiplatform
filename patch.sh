@@ -423,8 +423,6 @@ backports () {
 		patch_backports
 		${git} "${DIR}/patches/backports/greybus/0002-greybus-drivers-staging-greybus-module.c-no-struct_s.patch"
 	fi
-
-	dir 'drivers/exfat'
 }
 
 reverts () {
