@@ -1,6 +1,6 @@
-From 879ac5ca79d835d5fd5cf30dff48a78874654c67 Mon Sep 17 00:00:00 2001
+From 6e82054c997e339c0b264e29b33640a9a0fcf130 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Fri, 6 Sep 2019 13:13:56 -0500
+Date: Mon, 23 Sep 2019 10:12:32 -0500
 Subject: [PATCH 4/5] merge: aufs-standalone
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
@@ -391,5 +391,5 @@ index f493db0bf62a..96f118be469f 100644
  int security_file_alloc(struct file *file)
  {
 -- 
-2.23.0.rc1
+2.23.0
 
