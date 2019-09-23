@@ -1,6 +1,6 @@
-From 83918626d7df9c31028bc2e45cdd704dd4277c5f Mon Sep 17 00:00:00 2001
+From fbe16f506ca8fbb20d147d138b03dfe6c0df563a Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 23 Sep 2019 10:18:14 -0500
+Date: Mon, 23 Sep 2019 10:32:26 -0500
 Subject: [PATCH] backports: exfat: from: linux.git
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
