@@ -1,8 +1,9 @@
-From 188652c89d03369f1863a6487f8ab549cde0bd21 Mon Sep 17 00:00:00 2001
+From 736548393b3db28d23111ec30d8488ed5a3dddf8 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 7 Oct 2019 10:30:11 -0500
+Date: Thu, 10 Oct 2019 16:16:12 -0500
 Subject: [PATCH] merge: WireGuard
 
+https://git.zx2c4.com/WireGuard/commit/1e5ab020d191a75c44a34c2c1b9779bb2a2986c0
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  net/Kconfig                                   |    1 +
