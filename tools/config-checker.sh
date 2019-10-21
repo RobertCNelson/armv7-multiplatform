@@ -244,18 +244,17 @@ config="CONFIG_BT_LEDS" ; config_enable
 config="CONFIG_BT_HCIBTUSB_AUTOSUSPEND" ; config_disable
 
 config="CONFIG_BT_HCIUART" ; config_module
-config="CONFIG_BT_HCIUART_SERDEV" ; config_enable
+
 config="CONFIG_BT_HCIUART_H4" ; config_enable
-config="CONFIG_BT_HCIUART_BCSP" ; config_enable
+
 config="CONFIG_BT_HCIUART_ATH3K" ; config_enable
 config="CONFIG_BT_HCIUART_LL" ; config_enable
 config="CONFIG_BT_HCIUART_3WIRE" ; config_enable
-config="CONFIG_BT_HCIUART_QCA" ; config_enable
+
 config="CONFIG_BT_HCIBCM203X" ; config_module
 config="CONFIG_BT_HCIBPA10X" ; config_module
 config="CONFIG_BT_HCIBFUSB" ; config_module
-
-config="CONFIG_MAC80211_RC_MINSTREL_VHT" ; config_enable
+config="CONFIG_BT_HCIVHCI" ; config_module
 
 # end of Bluetooth device drivers
 config="CONFIG_CFG80211_DEFAULT_PS" ; config_disable
@@ -1116,6 +1115,8 @@ config="CONFIG_USB_MXS_PHY" ; config_enable
 
 config="CONFIG_USB_GADGET" ; config_enable
 config="CONFIG_USB_GADGET_VBUS_DRAW" ; option="500" ; config_value
+
+config="CONFIG_USB_DUMMY_HCD" ; config_module
 
 #
 # USB Peripheral Controller
