@@ -568,14 +568,9 @@ soc () {
 	dir 'soc/ti/omap4'
 
 #exit 2 #cleanup
-	dir 'soc/ti/pocketbeagle'
 	dir 'soc/ti/beaglebone_capes'
 	dir 'soc/ti/uboot'
 	dir 'soc/ti/spi_symlink'
-}
-
-dtb_makefile_append () {
-	sed -i -e 's:am335x-boneblack.dtb \\:am335x-boneblack.dtb \\\n\t'$device' \\:g' arch/arm/boot/dts/Makefile
 }
 
 beaglebone () {
