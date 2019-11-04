@@ -546,13 +546,10 @@ drivers () {
 	dir 'drivers/ti/serial'
 	dir 'drivers/ti/tsc'
 	dir 'drivers/ti/gpio'
-#exit 2 #cleanup
 
 	${git} "${DIR}/patches/drivers/ti/uio_pruss/0001-uio-pruss-cleanups-and-pruss-v2-pru-icss-support.patch"
 	${git} "${DIR}/patches/drivers/ti/uio_pruss/0003-ARM-omap2-support-deasserting-reset-from-dts.patch"
 
-	#[PATCH v3 1/4] mfd: stmpe: Move ADC related defines to header of mfd
-	#dir 'drivers/iio/stmpe'
 	dir 'drivers/greybus'
 }
 
@@ -562,7 +559,7 @@ soc () {
 	dir 'soc/imx/imx6'
 	dir 'soc/imx/imx7'
 
-	dir 'soc/ti/omap3'
+#exit 2 #cleanup
 	dir 'soc/ti/omap4'
 	dir 'soc/ti/am335x'
 
