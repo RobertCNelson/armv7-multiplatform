@@ -544,9 +544,9 @@ drivers () {
 	dir 'drivers/ti/eqep'
 	dir 'drivers/ti/rpmsg'
 	dir 'drivers/ti/serial'
-#exit 2 #cleanup
 	dir 'drivers/ti/tsc'
 	dir 'drivers/ti/gpio'
+#exit 2 #cleanup
 
 	${git} "${DIR}/patches/drivers/ti/uio_pruss/0001-uio-pruss-cleanups-and-pruss-v2-pru-icss-support.patch"
 	${git} "${DIR}/patches/drivers/ti/uio_pruss/0003-ARM-omap2-support-deasserting-reset-from-dts.patch"
