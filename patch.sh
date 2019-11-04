@@ -566,7 +566,6 @@ soc () {
 	dir 'soc/ti/omap4'
 
 #exit 2 #cleanup
-	dir 'soc/ti/blue'
 	dir 'soc/ti/abbbi'
 	dir 'soc/ti/pocketbeagle'
 	dir 'soc/ti/beaglebone_capes'
