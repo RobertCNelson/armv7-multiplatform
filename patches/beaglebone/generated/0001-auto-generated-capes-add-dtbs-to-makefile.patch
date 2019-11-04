@@ -1,33 +1,28 @@
-From f8c47f2ce9e759442c270c8720265a3ad838b083 Mon Sep 17 00:00:00 2001
+From f29470b3ee23ac669c041d152cae403119b76b7b Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 4 Nov 2019 16:22:39 -0600
+Date: Mon, 4 Nov 2019 16:30:46 -0600
 Subject: [PATCH] auto generated: capes: add dtbs to makefile
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
- arch/arm/boot/dts/Makefile | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ arch/arm/boot/dts/Makefile | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 41faca82c878..c4609fa797d0 100644
+index 43730296aea1..27429527388f 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
-@@ -703,6 +703,15 @@ dtb-$(CONFIG_SOC_AM33XX) += \
+@@ -703,6 +703,10 @@ dtb-$(CONFIG_SOC_AM33XX) += \
  	am335x-base0033.dtb \
  	am335x-bone.dtb \
  	am335x-boneblack.dtb \
 +	am335x-bonegreen-wireless-uboot-univ.dtb \
 +	am335x-boneblack-uboot-univ.dtb \
 +	am335x-bone-uboot-univ.dtb \
-+	am335x-boneblack-audio.dtb \
-+	am335x-boneblack-bbb-exp-r.dtb \
-+	am335x-boneblack-bbb-exp-c.dtb \
-+	am335x-boneblack-bbbmini.dtb \
-+	am335x-boneblack-wl1835mod.dtb \
 +	am335x-boneblack-uboot.dtb \
- 	am335x-abbbi.dtb \
- 	am335x-boneblack-wireless.dtb \
- 	am335x-boneblue.dtb \
+ 	am335x-boneblack-audio.dtb \
+ 	am335x-boneblack-bbb-exp-r.dtb \
+ 	am335x-boneblack-bbb-exp-c.dtb \
 -- 
 2.23.0
 
