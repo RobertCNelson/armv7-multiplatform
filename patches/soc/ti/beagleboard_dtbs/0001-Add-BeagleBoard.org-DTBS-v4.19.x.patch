@@ -1,11 +1,11 @@
-From 4e5a90cf84446c1b730aaf51c3535f057b3f524d Mon Sep 17 00:00:00 2001
+From 050ab5abe230918de1d0ea4931e5f74ab43e54c1 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 4 Nov 2019 14:59:57 -0600
+Date: Mon, 4 Nov 2019 15:36:55 -0600
 Subject: [PATCH] Add BeagleBoard.org DTBS: v4.19.x
 
 https://github.com/beagleboard/BeagleBoard-DeviceTrees/tree/v4.19.x
 
-https://github.com/beagleboard/BeagleBoard-DeviceTrees/commit/3316c41a5dc555f7a5e91fea598bc7e096879ea1
+https://github.com/beagleboard/BeagleBoard-DeviceTrees/commit/779e75ce0f85062e5be49f6573c35632b918f4b1
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  arch/arm/boot/dts/am335x-bone-common.dtsi     |   13 +-
@@ -17,10 +17,12 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  arch/arm/boot/dts/am335x-bonegreen.dts        |    1 +
  arch/arm/boot/dts/am335x-osd3358-sm-red.dts   |   10 +-
  arch/arm/boot/dts/am33xx-l4.dtsi              | 2131 ++++++++
+ .../boot/dts/am57xx-beagle-x15-common.dtsi    |    4 +
  arch/arm/boot/dts/dra7-l4.dtsi                | 4599 +++++++++++++++++
+ arch/arm/boot/dts/dra7.dtsi                   |   10 +
  arch/arm/boot/dts/omap5-l4.dtsi               | 2459 +++++++++
  include/uapi/linux/input-event-codes.h        |   16 +-
- 12 files changed, 9231 insertions(+), 22 deletions(-)
+ 14 files changed, 9245 insertions(+), 22 deletions(-)
  create mode 100644 arch/arm/boot/dts/am335x-bone-jtag.dtsi
  create mode 100644 arch/arm/boot/dts/am33xx-l4.dtsi
  create mode 100644 arch/arm/boot/dts/dra7-l4.dtsi
@@ -2328,6 +2330,21 @@ index 000000000000..d3ca6b91b547
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/am57xx-beagle-x15-common.dtsi b/arch/arm/boot/dts/am57xx-beagle-x15-common.dtsi
+index ad953113cefb..cefaa26270fd 100644
+--- a/arch/arm/boot/dts/am57xx-beagle-x15-common.dtsi
++++ b/arch/arm/boot/dts/am57xx-beagle-x15-common.dtsi
+@@ -167,6 +167,10 @@
+ 	};
+ };
+ 
++&bb2d {
++	status = "okay";
++};
++
+ &i2c1 {
+ 	status = "okay";
+ 	clock-frequency = <400000>;
 diff --git a/arch/arm/boot/dts/dra7-l4.dtsi b/arch/arm/boot/dts/dra7-l4.dtsi
 new file mode 100644
 index 000000000000..5b5929b387c5
@@ -6933,6 +6950,27 @@ index 000000000000..5b5929b387c5
 +		};
 +	};
 +};
+diff --git a/arch/arm/boot/dts/dra7.dtsi b/arch/arm/boot/dts/dra7.dtsi
+index 2cb45ddd2ae3..d33a1b7709a0 100644
+--- a/arch/arm/boot/dts/dra7.dtsi
++++ b/arch/arm/boot/dts/dra7.dtsi
+@@ -1028,6 +1028,16 @@
+ 			ti,hwmods = "dmm";
+ 		};
+ 
++		bb2d: bb2d@59000000 {
++			compatible = "ti,dra7-bb2d","vivante,gc";
++			reg = <0x59000000 0x0700>;
++			interrupts = <GIC_SPI 120 IRQ_TYPE_LEVEL_HIGH>;
++			ti,hwmods = "bb2d";
++			clocks = <&dpll_core_h24x2_ck>;
++			clock-names = "fclk";
++			status = "disabled";
++		};
++
+ 		i2c1: i2c@48070000 {
+ 			compatible = "ti,omap4-i2c";
+ 			reg = <0x48070000 0x100>;
 diff --git a/arch/arm/boot/dts/omap5-l4.dtsi b/arch/arm/boot/dts/omap5-l4.dtsi
 new file mode 100644
 index 000000000000..b1982b7518e4
