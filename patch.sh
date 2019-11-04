@@ -563,10 +563,9 @@ soc () {
 	dir 'soc/imx/imx6'
 	dir 'soc/imx/imx7'
 
-#exit 2 #cleanup
 	dir 'soc/ti/omap4'
-	dir 'soc/ti/am335x'
 
+#exit 2 #cleanup
 	dir 'soc/ti/blue'
 	dir 'soc/ti/abbbi'
 	dir 'soc/ti/pocketbeagle'
