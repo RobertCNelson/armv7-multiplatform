@@ -6565,6 +6565,7 @@ CONFIG_IIO_HRTIMER_TRIGGER=y
 # CONFIG_SRF04 is not set
 # CONFIG_SX9500 is not set
 # CONFIG_SRF08 is not set
+# CONFIG_VL53L0X_I2C is not set
 
 #
 # Resolver to digital converters

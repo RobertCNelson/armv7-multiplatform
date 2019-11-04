@@ -354,6 +354,60 @@ ti_pm_firmware () {
 	dir 'drivers/ti/firmware'
 }
 
+dtb_makefile_append_am5 () {
+	sed -i -e 's:am57xx-beagle-x15.dtb \\:am57xx-beagle-x15.dtb \\\n\t'$device' \\:g' arch/arm/boot/dts/Makefile
+}
+
+dtb_makefile_append () {
+	sed -i -e 's:am335x-boneblack.dtb \\:am335x-boneblack.dtb \\\n\t'$device' \\:g' arch/arm/boot/dts/Makefile
+}
+
+beagleboard_dtbs () {
+	bbdtbs="v4.19.x"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		cd ../
+		if [ ! -d ./BeagleBoard-DeviceTrees ] ; then
+			${git_bin} clone -b ${bbdtbs} https://github.com/beagleboard/BeagleBoard-DeviceTrees --depth=1
+			cd ./BeagleBoard-DeviceTrees
+				bbdtbs_hash=$(git rev-parse HEAD)
+			cd -
+		else
+			rm -rf ./BeagleBoard-DeviceTrees || true
+			${git_bin} clone -b ${bbdtbs} https://github.com/beagleboard/BeagleBoard-DeviceTrees --depth=1
+			cd ./BeagleBoard-DeviceTrees
+				bbdtbs_hash=$(git rev-parse HEAD)
+			cd -
+		fi
+		cd ./KERNEL/
+
+		cp -vr ../BeagleBoard-DeviceTrees/src/arm/* arch/arm/boot/dts/
+		cp -vr ../BeagleBoard-DeviceTrees/include/dt-bindings/* ./include/dt-bindings/
+
+		#device="am335x-abbbi.dtb" ; dtb_makefile_append
+
+		${git_bin} add -f arch/arm/boot/dts/
+		${git_bin} add -f include/dt-bindings/
+		${git_bin} commit -a -m "Add BeagleBoard.org DTBS: $bbdtbs" -m "https://github.com/beagleboard/BeagleBoard-DeviceTrees/tree/${bbdtbs}" -m "https://github.com/beagleboard/BeagleBoard-DeviceTrees/commit/${bbdtbs_hash}" -s
+		${git_bin} format-patch -1 -o ../patches/soc/ti/beagleboard_dtbs/
+		echo "BBDTBS: https://github.com/beagleboard/BeagleBoard-DeviceTrees/commit/${bbdtbs_hash}" > ../patches/git/BBDTBS
+
+		rm -rf ../BeagleBoard-DeviceTrees/ || true
+
+		${git_bin} reset --hard HEAD^
+
+		start_cleanup
+
+		${git} "${DIR}/patches/soc/ti/beagleboard_dtbs/0001-Add-BeagleBoard.org-DTBS-$bbdtbs.patch"
+
+		wdir="soc/ti/beagleboard_dtbs"
+		number=1
+		cleanup
+	fi
+
+	dir 'soc/ti/beagleboard_dtbs'
+}
+
 local_patch () {
 	echo "dir: dir"
 	${git} "${DIR}/patches/dir/0001-patch.patch"
@@ -365,6 +419,7 @@ can_isotp
 #rt
 wireguard
 ti_pm_firmware
+beagleboard_dtbs
 #local_patch
 
 pre_backports () {
@@ -416,6 +471,42 @@ backports () {
 	else
 		patch_backports
 	fi
+
+	backport_tag="v5.3.8"
+
+	subsystem="stmpe"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		pre_backports
+
+		cp -v ~/linux-src/drivers/iio/adc/stmpe-adc.c ./drivers/iio/adc/
+		cp -v ~/linux-src/drivers/mfd/stmpe.c ./drivers/mfd/
+		cp -v ~/linux-src/include/linux/mfd/stmpe.h ./include/linux/mfd/
+
+		post_backports
+		exit 2
+	else
+		patch_backports
+	fi
+
+	${git} "${DIR}/patches/backports/stmpe/0002-stmpe-wire-up-adc-Kconfig-Makefile.patch"
+
+	backport_tag="v5.0.21"
+
+	subsystem="vl53l0x"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		pre_backports
+
+		cp -v ~/linux-src/drivers/iio/proximity/vl53l0x-i2c.c ./drivers/iio/proximity/vl53l0x-i2c.c
+
+		post_backports
+		exit 2
+	else
+		patch_backports
+	fi
+
+	${git} "${DIR}/patches/backports/vl53l0x/0002-wire-up-VL53L0X_I2C.patch"
 }
 
 reverts () {
@@ -461,7 +552,7 @@ drivers () {
 	${git} "${DIR}/patches/drivers/ti/uio_pruss/0003-ARM-omap2-support-deasserting-reset-from-dts.patch"
 
 	#[PATCH v3 1/4] mfd: stmpe: Move ADC related defines to header of mfd
-	dir 'drivers/iio/stmpe'
+	#dir 'drivers/iio/stmpe'
 	dir 'drivers/greybus'
 }
 
