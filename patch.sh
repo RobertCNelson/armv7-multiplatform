@@ -578,12 +578,12 @@ soc () {
 	dir 'soc/imx/imx7'
 
 	dir 'soc/ti/omap4'
-
-#exit 2 #cleanup
-	dir 'soc/ti/spi_symlink'
 }
 
 beaglebone () {
+
+#exit 2 #cleanup
+
 	#This has to be last...
 	echo "dir: beaglebone/dtbs"
 	#regenerate="enable"

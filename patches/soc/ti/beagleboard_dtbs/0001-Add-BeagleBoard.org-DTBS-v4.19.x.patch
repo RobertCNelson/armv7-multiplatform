@@ -1,17 +1,17 @@
-From ed34856219bd1968400a67393a68f46061e19908 Mon Sep 17 00:00:00 2001
+From 4332105360a0ca174c3e97eee6d9136318e44dda Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 4 Nov 2019 16:38:09 -0600
+Date: Mon, 4 Nov 2019 16:42:19 -0600
 Subject: [PATCH] Add BeagleBoard.org DTBS: v4.19.x
 
 https://github.com/beagleboard/BeagleBoard-DeviceTrees/tree/v4.19.x
 
-https://github.com/beagleboard/BeagleBoard-DeviceTrees/commit/a5ff0c60ce6147dce8ec3b37510d47dd6e1b9b39
+https://github.com/beagleboard/BeagleBoard-DeviceTrees/commit/70c9f9bbe9ca998ca4deac0692f9651f47a852ec
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  arch/arm/boot/dts/Makefile                    |   11 +
  arch/arm/boot/dts/am335x-abbbi.dts            |  163 +
  .../dts/am335x-bone-common-no-capemgr.dtsi    |  375 ++
- .../arm/boot/dts/am335x-bone-common-univ.dtsi | 2919 +++++++++++
+ .../arm/boot/dts/am335x-bone-common-univ.dtsi | 2923 +++++++++++
  arch/arm/boot/dts/am335x-bone-common.dtsi     |   18 +-
  arch/arm/boot/dts/am335x-bone-jtag.dtsi       |   20 +
  .../arm/boot/dts/am335x-bone-pinmux-can0.dtsi |   45 +
@@ -24,7 +24,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  arch/arm/boot/dts/am335x-boneblack-audio.dts  |   50 +
  .../boot/dts/am335x-boneblack-bbb-exp-c.dts   |   47 +
  .../boot/dts/am335x-boneblack-bbb-exp-r.dts   |   47 +
- .../arm/boot/dts/am335x-boneblack-bbbmini.dts |  206 +
+ .../arm/boot/dts/am335x-boneblack-bbbmini.dts |  209 +
  .../arm/boot/dts/am335x-boneblack-common.dtsi |   10 +-
  .../boot/dts/am335x-boneblack-uboot-univ.dts  |   38 +
  arch/arm/boot/dts/am335x-boneblack-uboot.dts  |   37 +
@@ -32,8 +32,8 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  .../dts/am335x-boneblack-wl1835mod-cape.dtsi  |  128 +
  .../boot/dts/am335x-boneblack-wl1835mod.dts   |   49 +
  arch/arm/boot/dts/am335x-boneblack.dts        |    1 +
- arch/arm/boot/dts/am335x-boneblue.dts         |  481 +-
- ...am335x-bonegreen-wireless-common-univ.dtsi | 2793 ++++++++++
+ arch/arm/boot/dts/am335x-boneblue.dts         |  483 +-
+ ...am335x-bonegreen-wireless-common-univ.dtsi | 2797 ++++++++++
  .../am335x-bonegreen-wireless-uboot-univ.dts  |   53 +
  .../boot/dts/am335x-bonegreen-wireless.dts    |    1 +
  arch/arm/boot/dts/am335x-bonegreen.dts        |    1 +
@@ -45,7 +45,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  .../arm/boot/dts/am335x-peripheral-ttyS1.dtsi |   13 +
  .../arm/boot/dts/am335x-peripheral-ttyS2.dtsi |   13 +
  .../arm/boot/dts/am335x-peripheral-ttyS4.dtsi |   13 +
- arch/arm/boot/dts/am335x-pocketbeagle.dts     | 2036 +++++++-
+ arch/arm/boot/dts/am335x-pocketbeagle.dts     | 2040 +++++++-
  arch/arm/boot/dts/am33xx-l4.dtsi              | 2131 ++++++++
  arch/arm/boot/dts/am33xx.dtsi                 |  168 +-
  .../boot/dts/am57xx-beagle-x15-common.dtsi    |    4 +
@@ -64,7 +64,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  arch/arm/boot/dts/twl6030.dtsi                |    5 +
  .../dt-bindings/board/am335x-bbw-bbb-base.h   |  103 +
  include/uapi/linux/input-event-codes.h        |   16 +-
- 56 files changed, 19990 insertions(+), 123 deletions(-)
+ 56 files changed, 20007 insertions(+), 123 deletions(-)
  create mode 100644 arch/arm/boot/dts/am335x-abbbi.dts
  create mode 100644 arch/arm/boot/dts/am335x-bone-common-no-capemgr.dtsi
  create mode 100644 arch/arm/boot/dts/am335x-bone-common-univ.dtsi
@@ -679,10 +679,10 @@ index 000000000000..65a861c5f70c
 +};
 diff --git a/arch/arm/boot/dts/am335x-bone-common-univ.dtsi b/arch/arm/boot/dts/am335x-bone-common-univ.dtsi
 new file mode 100644
-index 000000000000..cdc9a971f717
+index 000000000000..037683957292
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-bone-common-univ.dtsi
-@@ -0,0 +1,2919 @@
+@@ -0,0 +1,2923 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -2025,6 +2025,7 @@ index 000000000000..cdc9a971f717
 +		#size-cells = <0>;
 +
 +		compatible = "spidev";
++		symlink = "spi/0.0";
 +
 +		reg = <0>;
 +		spi-max-frequency = <16000000>;
@@ -2036,6 +2037,7 @@ index 000000000000..cdc9a971f717
 +		#size-cells = <0>;
 +
 +		compatible = "spidev";
++		symlink = "spi/0.1";
 +
 +		reg = <1>;
 +		spi-max-frequency = <16000000>;
@@ -2052,6 +2054,7 @@ index 000000000000..cdc9a971f717
 +		#size-cells = <0>;
 +
 +		compatible = "spidev";
++		symlink = "spi/1.0";
 +
 +		reg = <0>;
 +		spi-max-frequency = <16000000>;
@@ -2063,6 +2066,7 @@ index 000000000000..cdc9a971f717
 +		#size-cells = <0>;
 +
 +		compatible = "spidev";
++		symlink = "spi/1.1";
 +
 +		reg = <1>;
 +		spi-max-frequency = <16000000>;
@@ -4271,10 +4275,10 @@ index 000000000000..5df881eaac4c
 +#include "am335x-cape-bbb-exp-r.dtsi"
 diff --git a/arch/arm/boot/dts/am335x-boneblack-bbbmini.dts b/arch/arm/boot/dts/am335x-boneblack-bbbmini.dts
 new file mode 100644
-index 000000000000..a2245501a5bd
+index 000000000000..34c1f17283f3
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-boneblack-bbbmini.dts
-@@ -0,0 +1,206 @@
+@@ -0,0 +1,209 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *                    Modified by Mirko Denecke <mirkix@gmail.com>
@@ -4433,6 +4437,7 @@ index 000000000000..a2245501a5bd
 +		spi-max-frequency = <24000000>;
 +		reg = <0>;
 +		compatible = "spidev";
++		symlink = "spi/0.0";
 +	};
 +};
 +
@@ -4447,6 +4452,7 @@ index 000000000000..a2245501a5bd
 +		reg = <0>;
 +		spi-max-frequency = <24000000>;
 +		compatible = "spidev";
++		symlink = "spi/1.0";
 +	};
 +
 +	spi1@1 {
@@ -4455,6 +4461,7 @@ index 000000000000..a2245501a5bd
 +		reg = <1>;
 +		spi-max-frequency = <24000000>;
 +		compatible = "spidev";
++		symlink = "spi/1.1";
 +	};
 +};
 +
@@ -4818,7 +4825,7 @@ index d154d3133c16..e62023252165 100644
  / {
  	model = "TI AM335x BeagleBone Black";
 diff --git a/arch/arm/boot/dts/am335x-boneblue.dts b/arch/arm/boot/dts/am335x-boneblue.dts
-index 7bcd72691f06..49b965a4bf4e 100644
+index 7bcd72691f06..1a24efdd1fc8 100644
 --- a/arch/arm/boot/dts/am335x-boneblue.dts
 +++ b/arch/arm/boot/dts/am335x-boneblue.dts
 @@ -125,9 +125,179 @@
@@ -5154,7 +5161,7 @@ index 7bcd72691f06..49b965a4bf4e 100644
  };
  
  &dcan1 {
-@@ -533,3 +752,215 @@
+@@ -533,3 +752,217 @@
  		line-name = "LS_BUF_EN";
  	};
  };
@@ -5358,6 +5365,7 @@ index 7bcd72691f06..49b965a4bf4e 100644
 +		#address-cells = <1>;
 +		#size-cells = <0>;
 +		compatible = "spidev";
++		symlink = "spi/1.0";
 +		reg = <0>;
 +		spi-max-frequency = <24000000>;
 +	};
@@ -5366,16 +5374,17 @@ index 7bcd72691f06..49b965a4bf4e 100644
 +		#address-cells = <1>;
 +		#size-cells = <0>;
 +		compatible = "spidev";
++		symlink = "spi/1.1";
 +		reg = <1>;
 +		spi-max-frequency = <24000000>;
 +	};
 +};
 diff --git a/arch/arm/boot/dts/am335x-bonegreen-wireless-common-univ.dtsi b/arch/arm/boot/dts/am335x-bonegreen-wireless-common-univ.dtsi
 new file mode 100644
-index 000000000000..ae2f79a78c3f
+index 000000000000..455a8fa5f68b
 --- /dev/null
 +++ b/arch/arm/boot/dts/am335x-bonegreen-wireless-common-univ.dtsi
-@@ -0,0 +1,2793 @@
+@@ -0,0 +1,2797 @@
 +/*
 + * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
 + *
@@ -6666,6 +6675,7 @@ index 000000000000..ae2f79a78c3f
 +		#size-cells = <0>;
 +
 +		compatible = "spidev";
++		symlink = "spi/0.0";
 +
 +		reg = <0>;
 +		spi-max-frequency = <16000000>;
@@ -6677,6 +6687,7 @@ index 000000000000..ae2f79a78c3f
 +		#size-cells = <0>;
 +
 +		compatible = "spidev";
++		symlink = "spi/0.1";
 +
 +		reg = <1>;
 +		spi-max-frequency = <16000000>;
@@ -6693,6 +6704,7 @@ index 000000000000..ae2f79a78c3f
 +		#size-cells = <0>;
 +
 +		compatible = "spidev";
++		symlink = "spi/1.0";
 +
 +		reg = <0>;
 +		spi-max-frequency = <16000000>;
@@ -6704,6 +6716,7 @@ index 000000000000..ae2f79a78c3f
 +		#size-cells = <0>;
 +
 +		compatible = "spidev";
++		symlink = "spi/1.1";
 +
 +		reg = <1>;
 +		spi-max-frequency = <16000000>;
@@ -8908,7 +8921,7 @@ index 000000000000..adc89f046fbb
 +	status = "okay";
 +};
 diff --git a/arch/arm/boot/dts/am335x-pocketbeagle.dts b/arch/arm/boot/dts/am335x-pocketbeagle.dts
-index 62fe5cab9fae..58e012235b09 100644
+index 62fe5cab9fae..9f4142c21ec6 100644
 --- a/arch/arm/boot/dts/am335x-pocketbeagle.dts
 +++ b/arch/arm/boot/dts/am335x-pocketbeagle.dts
 @@ -60,24 +60,24 @@
@@ -9925,7 +9938,7 @@ index 62fe5cab9fae..58e012235b09 100644
  
  	status = "okay";
  };
-@@ -235,3 +1098,1088 @@
+@@ -235,3 +1098,1092 @@
  &cppi41dma  {
  	status = "okay";
  };
@@ -9939,6 +9952,7 @@ index 62fe5cab9fae..58e012235b09 100644
 +		#address-cells = <1>;
 +		#size-cells = <0>;
 +		compatible = "spidev";
++		symlink = "spi/0.0";
 +		reg = <0>;
 +		spi-max-frequency = <24000000>;
 +	};
@@ -9947,6 +9961,7 @@ index 62fe5cab9fae..58e012235b09 100644
 +		#address-cells = <1>;
 +		#size-cells = <0>;
 +		compatible = "spidev";
++		symlink = "spi/0.1";
 +		reg = <1>;
 +		spi-max-frequency = <24000000>;
 +		status = "disabled";
@@ -9962,6 +9977,7 @@ index 62fe5cab9fae..58e012235b09 100644
 +		#address-cells = <1>;
 +		#size-cells = <0>;
 +		compatible = "spidev";
++		symlink = "spi/1.0";
 +		reg = <0>;
 +		spi-max-frequency = <24000000>;
 +	};
@@ -9970,6 +9986,7 @@ index 62fe5cab9fae..58e012235b09 100644
 +		#address-cells = <1>;
 +		#size-cells = <0>;
 +		compatible = "spidev";
++		symlink = "spi/1.1";
 +		reg = <1>;
 +		spi-max-frequency = <24000000>;
 +	};
