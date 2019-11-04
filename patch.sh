@@ -542,10 +542,9 @@ drivers () {
 	dir 'drivers/ti/cpsw'
 	dir 'drivers/ti/etnaviv'
 	dir 'drivers/ti/eqep'
-#exit 2 #cleanup
 	dir 'drivers/ti/rpmsg'
 	dir 'drivers/ti/serial'
-	dir 'drivers/ti/spi'
+#exit 2 #cleanup
 	dir 'drivers/ti/tsc'
 	dir 'drivers/ti/gpio'
 
