@@ -390,6 +390,8 @@ beagleboard_dtbs () {
 
 		device="omap4-panda-es-b3.dtb" ; dtb_makefile_append_omap4
 
+		device="am335x-abbbi.dtb" ; dtb_makefile_append
+
 		${git_bin} add -f arch/arm/boot/dts/
 		${git_bin} add -f include/dt-bindings/
 		${git_bin} commit -a -m "Add BeagleBoard.org DTBS: $bbdtbs" -m "https://github.com/beagleboard/BeagleBoard-DeviceTrees/tree/${bbdtbs}" -m "https://github.com/beagleboard/BeagleBoard-DeviceTrees/commit/${bbdtbs_hash}" -s
@@ -566,7 +568,6 @@ soc () {
 	dir 'soc/ti/omap4'
 
 #exit 2 #cleanup
-	dir 'soc/ti/abbbi'
 	dir 'soc/ti/pocketbeagle'
 	dir 'soc/ti/beaglebone_capes'
 	dir 'soc/ti/uboot'
@@ -605,11 +606,6 @@ beaglebone () {
 	if [ "x${regenerate}" = "xenable" ] ; then
 
 		device="am335x-boneblack-uboot.dtb" ; dtb_makefile_append
-
-#		device="am335x-boneblack-roboticscape.dtb" ; dtb_makefile_append
-#		device="am335x-boneblack-wireless-roboticscape.dtb" ; dtb_makefile_append
-
-		device="am335x-abbbi.dtb" ; dtb_makefile_append
 
 		device="am335x-boneblack-wl1835mod.dtb" ; dtb_makefile_append
 
