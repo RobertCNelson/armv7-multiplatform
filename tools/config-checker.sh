@@ -69,7 +69,7 @@ cd ${DIR}/KERNEL/
 #
 # General setup
 #
-config="CONFIG_BUILD_SALT" ; option="5.4-rc4-armv7-devel-r0" ; config_string
+config="CONFIG_BUILD_SALT" ; option="" ; config_string
 config="CONFIG_KERNEL_LZO" ; config_enable
 
 #
@@ -125,6 +125,11 @@ config="CONFIG_OMAP5_ERRATA_801819" ; config_enable
 # end of TI OMAP/AM/DM/DRA Family
 config="CONFIG_ARCH_ROCKCHIP" ; config_disable
 config="CONFIG_ARCH_SOCFPGA" ; config_disable
+config="CONFIG_ARCH_STM32" ; config_disable
+config="CONFIG_MACH_SUN6I" ; config_disable
+config="CONFIG_MACH_SUN7I" ; config_disable
+config="CONFIG_MACH_SUN8I" ; config_disable
+config="CONFIG_MACH_SUN9I" ; config_disable
 config="CONFIG_ARCH_TEGRA" ; config_disable
 config="CONFIG_ARCH_VEXPRESS" ; config_disable
 config="CONFIG_ARCH_WM8850" ; config_disable
@@ -165,11 +170,6 @@ config="CONFIG_ARM_PSCI_CPUIDLE" ; config_enable
 config="CONFIG_ARM_CPUIDLE" ; config_enable
 
 #
-# At least one emulation must be selected
-#
-config="CONFIG_KERNEL_MODE_NEON" ; config_enable
-
-#
 # Power management options
 #
 config="CONFIG_PM_AUTOSLEEP" ; config_enable
@@ -200,6 +200,7 @@ config="CONFIG_CRYPTO_NHPOLY1305_NEON" ; config_module
 ##
 ## GCOV-based kernel profiling
 ##
+config="CONFIG_MODULE_SIG" ; config_disable
 config="CONFIG_MODULE_COMPRESS" ; config_enable
 config="CONFIG_MODULE_COMPRESS_GZIP" ; config_disable
 config="CONFIG_MODULE_COMPRESS_XZ" ; config_enable
@@ -216,11 +217,7 @@ config="CONFIG_NETLABEL" ; config_enable
 #
 # DCCP Kernel Hacking
 #
-config="CONFIG_NET_DSA_TAG_BRCM" ; config_disable
-config="CONFIG_NET_DSA_TAG_BRCM_PREPEND" ; config_disable
-config="CONFIG_NET_DSA_TAG_DSA" ; config_disable
-config="CONFIG_NET_DSA_TAG_EDSA" ; config_disable
-config="CONFIG_NET_DSA_TAG_TRAILER" ; config_disable
+config="CONFIG_NET_DSA" ; config_disable
 
 # end of AX.25 network device drivers
 config="CONFIG_CAN_J1939" ; config_module
@@ -372,14 +369,6 @@ config="CONFIG_MD_RAID456" ; config_disable
 config="CONFIG_DM_RAID" ; config_disable
 config="CONFIG_MII" ; config_enable
 
-#
-# Distributed Switch Architecture drivers
-#
-config="CONFIG_B53" ; config_disable
-config="CONFIG_NET_DSA_BCM_SF2" ; config_disable
-config="CONFIG_NET_DSA_MV88E6060" ; config_disable
-config="CONFIG_NET_DSA_MV88E6XXX" ; config_disable
-
 # end of Distributed Switch Architecture drivers
 config="CONFIG_NET_VENDOR_ALACRITECH" ; config_disable
 
@@ -426,7 +415,7 @@ config="CONFIG_STMMAC_ETH" ; config_enable
 config="CONFIG_STMMAC_PLATFORM" ; config_enable
 config="CONFIG_DWMAC_GENERIC" ; config_enable
 config="CONFIG_DWMAC_SUNXI" ; config_enable
-config="CONFIG_DWMAC_SUN8I" ; config_enable
+config="CONFIG_DWMAC_SUN8I" ; config_disable
 
 config="CONFIG_NET_VENDOR_SYNOPSYS" ; config_disable
 
@@ -536,7 +525,6 @@ config="CONFIG_JOYSTICK_PXRC" ; config_module
 config="CONFIG_JOYSTICK_FSIA6B" ; config_module
 
 config="CONFIG_TOUCHSCREEN_AR1021_I2C" ; config_module
-config="CONFIG_TOUCHSCREEN_EDT_FT5X06" ; config_module
 config="CONFIG_TOUCHSCREEN_TOUCHIT213" ; config_disable
 config="CONFIG_TOUCHSCREEN_SILEAD" ; config_module
 config="CONFIG_TOUCHSCREEN_SUR40" ; config_disable
@@ -583,7 +571,6 @@ config="CONFIG_RANDOM_TRUST_BOOTLOADER" ; config_enable
 # I2C support
 #
 config="CONFIG_I2C_CHARDEV" ; config_enable
-config="CONFIG_I2C_MUX_PINCTRL" ; config_enable
 
 #
 # Multiplexer I2C Chip support
@@ -600,7 +587,6 @@ config="CONFIG_I2C_OCORES" ; config_disable
 config="CONFIG_I2C_PCA_PLATFORM" ; config_disable
 config="CONFIG_I2C_RK3X" ; config_disable
 config="CONFIG_I2C_SIMTEC" ; config_disable
-config="CONFIG_I2C_SUN6I_P2WI" ; config_enable
 
 #
 # SPI Master Controller Drivers
@@ -627,6 +613,19 @@ config="CONFIG_PPS_CLIENT_GPIO" ; config_module
 #
 config="CONFIG_PINCTRL_AXP209" ; config_enable
 config="CONFIG_PINCTRL_MCP23S08" ; config_disable
+
+config="CONFIG_PINCTRL_SUN6I_A31" ; config_disable
+config="CONFIG_PINCTRL_SUN6I_A31_R" ; config_disable
+config="CONFIG_PINCTRL_SUN8I_A23" ; config_disable
+config="CONFIG_PINCTRL_SUN8I_A33" ; config_disable
+config="CONFIG_PINCTRL_SUN8I_A83T" ; config_disable
+config="CONFIG_PINCTRL_SUN8I_A83T_R" ; config_disable
+config="CONFIG_PINCTRL_SUN8I_A23_R" ; config_disable
+config="CONFIG_PINCTRL_SUN8I_H3" ; config_disable
+config="CONFIG_PINCTRL_SUN8I_H3_R" ; config_disable
+config="CONFIG_PINCTRL_SUN8I_V3S" ; config_disable
+config="CONFIG_PINCTRL_SUN9I_A80" ; config_disable
+config="CONFIG_PINCTRL_SUN9I_A80_R" ; config_disable
 
 #
 # Memory mapped GPIO drivers
@@ -803,7 +802,6 @@ config="CONFIG_SENSORS_W83627HF" ; config_module
 
 config="CONFIG_THERMAL_GOV_BANG_BANG" ; config_enable
 config="CONFIG_CLOCK_THERMAL" ; config_enable
-config="CONFIG_DEVFREQ_THERMAL" ; config_enable
 config="CONFIG_IMX_THERMAL" ; config_enable
 
 #exit
@@ -816,7 +814,6 @@ config="CONFIG_OMAP3_THERMAL" ; config_enable
 
 # end of Texas Instruments thermal drivers
 config="CONFIG_GENERIC_ADC_THERMAL" ; config_module
-config="CONFIG_WATCHDOG_CORE" ; config_enable
 
 #
 # Watchdog Device Drivers
@@ -836,7 +833,6 @@ config="CONFIG_BCMA" ; config_disable
 #
 config="CONFIG_MFD_AS3722" ; config_disable #nvidia/jetson
 config="CONFIG_MFD_AXP20X_RSB" ; config_enable
-config="CONFIG_MFD_CROS_EC" ; config_disable
 config="CONFIG_MFD_VIPERBOARD" ; config_disable
 config="CONFIG_MFD_RK808" ; config_disable
 config="CONFIG_MFD_SEC_CORE" ; config_disable
@@ -848,6 +844,7 @@ config="CONFIG_MFD_TPS65217" ; config_enable
 config="CONFIG_MFD_TPS65218" ; config_enable
 config="CONFIG_MFD_TPS65910" ; config_enable
 config="CONFIG_MFD_WL1273_CORE" ; config_module
+config="CONFIG_MFD_STPMIC1" ; config_disable
 
 # end of Multifunction device drivers
 config="CONFIG_REGULATOR_USERSPACE_CONSUMER" ; config_enable
@@ -904,9 +901,9 @@ config="CONFIG_DRM_ARMADA" ; config_disable
 config="CONFIG_DRM_SUN4I" ; config_enable
 config="CONFIG_DRM_SUN4I_HDMI" ; config_enable
 config="CONFIG_DRM_SUN4I_BACKEND" ; config_enable
-config="CONFIG_DRM_SUN6I_DSI" ; config_enable
-config="CONFIG_DRM_SUN8I_DW_HDMI" ; config_enable
-config="CONFIG_DRM_SUN8I_MIXER" ; config_enable
+config="CONFIG_DRM_SUN6I_DSI" ; config_disable
+config="CONFIG_DRM_SUN8I_DW_HDMI" ; config_disable
+config="CONFIG_DRM_SUN8I_MIXER" ; config_disable
 config="CONFIG_DRM_OMAP" ; config_enable
 config="CONFIG_OMAP_DSS_BASE" ; config_enable
 config="CONFIG_OMAP2_DSS" ; config_enable
@@ -918,13 +915,19 @@ config="CONFIG_DRM_OMAP_ENCODER_OPA362" ; config_enable
 config="CONFIG_DRM_OMAP_ENCODER_TPD12S015" ; config_enable
 config="CONFIG_DRM_OMAP_CONNECTOR_HDMI" ; config_enable
 
+# end of OMAPDRM External Display Device Drivers
 config="CONFIG_DRM_TILCDC" ; config_enable
-config="CONFIG_DRM_MSM" ; config_disable
+config="CONFIG_DRM_STM" ; config_disable
 
 #
 # Display Panels
 #
+config="CONFIG_DRM_PANEL_SIMPLE" ; config_enable
+config="CONFIG_DRM_PANEL_ORISETECH_OTM8009A" ; config_enable
 config="CONFIG_DRM_PANEL_RASPBERRYPI_TOUCHSCREEN" ; config_disable
+config="CONFIG_DRM_PANEL_SONY_ACX565AKM" ; config_enable
+config="CONFIG_DRM_PANEL_TPO_TD028TTEC1" ; config_enable
+config="CONFIG_DRM_PANEL_TPO_TD043MTEA1" ; config_enable
 
 #
 # Display Interface Bridges
@@ -1122,6 +1125,9 @@ config="CONFIG_USB_MXS_PHY" ; config_enable
 config="CONFIG_USB_GADGET" ; config_enable
 config="CONFIG_USB_GADGET_VBUS_DRAW" ; option="500" ; config_value
 
+#
+# USB Peripheral Controller
+#
 config="CONFIG_USB_DUMMY_HCD" ; config_module
 
 #
@@ -1293,7 +1299,6 @@ config="CONFIG_RTC_DRV_HID_SENSOR_TIME" ; config_module
 #
 # DMA Devices
 #
-config="CONFIG_DMA_SUN6I" ; config_enable
 config="CONFIG_FSL_EDMA" ; config_enable
 config="CONFIG_DW_DMAC_CORE" ; config_enable
 config="CONFIG_DW_DMAC" ; config_enable
@@ -1439,6 +1444,12 @@ config="CONFIG_CHROME_PLATFORMS" ; config_disable
 config="CONFIG_CLK_TWL6040" ; config_enable
 
 config="CONFIG_COMMON_CLK_PALMAS" ; config_enable
+config="CONFIG_CLK_SUNXI_PRCM_SUN6I" ; config_disable
+config="CONFIG_CLK_SUNXI_PRCM_SUN8I" ; config_disable
+config="CONFIG_CLK_SUNXI_PRCM_SUN9I" ; config_disable
+config="CONFIG_SUN8I_A83T_CCU" ; config_disable
+config="CONFIG_SUN8I_DE2_CCU" ; config_disable
+config="CONFIG_SUN8I_R_CCU" ; config_disable
 
 # end of Common Clock Framework
 config="CONFIG_HWSPINLOCK" ; config_enable
@@ -1453,7 +1464,6 @@ config="CONFIG_IOMMU_IO_PGTABLE_LPAE" ; config_disable
 #
 # Remoteproc drivers
 #
-config="CONFIG_REMOTEPROC" ; config_enable
 config="CONFIG_IMX_REMOTEPROC" ; config_module
 config="CONFIG_OMAP_REMOTEPROC" ; config_module
 config="CONFIG_WKUP_M3_RPROC" ; config_enable
@@ -1933,6 +1943,8 @@ config="CONFIG_TSYS01" ; config_module
 config="CONFIG_TSYS02D" ; config_module
 config="CONFIG_MAX31856" ; config_module
 
+#exit
+
 # end of Temperature sensors
 config="CONFIG_PWM_PCA9685" ; config_module
 config="CONFIG_PWM_STMPE" ; config_enable
@@ -1944,7 +1956,8 @@ config="CONFIG_RESET_TI_SYSCON" ; config_enable
 # PHY Subsystem
 #
 config="CONFIG_PHY_SUN4I_USB" ; config_enable
-config="CONFIG_PHY_SUN9I_USB" ; config_enable
+config="CONFIG_PHY_SUN6I_MIPI_DPHY" ; config_disable
+config="CONFIG_PHY_SUN9I_USB" ; config_disable
 config="CONFIG_OMAP_USB2" ; config_enable
 config="CONFIG_TWL4030_USB" ; config_enable
 config="CONFIG_TI_PIPE3" ; config_module
@@ -1994,7 +2007,6 @@ config="CONFIG_OVERLAY_FS" ; config_enable
 config="CONFIG_FAT_FS" ; config_enable
 config="CONFIG_MSDOS_FS" ; config_enable
 config="CONFIG_VFAT_FS" ; config_enable
-config="CONFIG_NTFS_FS" ; config_module
 
 #
 # Pseudo filesystems
@@ -2023,6 +2035,7 @@ config="CONFIG_QNX6FS_FS" ; config_disable
 
 config="CONFIG_SYSV_FS" ; config_disable
 config="CONFIG_UFS_FS" ; config_disable
+config="CONFIG_EROFS_FS" ; config_disable
 
 config="CONFIG_NFS_FS" ; config_enable
 config="CONFIG_NFS_V2" ; config_enable
@@ -2039,6 +2052,7 @@ config="CONFIG_NLS_UTF8" ; config_enable
 #
 config="CONFIG_KEY_DH_OPERATIONS" ; config_disable
 config="CONFIG_SECURITY_DMESG_RESTRICT" ; config_disable
+config="CONFIG_SECURITY_LOCKDOWN_LSM" ; config_disable
 
 #
 # Crypto core or helper
