@@ -451,12 +451,10 @@ drivers () {
 	dir 'drivers/ar1021_i2c'
 	dir 'drivers/pwm'
 	dir 'drivers/spi'
-#	dir 'drivers/ssd1306'
 	dir 'drivers/tps65217'
 
 	dir 'drivers/ti/overlays'
 	dir 'drivers/ti/cpsw'
-#	dir 'drivers/ti/eqep'
 	dir 'drivers/ti/rpmsg'
 	dir 'drivers/ti/serial'
 	dir 'drivers/ti/tsc'
