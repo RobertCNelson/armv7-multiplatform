@@ -410,7 +410,7 @@ beagleboard_dtbs () {
 
 		${git_bin} add -f arch/arm/boot/dts/
 		${git_bin} add -f include/dt-bindings/
-		${git_bin} commit -a -m "Add BeagleBoard.org DTBS: $bbdtbs" -m "${https_repo}/tree/${branch}" -m "${https_repo}/commit/${git_hash}" -s
+		${git_bin} commit -a -m "Add BeagleBoard.org DTBS: $branch" -m "${https_repo}/tree/${branch}" -m "${https_repo}/commit/${git_hash}" -s
 		${git_bin} format-patch -1 -o ../patches/soc/ti/beagleboard_dtbs/
 		echo "BBDTBS: ${https_repo}/commit/${git_hash}" > ../patches/git/BBDTBS
 
@@ -463,7 +463,7 @@ seeed_dtbs () {
 
 		${git_bin} add -f arch/arm/boot/dts/
 		${git_bin} add -f include/dt-bindings/
-		${git_bin} commit -a -m "Add seeedstudio.com DTBS: $bbdtbs" -m "${https_repo}/tree/${branch}" -m "${https_repo}/commit/${git_hash}" -s
+		${git_bin} commit -a -m "Add seeedstudio.com DTBS: $branch" -m "${https_repo}/tree/${branch}" -m "${https_repo}/commit/${git_hash}" -s
 		${git_bin} format-patch -1 -o ../patches/seeed_dtbs/
 		echo "SEEEDDTBS: ${https_repo}/commit/${git_hash}" > ../patches/git/SEEEDDTBS
 
