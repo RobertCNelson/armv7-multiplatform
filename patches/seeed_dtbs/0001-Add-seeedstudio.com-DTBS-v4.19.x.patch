@@ -1,7 +1,7 @@
-From efa626178d98cb975a0e6828ac910e8750007f87 Mon Sep 17 00:00:00 2001
+From fe96aacb21bc7e08fbcf069a912fae7ca33cc164 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Wed, 29 Jan 2020 16:43:53 -0600
-Subject: [PATCH] Add seeedstudio.com DTBS:
+Date: Wed, 29 Jan 2020 16:55:29 -0600
+Subject: [PATCH] Add seeedstudio.com DTBS: v4.19.x
 
 https://github.com/RobertCNelson/Seeed-DeviceTrees/tree/v4.19.x
 
@@ -9,9 +9,11 @@ https://github.com/RobertCNelson/Seeed-DeviceTrees/commit/6aa3f7d3b2fbe703daa0a8
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  arch/arm/boot/dts/Makefile                   |   2 +
+ arch/arm/boot/dts/imx6ul-14x14-evk.dtsi      |   2 +-
+ arch/arm/boot/dts/imx6ul.dtsi                |   6 -
  arch/arm/boot/dts/imx6ull-seeed-npi-gpmi.dts |  44 +++
- arch/arm/boot/dts/imx6ull-seeed-npi.dts      | 354 +++++++++++++++++++
- 3 files changed, 400 insertions(+)
+ arch/arm/boot/dts/imx6ull-seeed-npi.dts      | 353 +++++++++++++++++++
+ 5 files changed, 400 insertions(+), 7 deletions(-)
  create mode 100644 arch/arm/boot/dts/imx6ull-seeed-npi-gpmi.dts
  create mode 100644 arch/arm/boot/dts/imx6ull-seeed-npi.dts
 
@@ -28,6 +30,43 @@ index 5b882465a67e..c4c7e27961c5 100644
  	imx6ull-colibri-eval-v3.dtb \
  	imx6ull-colibri-wifi-eval-v3.dtb
  dtb-$(CONFIG_SOC_IMX7D) += \
+diff --git a/arch/arm/boot/dts/imx6ul-14x14-evk.dtsi b/arch/arm/boot/dts/imx6ul-14x14-evk.dtsi
+index 695303435003..818021126559 100644
+--- a/arch/arm/boot/dts/imx6ul-14x14-evk.dtsi
++++ b/arch/arm/boot/dts/imx6ul-14x14-evk.dtsi
+@@ -175,7 +175,7 @@
+ 	flash0: n25q256a@0 {
+ 		#address-cells = <1>;
+ 		#size-cells = <1>;
+-		compatible = "micron,n25q256a", "jedec,spi-nor";
++		compatible = "micron,n25q256a";
+ 		spi-max-frequency = <29000000>;
+ 		reg = <0>;
+ 	};
+diff --git a/arch/arm/boot/dts/imx6ul.dtsi b/arch/arm/boot/dts/imx6ul.dtsi
+index adecd6e08468..50834a43e5fb 100644
+--- a/arch/arm/boot/dts/imx6ul.dtsi
++++ b/arch/arm/boot/dts/imx6ul.dtsi
+@@ -87,8 +87,6 @@
+ 				      "pll1_sys";
+ 			arm-supply = <&reg_arm>;
+ 			soc-supply = <&reg_soc>;
+-			nvmem-cells = <&cpu_speed_grade>;
+-			nvmem-cell-names = "speed_grade";
+ 		};
+ 	};
+ 
+@@ -932,10 +930,6 @@
+ 				tempmon_temp_grade: temp-grade@20 {
+ 					reg = <0x20 4>;
+ 				};
+-
+-				cpu_speed_grade: speed-grade@10 {
+-					reg = <0x10 4>;
+-				};
+ 			};
+ 
+ 			lcdif: lcdif@21c8000 {
 diff --git a/arch/arm/boot/dts/imx6ull-seeed-npi-gpmi.dts b/arch/arm/boot/dts/imx6ull-seeed-npi-gpmi.dts
 new file mode 100644
 index 000000000000..f0ed9d9ab912
@@ -80,10 +119,10 @@ index 000000000000..f0ed9d9ab912
 +};
 diff --git a/arch/arm/boot/dts/imx6ull-seeed-npi.dts b/arch/arm/boot/dts/imx6ull-seeed-npi.dts
 new file mode 100644
-index 000000000000..3d9fbe7666e1
+index 000000000000..aa0267ae5900
 --- /dev/null
 +++ b/arch/arm/boot/dts/imx6ull-seeed-npi.dts
-@@ -0,0 +1,354 @@
+@@ -0,0 +1,353 @@
 +/*
 + * Copyright (C) 2016 Freescale Semiconductor, Inc.
 + *
@@ -437,7 +476,6 @@ index 000000000000..3d9fbe7666e1
 +	non-removable;
 +	status = "okay";
 +};
-+
 -- 
 2.24.1
 
