@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.4.17 Kernel Configuration
+# Linux/arm 5.4.19 Kernel Configuration
 #
 
 #
@@ -6249,7 +6249,7 @@ CONFIG_BCM_VIDEOCORE=y
 # CONFIG_FIELDBUS_DEV is not set
 # CONFIG_USB_WUSB_CBAF is not set
 # CONFIG_UWB is not set
-# CONFIG_EXFAT_FS is not set
+# CONFIG_STAGING_EXFAT_FS is not set
 # CONFIG_QLGE is not set
 # CONFIG_GOLDFISH is not set
 CONFIG_MFD_CROS_EC=m
