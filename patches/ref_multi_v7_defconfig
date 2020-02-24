@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.5.5 Kernel Configuration
+# Linux/arm 5.5.6 Kernel Configuration
 #
 
 #
@@ -4984,6 +4984,7 @@ CONFIG_SND_SOC_GENERIC_DMAENGINE_PCM=y
 # CONFIG_SND_SOC_ADI is not set
 # CONFIG_SND_SOC_AMD_ACP is not set
 CONFIG_SND_ATMEL_SOC=m
+CONFIG_SND_ATMEL_SOC_PDC=m
 CONFIG_SND_ATMEL_SOC_DMA=m
 CONFIG_SND_ATMEL_SOC_SSC=m
 # CONFIG_SND_ATMEL_SOC_SSC_PDC is not set
