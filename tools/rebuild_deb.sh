@@ -1,6 +1,6 @@
 #!/bin/sh -e
 #
-# Copyright (c) 2009-2017 Robert Nelson <robertcnelson@gmail.com>
+# Copyright (c) 2009-2020 Robert Nelson <robertcnelson@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -85,18 +85,22 @@ make_deb () {
 	if grep -q bindeb-pkg "${DIR}/KERNEL/scripts/package/Makefile"; then
 		echo "make ${build_opts} CROSS_COMPILE="${CC}" bindeb-pkg"
 		echo "-----------------------------"
-		fakeroot make ${build_opts} CROSS_COMPILE="${CC}" bindeb-pkg
+		make ${build_opts} CROSS_COMPILE="${CC}" bindeb-pkg
 	else
 		echo "make ${build_opts} CROSS_COMPILE="${CC}" deb-pkg"
 		echo "-----------------------------"
-		fakeroot make ${build_opts} CROSS_COMPILE="${CC}" deb-pkg
+		make ${build_opts} CROSS_COMPILE="${CC}" deb-pkg
 	fi
 
-	mv "${DIR}"/*.deb "${DIR}/deploy/" || true
+	#old
 	mv "${DIR}"/*.debian.tar.gz "${DIR}/deploy/" || true
 	mv "${DIR}"/*.dsc "${DIR}/deploy/" || true
-	mv "${DIR}"/*.changes "${DIR}/deploy/" || true
 	mv "${DIR}"/*.orig.tar.gz "${DIR}/deploy/" || true
+
+	#current
+	mv "${DIR}"/*.buildinfo "${DIR}/deploy/" || true
+	mv "${DIR}"/*.changes "${DIR}/deploy/" || true
+	mv "${DIR}"/*.deb "${DIR}/deploy/" || true
 
 	KERNEL_UTS=$(cat "${DIR}/KERNEL/include/generated/utsrelease.h" | awk '{print $3}' | sed 's/\"//g' )
 
