@@ -1,17 +1,17 @@
-From f7433f76381f14b77e780dfa33fd088982e955c5 Mon Sep 17 00:00:00 2001
+From 188c66ec6ff2dc9a647de507a8c27e04c9e7d798 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Tue, 10 Mar 2020 16:00:20 -0500
+Date: Tue, 10 Mar 2020 16:18:36 -0500
 Subject: [PATCH] backports: bindeb-pkg: from: linux.git
 
-Reference: v5.2
+Reference: v5.2.21
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
- scripts/package/Makefile | 12 +++++-----
- scripts/package/builddeb | 46 +++++++++++++++++++++-----------------
+ scripts/package/Makefile | 12 +++++------
+ scripts/package/builddeb | 44 ++++++++++++++++++++++-----------------
  scripts/package/buildtar |  4 ++--
- scripts/package/mkdebian | 48 ++++++++++++++++++++++++----------------
- scripts/package/mkspec   | 11 ++++-----
- 5 files changed, 69 insertions(+), 52 deletions(-)
+ scripts/package/mkdebian | 45 +++++++++++++++++++++++-----------------
+ scripts/package/mkspec   | 11 +++++-----
+ 5 files changed, 65 insertions(+), 51 deletions(-)
 
 diff --git a/scripts/package/Makefile b/scripts/package/Makefile
 index 73503ebce632..ca7f46b562a4 100644
@@ -65,7 +65,7 @@ index 73503ebce632..ca7f46b562a4 100644
  clean-dirs += $(objtree)/tar-install/
  
 diff --git a/scripts/package/builddeb b/scripts/package/builddeb
-index 90c9a8ac7adb..b03dd56a4782 100755
+index 0b31f4f1f92c..b03dd56a4782 100755
 --- a/scripts/package/builddeb
 +++ b/scripts/package/builddeb
 @@ -12,6 +12,18 @@
@@ -96,12 +96,9 @@ index 90c9a8ac7adb..b03dd56a4782 100755
  
  # Setup the directory structure
  rm -rf "$tmpdir" "$kernel_headers_dir" "$libc_headers_dir" "$dbg_dir" $objtree/debian/files
-@@ -81,17 +93,17 @@ else
- 	cp System.map "$tmpdir/boot/System.map-$version"
- 	cp $KCONFIG_CONFIG "$tmpdir/boot/config-$version"
+@@ -83,15 +95,15 @@ else
  fi
--cp "$($MAKE -s image_name)" "$tmpdir/$installed_image_path"
-+cp "$($MAKE -s -f $srctree/Makefile image_name)" "$tmpdir/$installed_image_path"
+ cp "$($MAKE -s -f $srctree/Makefile image_name)" "$tmpdir/$installed_image_path"
  
 -if grep -q "^CONFIG_OF=y" $KCONFIG_CONFIG ; then
 +if is_enabled CONFIG_OF_EARLY_FLATTREE; then
@@ -192,7 +189,7 @@ index d624a07a4e77..2f66c81e4021 100755
  fi
  
 diff --git a/scripts/package/mkdebian b/scripts/package/mkdebian
-index 663a7f343b42..8351584cb24e 100755
+index edcad61fe3cd..8351584cb24e 100755
 --- a/scripts/package/mkdebian
 +++ b/scripts/package/mkdebian
 @@ -7,7 +7,7 @@
@@ -262,15 +259,7 @@ index 663a7f343b42..8351584cb24e 100755
  		fi
  		;;
  	esac
-@@ -88,6 +88,7 @@ set_debarch() {
- version=$KERNELRELEASE
- if [ -n "$KDEB_PKGVERSION" ]; then
- 	packageversion=$KDEB_PKGVERSION
-+	revision=${packageversion##*-}
- else
- 	revision=$(cat .version 2>/dev/null||echo 1)
- 	packageversion=$version-$revision
-@@ -131,8 +132,12 @@ else
+@@ -132,8 +132,12 @@ else
          echo >&2 "Install lsb-release or set \$KDEB_CHANGELOG_DIST explicitly"
  fi
  
@@ -284,7 +273,7 @@ index 663a7f343b42..8351584cb24e 100755
  
  # Generate a simple changelog template
  cat <<EOF > debian/changelog
-@@ -169,7 +174,7 @@ Source: $sourcename
+@@ -170,7 +174,7 @@ Source: $sourcename
  Section: kernel
  Priority: optional
  Maintainer: $maintainer
@@ -293,25 +282,25 @@ index 663a7f343b42..8351584cb24e 100755
  Homepage: http://www.kernel.org/
  
  Package: $packagename
-@@ -204,11 +209,15 @@ EOF
+@@ -205,13 +209,15 @@ EOF
  cat <<EOF > debian/rules
  #!$(command -v $MAKE) -f
  
 +srctree ?= .
 +
  build:
--	\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} KBUILD_SRC=
-+	\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} \
+ 	\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} \
+-	KBUILD_BUILD_VERSION=${revision} KBUILD_SRC=
 +	KBUILD_BUILD_VERSION=${revision} -f \$(srctree)/Makefile
  
  binary-arch:
--	\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} KBUILD_SRC= intdeb-pkg
-+	\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} \
+ 	\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} \
+-	KBUILD_BUILD_VERSION=${revision} KBUILD_SRC= intdeb-pkg
 +	KBUILD_BUILD_VERSION=${revision} -f \$(srctree)/Makefile intdeb-pkg
  
  clean:
  	rm -rf debian/*tmp debian/files
-@@ -216,5 +225,6 @@ clean:
+@@ -219,5 +225,6 @@ clean:
  
  binary: binary-arch
  EOF
