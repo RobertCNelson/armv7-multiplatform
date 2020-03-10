@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.19.103 Kernel Configuration
+# Linux/arm 4.19.106 Kernel Configuration
 #
 
 #
@@ -4619,6 +4619,7 @@ CONFIG_SND_SOC_GENERIC_DMAENGINE_PCM=y
 # CONFIG_SND_SOC_ADI is not set
 # CONFIG_SND_SOC_AMD_ACP is not set
 CONFIG_SND_ATMEL_SOC=m
+CONFIG_SND_ATMEL_SOC_PDC=m
 CONFIG_SND_ATMEL_SOC_DMA=m
 CONFIG_SND_ATMEL_SOC_SSC_DMA=m
 CONFIG_SND_ATMEL_SOC_SSC=m
