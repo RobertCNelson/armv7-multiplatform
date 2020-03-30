@@ -385,7 +385,7 @@ soc () {
 	dir 'soc/imx/imx7'
 
 	dir 'soc/ti/panda'
-	#dir 'bootup_hacks'
+	dir 'bootup_hacks'
 }
 
 ###
