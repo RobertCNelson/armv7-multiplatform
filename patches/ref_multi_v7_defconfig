@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.4.24 Kernel Configuration
+# Linux/arm 5.4.28 Kernel Configuration
 #
 
 #
@@ -2478,6 +2478,7 @@ CONFIG_BRCMFMAC_SDIO=y
 # CONFIG_BRCMFMAC_PCIE is not set
 # CONFIG_BRCM_TRACING is not set
 # CONFIG_BRCMDBG is not set
+# CONFIG_BRCMFMAC_PCIE_BARWIN_SZ is not set
 CONFIG_WLAN_VENDOR_CISCO=y
 CONFIG_WLAN_VENDOR_INTEL=y
 # CONFIG_IPW2100 is not set
