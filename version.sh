@@ -4,9 +4,9 @@ ARCH=$(uname -m)
 
 config="multi_v7_defconfig"
 
-build_prefix="-armv7-x"
+build_prefix="-armv7-rt-x"
 branch_prefix="v"
-branch_postfix=".x"
+branch_postfix=".x-rt"
 
 #arm
 KERNEL_ARCH=arm
@@ -36,9 +36,9 @@ toolchain="gcc_arm_gnueabihf_9"
 #Kernel
 KERNEL_REL=5.6
 KERNEL_TAG=${KERNEL_REL}.4
-kernel_rt=".X-rtY"
+kernel_rt=".4-rt3"
 #Kernel Build
-BUILD=${build_prefix}10
+BUILD=${build_prefix}10.1
 
 #v5.X-rcX + upto SHA
 #prev_KERNEL_SHA=""
