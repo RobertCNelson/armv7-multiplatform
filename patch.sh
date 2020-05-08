@@ -608,6 +608,7 @@ drivers () {
 	dir 'drivers/ar1021_i2c'
 	dir 'drivers/btrfs'
 	dir 'drivers/pwm'
+	dir 'drivers/sound'
 	dir 'drivers/spi'
 	dir 'drivers/ssd1306'
 	dir 'drivers/tps65217'
@@ -636,6 +637,7 @@ soc () {
 	dir 'soc/imx/imx7'
 
 	dir 'soc/ti/omap4'
+	dir 'bootup_hacks'
 }
 
 ###
