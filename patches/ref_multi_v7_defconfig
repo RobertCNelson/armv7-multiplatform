@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.7.0-rc5 Kernel Configuration
+# Linux/arm 5.7.0-rc6 Kernel Configuration
 #
 
 #
@@ -1043,6 +1043,7 @@ CONFIG_ARCH_SUPPORTS_ATOMIC_RMW=y
 CONFIG_MUTEX_SPIN_ON_OWNER=y
 CONFIG_RWSEM_SPIN_ON_OWNER=y
 CONFIG_LOCK_SPIN_ON_OWNER=y
+CONFIG_ARCH_HAS_NON_OVERLAPPING_ADDRESS_SPACE=y
 CONFIG_FREEZER=y
 
 #
@@ -2203,7 +2204,6 @@ CONFIG_NET_VENDOR_HISILICON=y
 CONFIG_HIX5HD2_GMAC=y
 # CONFIG_HISI_FEMAC is not set
 # CONFIG_HIP04_ETH is not set
-# CONFIG_HNS is not set
 # CONFIG_HNS_DSAF is not set
 # CONFIG_HNS_ENET is not set
 # CONFIG_HNS3 is not set
