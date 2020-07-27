@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.8.0-rc6 Kernel Configuration
+# Linux/arm 5.8.0-rc7 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-none-linux-gnueabihf-gcc (GNU Toolchain for the A-profile Architecture 9.2-2019.12 (arm-9.10)) 9.2.1 20191025"
 CONFIG_CC_IS_GCC=y
@@ -3417,7 +3417,7 @@ CONFIG_GPIO_XRA1403=m
 #
 # end of USB GPIO expanders
 
-# CONFIG_GPIO_AGGREGATOR is not set
+CONFIG_GPIO_AGGREGATOR=m
 # CONFIG_GPIO_MOCKUP is not set
 CONFIG_W1=m
 CONFIG_W1_CON=y
