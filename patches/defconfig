@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.19.127 Kernel Configuration
+# Linux/arm 4.19.135 Kernel Configuration
 #
 
 #
@@ -2049,7 +2049,6 @@ CONFIG_BLK_DEV_SD=y
 CONFIG_CHR_DEV_ST=m
 CONFIG_CHR_DEV_OSST=m
 CONFIG_BLK_DEV_SR=m
-CONFIG_BLK_DEV_SR_VENDOR=y
 CONFIG_CHR_DEV_SG=m
 CONFIG_CHR_DEV_SCH=m
 CONFIG_SCSI_CONSTANTS=y
@@ -5141,7 +5140,20 @@ CONFIG_USB_G_DBGP=m
 # CONFIG_USB_G_DBGP_PRINTK is not set
 CONFIG_USB_G_DBGP_SERIAL=y
 # CONFIG_USB_G_WEBCAM is not set
-# CONFIG_TYPEC is not set
+CONFIG_TYPEC=y
+# CONFIG_TYPEC_TCPM is not set
+# CONFIG_TYPEC_UCSI is not set
+# CONFIG_TYPEC_TPS6598X is not set
+
+#
+# USB Type-C Multiplexer/DeMultiplexer Switch support
+#
+# CONFIG_TYPEC_MUX_PI3USB30532 is not set
+
+#
+# USB Type-C Alternate Mode drivers
+#
+# CONFIG_TYPEC_DP_ALTMODE is not set
 # CONFIG_USB_ROLE_SWITCH is not set
 CONFIG_USB_LED_TRIG=y
 CONFIG_USB_ULPI_BUS=y
