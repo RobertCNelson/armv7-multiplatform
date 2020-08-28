@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.14.192 Kernel Configuration
+# Linux/arm 4.14.195 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -2841,6 +2841,7 @@ CONFIG_SPI_SPIDEV=y
 # CONFIG_SPI_LOOPBACK_TEST is not set
 # CONFIG_SPI_TLE62X0 is not set
 # CONFIG_SPI_SLAVE is not set
+CONFIG_SPI_DYNAMIC=y
 CONFIG_SPMI=y
 CONFIG_SPMI_MSM_PMIC_ARB=y
 # CONFIG_HSI is not set
