@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.8.2 Kernel Configuration
+# Linux/arm 5.8.5 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-none-linux-gnueabihf-gcc (GNU Toolchain for the A-profile Architecture 9.2-2019.12 (arm-9.10)) 9.2.1 20191025"
 CONFIG_CC_IS_GCC=y
@@ -3236,6 +3236,7 @@ CONFIG_SPI_SPIDEV=y
 # CONFIG_SPI_LOOPBACK_TEST is not set
 # CONFIG_SPI_TLE62X0 is not set
 # CONFIG_SPI_SLAVE is not set
+CONFIG_SPI_DYNAMIC=y
 CONFIG_SPMI=y
 CONFIG_SPMI_MSM_PMIC_ARB=y
 # CONFIG_HSI is not set
@@ -6765,6 +6766,7 @@ CONFIG_CLK_SP810=y
 CONFIG_CLK_VEXPRESS_OSC=y
 # end of Clock driver for ARM Reference designs
 
+# CONFIG_CLK_HSDK is not set
 CONFIG_COMMON_CLK_MAX77686=y
 # CONFIG_COMMON_CLK_MAX9485 is not set
 CONFIG_COMMON_CLK_RK808=m
