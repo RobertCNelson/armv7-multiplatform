@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.9.0-rc8 Kernel Configuration
+# Linux/arm 5.9.0 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-none-linux-gnueabihf-gcc (GNU Toolchain for the A-profile Architecture 9.2-2019.12 (arm-9.10)) 9.2.1 20191025"
 CONFIG_CC_IS_GCC=y
@@ -5184,6 +5184,7 @@ CONFIG_FB_MODE_HELPERS=y
 #
 # CONFIG_FB_CIRRUS is not set
 # CONFIG_FB_PM2 is not set
+# CONFIG_FB_ARMCLCD is not set
 # CONFIG_FB_IMX is not set
 # CONFIG_FB_CYBER2000 is not set
 # CONFIG_FB_ASILIANT is not set
