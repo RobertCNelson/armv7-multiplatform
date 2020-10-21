@@ -2196,6 +2196,7 @@ CONFIG_TI_ST=m
 # CONFIG_ECHO is not set
 # CONFIG_MISC_RTSX_USB is not set
 # CONFIG_UACCE is not set
+CONFIG_MIKROBUS=y
 # end of Misc devices
 
 #

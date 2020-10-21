@@ -382,6 +382,9 @@ drivers () {
 	dir 'drivers/ti/tsc'
 	dir 'drivers/ti/gpio'
 	dir 'drivers/greybus'
+	dir 'drivers/mikrobus'
+	dir 'drivers/serdev'
+	dir 'drivers/iio'
 }
 
 soc () {
