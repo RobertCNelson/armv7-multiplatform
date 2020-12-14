@@ -8,7 +8,7 @@ build_prefix="-armv7-x"
 branch_prefix="v"
 branch_postfix=".x"
 
-#https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/Documentation/process/changes.rst?h=v5.9.1
+#https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/Documentation/process/changes.rst?h=v5.9-rc1
 #arm
 KERNEL_ARCH=arm
 #toolchain="gcc_linaro_eabi_4_9"
@@ -36,10 +36,10 @@ toolchain="gcc_arm_gnueabihf_9"
 
 #Kernel
 KERNEL_REL=5.9
-KERNEL_TAG=${KERNEL_REL}.12
+KERNEL_TAG=${KERNEL_REL}.14
 kernel_rt=".1-rt20"
 #Kernel Build
-BUILD=${build_prefix}15
+BUILD=${build_prefix}15.1
 
 #v5.X-rcX + upto SHA
 #prev_KERNEL_SHA=""
