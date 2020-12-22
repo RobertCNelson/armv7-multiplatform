@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.10.0 Kernel Configuration
+# Linux/arm 5.10.2 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-none-linux-gnueabihf-gcc (GNU Toolchain for the A-profile Architecture 10.2-2020.11 (arm-10.16)) 10.2.1 20201103"
 CONFIG_CC_IS_GCC=y
@@ -5742,7 +5742,6 @@ CONFIG_USB_FTDI_ELAN=m
 CONFIG_USB_APPLEDISPLAY=m
 # CONFIG_APPLE_MFI_FASTCHARGE is not set
 CONFIG_USB_SISUSBVGA=m
-CONFIG_USB_SISUSBVGA_CON=y
 CONFIG_USB_LD=m
 CONFIG_USB_TRANCEVIBRATOR=m
 CONFIG_USB_IOWARRIOR=m
