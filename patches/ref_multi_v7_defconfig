@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.11.0-rc2 Kernel Configuration
+# Linux/arm 5.11.0-rc3 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-none-linux-gnueabihf-gcc (GNU Toolchain for the A-profile Architecture 10.2-2020.11 (arm-10.16)) 10.2.1 20201103"
 CONFIG_CC_IS_GCC=y
@@ -2162,6 +2162,7 @@ CONFIG_NET_VENDOR_AMD=y
 # CONFIG_AMD8111_ETH is not set
 # CONFIG_PCNET32 is not set
 CONFIG_NET_VENDOR_AQUANTIA=y
+# CONFIG_AQTION is not set
 CONFIG_NET_VENDOR_ARC=y
 # CONFIG_EMAC_ROCKCHIP is not set
 CONFIG_NET_VENDOR_ATHEROS=y
@@ -3008,6 +3009,7 @@ CONFIG_SERIAL_MCTRL_GPIO=y
 # CONFIG_SERIAL_NONSTANDARD is not set
 # CONFIG_N_GSM is not set
 # CONFIG_NOZOMI is not set
+# CONFIG_NULL_TTY is not set
 # CONFIG_TRACE_SINK is not set
 CONFIG_HVC_DRIVER=y
 # CONFIG_HVC_DCC is not set
@@ -6186,7 +6188,6 @@ CONFIG_USB_GADGET_STORAGE_NUM_BUFFERS=2
 #
 # CONFIG_USB_AT91 is not set
 # CONFIG_USB_ATMEL_USBA is not set
-CONFIG_USB_FSL_USB2=y
 # CONFIG_USB_FUSB300 is not set
 # CONFIG_USB_FOTG210_UDC is not set
 # CONFIG_USB_GR_UDC is not set
@@ -8900,7 +8901,6 @@ CONFIG_DEBUG_BUGVERBOSE=y
 # Compile-time checks and compiler options
 #
 # CONFIG_DEBUG_INFO is not set
-CONFIG_ENABLE_MUST_CHECK=y
 CONFIG_FRAME_WARN=1024
 # CONFIG_STRIP_ASM_SYMS is not set
 # CONFIG_READABLE_ASM is not set
