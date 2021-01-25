@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.11.0-rc4 Kernel Configuration
+# Linux/arm 5.11.0-rc5 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-none-linux-gnueabihf-gcc (GNU Toolchain for the A-profile Architecture 10.2-2020.11 (arm-10.16)) 10.2.1 20201103"
 CONFIG_CC_IS_GCC=y
@@ -6204,7 +6204,6 @@ CONFIG_USB_BDC_UDC=y
 #
 # Platform Support
 #
-CONFIG_USB_BDC_PCI=y
 # CONFIG_USB_AMD5536UDC is not set
 # CONFIG_USB_NET2272 is not set
 # CONFIG_USB_NET2280 is not set
@@ -6871,7 +6870,6 @@ CONFIG_CROS_EC_TYPEC=m
 CONFIG_CROS_USBPD_NOTIFY=m
 # CONFIG_MELLANOX_PLATFORM is not set
 # CONFIG_OLPC_XO175 is not set
-CONFIG_SURFACE_PLATFORMS=y
 CONFIG_HAVE_CLK=y
 CONFIG_CLKDEV_LOOKUP=y
 CONFIG_HAVE_CLK_PREPARE=y
@@ -8039,7 +8037,6 @@ CONFIG_MESON_IRQ_GPIO=y
 # CONFIG_QCOM_PDC is not set
 CONFIG_IMX_IRQSTEER=y
 CONFIG_IMX_INTMUX=y
-# CONFIG_TI_PRUSS_INTC is not set
 CONFIG_EXYNOS_IRQ_COMBINER=y
 CONFIG_MST_IRQ=y
 # end of IRQ chip support
