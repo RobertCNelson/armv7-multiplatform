@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.4.91 Kernel Configuration
+# Linux/arm 5.4.93 Kernel Configuration
 #
 
 #
@@ -5638,7 +5638,6 @@ CONFIG_USB_BDC_UDC=y
 #
 # Platform Support
 #
-CONFIG_USB_BDC_PCI=y
 # CONFIG_USB_AMD5536UDC is not set
 # CONFIG_USB_NET2272 is not set
 # CONFIG_USB_NET2280 is not set
