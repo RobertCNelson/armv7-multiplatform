@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.1.18 Kernel Configuration
+# Linux/arm 5.1.21 Kernel Configuration
 #
 
 #
@@ -1146,6 +1146,7 @@ CONFIG_CAN=y
 CONFIG_CAN_RAW=y
 CONFIG_CAN_BCM=y
 CONFIG_CAN_GW=y
+CONFIG_CAN_ISOTP=y
 
 #
 # CAN Device Drivers
@@ -4870,6 +4871,7 @@ CONFIG_SND_SOC_MAX98095=m
 # CONFIG_SND_SOC_PCM3060_SPI is not set
 # CONFIG_SND_SOC_PCM3168A_I2C is not set
 # CONFIG_SND_SOC_PCM3168A_SPI is not set
+# CONFIG_SND_SOC_PCM5102A is not set
 # CONFIG_SND_SOC_PCM512x_I2C is not set
 # CONFIG_SND_SOC_PCM512x_SPI is not set
 # CONFIG_SND_SOC_RK3328 is not set
