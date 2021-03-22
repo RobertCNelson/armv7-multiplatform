@@ -6,6 +6,10 @@ wfile=$(mktemp /tmp/builder.XXXXXXXXX)
 echo "Working on temp $wfile ..."
 
 cat_files () {
+	if [ -f ./patches/git/AUFS ] ; then
+		cat ./patches/git/AUFS >> ${wfile}
+	fi
+
 	if [ -f ./patches/git/BBDTBS ] ; then
 		cat ./patches/git/BBDTBS >> ${wfile}
 	fi
@@ -20,6 +24,10 @@ cat_files () {
 
 	if [ -f ./patches/git/TI_AMX3_CM3 ] ; then
 		cat ./patches/git/TI_AMX3_CM3 >> ${wfile}
+	fi
+
+	if [ -f ./patches/git/WPANUSB ] ; then
+		cat ./patches/git/WPANUSB >> ${wfile}
 	fi
 }
 
