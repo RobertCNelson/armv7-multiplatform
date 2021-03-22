@@ -1,6 +1,6 @@
-From f9de656878f9b8b1043c2f259360aeeee8d2c990 Mon Sep 17 00:00:00 2001
+From 1d3e8e02b63aa0c4c5c953aa2672c863b8229a91 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Thu, 5 Dec 2019 09:19:50 -0600
+Date: Mon, 22 Mar 2021 14:37:08 -0500
 Subject: [PATCH 3/5] merge: aufs-mmap
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
@@ -325,7 +325,7 @@ index fed1b6e9c89b..0d43b248ed54 100644
  
 diff --git a/mm/prfile.c b/mm/prfile.c
 new file mode 100644
-index 000000000000..024cdcfae1b1
+index 000000000000..00d51187c325
 --- /dev/null
 +++ b/mm/prfile.c
 @@ -0,0 +1,86 @@
@@ -337,7 +337,7 @@ index 000000000000..024cdcfae1b1
 + *
 + * See Documentation/filesystems/aufs/design/06mmap.txt
 + *
-+ * Copyright (c) 2014-2019 Junjro R. Okajima
++ * Copyright (c) 2014-2020 Junjro R. Okajima
 + * Copyright (c) 2014 Ian Campbell
 + */
 +
@@ -416,5 +416,5 @@ index 000000000000..024cdcfae1b1
 +}
 +#endif /* !CONFIG_MMU */
 -- 
-2.24.0
+2.30.2
 

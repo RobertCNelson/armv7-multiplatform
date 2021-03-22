@@ -1,0 +1,60 @@
+From 49517354376e75831a7509821deb368a542f96d6 Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Mon, 22 Mar 2021 14:43:00 -0500
+Subject: [PATCH] backports: bindeb-pkg: from: linux.git
+
+Reference: v5.4.107
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ scripts/package/buildtar | 6 +++---
+ scripts/package/mkdebian | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/scripts/package/buildtar b/scripts/package/buildtar
+index 2f66c81e4021..3d541cee16ed 100755
+--- a/scripts/package/buildtar
++++ b/scripts/package/buildtar
+@@ -28,15 +28,15 @@ case "${1}" in
+ 		opts=
+ 		;;
+ 	targz-pkg)
+-		opts=--gzip
++		opts="-I ${KGZIP}"
+ 		tarball=${tarball}.gz
+ 		;;
+ 	tarbz2-pkg)
+-		opts=--bzip2
++		opts="-I ${KBZIP2}"
+ 		tarball=${tarball}.bz2
+ 		;;
+ 	tarxz-pkg)
+-		opts=--xz
++		opts="-I ${XZ}"
+ 		tarball=${tarball}.xz
+ 		;;
+ 	*)
+diff --git a/scripts/package/mkdebian b/scripts/package/mkdebian
+index e0750b70453f..357dc56bcf30 100755
+--- a/scripts/package/mkdebian
++++ b/scripts/package/mkdebian
+@@ -136,7 +136,7 @@ mkdir -p debian/source/
+ echo "1.0" > debian/source/format
+ 
+ echo $debarch > debian/arch
+-extra_build_depends=", $(if_enabled_echo CONFIG_UNWINDER_ORC libelf-dev)"
++extra_build_depends=", $(if_enabled_echo CONFIG_UNWINDER_ORC libelf-dev:native)"
+ extra_build_depends="$extra_build_depends, $(if_enabled_echo CONFIG_SYSTEM_TRUSTED_KEYRING libssl-dev:native)"
+ 
+ # Generate a simple changelog template
+@@ -174,7 +174,7 @@ Source: $sourcename
+ Section: kernel
+ Priority: optional
+ Maintainer: $maintainer
+-Build-Depends: bc, kmod, cpio, bison, flex | flex:native $extra_build_depends
++Build-Depends: bc, rsync, kmod, cpio, bison, flex | flex:native $extra_build_depends
+ Homepage: http://www.kernel.org/
+ 
+ Package: $packagename
+-- 
+2.30.2
+
