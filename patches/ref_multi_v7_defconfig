@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.2.20 Kernel Configuration
+# Linux/arm 5.2.21 Kernel Configuration
 #
 
 #
@@ -5121,6 +5121,7 @@ CONFIG_SND_SOC_MAX98095=m
 # CONFIG_SND_SOC_PCM3060_SPI is not set
 # CONFIG_SND_SOC_PCM3168A_I2C is not set
 # CONFIG_SND_SOC_PCM3168A_SPI is not set
+# CONFIG_SND_SOC_PCM5102A is not set
 # CONFIG_SND_SOC_PCM512x_I2C is not set
 # CONFIG_SND_SOC_PCM512x_SPI is not set
 # CONFIG_SND_SOC_RK3328 is not set
@@ -6173,7 +6174,7 @@ CONFIG_BCM_VIDEOCORE=y
 # CONFIG_XIL_AXIS_FIFO is not set
 # CONFIG_EROFS_FS is not set
 # CONFIG_FIELDBUS_DEV is not set
-# CONFIG_EXFAT_FS is not set
+# CONFIG_STAGING_EXFAT_FS is not set
 # CONFIG_GOLDFISH is not set
 CONFIG_CHROME_PLATFORMS=y
 CONFIG_CROS_EC_I2C=m
@@ -7608,7 +7609,6 @@ CONFIG_INIT_STACK_NONE=y
 # end of Kernel hardening options
 # end of Security options
 
-CONFIG_XOR_BLOCKS=m
 CONFIG_CRYPTO=y
 
 #
