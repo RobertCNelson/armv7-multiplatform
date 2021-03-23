@@ -1,6 +1,6 @@
-From 1c0d54c24313b34451bf1802bcd7fdc8fdabcc6b Mon Sep 17 00:00:00 2001
+From c993f59fa5e0af0b72ba01f646f7c13a0991dbd9 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 18 Mar 2019 09:35:52 -0500
+Date: Mon, 22 Mar 2021 20:14:30 -0500
 Subject: [PATCH 1/5] merge: aufs-kbuild
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
@@ -31,5 +31,5 @@ index 293733f61594..12d19d0de07a 100644
  obj-$(CONFIG_EFIVAR_FS)		+= efivarfs/
 +obj-$(CONFIG_AUFS_FS)           += aufs/
 -- 
-2.20.1
+2.30.2
 

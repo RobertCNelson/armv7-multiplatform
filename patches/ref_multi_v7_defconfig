@@ -1,13 +1,13 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.20.16 Kernel Configuration
+# Linux/arm 4.20.17 Kernel Configuration
 #
 
 #
-# Compiler: arm-linux-gnueabihf-gcc (GNU Toolchain for the A-profile Architecture 8.2-2019.01 (arm-rel-8.28)) 8.2.1 20180802
+# Compiler: arm-linux-gnueabihf-gcc (GNU Toolchain for the A-profile Architecture 8.3-2019.03 (arm-rel-8.36)) 8.3.0
 #
 CONFIG_CC_IS_GCC=y
-CONFIG_GCC_VERSION=80201
+CONFIG_GCC_VERSION=80300
 CONFIG_CLANG_VERSION=0
 CONFIG_IRQ_WORK=y
 CONFIG_BUILDTIME_EXTABLE_SORT=y
@@ -1238,6 +1238,7 @@ CONFIG_CAN=y
 CONFIG_CAN_RAW=y
 CONFIG_CAN_BCM=y
 CONFIG_CAN_GW=y
+CONFIG_CAN_ISOTP=y
 
 #
 # CAN Device Drivers
@@ -4818,6 +4819,7 @@ CONFIG_SND_SOC_MAX98095=m
 # CONFIG_SND_SOC_PCM3060_SPI is not set
 # CONFIG_SND_SOC_PCM3168A_I2C is not set
 # CONFIG_SND_SOC_PCM3168A_SPI is not set
+# CONFIG_SND_SOC_PCM5102A is not set
 # CONFIG_SND_SOC_PCM512x_I2C is not set
 # CONFIG_SND_SOC_PCM512x_SPI is not set
 CONFIG_SND_SOC_RL6231=m
