@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.0.19 Kernel Configuration
+# Linux/arm 5.0.21 Kernel Configuration
 #
 
 #
@@ -1583,6 +1583,7 @@ CONFIG_CAN=m
 CONFIG_CAN_RAW=m
 CONFIG_CAN_BCM=m
 CONFIG_CAN_GW=m
+CONFIG_CAN_ISOTP=m
 
 #
 # CAN Device Drivers
@@ -4576,8 +4577,8 @@ CONFIG_SND_SOC_FSL_UTILS=m
 CONFIG_SND_SOC_IMX_PCM_DMA=m
 CONFIG_SND_SOC_IMX_AUDMUX=m
 CONFIG_SND_IMX_SOC=m
-CONFIG_SND_SOC_IMX_SSI=m
 CONFIG_SND_SOC_IMX_PCM_FIQ=m
+CONFIG_SND_SOC_IMX_SSI=m
 
 #
 # SoC Audio support for Freescale i.MX boards:
@@ -4694,6 +4695,7 @@ CONFIG_SND_SOC_ES8328_SPI=m
 # CONFIG_SND_SOC_PCM3060_SPI is not set
 # CONFIG_SND_SOC_PCM3168A_I2C is not set
 # CONFIG_SND_SOC_PCM3168A_SPI is not set
+CONFIG_SND_SOC_PCM5102A=m
 # CONFIG_SND_SOC_PCM512x_I2C is not set
 # CONFIG_SND_SOC_PCM512x_SPI is not set
 # CONFIG_SND_SOC_RT5616 is not set
