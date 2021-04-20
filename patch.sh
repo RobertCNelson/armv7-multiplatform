@@ -472,7 +472,7 @@ patch_backports (){
 }
 
 backports () {
-	backport_tag="v5.10.25"
+	backport_tag="v5.11.8"
 
 	subsystem="greybus"
 	#regenerate="enable"
