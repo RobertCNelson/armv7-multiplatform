@@ -1,9 +1,9 @@
-From 064882a191361bb36557508762787d37be5ebe38 Mon Sep 17 00:00:00 2001
+From 444d8f15a4077ea598d3ae8e605e55e6bd644b83 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Tue, 20 Apr 2021 17:18:03 -0500
+Date: Tue, 20 Apr 2021 17:27:44 -0500
 Subject: [PATCH] backports: wlcore: from: linux.git
 
-Reference: v5.11.8
+Reference: v5.11.15
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  drivers/net/wireless/ti/wl1251/cmd.c     |   2 +-
