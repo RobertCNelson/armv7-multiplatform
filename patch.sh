@@ -109,6 +109,7 @@ aufs_fail () {
 }
 
 aufs () {
+	#https://github.com/sfjro/aufs5-standalone/tree/aufs5.7
 	aufs_prefix="aufs5-"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
@@ -466,6 +467,22 @@ patch_backports (){
 }
 
 backports () {
+	backport_tag="v5.9.16"
+
+	subsystem="greybus"
+	#regenerate="enable"
+	if [ "x${regenerate}" = "xenable" ] ; then
+		pre_backports
+
+		cp -rv ~/linux-src/drivers/greybus/* ./drivers/greybus/
+		cp -rv ~/linux-src/drivers/staging/greybus/* ./drivers/staging/greybus/
+
+		post_backports
+		exit 2
+	else
+		patch_backports
+	fi
+
 	backport_tag="v5.11.8"
 
 	subsystem="wlcore"
@@ -482,22 +499,6 @@ backports () {
 	fi
 
 	${git} "${DIR}/patches/backports/wlcore/0002-wlcore-Downgrade-exceeded-max-RX-BA-sessions-to-debu.patch"
-
-	backport_tag="v5.9.16"
-
-	subsystem="greybus"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		pre_backports
-
-		cp -rv ~/linux-src/drivers/greybus/* ./drivers/greybus/
-		cp -rv ~/linux-src/drivers/staging/greybus/* ./drivers/staging/greybus/
-
-		post_backports
-		exit 2
-	else
-		patch_backports
-	fi
 
 	backport_tag="v5.4.18"
 
@@ -523,7 +524,6 @@ backports () {
 }
 
 reverts () {
-	echo "dir: reverts"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		start_cleanup
@@ -532,7 +532,7 @@ reverts () {
 	## notes
 	##git revert --no-edit xyz -s
 
-	#${git} "${DIR}/patches/reverts/0001-Revert-xyz.patch"
+	dir 'reverts'
 
 	if [ "x${regenerate}" = "xenable" ] ; then
 		wdir="reverts"
@@ -574,7 +574,7 @@ soc
 packaging () {
 	do_backport="enable"
 	if [ "x${do_backport}" = "xenable" ] ; then
-		backport_tag="v5.10.25"
+		backport_tag="v5.10.31"
 
 		subsystem="bindeb-pkg"
 		#regenerate="enable"
