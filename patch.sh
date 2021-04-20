@@ -483,7 +483,7 @@ backports () {
 		patch_backports
 	fi
 
-	backport_tag="v5.11.15"
+	backport_tag="v5.12-rc8"
 
 	subsystem="wlcore"
 	#regenerate="enable"
@@ -497,8 +497,6 @@ backports () {
 	else
 		patch_backports
 	fi
-
-	${git} "${DIR}/patches/backports/wlcore/0002-wlcore-Downgrade-exceeded-max-RX-BA-sessions-to-debu.patch"
 }
 
 reverts () {
