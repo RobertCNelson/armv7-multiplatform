@@ -484,7 +484,7 @@ backports () {
 		patch_backports
 	fi
 
-	backport_tag="v5.10.32"
+	backport_tag="v5.12-rc8"
 
 	subsystem="wlcore"
 	#regenerate="enable"
