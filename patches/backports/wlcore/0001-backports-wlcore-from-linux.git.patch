@@ -1,0 +1,289 @@
+From 5fb4a6776fab1f513ab9054a8032057cd9f97673 Mon Sep 17 00:00:00 2001
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Wed, 21 Apr 2021 17:21:42 -0500
+Subject: [PATCH] backports: wlcore: from: linux.git
+
+Reference: v5.5.19
+Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
+---
+ drivers/net/wireless/ti/wl1251/event.c  |  2 +-
+ drivers/net/wireless/ti/wl1251/sdio.c   | 25 +++++++++++-------
+ drivers/net/wireless/ti/wl12xx/Kconfig  |  8 +++---
+ drivers/net/wireless/ti/wl12xx/main.c   |  3 +++
+ drivers/net/wireless/ti/wlcore/main.c   | 34 ++++++++++++++++---------
+ drivers/net/wireless/ti/wlcore/sdio.c   |  8 ------
+ drivers/net/wireless/ti/wlcore/spi.c    |  2 +-
+ drivers/net/wireless/ti/wlcore/tx.c     |  1 -
+ drivers/net/wireless/ti/wlcore/wlcore.h |  3 +++
+ 9 files changed, 50 insertions(+), 36 deletions(-)
+
+diff --git a/drivers/net/wireless/ti/wl1251/event.c b/drivers/net/wireless/ti/wl1251/event.c
+index e6d426edab56..850864dbafa1 100644
+--- a/drivers/net/wireless/ti/wl1251/event.c
++++ b/drivers/net/wireless/ti/wl1251/event.c
+@@ -70,7 +70,7 @@ static int wl1251_event_ps_report(struct wl1251 *wl,
+ 		break;
+ 	}
+ 
+-	return ret;
++	return 0;
+ }
+ 
+ static void wl1251_event_mbox_dump(struct event_mailbox *mbox)
+diff --git a/drivers/net/wireless/ti/wl1251/sdio.c b/drivers/net/wireless/ti/wl1251/sdio.c
+index 677f1146ccf0..94569cd695c8 100644
+--- a/drivers/net/wireless/ti/wl1251/sdio.c
++++ b/drivers/net/wireless/ti/wl1251/sdio.c
+@@ -16,17 +16,12 @@
+ #include <linux/irq.h>
+ #include <linux/pm_runtime.h>
+ #include <linux/gpio.h>
++#include <linux/of.h>
++#include <linux/of_gpio.h>
++#include <linux/of_irq.h>
+ 
+ #include "wl1251.h"
+ 
+-#ifndef SDIO_VENDOR_ID_TI
+-#define SDIO_VENDOR_ID_TI		0x104c
+-#endif
+-
+-#ifndef SDIO_DEVICE_ID_TI_WL1251
+-#define SDIO_DEVICE_ID_TI_WL1251	0x9066
+-#endif
+-
+ struct wl1251_sdio {
+ 	struct sdio_func *func;
+ 	u32 elp_val;
+@@ -49,7 +44,7 @@ static void wl1251_sdio_interrupt(struct sdio_func *func)
+ }
+ 
+ static const struct sdio_device_id wl1251_devices[] = {
+-	{ SDIO_DEVICE(SDIO_VENDOR_ID_TI, SDIO_DEVICE_ID_TI_WL1251) },
++	{ SDIO_DEVICE(SDIO_VENDOR_ID_TI_WL1251, SDIO_DEVICE_ID_TI_WL1251) },
+ 	{}
+ };
+ MODULE_DEVICE_TABLE(sdio, wl1251_devices);
+@@ -217,6 +212,7 @@ static int wl1251_sdio_probe(struct sdio_func *func,
+ 	struct ieee80211_hw *hw;
+ 	struct wl1251_sdio *wl_sdio;
+ 	const struct wl1251_platform_data *wl1251_board_data;
++	struct device_node *np = func->dev.of_node;
+ 
+ 	hw = wl1251_alloc_hw();
+ 	if (IS_ERR(hw))
+@@ -248,6 +244,17 @@ static int wl1251_sdio_probe(struct sdio_func *func,
+ 		wl->power_gpio = wl1251_board_data->power_gpio;
+ 		wl->irq = wl1251_board_data->irq;
+ 		wl->use_eeprom = wl1251_board_data->use_eeprom;
++	} else if (np) {
++		wl->use_eeprom = of_property_read_bool(np,
++						       "ti,wl1251-has-eeprom");
++		wl->power_gpio = of_get_named_gpio(np, "ti,power-gpio", 0);
++		wl->irq = of_irq_get(np, 0);
++
++		if (wl->power_gpio == -EPROBE_DEFER ||
++		    wl->irq == -EPROBE_DEFER) {
++			ret = -EPROBE_DEFER;
++			goto disable;
++		}
+ 	}
+ 
+ 	if (gpio_is_valid(wl->power_gpio)) {
+diff --git a/drivers/net/wireless/ti/wl12xx/Kconfig b/drivers/net/wireless/ti/wl12xx/Kconfig
+index e409042ee9a0..9c4511604b67 100644
+--- a/drivers/net/wireless/ti/wl12xx/Kconfig
++++ b/drivers/net/wireless/ti/wl12xx/Kconfig
+@@ -1,10 +1,10 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+ config WL12XX
+-       tristate "TI wl12xx support"
++	tristate "TI wl12xx support"
+ 	depends on MAC80211
+-       select WLCORE
+-       ---help---
++	select WLCORE
++	---help---
+ 	  This module adds support for wireless adapters based on TI wl1271,
+ 	  wl1273, wl1281 and wl1283 chipsets. This module does *not* include
+ 	  support for wl1251.  For wl1251 support, use the separate homonymous
+-	   driver instead.
++	  driver instead.
+diff --git a/drivers/net/wireless/ti/wl12xx/main.c b/drivers/net/wireless/ti/wl12xx/main.c
+index 9d7dbfe7fe0c..3c9c623bb428 100644
+--- a/drivers/net/wireless/ti/wl12xx/main.c
++++ b/drivers/net/wireless/ti/wl12xx/main.c
+@@ -635,6 +635,7 @@ static int wl12xx_identify_chip(struct wl1271 *wl)
+ 		wl->quirks |= WLCORE_QUIRK_LEGACY_NVS |
+ 			      WLCORE_QUIRK_DUAL_PROBE_TMPL |
+ 			      WLCORE_QUIRK_TKIP_HEADER_SPACE |
++			      WLCORE_QUIRK_START_STA_FAILS |
+ 			      WLCORE_QUIRK_AP_ZERO_SESSION_ID;
+ 		wl->sr_fw_name = WL127X_FW_NAME_SINGLE;
+ 		wl->mr_fw_name = WL127X_FW_NAME_MULTI;
+@@ -658,6 +659,7 @@ static int wl12xx_identify_chip(struct wl1271 *wl)
+ 		wl->quirks |= WLCORE_QUIRK_LEGACY_NVS |
+ 			      WLCORE_QUIRK_DUAL_PROBE_TMPL |
+ 			      WLCORE_QUIRK_TKIP_HEADER_SPACE |
++			      WLCORE_QUIRK_START_STA_FAILS |
+ 			      WLCORE_QUIRK_AP_ZERO_SESSION_ID;
+ 		wl->plt_fw_name = WL127X_PLT_FW_NAME;
+ 		wl->sr_fw_name = WL127X_FW_NAME_SINGLE;
+@@ -686,6 +688,7 @@ static int wl12xx_identify_chip(struct wl1271 *wl)
+ 		wl->quirks |= WLCORE_QUIRK_TX_BLOCKSIZE_ALIGN |
+ 			      WLCORE_QUIRK_DUAL_PROBE_TMPL |
+ 			      WLCORE_QUIRK_TKIP_HEADER_SPACE |
++			      WLCORE_QUIRK_START_STA_FAILS |
+ 			      WLCORE_QUIRK_AP_ZERO_SESSION_ID;
+ 
+ 		wlcore_set_min_fw_ver(wl, WL128X_CHIP_VER,
+diff --git a/drivers/net/wireless/ti/wlcore/main.c b/drivers/net/wireless/ti/wlcore/main.c
+index be0ed19f9356..e994995d79ab 100644
+--- a/drivers/net/wireless/ti/wlcore/main.c
++++ b/drivers/net/wireless/ti/wlcore/main.c
+@@ -544,11 +544,6 @@ static int wlcore_irq_locked(struct wl1271 *wl)
+ 	}
+ 
+ 	while (!done && loopcount--) {
+-		/*
+-		 * In order to avoid a race with the hardirq, clear the flag
+-		 * before acknowledging the chip.
+-		 */
+-		clear_bit(WL1271_FLAG_IRQ_RUNNING, &wl->flags);
+ 		smp_mb__after_atomic();
+ 
+ 		ret = wlcore_fw_status(wl, wl->fw_status);
+@@ -668,7 +663,7 @@ static irqreturn_t wlcore_irq(int irq, void *cookie)
+ 		disable_irq_nosync(wl->irq);
+ 		pm_wakeup_event(wl->dev, 0);
+ 		spin_unlock_irqrestore(&wl->wl_lock, flags);
+-		return IRQ_HANDLED;
++		goto out_handled;
+ 	}
+ 	spin_unlock_irqrestore(&wl->wl_lock, flags);
+ 
+@@ -692,6 +687,11 @@ static irqreturn_t wlcore_irq(int irq, void *cookie)
+ 
+ 	mutex_unlock(&wl->mutex);
+ 
++out_handled:
++	spin_lock_irqsave(&wl->wl_lock, flags);
++	clear_bit(WL1271_FLAG_IRQ_RUNNING, &wl->flags);
++	spin_unlock_irqrestore(&wl->wl_lock, flags);
++
+ 	return IRQ_HANDLED;
+ }
+ 
+@@ -1434,7 +1434,7 @@ int wl1271_rx_filter_alloc_field(struct wl12xx_rx_filter *filter,
+ 
+ 	field = &filter->fields[filter->num_fields];
+ 
+-	field->pattern = kzalloc(len, GFP_KERNEL);
++	field->pattern = kmemdup(pattern, len, GFP_KERNEL);
+ 	if (!field->pattern) {
+ 		wl1271_warning("Failed to allocate RX filter pattern");
+ 		return -ENOMEM;
+@@ -1445,7 +1445,6 @@ int wl1271_rx_filter_alloc_field(struct wl12xx_rx_filter *filter,
+ 	field->offset = cpu_to_le16(offset);
+ 	field->flags = flags;
+ 	field->len = len;
+-	memcpy(field->pattern, pattern, len);
+ 
+ 	return 0;
+ }
+@@ -2862,8 +2861,21 @@ static int wlcore_join(struct wl1271 *wl, struct wl12xx_vif *wlvif)
+ 
+ 	if (is_ibss)
+ 		ret = wl12xx_cmd_role_start_ibss(wl, wlvif);
+-	else
++	else {
++		if (wl->quirks & WLCORE_QUIRK_START_STA_FAILS) {
++			/*
++			 * TODO: this is an ugly workaround for wl12xx fw
++			 * bug - we are not able to tx/rx after the first
++			 * start_sta, so make dummy start+stop calls,
++			 * and then call start_sta again.
++			 * this should be fixed in the fw.
++			 */
++			wl12xx_cmd_role_start_sta(wl, wlvif);
++			wl12xx_cmd_role_stop_sta(wl, wlvif);
++		}
++
+ 		ret = wl12xx_cmd_role_start_sta(wl, wlvif);
++	}
+ 
+ 	return ret;
+ }
+@@ -3645,10 +3657,8 @@ void wlcore_regdomain_config(struct wl1271 *wl)
+ 		goto out;
+ 
+ 	ret = pm_runtime_get_sync(wl->dev);
+-	if (ret < 0) {
+-		pm_runtime_put_autosuspend(wl->dev);
++	if (ret < 0)
+ 		goto out;
+-	}
+ 
+ 	ret = wlcore_cmd_regdomain_config_locked(wl);
+ 	if (ret < 0) {
+diff --git a/drivers/net/wireless/ti/wlcore/sdio.c b/drivers/net/wireless/ti/wlcore/sdio.c
+index 7afaf35f2453..9fd8cf2d270c 100644
+--- a/drivers/net/wireless/ti/wlcore/sdio.c
++++ b/drivers/net/wireless/ti/wlcore/sdio.c
+@@ -26,14 +26,6 @@
+ #include "wl12xx_80211.h"
+ #include "io.h"
+ 
+-#ifndef SDIO_VENDOR_ID_TI
+-#define SDIO_VENDOR_ID_TI		0x0097
+-#endif
+-
+-#ifndef SDIO_DEVICE_ID_TI_WL1271
+-#define SDIO_DEVICE_ID_TI_WL1271	0x4076
+-#endif
+-
+ static bool dump = false;
+ 
+ struct wl12xx_sdio_glue {
+diff --git a/drivers/net/wireless/ti/wlcore/spi.c b/drivers/net/wireless/ti/wlcore/spi.c
+index d4c09e54fd63..18c4d998ce4b 100644
+--- a/drivers/net/wireless/ti/wlcore/spi.c
++++ b/drivers/net/wireless/ti/wlcore/spi.c
+@@ -186,7 +186,7 @@ static void wl12xx_spi_init(struct device *child)
+ 
+ 	spi_sync(to_spi_device(glue->dev), &m);
+ 
+-	/* Restore chip select configration to normal */
++	/* Restore chip select configuration to normal */
+ 	spi->mode ^= SPI_CS_HIGH;
+ 	kfree(cmd);
+ }
+diff --git a/drivers/net/wireless/ti/wlcore/tx.c b/drivers/net/wireless/ti/wlcore/tx.c
+index e20e18cd04ae..90e56d4c3df3 100644
+--- a/drivers/net/wireless/ti/wlcore/tx.c
++++ b/drivers/net/wireless/ti/wlcore/tx.c
+@@ -863,7 +863,6 @@ void wl1271_tx_work(struct work_struct *work)
+ 
+ 	ret = wlcore_tx_work_locked(wl);
+ 	if (ret < 0) {
+-		pm_runtime_put_noidle(wl->dev);
+ 		wl12xx_queue_recovery_work(wl);
+ 		goto out;
+ 	}
+diff --git a/drivers/net/wireless/ti/wlcore/wlcore.h b/drivers/net/wireless/ti/wlcore/wlcore.h
+index 81c94d390623..b7821311ac75 100644
+--- a/drivers/net/wireless/ti/wlcore/wlcore.h
++++ b/drivers/net/wireless/ti/wlcore/wlcore.h
+@@ -547,6 +547,9 @@ wlcore_set_min_fw_ver(struct wl1271 *wl, unsigned int chip,
+ /* Each RX/TX transaction requires an end-of-transaction transfer */
+ #define WLCORE_QUIRK_END_OF_TRANSACTION		BIT(0)
+ 
++/* the first start_role(sta) sometimes doesn't work on wl12xx */
++#define WLCORE_QUIRK_START_STA_FAILS		BIT(1)
++
+ /* wl127x and SPI don't support SDIO block size alignment */
+ #define WLCORE_QUIRK_TX_BLOCKSIZE_ALIGN		BIT(2)
+ 
+-- 
+2.30.2
+
