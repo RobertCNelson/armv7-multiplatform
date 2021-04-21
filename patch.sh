@@ -467,7 +467,7 @@ patch_backports (){
 }
 
 backports () {
-	backport_tag="v5.9.16"
+	backport_tag="v5.10.32"
 
 	subsystem="greybus"
 	#regenerate="enable"
@@ -483,7 +483,7 @@ backports () {
 		patch_backports
 	fi
 
-	backport_tag="v5.6.19"
+	backport_tag="v5.7.19"
 
 	subsystem="wlcore"
 	#regenerate="enable"

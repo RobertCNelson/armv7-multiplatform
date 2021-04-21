@@ -1,17 +1,173 @@
-From 63d497cbf4bf06756f690e11142f0a6b514df898 Mon Sep 17 00:00:00 2001
+From 3e1f21d48d7ed4763cdbae0bd123f67c00703a21 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Wed, 21 Apr 2021 15:55:59 -0500
+Date: Wed, 21 Apr 2021 16:10:36 -0500
 Subject: [PATCH] backports: wlcore: from: linux.git
 
-Reference: v5.6.19
+Reference: v5.7.19
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
- drivers/net/wireless/ti/wlcore/cmd.c      |  6 ++++--
- drivers/net/wireless/ti/wlcore/cmd.h      |  2 +-
- drivers/net/wireless/ti/wlcore/main.c     | 23 +++++++++++++++--------
- drivers/net/wireless/ti/wlcore/wlcore_i.h |  1 +
- 4 files changed, 21 insertions(+), 11 deletions(-)
+ drivers/net/wireless/ti/wl1251/cmd.h          |  4 +--
+ drivers/net/wireless/ti/wl1251/event.c        |  2 +-
+ drivers/net/wireless/ti/wl1251/sdio.c         | 32 ++-----------------
+ drivers/net/wireless/ti/wl1251/wl12xx_80211.h |  2 +-
+ drivers/net/wireless/ti/wlcore/acx.h          |  2 +-
+ drivers/net/wireless/ti/wlcore/boot.h         |  2 +-
+ drivers/net/wireless/ti/wlcore/cmd.c          |  6 ++--
+ drivers/net/wireless/ti/wlcore/cmd.h          |  4 +--
+ drivers/net/wireless/ti/wlcore/conf.h         |  2 +-
+ drivers/net/wireless/ti/wlcore/main.c         | 23 ++++++++-----
+ drivers/net/wireless/ti/wlcore/wl12xx_80211.h |  2 +-
+ drivers/net/wireless/ti/wlcore/wlcore_i.h     |  1 +
+ 12 files changed, 32 insertions(+), 50 deletions(-)
 
+diff --git a/drivers/net/wireless/ti/wl1251/cmd.h b/drivers/net/wireless/ti/wl1251/cmd.h
+index 1c1a591c6055..e5874186f9d7 100644
+--- a/drivers/net/wireless/ti/wl1251/cmd.h
++++ b/drivers/net/wireless/ti/wl1251/cmd.h
+@@ -90,7 +90,7 @@ struct wl1251_cmd_header {
+ 	u16 id;
+ 	u16 status;
+ 	/* payload */
+-	u8 data[0];
++	u8 data[];
+ } __packed;
+ 
+ struct  wl1251_command {
+@@ -281,7 +281,7 @@ struct wl1251_cmd_packet_template {
+ 	struct wl1251_cmd_header header;
+ 
+ 	__le16 size;
+-	u8 data[0];
++	u8 data[];
+ } __packed;
+ 
+ #define TIM_ELE_ID    5
+diff --git a/drivers/net/wireless/ti/wl1251/event.c b/drivers/net/wireless/ti/wl1251/event.c
+index 850864dbafa1..e6d426edab56 100644
+--- a/drivers/net/wireless/ti/wl1251/event.c
++++ b/drivers/net/wireless/ti/wl1251/event.c
+@@ -70,7 +70,7 @@ static int wl1251_event_ps_report(struct wl1251 *wl,
+ 		break;
+ 	}
+ 
+-	return 0;
++	return ret;
+ }
+ 
+ static void wl1251_event_mbox_dump(struct event_mailbox *mbox)
+diff --git a/drivers/net/wireless/ti/wl1251/sdio.c b/drivers/net/wireless/ti/wl1251/sdio.c
+index 94569cd695c8..c9a4e9a43400 100644
+--- a/drivers/net/wireless/ti/wl1251/sdio.c
++++ b/drivers/net/wireless/ti/wl1251/sdio.c
+@@ -15,9 +15,7 @@
+ #include <linux/wl12xx.h>
+ #include <linux/irq.h>
+ #include <linux/pm_runtime.h>
+-#include <linux/gpio.h>
+ #include <linux/of.h>
+-#include <linux/of_gpio.h>
+ #include <linux/of_irq.h>
+ 
+ #include "wl1251.h"
+@@ -160,15 +158,6 @@ static int wl1251_sdio_set_power(struct wl1251 *wl, bool enable)
+ 	int ret;
+ 
+ 	if (enable) {
+-		/*
+-		 * Power is controlled by runtime PM, but we still call board
+-		 * callback in case it wants to do any additional setup,
+-		 * for example enabling clock buffer for the module.
+-		 */
+-		if (gpio_is_valid(wl->power_gpio))
+-			gpio_set_value(wl->power_gpio, true);
+-
+-
+ 		ret = pm_runtime_get_sync(&func->dev);
+ 		if (ret < 0) {
+ 			pm_runtime_put_sync(&func->dev);
+@@ -186,9 +175,6 @@ static int wl1251_sdio_set_power(struct wl1251 *wl, bool enable)
+ 		ret = pm_runtime_put_sync(&func->dev);
+ 		if (ret < 0)
+ 			goto out;
+-
+-		if (gpio_is_valid(wl->power_gpio))
+-			gpio_set_value(wl->power_gpio, false);
+ 	}
+ 
+ out:
+@@ -241,31 +227,17 @@ static int wl1251_sdio_probe(struct sdio_func *func,
+ 
+ 	wl1251_board_data = wl1251_get_platform_data();
+ 	if (!IS_ERR(wl1251_board_data)) {
+-		wl->power_gpio = wl1251_board_data->power_gpio;
+ 		wl->irq = wl1251_board_data->irq;
+ 		wl->use_eeprom = wl1251_board_data->use_eeprom;
+ 	} else if (np) {
+-		wl->use_eeprom = of_property_read_bool(np,
+-						       "ti,wl1251-has-eeprom");
+-		wl->power_gpio = of_get_named_gpio(np, "ti,power-gpio", 0);
++		wl->use_eeprom = of_property_read_bool(np, "ti,wl1251-has-eeprom");
+ 		wl->irq = of_irq_get(np, 0);
+-
+-		if (wl->power_gpio == -EPROBE_DEFER ||
+-		    wl->irq == -EPROBE_DEFER) {
++		if (wl->irq == -EPROBE_DEFER) {
+ 			ret = -EPROBE_DEFER;
+ 			goto disable;
+ 		}
+ 	}
+ 
+-	if (gpio_is_valid(wl->power_gpio)) {
+-		ret = devm_gpio_request(&func->dev, wl->power_gpio,
+-								"wl1251 power");
+-		if (ret) {
+-			wl1251_error("Failed to request gpio: %d\n", ret);
+-			goto disable;
+-		}
+-	}
+-
+ 	if (wl->irq) {
+ 		irq_set_status_flags(wl->irq, IRQ_NOAUTOEN);
+ 		ret = request_irq(wl->irq, wl1251_line_irq, 0, "wl1251", wl);
+diff --git a/drivers/net/wireless/ti/wl1251/wl12xx_80211.h b/drivers/net/wireless/ti/wl1251/wl12xx_80211.h
+index 7fabe702c4cc..7e28fe435b43 100644
+--- a/drivers/net/wireless/ti/wl1251/wl12xx_80211.h
++++ b/drivers/net/wireless/ti/wl1251/wl12xx_80211.h
+@@ -65,7 +65,7 @@ struct ieee80211_header {
+ 	u8 sa[ETH_ALEN];
+ 	u8 bssid[ETH_ALEN];
+ 	__le16 seq_ctl;
+-	u8 payload[0];
++	u8 payload[];
+ } __packed;
+ 
+ struct wl12xx_ie_header {
+diff --git a/drivers/net/wireless/ti/wlcore/acx.h b/drivers/net/wireless/ti/wlcore/acx.h
+index a265fba0cb4c..c725f5855c13 100644
+--- a/drivers/net/wireless/ti/wlcore/acx.h
++++ b/drivers/net/wireless/ti/wlcore/acx.h
+@@ -938,7 +938,7 @@ struct acx_rx_filter_cfg {
+ 	u8 action;
+ 
+ 	u8 num_fields;
+-	u8 fields[0];
++	u8 fields[];
+ } __packed;
+ 
+ struct acx_roaming_stats {
+diff --git a/drivers/net/wireless/ti/wlcore/boot.h b/drivers/net/wireless/ti/wlcore/boot.h
+index 14b367e98dce..24a2dfcb41ea 100644
+--- a/drivers/net/wireless/ti/wlcore/boot.h
++++ b/drivers/net/wireless/ti/wlcore/boot.h
+@@ -26,7 +26,7 @@ struct wl1271_static_data {
+ 	u8 fw_version[WL1271_FW_VERSION_MAX_LEN];
+ 	u32 hw_version;
+ 	u8 tx_power_table[WL1271_NO_SUBBANDS][WL1271_NO_POWER_LEVELS];
+-	u8 priv[0];
++	u8 priv[];
+ };
+ 
+ /* number of times we try to read the INIT interrupt */
 diff --git a/drivers/net/wireless/ti/wlcore/cmd.c b/drivers/net/wireless/ti/wlcore/cmd.c
 index 2a48fc6ad56c..6ef8fc9ae627 100644
 --- a/drivers/net/wireless/ti/wlcore/cmd.c
@@ -38,7 +194,7 @@ index 2a48fc6ad56c..6ef8fc9ae627 100644
  
  	wl1271_debug(DEBUG_CRYPT, "ap key action: %d id: %d lid: %d type: %d"
 diff --git a/drivers/net/wireless/ti/wlcore/cmd.h b/drivers/net/wireless/ti/wlcore/cmd.h
-index 084375ba4abf..bfad7b5a1ac6 100644
+index 084375ba4abf..f2609d5b6bf7 100644
 --- a/drivers/net/wireless/ti/wlcore/cmd.h
 +++ b/drivers/net/wireless/ti/wlcore/cmd.h
 @@ -65,7 +65,7 @@ int wl1271_cmd_set_sta_key(struct wl1271 *wl, struct wl12xx_vif *wlvif,
@@ -50,6 +206,28 @@ index 084375ba4abf..bfad7b5a1ac6 100644
  int wl12xx_cmd_set_peer_state(struct wl1271 *wl, struct wl12xx_vif *wlvif,
  			      u8 hlid);
  int wl12xx_roc(struct wl1271 *wl, struct wl12xx_vif *wlvif, u8 role_id,
+@@ -209,7 +209,7 @@ struct wl1271_cmd_header {
+ 	__le16 id;
+ 	__le16 status;
+ 	/* payload */
+-	u8 data[0];
++	u8 data[];
+ } __packed;
+ 
+ #define WL1271_CMD_MAX_PARAMS 572
+diff --git a/drivers/net/wireless/ti/wlcore/conf.h b/drivers/net/wireless/ti/wlcore/conf.h
+index 6116383ee248..31be425f2332 100644
+--- a/drivers/net/wireless/ti/wlcore/conf.h
++++ b/drivers/net/wireless/ti/wlcore/conf.h
+@@ -1150,7 +1150,7 @@ struct wlcore_conf {
+ struct wlcore_conf_file {
+ 	struct wlcore_conf_header header;
+ 	struct wlcore_conf core;
+-	u8 priv[0];
++	u8 priv[];
+ } __packed;
+ 
+ #endif
 diff --git a/drivers/net/wireless/ti/wlcore/main.c b/drivers/net/wireless/ti/wlcore/main.c
 index e994995d79ab..f140f7d7f553 100644
 --- a/drivers/net/wireless/ti/wlcore/main.c
@@ -156,6 +334,19 @@ index e994995d79ab..f140f7d7f553 100644
  
  	wl->hw->wiphy->features |= NL80211_FEATURE_AP_SCAN;
  
+diff --git a/drivers/net/wireless/ti/wlcore/wl12xx_80211.h b/drivers/net/wireless/ti/wlcore/wl12xx_80211.h
+index 181be725eff8..1dd7ecc11f86 100644
+--- a/drivers/net/wireless/ti/wlcore/wl12xx_80211.h
++++ b/drivers/net/wireless/ti/wlcore/wl12xx_80211.h
+@@ -66,7 +66,7 @@ struct ieee80211_header {
+ 	u8 sa[ETH_ALEN];
+ 	u8 bssid[ETH_ALEN];
+ 	__le16 seq_ctl;
+-	u8 payload[0];
++	u8 payload[];
+ } __packed;
+ 
+ struct wl12xx_ie_header {
 diff --git a/drivers/net/wireless/ti/wlcore/wlcore_i.h b/drivers/net/wireless/ti/wlcore/wlcore_i.h
 index 6fab60b0e367..eefae3f867b9 100644
 --- a/drivers/net/wireless/ti/wlcore/wlcore_i.h
