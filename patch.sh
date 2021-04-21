@@ -453,6 +453,7 @@ post_backports () {
 		cd -
 	fi
 
+	rm -f arch/arm/boot/dts/overlays/*.dtbo || true
 	${git_bin} add .
 	${git_bin} commit -a -m "backports: ${subsystem}: from: linux.git" -m "Reference: ${backport_tag}" -s
 	if [ ! -d ../patches/backports/${subsystem}/ ] ; then
@@ -467,7 +468,7 @@ patch_backports (){
 }
 
 backports () {
-	backport_tag="v5.10.32"
+	backport_tag="v5.11.16"
 
 	subsystem="greybus"
 	#regenerate="enable"
@@ -483,7 +484,7 @@ backports () {
 		patch_backports
 	fi
 
-	backport_tag="v5.7.19"
+	backport_tag="v5.8.18"
 
 	subsystem="wlcore"
 	#regenerate="enable"

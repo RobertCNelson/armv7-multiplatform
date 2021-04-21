@@ -1,25 +1,84 @@
-From 3e1f21d48d7ed4763cdbae0bd123f67c00703a21 Mon Sep 17 00:00:00 2001
+From 9f863408ba31952a5006c7538730e9cc03772f2c Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Wed, 21 Apr 2021 16:10:36 -0500
+Date: Wed, 21 Apr 2021 16:22:10 -0500
 Subject: [PATCH] backports: wlcore: from: linux.git
 
-Reference: v5.7.19
+Reference: v5.8.18
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
- drivers/net/wireless/ti/wl1251/cmd.h          |  4 +--
+ drivers/net/wireless/ti/Kconfig               |  4 +-
+ drivers/net/wireless/ti/wl1251/Kconfig        |  6 +-
+ drivers/net/wireless/ti/wl1251/cmd.h          |  4 +-
  drivers/net/wireless/ti/wl1251/event.c        |  2 +-
- drivers/net/wireless/ti/wl1251/sdio.c         | 32 ++-----------------
+ drivers/net/wireless/ti/wl1251/sdio.c         | 32 +----------
  drivers/net/wireless/ti/wl1251/wl12xx_80211.h |  2 +-
+ drivers/net/wireless/ti/wl12xx/Kconfig        |  2 +-
+ drivers/net/wireless/ti/wl18xx/Kconfig        |  2 +-
+ drivers/net/wireless/ti/wlcore/Kconfig        |  6 +-
  drivers/net/wireless/ti/wlcore/acx.h          |  2 +-
  drivers/net/wireless/ti/wlcore/boot.h         |  2 +-
- drivers/net/wireless/ti/wlcore/cmd.c          |  6 ++--
- drivers/net/wireless/ti/wlcore/cmd.h          |  4 +--
+ drivers/net/wireless/ti/wlcore/cmd.c          |  6 +-
+ drivers/net/wireless/ti/wlcore/cmd.h          |  4 +-
  drivers/net/wireless/ti/wlcore/conf.h         |  2 +-
- drivers/net/wireless/ti/wlcore/main.c         | 23 ++++++++-----
+ drivers/net/wireless/ti/wlcore/main.c         | 56 +++++++++++--------
+ drivers/net/wireless/ti/wlcore/tx.c           |  1 +
  drivers/net/wireless/ti/wlcore/wl12xx_80211.h |  2 +-
  drivers/net/wireless/ti/wlcore/wlcore_i.h     |  1 +
- 12 files changed, 32 insertions(+), 50 deletions(-)
+ 18 files changed, 62 insertions(+), 74 deletions(-)
 
+diff --git a/drivers/net/wireless/ti/Kconfig b/drivers/net/wireless/ti/Kconfig
+index b81f2e41a63a..7c0b17a76fe2 100644
+--- a/drivers/net/wireless/ti/Kconfig
++++ b/drivers/net/wireless/ti/Kconfig
+@@ -2,7 +2,7 @@
+ config WLAN_VENDOR_TI
+ 	bool "Texas Instrument devices"
+ 	default y
+-	---help---
++	help
+ 	  If you have a wireless card belonging to this class, say Y.
+ 
+ 	  Note that the answer to this question doesn't directly affect the
+@@ -22,7 +22,7 @@ config WILINK_PLATFORM_DATA
+ 	bool "TI WiLink platform data"
+ 	depends on WLCORE_SDIO || WL1251_SDIO
+ 	default y
+-	---help---
++	help
+ 	Small platform data bit needed to pass data to the sdio modules.
+ 
+ 
+diff --git a/drivers/net/wireless/ti/wl1251/Kconfig b/drivers/net/wireless/ti/wl1251/Kconfig
+index 7d39f0a4ba5b..de1c70e10cda 100644
+--- a/drivers/net/wireless/ti/wl1251/Kconfig
++++ b/drivers/net/wireless/ti/wl1251/Kconfig
+@@ -4,7 +4,7 @@ config WL1251
+ 	depends on MAC80211
+ 	select FW_LOADER
+ 	select CRC7
+-	---help---
++	help
+ 	  This will enable TI wl1251 driver support. The drivers make
+ 	  use of the mac80211 stack.
+ 
+@@ -14,7 +14,7 @@ config WL1251
+ config WL1251_SPI
+ 	tristate "TI wl1251 SPI support"
+ 	depends on WL1251 && SPI_MASTER
+-	---help---
++	help
+ 	  This module adds support for the SPI interface of adapters using
+ 	  TI wl1251 chipset.  Select this if your platform is using
+ 	  the SPI bus.
+@@ -25,7 +25,7 @@ config WL1251_SPI
+ config WL1251_SDIO
+ 	tristate "TI wl1251 SDIO support"
+ 	depends on WL1251 && MMC
+-	---help---
++	help
+ 	  This module adds support for the SDIO interface of adapters using
+ 	  TI wl1251 chipset.  Select this if your platform is using
+ 	  the SDIO bus.
 diff --git a/drivers/net/wireless/ti/wl1251/cmd.h b/drivers/net/wireless/ti/wl1251/cmd.h
 index 1c1a591c6055..e5874186f9d7 100644
 --- a/drivers/net/wireless/ti/wl1251/cmd.h
@@ -142,6 +201,62 @@ index 7fabe702c4cc..7e28fe435b43 100644
  } __packed;
  
  struct wl12xx_ie_header {
+diff --git a/drivers/net/wireless/ti/wl12xx/Kconfig b/drivers/net/wireless/ti/wl12xx/Kconfig
+index 9c4511604b67..786fff288505 100644
+--- a/drivers/net/wireless/ti/wl12xx/Kconfig
++++ b/drivers/net/wireless/ti/wl12xx/Kconfig
+@@ -3,7 +3,7 @@ config WL12XX
+ 	tristate "TI wl12xx support"
+ 	depends on MAC80211
+ 	select WLCORE
+-	---help---
++	help
+ 	  This module adds support for wireless adapters based on TI wl1271,
+ 	  wl1273, wl1281 and wl1283 chipsets. This module does *not* include
+ 	  support for wl1251.  For wl1251 support, use the separate homonymous
+diff --git a/drivers/net/wireless/ti/wl18xx/Kconfig b/drivers/net/wireless/ti/wl18xx/Kconfig
+index e29aa2a3ba8a..98fe188dfb41 100644
+--- a/drivers/net/wireless/ti/wl18xx/Kconfig
++++ b/drivers/net/wireless/ti/wl18xx/Kconfig
+@@ -3,6 +3,6 @@ config WL18XX
+ 	tristate "TI wl18xx support"
+ 	depends on MAC80211
+ 	select WLCORE
+-	---help---
++	help
+ 	  This module adds support for wireless adapters based on TI
+ 	  WiLink 8 chipsets.
+diff --git a/drivers/net/wireless/ti/wlcore/Kconfig b/drivers/net/wireless/ti/wlcore/Kconfig
+index a9db1288221c..8094323256fb 100644
+--- a/drivers/net/wireless/ti/wlcore/Kconfig
++++ b/drivers/net/wireless/ti/wlcore/Kconfig
+@@ -3,7 +3,7 @@ config WLCORE
+ 	tristate "TI wlcore support"
+ 	depends on MAC80211
+ 	select FW_LOADER
+-	---help---
++	help
+ 	  This module contains the main code for TI WLAN chips.  It abstracts
+ 	  hardware-specific differences among different chipset families.
+ 	  Each chipset family needs to implement its own lower-level module
+@@ -16,7 +16,7 @@ config WLCORE_SPI
+ 	tristate "TI wlcore SPI support"
+ 	depends on WLCORE && SPI_MASTER && OF
+ 	select CRC7
+-	---help---
++	help
+ 	  This module adds support for the SPI interface of adapters using
+ 	  TI WLAN chipsets.  Select this if your platform is using
+ 	  the SPI bus.
+@@ -27,7 +27,7 @@ config WLCORE_SPI
+ config WLCORE_SDIO
+ 	tristate "TI wlcore SDIO support"
+ 	depends on WLCORE && MMC
+-	---help---
++	help
+ 	  This module adds support for the SDIO interface of adapters using
+ 	  TI WLAN chipsets.  Select this if your platform is using
+ 	  the SDIO bus.
 diff --git a/drivers/net/wireless/ti/wlcore/acx.h b/drivers/net/wireless/ti/wlcore/acx.h
 index a265fba0cb4c..c725f5855c13 100644
 --- a/drivers/net/wireless/ti/wlcore/acx.h
@@ -229,10 +344,119 @@ index 6116383ee248..31be425f2332 100644
  
  #endif
 diff --git a/drivers/net/wireless/ti/wlcore/main.c b/drivers/net/wireless/ti/wlcore/main.c
-index e994995d79ab..f140f7d7f553 100644
+index e994995d79ab..ef169de99224 100644
 --- a/drivers/net/wireless/ti/wlcore/main.c
 +++ b/drivers/net/wireless/ti/wlcore/main.c
-@@ -3273,7 +3273,7 @@ static void wl1271_op_configure_filter(struct ieee80211_hw *hw,
+@@ -548,7 +548,7 @@ static int wlcore_irq_locked(struct wl1271 *wl)
+ 
+ 		ret = wlcore_fw_status(wl, wl->fw_status);
+ 		if (ret < 0)
+-			goto out;
++			goto err_ret;
+ 
+ 		wlcore_hw_tx_immediate_compl(wl);
+ 
+@@ -565,7 +565,7 @@ static int wlcore_irq_locked(struct wl1271 *wl)
+ 			ret = -EIO;
+ 
+ 			/* restarting the chip. ignore any other interrupt. */
+-			goto out;
++			goto err_ret;
+ 		}
+ 
+ 		if (unlikely(intr & WL1271_ACX_SW_INTR_WATCHDOG)) {
+@@ -575,7 +575,7 @@ static int wlcore_irq_locked(struct wl1271 *wl)
+ 			ret = -EIO;
+ 
+ 			/* restarting the chip. ignore any other interrupt. */
+-			goto out;
++			goto err_ret;
+ 		}
+ 
+ 		if (likely(intr & WL1271_ACX_INTR_DATA)) {
+@@ -583,7 +583,7 @@ static int wlcore_irq_locked(struct wl1271 *wl)
+ 
+ 			ret = wlcore_rx(wl, wl->fw_status);
+ 			if (ret < 0)
+-				goto out;
++				goto err_ret;
+ 
+ 			/* Check if any tx blocks were freed */
+ 			spin_lock_irqsave(&wl->wl_lock, flags);
+@@ -596,7 +596,7 @@ static int wlcore_irq_locked(struct wl1271 *wl)
+ 				 */
+ 				ret = wlcore_tx_work_locked(wl);
+ 				if (ret < 0)
+-					goto out;
++					goto err_ret;
+ 			} else {
+ 				spin_unlock_irqrestore(&wl->wl_lock, flags);
+ 			}
+@@ -604,7 +604,7 @@ static int wlcore_irq_locked(struct wl1271 *wl)
+ 			/* check for tx results */
+ 			ret = wlcore_hw_tx_delayed_compl(wl);
+ 			if (ret < 0)
+-				goto out;
++				goto err_ret;
+ 
+ 			/* Make sure the deferred queues don't get too long */
+ 			defer_count = skb_queue_len(&wl->deferred_tx_queue) +
+@@ -617,14 +617,14 @@ static int wlcore_irq_locked(struct wl1271 *wl)
+ 			wl1271_debug(DEBUG_IRQ, "WL1271_ACX_INTR_EVENT_A");
+ 			ret = wl1271_event_handle(wl, 0);
+ 			if (ret < 0)
+-				goto out;
++				goto err_ret;
+ 		}
+ 
+ 		if (intr & WL1271_ACX_INTR_EVENT_B) {
+ 			wl1271_debug(DEBUG_IRQ, "WL1271_ACX_INTR_EVENT_B");
+ 			ret = wl1271_event_handle(wl, 1);
+ 			if (ret < 0)
+-				goto out;
++				goto err_ret;
+ 		}
+ 
+ 		if (intr & WL1271_ACX_INTR_INIT_COMPLETE)
+@@ -635,6 +635,7 @@ static int wlcore_irq_locked(struct wl1271 *wl)
+ 			wl1271_debug(DEBUG_IRQ, "WL1271_ACX_INTR_HW_AVAILABLE");
+ 	}
+ 
++err_ret:
+ 	pm_runtime_mark_last_busy(wl->dev);
+ 	pm_runtime_put_autosuspend(wl->dev);
+ 
+@@ -1746,9 +1747,7 @@ static int __maybe_unused wl1271_op_suspend(struct ieee80211_hw *hw,
+ 
+ 		ret = wl1271_configure_suspend(wl, wlvif, wow);
+ 		if (ret < 0) {
+-			mutex_unlock(&wl->mutex);
+-			wl1271_warning("couldn't prepare device to suspend");
+-			return ret;
++			goto out_sleep;
+ 		}
+ 	}
+ 
+@@ -2698,12 +2697,16 @@ static void __wl1271_op_remove_interface(struct wl1271 *wl,
+ 
+ 		if (!wlcore_is_p2p_mgmt(wlvif)) {
+ 			ret = wl12xx_cmd_role_disable(wl, &wlvif->role_id);
+-			if (ret < 0)
++			if (ret < 0) {
++				pm_runtime_put_noidle(wl->dev);
+ 				goto deinit;
++			}
+ 		} else {
+ 			ret = wl12xx_cmd_role_disable(wl, &wlvif->dev_role_id);
+-			if (ret < 0)
++			if (ret < 0) {
++				pm_runtime_put_noidle(wl->dev);
+ 				goto deinit;
++			}
+ 		}
+ 
+ 		pm_runtime_mark_last_busy(wl->dev);
+@@ -3273,7 +3276,7 @@ static void wl1271_op_configure_filter(struct ieee80211_hw *hw,
  static int wl1271_record_ap_key(struct wl1271 *wl, struct wl12xx_vif *wlvif,
  				u8 id, u8 key_type, u8 key_size,
  				const u8 *key, u8 hlid, u32 tx_seq_32,
@@ -241,7 +465,7 @@ index e994995d79ab..f140f7d7f553 100644
  {
  	struct wl1271_ap_key *ap_key;
  	int i;
-@@ -3311,6 +3311,7 @@ static int wl1271_record_ap_key(struct wl1271 *wl, struct wl12xx_vif *wlvif,
+@@ -3311,6 +3314,7 @@ static int wl1271_record_ap_key(struct wl1271 *wl, struct wl12xx_vif *wlvif,
  	ap_key->hlid = hlid;
  	ap_key->tx_seq_32 = tx_seq_32;
  	ap_key->tx_seq_16 = tx_seq_16;
@@ -249,7 +473,7 @@ index e994995d79ab..f140f7d7f553 100644
  
  	wlvif->ap.recorded_keys[i] = ap_key;
  	return 0;
-@@ -3346,7 +3347,7 @@ static int wl1271_ap_init_hwenc(struct wl1271 *wl, struct wl12xx_vif *wlvif)
+@@ -3346,7 +3350,7 @@ static int wl1271_ap_init_hwenc(struct wl1271 *wl, struct wl12xx_vif *wlvif)
  					    key->id, key->key_type,
  					    key->key_size, key->key,
  					    hlid, key->tx_seq_32,
@@ -258,7 +482,7 @@ index e994995d79ab..f140f7d7f553 100644
  		if (ret < 0)
  			goto out;
  
-@@ -3369,7 +3370,8 @@ static int wl1271_ap_init_hwenc(struct wl1271 *wl, struct wl12xx_vif *wlvif)
+@@ -3369,7 +3373,8 @@ static int wl1271_ap_init_hwenc(struct wl1271 *wl, struct wl12xx_vif *wlvif)
  static int wl1271_set_key(struct wl1271 *wl, struct wl12xx_vif *wlvif,
  		       u16 action, u8 id, u8 key_type,
  		       u8 key_size, const u8 *key, u32 tx_seq_32,
@@ -268,7 +492,7 @@ index e994995d79ab..f140f7d7f553 100644
  {
  	int ret;
  	bool is_ap = (wlvif->bss_type == BSS_TYPE_AP_BSS);
-@@ -3396,12 +3398,12 @@ static int wl1271_set_key(struct wl1271 *wl, struct wl12xx_vif *wlvif,
+@@ -3396,12 +3401,12 @@ static int wl1271_set_key(struct wl1271 *wl, struct wl12xx_vif *wlvif,
  			ret = wl1271_record_ap_key(wl, wlvif, id,
  					     key_type, key_size,
  					     key, hlid, tx_seq_32,
@@ -283,7 +507,7 @@ index e994995d79ab..f140f7d7f553 100644
  		}
  
  		if (ret < 0)
-@@ -3501,6 +3503,7 @@ int wlcore_set_key(struct wl1271 *wl, enum set_key_cmd cmd,
+@@ -3501,6 +3506,7 @@ int wlcore_set_key(struct wl1271 *wl, enum set_key_cmd cmd,
  	u16 tx_seq_16 = 0;
  	u8 key_type;
  	u8 hlid;
@@ -291,7 +515,7 @@ index e994995d79ab..f140f7d7f553 100644
  
  	wl1271_debug(DEBUG_MAC80211, "mac80211 set key");
  
-@@ -3550,12 +3553,14 @@ int wlcore_set_key(struct wl1271 *wl, enum set_key_cmd cmd,
+@@ -3550,12 +3556,14 @@ int wlcore_set_key(struct wl1271 *wl, enum set_key_cmd cmd,
  		return -EOPNOTSUPP;
  	}
  
@@ -307,7 +531,7 @@ index e994995d79ab..f140f7d7f553 100644
  		if (ret < 0) {
  			wl1271_error("Could not add or replace key");
  			return ret;
-@@ -3581,7 +3586,7 @@ int wlcore_set_key(struct wl1271 *wl, enum set_key_cmd cmd,
+@@ -3581,7 +3589,7 @@ int wlcore_set_key(struct wl1271 *wl, enum set_key_cmd cmd,
  		ret = wl1271_set_key(wl, wlvif, KEY_REMOVE,
  				     key_conf->keyidx, key_type,
  				     key_conf->keylen, key_conf->key,
@@ -316,7 +540,19 @@ index e994995d79ab..f140f7d7f553 100644
  		if (ret < 0) {
  			wl1271_error("Could not remove key");
  			return ret;
-@@ -6223,6 +6228,7 @@ static int wl1271_init_ieee80211(struct wl1271 *wl)
+@@ -3657,8 +3665,10 @@ void wlcore_regdomain_config(struct wl1271 *wl)
+ 		goto out;
+ 
+ 	ret = pm_runtime_get_sync(wl->dev);
+-	if (ret < 0)
++	if (ret < 0) {
++		pm_runtime_put_autosuspend(wl->dev);
+ 		goto out;
++	}
+ 
+ 	ret = wlcore_cmd_regdomain_config_locked(wl);
+ 	if (ret < 0) {
+@@ -6223,6 +6233,7 @@ static int wl1271_init_ieee80211(struct wl1271 *wl)
  
  	ieee80211_hw_set(wl->hw, SUPPORT_FAST_XMIT);
  	ieee80211_hw_set(wl->hw, CHANCTX_STA_CSA);
@@ -324,7 +560,7 @@ index e994995d79ab..f140f7d7f553 100644
  	ieee80211_hw_set(wl->hw, QUEUE_CONTROL);
  	ieee80211_hw_set(wl->hw, TX_AMPDU_SETUP_IN_HW);
  	ieee80211_hw_set(wl->hw, AMPDU_AGGREGATION);
-@@ -6267,7 +6273,8 @@ static int wl1271_init_ieee80211(struct wl1271 *wl)
+@@ -6267,7 +6278,8 @@ static int wl1271_init_ieee80211(struct wl1271 *wl)
  
  	wl->hw->wiphy->flags |= WIPHY_FLAG_AP_UAPSD |
  				WIPHY_FLAG_HAS_REMAIN_ON_CHANNEL |
@@ -334,6 +570,18 @@ index e994995d79ab..f140f7d7f553 100644
  
  	wl->hw->wiphy->features |= NL80211_FEATURE_AP_SCAN;
  
+diff --git a/drivers/net/wireless/ti/wlcore/tx.c b/drivers/net/wireless/ti/wlcore/tx.c
+index 90e56d4c3df3..e20e18cd04ae 100644
+--- a/drivers/net/wireless/ti/wlcore/tx.c
++++ b/drivers/net/wireless/ti/wlcore/tx.c
+@@ -863,6 +863,7 @@ void wl1271_tx_work(struct work_struct *work)
+ 
+ 	ret = wlcore_tx_work_locked(wl);
+ 	if (ret < 0) {
++		pm_runtime_put_noidle(wl->dev);
+ 		wl12xx_queue_recovery_work(wl);
+ 		goto out;
+ 	}
 diff --git a/drivers/net/wireless/ti/wlcore/wl12xx_80211.h b/drivers/net/wireless/ti/wlcore/wl12xx_80211.h
 index 181be725eff8..1dd7ecc11f86 100644
 --- a/drivers/net/wireless/ti/wlcore/wl12xx_80211.h
