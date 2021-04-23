@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.19.182 Kernel Configuration
+# Linux/arm 4.19.188 Kernel Configuration
 #
 
 #
@@ -5806,7 +5806,6 @@ CONFIG_BCM_VIDEOCORE=y
 # CONFIG_SND_BCM2835 is not set
 # CONFIG_VIDEO_BCM2835 is not set
 # CONFIG_PI433 is not set
-# CONFIG_MTK_MMC is not set
 
 #
 # Gasket devices

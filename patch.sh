@@ -109,6 +109,7 @@ aufs_fail () {
 }
 
 aufs () {
+	#https://github.com/sfjro/aufs4-standalone/tree/aufs4.19.63+
 	aufs_prefix="aufs4-"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
@@ -521,6 +522,7 @@ post_backports () {
 		cd -
 	fi
 
+	rm -f arch/arm/boot/dts/overlays/*.dtbo || true
 	${git_bin} add .
 	${git_bin} commit -a -m "backports: ${subsystem}: from: linux.git" -m "Reference: ${backport_tag}" -s
 	if [ ! -d ../patches/backports/${subsystem}/ ] ; then
@@ -535,7 +537,7 @@ patch_backports (){
 }
 
 backports () {
-	backport_tag="v5.4.109"
+	backport_tag="v5.4.114"
 
 	subsystem="wiznet"
 	#regenerate="enable"
@@ -611,7 +613,6 @@ reverts () {
 
 	## notes
 	##git revert --no-edit xyz -s
-	#git revert --no-edit caf20def4cca3aadfed451cb665872cfe959c4ed -s
 
 	dir 'reverts'
 
@@ -660,7 +661,7 @@ soc () {
 
 ###
 backports
-reverts
+#reverts
 drivers
 soc
 
