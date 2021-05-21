@@ -167,7 +167,6 @@ debian_regs () {
 	pkg="u-boot-tools"
 	check_dpkg
 
-	unset warn_dpkg_ia32
 	unset stop_pkg_search
 	#lsb_release might not be installed...
 	if [ "$(which lsb_release)" ] ; then
@@ -532,9 +531,6 @@ debian_regs () {
 			if [ "${dpkg_multiarch}" ] ; then
 				unset check_foreign
 				check_foreign=$(LC_ALL=C dpkg --print-foreign-architectures)
-				if [ "x${check_foreign}" = "x" ] ; then
-					warn_dpkg_ia32=1
-				fi
 			fi
 		fi
 	fi
@@ -567,9 +563,6 @@ debian_regs () {
 	if [ "${deb_pkgs}" ] ; then
 		echo "Debian/Ubuntu/Mint: missing dependencies, please install:"
 		echo "-----------------------------"
-		if [ "${warn_dpkg_ia32}" ] ; then
-			echo "sudo dpkg --add-architecture i386"
-		fi
 		echo "sudo apt-get update"
 		echo "sudo apt-get install ${deb_pkgs}"
 		echo "-----------------------------"
