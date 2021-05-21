@@ -606,7 +606,7 @@ if [ "x${ARCH}" = "xx86_64" ] ; then
 	gcc_linaro_eabi_6|gcc_linaro_gnueabihf_6|gcc_linaro_aarch64_gnu_6)
 		ignore_32bit="true"
 		;;
-	gcc_linaro_eabi_7|gcc_linaro_gnueabihf_7|gcc_linaro_aarch64_gnu_7)
+	gcc_linaro_eabi_7|gcc_linaro_gnueabihf_7|gcc_linaro_aarch64_gnu_7|gcc_7_arm|gcc_7_aarch64|gcc_7_riscv64)
 		ignore_32bit="true"
 		;;
 	gcc_arm_eabi_8|gcc_arm_gnueabihf_8|gcc_arm_aarch64_gnu_8|gcc_8_arm|gcc_8_aarch64|gcc_8_riscv64)
