@@ -515,7 +515,6 @@ debian_regs () {
 
 		#pkg: ia32-libs
 		if [ "x${deb_arch}" = "xamd64" ] ; then
-			unset dpkg_multiarch
 			if [ "x${ignore_32bit}" = "xfalse" ] ; then
 				pkg="libc6:i386"
 				check_dpkg
@@ -525,12 +524,6 @@ debian_regs () {
 				check_dpkg
 				pkg="zlib1g:i386"
 				check_dpkg
-				dpkg_multiarch=1
-			fi
-
-			if [ "${dpkg_multiarch}" ] ; then
-				unset check_foreign
-				check_foreign=$(LC_ALL=C dpkg --print-foreign-architectures)
 			fi
 		fi
 	fi
