@@ -600,19 +600,19 @@ ARCH=$(uname -m)
 ignore_32bit="false"
 if [ "x${ARCH}" = "xx86_64" ] ; then
 	case "${toolchain}" in
-	gcc_linaro_eabi_6|gcc_linaro_gnueabihf_6|gcc_linaro_aarch64_gnu_6|gcc_6_arm|gcc_6_aarch64)
+	gcc_6_arm|gcc_6_aarch64)
 		ignore_32bit="true"
 		;;
-	gcc_linaro_eabi_7|gcc_linaro_gnueabihf_7|gcc_linaro_aarch64_gnu_7|gcc_7_arm|gcc_7_aarch64|gcc_7_riscv64)
+	gcc_7_arm|gcc_7_aarch64|gcc_7_riscv64)
 		ignore_32bit="true"
 		;;
-	gcc_arm_eabi_8|gcc_arm_gnueabihf_8|gcc_arm_aarch64_gnu_8|gcc_8_arm|gcc_8_aarch64|gcc_8_riscv64)
+	gcc_8_arm|gcc_8_aarch64|gcc_8_riscv64)
 		ignore_32bit="true"
 		;;
-	gcc_arm_eabi_9|gcc_arm_gnueabihf_9|gcc_arm_aarch64_gnu_9|gcc_9_arm|gcc_9_aarch64|gcc_9_riscv64)
+	gcc_9_arm|gcc_9_aarch64|gcc_9_riscv64)
 		ignore_32bit="true"
 		;;
-	gcc_arm_eabi_10|gcc_arm_gnueabihf_10|gcc_arm_aarch64_gnu_10|gcc_10_arm|gcc_10_aarch64|gcc_10_riscv64)
+	gcc_10_arm|gcc_10_aarch64|gcc_10_riscv64)
 		ignore_32bit="true"
 		;;
 	*)
