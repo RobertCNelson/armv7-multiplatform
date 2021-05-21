@@ -12,10 +12,6 @@ branch_postfix=".x"
 #arm
 KERNEL_ARCH=arm
 DEBARCH=armhf
-#toolchain="gcc_linaro_eabi_4_9"
-#toolchain="gcc_linaro_eabi_5"
-#toolchain="gcc_linaro_gnueabihf_4_9"
-#toolchain="gcc_linaro_gnueabihf_5"
 #toolchain="gcc_6_arm"
 #toolchain="gcc_7_arm"
 #toolchain="gcc_8_arm"
@@ -24,7 +20,6 @@ toolchain="gcc_10_arm"
 #arm64
 #KERNEL_ARCH=arm64
 #DEBARCH=arm64
-#toolchain="gcc_linaro_aarch64_gnu_5"
 #toolchain="gcc_6_aarch64"
 #toolchain="gcc_7_aarch64"
 #toolchain="gcc_8_aarch64"

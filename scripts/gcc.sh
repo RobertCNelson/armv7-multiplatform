@@ -73,60 +73,6 @@ dl_gcc_generic () {
 gcc_toolchain () {
 	unset extracted_dir
 	case "${toolchain}" in
-	gcc_linaro_eabi_4_9)
-		#
-		#https://releases.linaro.org/components/toolchain/binaries/4.9-2017.01/arm-eabi/gcc-linaro-4.9.4-2017.01-x86_64_arm-eabi.tar.xz
-		#
-
-		gcc_html_path="https://releases.linaro.org/components/toolchain/binaries/4.9-2017.01/arm-eabi/"
-		gcc_filename_prefix="gcc-linaro-4.9.4-2017.01-x86_64_arm-eabi"
-		gcc_banner="arm-eabi-gcc (Linaro GCC 4.9-2017.01) 4.9.4"
-		gcc_copyright="2015"
-		datestamp="2017.01-gcc-arm-none-eabi"
-
-		binary="bin/arm-eabi-"
-		;;
-	gcc_linaro_eabi_5)
-		#
-		#https://releases.linaro.org/components/toolchain/binaries/5.4-2017.05/arm-eabi/gcc-linaro-5.4.1-2017.05-x86_64_arm-eabi.tar.xz
-		#https://releases.linaro.org/components/toolchain/binaries/5.5-2017.10/arm-eabi/gcc-linaro-5.5.0-2017.10-x86_64_arm-eabi.tar.xz
-		#
-
-		gcc_html_path="https://releases.linaro.org/components/toolchain/binaries/5.5-2017.10/arm-eabi/"
-		gcc_filename_prefix="gcc-linaro-5.5.0-2017.10-x86_64_arm-eabi"
-		gcc_banner="arm-eabi-gcc (Linaro GCC 5.5-2017.10) 5.5.0"
-		gcc_copyright="2015"
-		datestamp="2017.10-gcc-arm-none-eabi"
-
-		binary="bin/arm-eabi-"
-		;;
-	gcc_linaro_gnueabihf_4_9)
-		#
-		#https://releases.linaro.org/components/toolchain/binaries/4.9-2017.01/arm-linux-gnueabihf/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf.tar.xz
-		#
-
-		gcc_html_path="https://releases.linaro.org/components/toolchain/binaries/4.9-2017.01/arm-linux-gnueabihf/"
-		gcc_filename_prefix="gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf"
-		gcc_banner="arm-linux-gnueabihf-gcc (Linaro GCC 4.9-2017.01) 4.9.4"
-		gcc_copyright="2015"
-		datestamp="2017.01-gcc-arm-linux-gnueabihf"
-
-		binary="bin/arm-linux-gnueabihf-"
-		;;
-	gcc_linaro_gnueabihf_5)
-		#
-		#https://releases.linaro.org/components/toolchain/binaries/5.4-2017.05/arm-linux-gnueabihf/gcc-linaro-5.4.1-2017.05-x86_64_arm-linux-gnueabihf.tar.xz
-		#https://releases.linaro.org/components/toolchain/binaries/5.5-2017.10/arm-linux-gnueabihf/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabihf.tar.xz
-		#
-
-		gcc_html_path="https://releases.linaro.org/components/toolchain/binaries/5.5-2017.10/arm-linux-gnueabihf/"
-		gcc_filename_prefix="gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabihf"
-		gcc_banner="arm-linux-gnueabihf-gcc (Linaro GCC 5.5-2017.10) 5.5.0"
-		gcc_copyright="2015"
-		datestamp="2017.10-gcc-arm-linux-gnueabihf"
-
-		binary="bin/arm-linux-gnueabihf-"
-		;;
 	gcc_linaro_gnueabihf_6|gcc_6_arm)
 		#
 		#https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_64/6.5.0/x86_64-gcc-6.5.0-nolibc-arm-linux-gnueabi.tar.xz
@@ -196,20 +142,6 @@ gcc_toolchain () {
 		datestamp="2020.10.3.0-arm-linux-gnueabi"
 
 		binary="bin/arm-linux-gnueabi-"
-		;;
-	gcc_linaro_aarch64_gnu_5)
-		#
-		#https://releases.linaro.org/components/toolchain/binaries/5.4-2017.05/aarch64-linux-gnu/gcc-linaro-5.4.1-2017.05-x86_64_aarch64-linux-gnu.tar.xz
-		#https://releases.linaro.org/components/toolchain/binaries/5.5-2017.10/aarch64-linux-gnu/gcc-linaro-5.5.0-2017.10-x86_64_aarch64-linux-gnu.tar.xz
-		#
-
-		gcc_html_path="https://releases.linaro.org/components/toolchain/binaries/5.5-2017.10/aarch64-linux-gnu/"
-		gcc_filename_prefix="gcc-linaro-5.5.0-2017.10-x86_64_aarch64-linux-gnu"
-		gcc_banner="aarch64-linux-gnu-gcc (Linaro GCC 5.5-2017.10) 5.5.0"
-		gcc_copyright="2015"
-		datestamp="2017.10-gcc-aarch64-linux-gnu"
-
-		binary="bin/aarch64-linux-gnu-"
 		;;
 	gcc_linaro_aarch64_gnu_6|gcc_6_aarch64)
 		#
