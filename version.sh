@@ -29,8 +29,8 @@ toolchain="gcc_10_arm"
 #toolchain="gcc_linaro_aarch64_gnu_5"
 #toolchain="gcc_linaro_aarch64_gnu_6"
 #toolchain="gcc_linaro_aarch64_gnu_7"
-#toolchain="gcc_arm_aarch64_gnu_8"
-#toolchain="gcc_arm_aarch64_gnu_9"
+#toolchain="gcc_8_aarch64"
+#toolchain="gcc_9_aarch64"
 #toolchain="gcc_10_aarch64"
 #riscv64
 #KERNEL_ARCH=riscv
