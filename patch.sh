@@ -377,6 +377,12 @@ beagleboard_dtbs () {
 		fi
 		cd ./KERNEL/
 
+		#Cleanup...
+		rm -rf arch/arm/boot/dts/.*cmd || true
+		rm -rf arch/arm/boot/dts/.*tmp || true
+		rm -rf arch/arm/boot/dts/*dtb || true
+		rm -rf arch/arm/boot/dts/overlays/ || true
+
 		mkdir -p arch/arm/boot/dts/overlays/
 		cp -vr ../${work_dir}/src/arm/* arch/arm/boot/dts/
 		cp -vr ../${work_dir}/include/dt-bindings/* ./include/dt-bindings/
@@ -547,7 +553,7 @@ soc
 packaging () {
 	#do_backport="enable"
 	if [ "x${do_backport}" = "xenable" ] ; then
-		backport_tag="v5.10.45"
+		backport_tag="v5.10.46"
 
 		subsystem="bindeb-pkg"
 		#regenerate="enable"
