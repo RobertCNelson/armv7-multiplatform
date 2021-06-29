@@ -352,6 +352,12 @@ sancloud_next () {
 	dir 'dts/sancloud'
 }
 
+cleanup_dts_builds () {
+	rm -rf arch/arm/boot/dts/.*cmd || true
+	rm -rf arch/arm/boot/dts/.*tmp || true
+	rm -rf arch/arm/boot/dts/*dtb || true
+}
+
 dtb_makefile_append () {
 	sed -i -e 's:am335x-boneblack.dtb \\:am335x-boneblack.dtb \\\n\t'$device' \\:g' arch/arm/boot/dts/Makefile
 }
@@ -377,10 +383,7 @@ beagleboard_dtbs () {
 		fi
 		cd ./KERNEL/
 
-		#Cleanup...
-		rm -rf arch/arm/boot/dts/.*cmd || true
-		rm -rf arch/arm/boot/dts/.*tmp || true
-		rm -rf arch/arm/boot/dts/*dtb || true
+		cleanup_dts_builds
 		rm -rf arch/arm/boot/dts/overlays/ || true
 
 		mkdir -p arch/arm/boot/dts/overlays/
