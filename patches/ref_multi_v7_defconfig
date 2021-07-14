@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.12.13 Kernel Configuration
+# Linux/arm 5.12.17 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-linux-gnueabi-gcc (GCC) 10.3.0"
 CONFIG_CC_IS_GCC=y
@@ -1865,6 +1865,7 @@ CONFIG_EEPROM_93CX6=y
 # CONFIG_SENSORS_LIS3_SPI is not set
 # CONFIG_SENSORS_LIS3_I2C is not set
 # CONFIG_ALTERA_STAPL is not set
+# CONFIG_BEAGLEBONE_PINMUX_HELPER is not set
 # CONFIG_ECHO is not set
 # CONFIG_BCM_VK is not set
 # CONFIG_MISC_ALCOR_PCI is not set
@@ -3478,6 +3479,7 @@ CONFIG_GPIOLIB_IRQCHIP=y
 # CONFIG_GPIO_SYSFS is not set
 CONFIG_GPIO_CDEV=y
 CONFIG_GPIO_CDEV_V1=y
+# CONFIG_GPIO_OF_HELPER is not set
 CONFIG_GPIO_GENERIC=y
 
 #
@@ -8416,7 +8418,6 @@ CONFIG_PSTORE_COMPRESS_DEFAULT="deflate"
 CONFIG_PSTORE_CONSOLE=y
 CONFIG_PSTORE_PMSG=y
 CONFIG_PSTORE_RAM=y
-# CONFIG_PSTORE_BLK is not set
 # CONFIG_SYSV_FS is not set
 # CONFIG_UFS_FS is not set
 # CONFIG_EROFS_FS is not set
