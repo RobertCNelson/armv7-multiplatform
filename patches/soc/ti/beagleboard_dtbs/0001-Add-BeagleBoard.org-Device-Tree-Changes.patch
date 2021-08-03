@@ -1,11 +1,11 @@
-From e59cf58b1cdd9dc2b938f6bc4f427eeab630309b Mon Sep 17 00:00:00 2001
+From 51cb74d2e435b6f211e90c6b0672f2b6cfce82d0 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Fri, 30 Jul 2021 18:06:02 -0500
+Date: Tue, 3 Aug 2021 10:43:06 -0500
 Subject: [PATCH] Add BeagleBoard.org Device Tree Changes
 
 https://github.com/beagleboard/BeagleBoard-DeviceTrees/tree/v5.14.x
 
-https://github.com/beagleboard/BeagleBoard-DeviceTrees/commit/1c8a3d3fdb994c8ab224a9343b622d8acf3908c7
+https://github.com/beagleboard/BeagleBoard-DeviceTrees/commit/bef2186a4df672fed33813149e55147a3a7c3155
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  arch/arm/boot/dts/Makefile                    |   2 +
@@ -39,8 +39,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  arch/arm/boot/dts/overlays/BONE-ADC.dts       |  28 +++
  arch/arm/boot/dts/overlays/Makefile           |  14 ++
  arch/arm/boot/dts/twl6030.dtsi                |   5 +
- include/dt-bindings/pinctrl/omap.h            |   4 +-
- 32 files changed, 831 insertions(+), 136 deletions(-)
+ 31 files changed, 829 insertions(+), 134 deletions(-)
  create mode 100644 arch/arm/boot/dts/am335x-bbb-bone-buses.dtsi
  create mode 100644 arch/arm/boot/dts/am335x-boneblack-uboot.dts
  create mode 100644 arch/arm/boot/dts/am335x-bonegreen-gateway.dts
@@ -1415,21 +1414,6 @@ index 9d588cfaa5cb..c0094e0c4e0f 100644
  	twl_usb_comparator: usb-comparator {
  		compatible = "ti,twl6030-usb";
  		interrupts = <4>, <10>;
-diff --git a/include/dt-bindings/pinctrl/omap.h b/include/dt-bindings/pinctrl/omap.h
-index f48245ff87e5..625718042413 100644
---- a/include/dt-bindings/pinctrl/omap.h
-+++ b/include/dt-bindings/pinctrl/omap.h
-@@ -64,8 +64,8 @@
- #define OMAP3_WKUP_IOPAD(pa, val)	OMAP_IOPAD_OFFSET((pa), 0x2a00) (val)
- #define DM814X_IOPAD(pa, val)		OMAP_IOPAD_OFFSET((pa), 0x0800) (val)
- #define DM816X_IOPAD(pa, val)		OMAP_IOPAD_OFFSET((pa), 0x0800) (val)
--#define AM33XX_IOPAD(pa, val)		OMAP_IOPAD_OFFSET((pa), 0x0800) (val) (0)
--#define AM33XX_PADCONF(pa, conf, mux)	OMAP_IOPAD_OFFSET((pa), 0x0800) (conf) (mux)
-+#define AM33XX_IOPAD(pa, val)		OMAP_IOPAD_OFFSET((pa), 0x0800) (val)
-+#define AM33XX_PADCONF(pa, dir, mux)	OMAP_IOPAD_OFFSET((pa), 0x0800) ((dir) | (mux))
- 
- /*
-  * Macros to allow using the offset from the padconf physical address
 -- 
 2.30.2
 

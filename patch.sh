@@ -429,7 +429,7 @@ wpanusb
 wireless_regdb
 ti_pm_firmware
 next_dtbs
-#beagleboard_dtbs
+beagleboard_dtbs
 #local_patch
 
 pre_backports () {
@@ -505,7 +505,7 @@ reverts () {
 drivers () {
 	#https://github.com/raspberrypi/linux/branches
 	#exit 2
-	#dir 'RPi'
+	dir 'RPi'
 	dir 'drivers/ar1021_i2c'
 	dir 'drivers/spi'
 	dir 'drivers/tps65217'
@@ -513,7 +513,7 @@ drivers () {
 	dir 'drivers/ti/cpsw'
 	dir 'drivers/ti/serial'
 	dir 'drivers/ti/tsc'
-	#dir 'drivers/ti/gpio'
+	dir 'drivers/ti/gpio'
 	dir 'drivers/greybus'
 	dir 'drivers/serdev'
 	dir 'drivers/fb_ssd1306'
@@ -539,7 +539,7 @@ dir 'le9'
 packaging () {
 	#do_backport="enable"
 	if [ "x${do_backport}" = "xenable" ] ; then
-		backport_tag="v5.10.51"
+		backport_tag="v5.10.55"
 
 		subsystem="bindeb-pkg"
 		#regenerate="enable"
