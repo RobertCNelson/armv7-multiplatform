@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.14.0-rc7 Kernel Configuration
+# Linux/arm 5.14.0 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-linux-gnueabi-gcc (GCC) 11.1.0"
 CONFIG_CC_IS_GCC=y
@@ -8079,7 +8079,6 @@ CONFIG_RESET_BERLIN=m
 CONFIG_RESET_BRCMSTB=y
 CONFIG_RESET_BRCMSTB_RESCAL=y
 CONFIG_RESET_IMX7=y
-# CONFIG_RESET_MCHP_SPARX5 is not set
 CONFIG_RESET_MESON=y
 # CONFIG_RESET_MESON_AUDIO_ARB is not set
 # CONFIG_RESET_QCOM_AOSS is not set
