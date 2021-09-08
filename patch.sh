@@ -349,6 +349,7 @@ ti_pm_firmware () {
 }
 
 cleanup_dts_builds () {
+	rm -rf arch/arm/boot/dts/modules.order || true
 	rm -rf arch/arm/boot/dts/.*cmd || true
 	rm -rf arch/arm/boot/dts/.*tmp || true
 	rm -rf arch/arm/boot/dts/*dtb || true
@@ -390,6 +391,9 @@ beagleboard_dtbs () {
 		device="am335x-sancloud-bbe-lite.dtb" ; dtb_makefile_append
 
 		device="am335x-boneblack-uboot.dtb" ; dtb_makefile_append
+
+		device="am335x-bone-uboot-univ.dtb" ; dtb_makefile_append
+		device="am335x-boneblack-uboot-univ.dtb" ; dtb_makefile_append
 
 		${git_bin} add -f arch/arm/boot/dts/
 		${git_bin} add -f include/dt-bindings/
@@ -516,7 +520,6 @@ drivers () {
 
 soc () {
 	dir 'soc/imx/imx7'
-
 	dir 'soc/ti/panda'
 	dir 'bootup_hacks'
 }
@@ -530,7 +533,7 @@ soc
 packaging () {
 	#do_backport="enable"
 	if [ "x${do_backport}" = "xenable" ] ; then
-		backport_tag="v5.10.61"
+		backport_tag="v5.10.62"
 
 		subsystem="bindeb-pkg"
 		#regenerate="enable"
