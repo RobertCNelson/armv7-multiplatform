@@ -1,24 +1,25 @@
-From b7a41eb6e24bd33a51d6418fba0f062fa2eb3c3f Mon Sep 17 00:00:00 2001
+From 7650f7871f14cdff844f57aefd329ded6bdc8bb7 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Tue, 10 Mar 2020 16:12:06 -0500
+Date: Wed, 8 Sep 2021 17:03:46 -0500
 Subject: [PATCH] Add seeedstudio.com DTBS: v4.19.x
 
 https://github.com/RobertCNelson/Seeed-DeviceTrees/tree/v4.19.x
 
-https://github.com/RobertCNelson/Seeed-DeviceTrees/commit/6aa3f7d3b2fbe703daa0a88f88b979d86b302ce3
+https://github.com/RobertCNelson/Seeed-DeviceTrees/commit/5697e1778c3523dfea8692559cabb8cfab2b9b14
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  arch/arm/boot/dts/Makefile                   |   2 +
  arch/arm/boot/dts/imx6ul-14x14-evk.dtsi      |   2 +-
  arch/arm/boot/dts/imx6ul.dtsi                |   6 -
+ arch/arm/boot/dts/imx6ull-colibri-wifi.dtsi  |   1 -
  arch/arm/boot/dts/imx6ull-seeed-npi-gpmi.dts |  44 +++
  arch/arm/boot/dts/imx6ull-seeed-npi.dts      | 353 +++++++++++++++++++
- 5 files changed, 400 insertions(+), 7 deletions(-)
+ 6 files changed, 400 insertions(+), 8 deletions(-)
  create mode 100644 arch/arm/boot/dts/imx6ull-seeed-npi-gpmi.dts
  create mode 100644 arch/arm/boot/dts/imx6ull-seeed-npi.dts
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 5b882465a67e..c4c7e27961c5 100644
+index 30f36c321c10..7fc16e9efb7e 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
 @@ -558,6 +558,8 @@ dtb-$(CONFIG_SOC_IMX6UL) += \
@@ -67,6 +68,18 @@ index adecd6e08468..50834a43e5fb 100644
  			};
  
  			lcdif: lcdif@21c8000 {
+diff --git a/arch/arm/boot/dts/imx6ull-colibri-wifi.dtsi b/arch/arm/boot/dts/imx6ull-colibri-wifi.dtsi
+index 621396884c31..038d8c90f6df 100644
+--- a/arch/arm/boot/dts/imx6ull-colibri-wifi.dtsi
++++ b/arch/arm/boot/dts/imx6ull-colibri-wifi.dtsi
+@@ -43,7 +43,6 @@
+ 	assigned-clock-rates = <0>, <198000000>;
+ 	cap-power-off-card;
+ 	keep-power-in-suspend;
+-	max-frequency = <25000000>;
+ 	mmc-pwrseq = <&wifi_pwrseq>;
+ 	no-1-8-v;
+ 	non-removable;
 diff --git a/arch/arm/boot/dts/imx6ull-seeed-npi-gpmi.dts b/arch/arm/boot/dts/imx6ull-seeed-npi-gpmi.dts
 new file mode 100644
 index 000000000000..f0ed9d9ab912
@@ -477,5 +490,5 @@ index 000000000000..aa0267ae5900
 +	status = "okay";
 +};
 -- 
-2.25.1
+2.30.2
 
