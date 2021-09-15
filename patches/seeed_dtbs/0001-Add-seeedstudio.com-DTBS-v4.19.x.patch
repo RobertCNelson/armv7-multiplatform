@@ -1,6 +1,6 @@
-From 7650f7871f14cdff844f57aefd329ded6bdc8bb7 Mon Sep 17 00:00:00 2001
+From 704481de17cb9f90704e51467bd63b0276a62183 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Wed, 8 Sep 2021 17:03:46 -0500
+Date: Wed, 15 Sep 2021 17:15:49 -0500
 Subject: [PATCH] Add seeedstudio.com DTBS: v4.19.x
 
 https://github.com/RobertCNelson/Seeed-DeviceTrees/tree/v4.19.x
