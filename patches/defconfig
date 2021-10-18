@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.15.0-rc5 Kernel Configuration
+# Linux/arm 5.15.0-rc6 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-linux-gnueabi-gcc (GCC) 11.1.0"
 CONFIG_CC_IS_GCC=y
@@ -1951,7 +1951,6 @@ CONFIG_ARM_CCI400_PORT_CTRL=y
 CONFIG_IMX_WEIM=y
 CONFIG_OMAP_INTERCONNECT=y
 CONFIG_OMAP_OCP2SCP=y
-CONFIG_SIMPLE_PM_BUS=y
 # CONFIG_SUN50I_DE2_BUS is not set
 CONFIG_SUNXI_RSB=y
 CONFIG_TI_PWMSS=y
