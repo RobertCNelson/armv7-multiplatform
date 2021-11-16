@@ -943,7 +943,7 @@ soc () {
 
 	dir 'soc/ti/panda'
 	dir 'bootup_hacks'
-	#dir 'fixes'
+	dir 'fixes/gcc'
 }
 
 ###
