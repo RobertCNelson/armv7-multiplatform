@@ -735,6 +735,7 @@ soc () {
 	dir 'soc/ti/omap4'
 	dir 'bootup_hacks'
 	dir 'fixes'
+	dir 'fixes/gcc'
 }
 
 ###
