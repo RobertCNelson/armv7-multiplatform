@@ -1,7 +1,7 @@
-From cd69146d6bfcc6c6bdb6f0023d2545fed79e849c Mon Sep 17 00:00:00 2001
+From a93ad51174f5c4493bfcb9b2574cb7a5a88554df Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Tue, 7 Sep 2021 20:17:36 -0500
-Subject: [PATCH 1/5] merge: aufs-kbuild
+Date: Tue, 7 Dec 2021 18:14:26 -0600
+Subject: [PATCH 1/6] merge: aufs-kbuild
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
