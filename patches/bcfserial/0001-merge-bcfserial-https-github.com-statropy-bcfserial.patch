@@ -1,6 +1,6 @@
-From 51ff3992ccf851954ac88deda24c1a27b7f6f16d Mon Sep 17 00:00:00 2001
+From 92e14343a4c5c36d3789993cfd34b29521e62882 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 29 Nov 2021 11:00:46 -0600
+Date: Tue, 7 Dec 2021 19:15:40 -0600
 Subject: [PATCH] merge: bcfserial: https://github.com/statropy/bcfserial
 
 https://github.com/statropy/bcfserial/commit/aded88429a8a00143596b41f4c1f50d9ae3d4069
