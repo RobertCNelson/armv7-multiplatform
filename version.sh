@@ -4,9 +4,9 @@ ARCH=$(uname -m)
 
 config="multi_v7_defconfig"
 
-build_prefix="-armv7-x"
+build_prefix="-armv7-rt-x"
 branch_prefix="v"
-branch_postfix=".x"
+branch_postfix=".x-rt"
 
 #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/Documentation/process/changes.rst?h=v5.15-rc1
 #arm
@@ -39,9 +39,9 @@ toolchain="gcc_11_arm"
 #Kernel
 KERNEL_REL=5.15
 KERNEL_TAG=${KERNEL_REL}.10
-kernel_rt=".X-rtY"
+kernel_rt=".10-rt24"
 #Kernel Build
-BUILD=${build_prefix}15
+BUILD=${build_prefix}17.1
 
 #v5.X-rcX + upto SHA
 #prev_KERNEL_SHA=""
