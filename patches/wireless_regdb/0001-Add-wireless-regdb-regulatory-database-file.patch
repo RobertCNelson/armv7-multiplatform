@@ -1,9 +1,9 @@
-From 25f68b1c0c874645db5172ec6ad3cfa97ae27f33 Mon Sep 17 00:00:00 2001
+From 88719bcb7293161f32f1592ef80a6617bd5e3f71 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Tue, 7 Dec 2021 17:05:57 -0600
+Date: Thu, 27 Jan 2022 17:07:03 -0600
 Subject: [PATCH] Add wireless-regdb regulatory database file
 
-https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/commit/?id=47007d0169c4c6c855a3fc5333c142489a43e89e
+https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/commit/?id=2ce78ed90f71955f7b223c17b5cda6c8a7708efe
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  firmware/regulatory.db     | Bin 0 -> 4160 bytes
