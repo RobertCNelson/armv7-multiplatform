@@ -109,7 +109,7 @@ aufs_fail () {
 }
 
 aufs () {
-	#https://github.com/sfjro/aufs5-standalone/tree/aufs5.10
+	#https://github.com/sfjro/aufs5-standalone/tree/aufs5.10.82
 	aufs_prefix="aufs5-"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
@@ -569,7 +569,7 @@ backports () {
 		patch_backports
 	fi
 
-	backport_tag="v5.10.83"
+	backport_tag="v5.10.94"
 
 	subsystem="iio"
 	#regenerate="enable"
@@ -583,7 +583,7 @@ backports () {
 
 		post_backports
 		exit 2
-	#else
+	else
 		patch_backports
 	fi
 }
@@ -758,12 +758,10 @@ drivers () {
 	dir 'drivers/ti/tsc'
 	dir 'drivers/ti/gpio'
 	dir 'drivers/greybus'
-#	dir 'drivers/mikrobus'
 	dir 'drivers/serdev'
 	dir 'drivers/iio'
 	dir 'drivers/fb_ssd1306'
 	dir 'drivers/bluetooth'
-#	dir 'fixes'
 }
 
 soc () {
@@ -789,7 +787,7 @@ fixes
 packaging () {
 	#do_backport="enable"
 	if [ "x${do_backport}" = "xenable" ] ; then
-		backport_tag="v5.15.6"
+		backport_tag="v5.16.3"
 
 		subsystem="bindeb-pkg"
 		#regenerate="enable"
