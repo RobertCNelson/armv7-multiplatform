@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.17.0-rc3 Kernel Configuration
+# Linux/arm 5.17.0-rc5 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-linux-gnueabi-gcc (GCC) 11.1.0"
 CONFIG_CC_IS_GCC=y
@@ -6165,6 +6165,7 @@ CONFIG_USB_XHCI_PLATFORM=y
 CONFIG_USB_XHCI_MVEBU=y
 CONFIG_USB_XHCI_RCAR=y
 CONFIG_USB_XHCI_TEGRA=m
+# CONFIG_USB_BRCMSTB is not set
 CONFIG_USB_EHCI_HCD=y
 CONFIG_USB_EHCI_ROOT_HUB_TT=y
 CONFIG_USB_EHCI_TT_NEWSCHED=y
@@ -6341,6 +6342,7 @@ CONFIG_USB_HSIC_USB3503=y
 # CONFIG_USB_HSIC_USB4604 is not set
 # CONFIG_USB_LINK_LAYER_TEST is not set
 # CONFIG_USB_CHAOSKEY is not set
+CONFIG_BRCM_USB_PINMAP=y
 
 #
 # USB Physical Layer drivers
@@ -8389,7 +8391,7 @@ CONFIG_PHY_BCM_SR_USB=y
 CONFIG_PHY_NS2_PCIE=y
 CONFIG_PHY_NS2_USB_DRD=y
 CONFIG_PHY_BRCM_SATA=y
-# CONFIG_PHY_BRCM_USB is not set
+CONFIG_PHY_BRCM_USB=y
 CONFIG_PHY_BCM_SR_PCIE=y
 # end of PHY drivers for Broadcom platforms
 
