@@ -12,23 +12,14 @@ Signed-off-by: Peter Chen <peter.chen@nxp.com>
 Signed-off-by: Joshua Clayton <stillcompiling@gmail.com>
 Tested-by: Maciej S. Szmigiero <mail@maciej.szmigiero.name>
 ---
- arch/arm/boot/dts/imx6qdl-udoo.dtsi | 26 ++++++++++++--------------
- 1 file changed, 12 insertions(+), 14 deletions(-)
+ arch/arm/boot/dts/imx6qdl-udoo.dtsi | 24 ++++++++++--------------
+ 1 file changed, 10 insertions(+), 14 deletions(-)
 
 diff --git a/arch/arm/boot/dts/imx6qdl-udoo.dtsi b/arch/arm/boot/dts/imx6qdl-udoo.dtsi
-index 4f27861bbb32..dead14b0d4bf 100644
+index ef63ea5873ed..ca10a46ff597 100644
 --- a/arch/arm/boot/dts/imx6qdl-udoo.dtsi
 +++ b/arch/arm/boot/dts/imx6qdl-udoo.dtsi
-@@ -5,6 +5,8 @@
-  * Author: Fabio Estevam <fabio.estevam@freescale.com>
-  */
- 
-+#include <dt-bindings/gpio/gpio.h>
-+
- / {
- 	aliases {
- 		backlight = &backlight;
-@@ -61,17 +63,6 @@
+@@ -63,17 +63,6 @@
  		#address-cells = <1>;
  		#size-cells = <0>;
  
@@ -46,7 +37,7 @@ index 4f27861bbb32..dead14b0d4bf 100644
  		reg_panel: regulator@1 {
  			compatible = "regulator-fixed";
  			reg = <1>;
-@@ -197,7 +188,7 @@
+@@ -199,7 +188,7 @@
  
  		pinctrl_usbh: usbhgrp {
  			fsl,pins = <
@@ -55,7 +46,7 @@ index 4f27861bbb32..dead14b0d4bf 100644
  				MX6QDL_PAD_NANDF_CS2__CCM_CLKO2 0x130b0
  			>;
  		};
-@@ -268,9 +259,16 @@
+@@ -271,9 +260,16 @@
  &usbh1 {
  	pinctrl-names = "default";
  	pinctrl-0 = <&pinctrl_usbh>;

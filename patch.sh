@@ -593,7 +593,7 @@ patch_backports (){
 }
 
 backports () {
-	backport_tag="v4.19.217"
+	backport_tag="v4.19.232"
 
 	subsystem="iio"
 	#regenerate="enable"
@@ -611,7 +611,7 @@ backports () {
 		patch_backports
 	fi
 
-	backport_tag="v5.4.159"
+	backport_tag="v5.4.182"
 
 	subsystem="wiznet"
 	#regenerate="enable"
@@ -734,6 +734,9 @@ soc () {
 
 	dir 'soc/ti/omap4'
 	dir 'bootup_hacks'
+}
+
+fixes () {
 	dir 'fixes'
 	dir 'fixes/gcc'
 }
@@ -743,6 +746,7 @@ backports
 reverts
 drivers
 soc
+fixes
 
 packaging () {
 	do_backport="enable"
