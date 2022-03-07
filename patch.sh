@@ -574,6 +574,7 @@ drivers () {
 	dir 'drivers/greybus'
 	dir 'drivers/serdev'
 	dir 'drivers/fb_ssd1306'
+	#dir 'drivers/mikrobus'
 }
 
 soc () {
@@ -596,7 +597,7 @@ fixes
 packaging () {
 	#do_backport="enable"
 	if [ "x${do_backport}" = "xenable" ] ; then
-		backport_tag="v5.16.11"
+		backport_tag="v5.16.12"
 
 		subsystem="bindeb-pkg"
 		#regenerate="enable"
