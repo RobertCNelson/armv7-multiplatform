@@ -1,9 +1,9 @@
-From fe20c205928e5ab746ec719d90d922a438cd9fd2 Mon Sep 17 00:00:00 2001
+From 095f9a78782af64d706c9c274801404c281bc837 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 15 Nov 2021 15:04:55 -0600
+Date: Mon, 7 Mar 2022 16:01:29 -0600
 Subject: [PATCH] backports: bindeb-pkg: from: linux.git
 
-Reference: v5.10.79
+Reference: v5.10.103
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  scripts/package/builddeb | 119 ++++++++++++++++++++++++---------------

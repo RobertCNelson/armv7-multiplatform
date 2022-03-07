@@ -628,22 +628,6 @@ patch_backports (){
 }
 
 backports () {
-	backport_tag="v5.12.19"
-
-	subsystem="greybus"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		pre_backports
-
-		cp -rv ~/linux-src/drivers/greybus/* ./drivers/greybus/
-		cp -rv ~/linux-src/drivers/staging/greybus/* ./drivers/staging/greybus/
-
-		post_backports
-		exit 2
-	else
-		patch_backports
-	fi
-
 	backport_tag="v5.13.19"
 
 	subsystem="wlcore"
@@ -676,22 +660,7 @@ backports () {
 	fi
 
 
-	backport_tag="v5.4.159"
-
-	subsystem="musb"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		pre_backports
-
-		cp -rv ~/linux-src/drivers/usb/musb/musb_* ./drivers/usb/musb/
-
-		post_backports
-		exit 2
-	else
-		patch_backports
-	fi
-
-	backport_tag="v5.4.159"
+	backport_tag="v5.4.182"
 
 	subsystem="iio"
 	#regenerate="enable"
@@ -705,7 +674,7 @@ backports () {
 
 		post_backports
 		exit 2
-	else
+	#else
 		patch_backports
 	fi
 }
@@ -943,6 +912,9 @@ soc () {
 
 	dir 'soc/ti/panda'
 	dir 'bootup_hacks'
+}
+
+fixes () {
 	dir 'fixes/gcc'
 }
 
@@ -952,11 +924,12 @@ brcmfmac
 reverts
 drivers
 soc
+fixes
 
 packaging () {
 	do_backport="enable"
 	if [ "x${do_backport}" = "xenable" ] ; then
-		backport_tag="v5.10.79"
+		backport_tag="v5.10.103"
 
 		subsystem="bindeb-pkg"
 		#regenerate="enable"
