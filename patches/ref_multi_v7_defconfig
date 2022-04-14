@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.18.0-rc1 Kernel Configuration
+# Linux/arm 5.18.0-rc2 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-linux-gnueabi-gcc (GCC) 11.1.0"
 CONFIG_CC_IS_GCC=y
@@ -2058,7 +2058,7 @@ CONFIG_SATA_PMP=y
 # Controllers with non-SFF native interface
 #
 CONFIG_SATA_AHCI=y
-CONFIG_SATA_LPM_POLICY=0
+CONFIG_SATA_MOBILE_LPM_POLICY=0
 CONFIG_SATA_AHCI_PLATFORM=y
 CONFIG_AHCI_BRCM=y
 CONFIG_AHCI_DM816=y
@@ -9119,7 +9119,7 @@ CONFIG_CRYPTO_HMAC=m
 #
 CONFIG_CRYPTO_CRC32C=y
 # CONFIG_CRYPTO_CRC32 is not set
-CONFIG_CRYPTO_XXHASH=y
+# CONFIG_CRYPTO_XXHASH is not set
 # CONFIG_CRYPTO_BLAKE2B is not set
 # CONFIG_CRYPTO_BLAKE2S is not set
 # CONFIG_CRYPTO_CRCT10DIF is not set
