@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.17.0 Kernel Configuration
+# Linux/arm 5.17.3 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-linux-gnueabi-gcc (GCC) 11.1.0"
 CONFIG_CC_IS_GCC=y
@@ -2190,7 +2190,7 @@ CONFIG_NET_DSA_BCM_SF2=m
 # CONFIG_NET_DSA_XRS700X_I2C is not set
 # CONFIG_NET_DSA_XRS700X_MDIO is not set
 # CONFIG_NET_DSA_QCA8K is not set
-# CONFIG_NET_DSA_REALTEK_SMI is not set
+# CONFIG_NET_DSA_REALTEK is not set
 # CONFIG_NET_DSA_SMSC_LAN9303_I2C is not set
 # CONFIG_NET_DSA_SMSC_LAN9303_MDIO is not set
 # CONFIG_NET_DSA_VITESSE_VSC73XX_SPI is not set
@@ -8707,6 +8707,7 @@ CONFIG_PSTORE_RAM=y
 # CONFIG_SYSV_FS is not set
 # CONFIG_UFS_FS is not set
 # CONFIG_EROFS_FS is not set
+# CONFIG_AUFS_FS is not set
 CONFIG_NETWORK_FILESYSTEMS=y
 CONFIG_NFS_FS=y
 CONFIG_NFS_V2=y
@@ -9217,7 +9218,6 @@ CONFIG_FRAME_WARN=1024
 # CONFIG_HEADERS_INSTALL is not set
 # CONFIG_DEBUG_SECTION_MISMATCH is not set
 CONFIG_SECTION_MISMATCH_WARN_ONLY=y
-# CONFIG_DEBUG_FORCE_FUNCTION_ALIGN_64B is not set
 # CONFIG_VMLINUX_MAP is not set
 # CONFIG_DEBUG_FORCE_WEAK_PER_CPU is not set
 # end of Compile-time checks and compiler options
