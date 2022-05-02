@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.18.0-rc4 Kernel Configuration
+# Linux/arm 5.18.0-rc5 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-linux-gnueabi-gcc (GCC) 11.1.0"
 CONFIG_CC_IS_GCC=y
@@ -4515,6 +4515,7 @@ CONFIG_VIDEO_V4L2_I2C=y
 CONFIG_VIDEO_V4L2_SUBDEV_API=y
 # CONFIG_VIDEO_ADV_DEBUG is not set
 # CONFIG_VIDEO_FIXED_MINOR_RANGES is not set
+CONFIG_V4L2_H264=m
 CONFIG_V4L2_MEM2MEM_DEV=m
 # CONFIG_V4L2_FLASH_LED_CLASS is not set
 CONFIG_V4L2_FWNODE=m
@@ -4676,7 +4677,7 @@ CONFIG_VIDEO_MMP_CAMERA=m
 #
 # NVidia media platform drivers
 #
-# CONFIG_VIDEO_TEGRA_VDE is not set
+CONFIG_VIDEO_TEGRA_VDE=m
 
 #
 # NXP media platform drivers
