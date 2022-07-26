@@ -518,7 +518,7 @@ patch_backports (){
 }
 
 backports () {
-	backport_tag="v5.10.131"
+	backport_tag="v5.10.133"
 
 	subsystem="uio"
 	#regenerate="enable"
@@ -572,7 +572,6 @@ drivers () {
 soc () {
 	dir 'soc/imx/imx7'
 	dir 'soc/ti/panda'
-	#dir 'bootup_hacks'
 }
 
 fixes () {
@@ -589,7 +588,7 @@ fixes
 packaging () {
 	#do_backport="enable"
 	if [ "x${do_backport}" = "xenable" ] ; then
-		backport_tag="v5.18.12"
+		backport_tag="v5.18.14"
 
 		subsystem="bindeb-pkg"
 		#regenerate="enable"
