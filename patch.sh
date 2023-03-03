@@ -387,6 +387,14 @@ cleanup_dts_builds () {
 	rm -rf arch/arm/boot/dts/*dtb || true
 }
 
+dtb_makefile_append_omap4 () {
+	sed -i -e 's:omap4-panda.dtb \\:omap4-panda.dtb \\\n\t'$device' \\:g' arch/arm/boot/dts/Makefile
+}
+
+dtb_makefile_append_am5 () {
+	sed -i -e 's:am57xx-beagle-x15.dtb \\:am57xx-beagle-x15.dtb \\\n\t'$device' \\:g' arch/arm/boot/dts/Makefile
+}
+
 dtb_makefile_append () {
 	sed -i -e 's:am335x-boneblack.dtb \\:am335x-boneblack.dtb \\\n\t'$device' \\:g' arch/arm/boot/dts/Makefile
 }
@@ -415,6 +423,8 @@ beagleboard_dtbs () {
 		mkdir -p arch/arm/boot/dts/overlays/
 		cp -vr ../${work_dir}/src/arm/* arch/arm/boot/dts/
 		cp -vr ../${work_dir}/include/dt-bindings/* ./include/dt-bindings/
+
+		device="omap4-panda-es-b3.dtb" ; dtb_makefile_append_omap4
 
 		device="am335x-bonegreen-gateway.dtb" ; dtb_makefile_append
 		device="am335x-sancloud-bbe-lite.dtb" ; dtb_makefile_append
