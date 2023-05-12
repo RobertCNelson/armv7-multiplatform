@@ -1,6 +1,6 @@
-From e38bba67d97e932f2cd5d9c1a2a0faaf96348143 Mon Sep 17 00:00:00 2001
+From 9be4b4b0debc83231cae323e64cf75d9cf052716 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 7 Mar 2022 16:38:57 -0600
+Date: Fri, 12 May 2023 13:19:58 -0500
 Subject: [PATCH 3/5] merge: aufs-mmap
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
@@ -50,7 +50,7 @@ index 3b63be64e436..fb9913bf3d10 100644
  		ino = inode->i_ino;
  	}
 diff --git a/fs/proc/task_mmu.c b/fs/proc/task_mmu.c
-index efa6273c0006..75dbd27826f7 100644
+index 2f2afc3c6fc6..2b576c9f87d6 100644
 --- a/fs/proc/task_mmu.c
 +++ b/fs/proc/task_mmu.c
 @@ -309,7 +309,10 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
@@ -65,7 +65,7 @@ index efa6273c0006..75dbd27826f7 100644
  		dev = inode->i_sb->s_dev;
  		ino = inode->i_ino;
  		pgoff = ((loff_t)vma->vm_pgoff) << PAGE_SHIFT;
-@@ -1768,7 +1771,7 @@ static int show_numa_map(struct seq_file *m, void *v)
+@@ -1766,7 +1769,7 @@ static int show_numa_map(struct seq_file *m, void *v)
  	struct proc_maps_private *proc_priv = &numa_priv->proc_maps;
  	struct vm_area_struct *vma = v;
  	struct numa_maps *md = &numa_priv->md;
@@ -91,7 +91,7 @@ index 5161894a6d62..b6d13cce45f3 100644
  		ino = inode->i_ino;
  		pgoff = (loff_t)vma->vm_pgoff << PAGE_SHIFT;
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index c736c677b876..51528f7514f8 100644
+index 26a5fba22664..8e3d532c86f5 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
 @@ -1463,6 +1463,28 @@ static inline void unmap_shared_mapping_range(struct address_space *mapping,
@@ -170,7 +170,7 @@ index 26ef77a3883b..b2869af1ef08 100644
  obj-y += init-mm.o
  
 diff --git a/mm/filemap.c b/mm/filemap.c
-index f2e777003b90..1f87bd61e956 100644
+index e61ec2c88bd0..158d66735ee3 100644
 --- a/mm/filemap.c
 +++ b/mm/filemap.c
 @@ -2723,7 +2723,7 @@ vm_fault_t filemap_page_mkwrite(struct vm_fault *vmf)
@@ -183,7 +183,7 @@ index f2e777003b90..1f87bd61e956 100644
  	if (page->mapping != inode->i_mapping) {
  		unlock_page(page);
 diff --git a/mm/mmap.c b/mm/mmap.c
-index f875386e7acd..af65f8895f7f 100644
+index 38541885ea45..e70876ddf815 100644
 --- a/mm/mmap.c
 +++ b/mm/mmap.c
 @@ -175,7 +175,7 @@ static struct vm_area_struct *remove_vma(struct vm_area_struct *vma)
@@ -204,7 +204,7 @@ index f875386e7acd..af65f8895f7f 100644
  		}
  		if (next->anon_vma)
  			anon_vma_merge(vma, next);
-@@ -1816,8 +1816,8 @@ unsigned long mmap_region(struct file *file, unsigned long addr,
+@@ -1820,8 +1820,8 @@ unsigned long mmap_region(struct file *file, unsigned long addr,
  	return addr;
  
  unmap_and_free_vma:
@@ -214,7 +214,7 @@ index f875386e7acd..af65f8895f7f 100644
  
  	/* Undo any partial mapping done by a device driver. */
  	unmap_region(mm, vma, prev, vma->vm_start, vma->vm_end);
-@@ -2641,7 +2641,7 @@ int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
+@@ -2661,7 +2661,7 @@ int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
  		goto out_free_mpol;
  
  	if (new->vm_file)
@@ -223,7 +223,7 @@ index f875386e7acd..af65f8895f7f 100644
  
  	if (new->vm_ops && new->vm_ops->open)
  		new->vm_ops->open(new);
-@@ -2660,7 +2660,7 @@ int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
+@@ -2680,7 +2680,7 @@ int __split_vma(struct mm_struct *mm, struct vm_area_struct *vma,
  	if (new->vm_ops && new->vm_ops->close)
  		new->vm_ops->close(new);
  	if (new->vm_file)
@@ -232,7 +232,7 @@ index f875386e7acd..af65f8895f7f 100644
  	unlink_anon_vmas(new);
   out_free_mpol:
  	mpol_put(vma_policy(new));
-@@ -2822,7 +2822,7 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
+@@ -2842,7 +2842,7 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
  	struct vm_area_struct *vma;
  	unsigned long populate = 0;
  	unsigned long ret = -EINVAL;
@@ -241,7 +241,7 @@ index f875386e7acd..af65f8895f7f 100644
  
  	pr_warn_once("%s (%d) uses deprecated remap_file_pages() syscall. See Documentation/vm/remap_file_pages.rst.\n",
  		     current->comm, current->pid);
-@@ -2897,10 +2897,27 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
+@@ -2917,10 +2917,27 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
  		}
  	}
  
@@ -270,7 +270,7 @@ index f875386e7acd..af65f8895f7f 100644
  out:
  	up_write(&mm->mmap_sem);
  	if (populate)
-@@ -3207,7 +3224,7 @@ struct vm_area_struct *copy_vma(struct vm_area_struct **vmap,
+@@ -3227,7 +3244,7 @@ struct vm_area_struct *copy_vma(struct vm_area_struct **vmap,
  		if (anon_vma_clone(new_vma, vma))
  			goto out_free_mempol;
  		if (new_vma->vm_file)
@@ -416,5 +416,5 @@ index 000000000000..00d51187c325
 +}
 +#endif /* !CONFIG_MMU */
 -- 
-2.30.2
+2.39.2
 
