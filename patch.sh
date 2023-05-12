@@ -1,6 +1,6 @@
 #!/bin/bash -e
 #
-# Copyright (c) 2009-2021 Robert Nelson <robertcnelson@gmail.com>
+# Copyright (c) 2009-2022 Robert Nelson <robertcnelson@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -138,21 +138,18 @@ aufs () {
 		${git_bin} add .
 		${git_bin} commit -a -m 'merge: aufs-standalone' -s
 
-		${git_bin} format-patch -4 -o ../patches/aufs/
+		${git_bin} format-patch -4 -o ../patches/external/aufs/
 
 		cd ../
-		if [ ! -d ./${aufs_prefix}standalone ] ; then
-			${git_bin} clone -b aufs${KERNEL_REL} https://github.com/sfjro/${aufs_prefix}standalone --depth=1
-			cd ./${aufs_prefix}standalone/
-				aufs_hash=$(git rev-parse HEAD)
-			cd -
-		else
+		if [ -d ./${aufs_prefix}standalone ] ; then
 			rm -rf ./${aufs_prefix}standalone || true
-			${git_bin} clone -b aufs${KERNEL_REL} https://github.com/sfjro/${aufs_prefix}standalone --depth=1
-			cd ./${aufs_prefix}standalone/
-				aufs_hash=$(git rev-parse HEAD)
-			cd -
 		fi
+
+		${git_bin} clone -b aufs${KERNEL_REL} https://github.com/sfjro/${aufs_prefix}standalone --depth=1
+		cd ./${aufs_prefix}standalone/
+			aufs_hash=$(git rev-parse HEAD)
+		cd -
+
 		cd ./KERNEL/
 		KERNEL_REL=4.19
 
@@ -165,8 +162,8 @@ aufs () {
 
 		${git_bin} add .
 		${git_bin} commit -a -m 'merge: aufs' -m "https://github.com/sfjro/${aufs_prefix}standalone/commit/${aufs_hash}" -s
-		${git_bin} format-patch -5 -o ../patches/aufs/
-		echo "AUFS: https://github.com/sfjro/${aufs_prefix}standalone/commit/${aufs_hash}" > ../patches/git/AUFS
+		${git_bin} format-patch -5 -o ../patches/external/aufs/
+		echo "AUFS: https://github.com/sfjro/${aufs_prefix}standalone/commit/${aufs_hash}" > ../patches/external/git/AUFS
 
 		rm -rf ../${aufs_prefix}standalone/ || true
 
@@ -174,36 +171,32 @@ aufs () {
 
 		start_cleanup
 
-		${git} "${DIR}/patches/aufs/0001-merge-aufs-kbuild.patch"
-		${git} "${DIR}/patches/aufs/0002-merge-aufs-base.patch"
-		${git} "${DIR}/patches/aufs/0003-merge-aufs-mmap.patch"
-		${git} "${DIR}/patches/aufs/0004-merge-aufs-standalone.patch"
-		${git} "${DIR}/patches/aufs/0005-merge-aufs.patch"
+		${git} "${DIR}/patches/external/aufs/0001-merge-aufs-kbuild.patch"
+		${git} "${DIR}/patches/external/aufs/0002-merge-aufs-base.patch"
+		${git} "${DIR}/patches/external/aufs/0003-merge-aufs-mmap.patch"
+		${git} "${DIR}/patches/external/aufs/0004-merge-aufs-standalone.patch"
+		${git} "${DIR}/patches/external/aufs/0005-merge-aufs.patch"
 
-		wdir="aufs"
+		wdir="external/aufs"
 		number=5
 		cleanup
 	fi
 
-	dir 'aufs'
+	dir 'external/aufs'
 }
 
 can_isotp () {
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		cd ../
-		if [ ! -d ./can-isotp ] ; then
-			${git_bin} clone https://github.com/hartkopp/can-isotp --depth=1
-			cd ./can-isotp
-				isotp_hash=$(git rev-parse HEAD)
-			cd -
-		else
+		if [ -d ./can-isotp ] ; then
 			rm -rf ./can-isotp || true
-			${git_bin} clone https://github.com/hartkopp/can-isotp --depth=1
-			cd ./can-isotp
-				isotp_hash=$(git rev-parse HEAD)
-			cd -
 		fi
+
+		${git_bin} clone https://github.com/hartkopp/can-isotp --depth=1
+		cd ./can-isotp
+			isotp_hash=$(git rev-parse HEAD)
+		cd -
 
 		cd ./KERNEL/
 
@@ -212,8 +205,8 @@ can_isotp () {
 
 		${git_bin} add .
 		${git_bin} commit -a -m 'merge: can-isotp: https://github.com/hartkopp/can-isotp' -m "https://github.com/hartkopp/can-isotp/commit/${isotp_hash}" -s
-		${git_bin} format-patch -1 -o ../patches/can_isotp/
-		echo "CAN-ISOTP: https://github.com/hartkopp/can-isotp/commit/${isotp_hash}" > ../patches/git/CAN-ISOTP
+		${git_bin} format-patch -1 -o ../patches/external/can_isotp/
+		echo "CAN-ISOTP: https://github.com/hartkopp/can-isotp/commit/${isotp_hash}" > ../patches/external/git/CAN-ISOTP
 
 		rm -rf ../can-isotp/ || true
 
@@ -221,15 +214,15 @@ can_isotp () {
 
 		start_cleanup
 
-		${git} "${DIR}/patches/can_isotp/0001-merge-can-isotp-https-github.com-hartkopp-can-isotp.patch"
+		${git} "${DIR}/patches/external/can_isotp/0001-merge-can-isotp-https-github.com-hartkopp-can-isotp.patch"
 
-		wdir="can_isotp"
+		wdir="external/can_isotp"
 		number=1
 		cleanup
 
 		exit 2
 	fi
-	dir 'can_isotp'
+	dir 'external/can_isotp'
 }
 
 rt_cleanup () {
@@ -250,13 +243,13 @@ rt () {
 		rm -f localversion-rt
 		${git_bin} add .
 		${git_bin} commit -a -m 'merge: CONFIG_PREEMPT_RT Patch Set' -m "patch-${rt_patch}.patch.xz" -s
-		${git_bin} format-patch -1 -o ../patches/rt/
-		echo "RT: patch-${rt_patch}.patch.xz" > ../patches/git/RT
+		${git_bin} format-patch -1 -o ../patches/external/rt/
+		echo "RT: patch-${rt_patch}.patch.xz" > ../patches/external/git/RT
 
 		exit 2
 	fi
 
-	dir 'rt'
+	dir 'external/rt'
 }
 
 wireguard_fail () {
@@ -268,18 +261,14 @@ wireguard () {
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		cd ../
-		if [ ! -d ./WireGuard ] ; then
-			${git_bin} clone https://git.zx2c4.com/WireGuard --depth=1
-			cd ./WireGuard
-				wireguard_hash=$(git rev-parse HEAD)
-			cd -
-		else
+		if [ -d ./WireGuard ] ; then
 			rm -rf ./WireGuard || true
-			${git_bin} clone https://git.zx2c4.com/WireGuard --depth=1
-			cd ./WireGuard
-				wireguard_hash=$(git rev-parse HEAD)
-			cd -
 		fi
+
+		${git_bin} clone https://git.zx2c4.com/WireGuard --depth=1
+		cd ./WireGuard
+			wireguard_hash=$(git rev-parse HEAD)
+		cd -
 
 		#cd ./WireGuard/
 		#${git_bin}  revert --no-edit xyz
@@ -291,8 +280,8 @@ wireguard () {
 
 		${git_bin} add .
 		${git_bin} commit -a -m 'merge: WireGuard' -m "https://git.zx2c4.com/WireGuard/commit/${wireguard_hash}" -s
-		${git_bin} format-patch -1 -o ../patches/WireGuard/
-		echo "WIREGUARD: https://git.zx2c4.com/WireGuard/commit/${wireguard_hash}" > ../patches/git/WIREGUARD
+		${git_bin} format-patch -1 -o ../patches/external/WireGuard/
+		echo "WIREGUARD: https://git.zx2c4.com/WireGuard/commit/${wireguard_hash}" > ../patches/external/git/WIREGUARD
 
 		rm -rf ../WireGuard/ || true
 
@@ -300,34 +289,30 @@ wireguard () {
 
 		start_cleanup
 
-		${git} "${DIR}/patches/WireGuard/0001-merge-WireGuard.patch"
+		${git} "${DIR}/patches/external/WireGuard/0001-merge-WireGuard.patch"
 
-		wdir="WireGuard"
+		wdir="external/WireGuard"
 		number=1
 		cleanup
 	fi
 
-	dir 'WireGuard'
+	dir 'external/WireGuard'
 }
 
 wireless_regdb () {
 	#https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
-
 		cd ../
-		if [ ! -d ./wireless-regdb ] ; then
-			${git_bin} clone git://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git --depth=1
-			cd ./wireless-regdb
-				wireless_regdb_hash=$(git rev-parse HEAD)
-			cd -
-		else
+		if [ -d ./wireless-regdb ] ; then
 			rm -rf ./wireless-regdb || true
-			${git_bin} clone git://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git --depth=1
-			cd ./wireless-regdb
-				wireless_regdb_hash=$(git rev-parse HEAD)
-			cd -
 		fi
+
+		${git_bin} clone git://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git --depth=1
+		cd ./wireless-regdb
+			wireless_regdb_hash=$(git rev-parse HEAD)
+		cd -
+
 		cd ./KERNEL/
 
 		mkdir -p ./firmware/ || true
@@ -336,8 +321,8 @@ wireless_regdb () {
 		${git_bin} add -f ./firmware/regulatory.*
 		${git_bin} commit -a -m 'Add wireless-regdb regulatory database file' -m "https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/commit/?id=${wireless_regdb_hash}" -s
 
-		${git_bin} format-patch -1 -o ../patches/wireless_regdb/
-		echo "WIRELESS_REGDB: https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/commit/?id=${wireless_regdb_hash}" > ../patches/git/WIRELESS_REGDB
+		${git_bin} format-patch -1 -o ../patches/external/wireless_regdb/
+		echo "WIRELESS_REGDB: https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/commit/?id=${wireless_regdb_hash}" > ../patches/external/git/WIRELESS_REGDB
 
 		rm -rf ../wireless-regdb/ || true
 
@@ -345,34 +330,30 @@ wireless_regdb () {
 
 		start_cleanup
 
-		${git} "${DIR}/patches/wireless_regdb/0001-Add-wireless-regdb-regulatory-database-file.patch"
+		${git} "${DIR}/patches/external/wireless_regdb/0001-Add-wireless-regdb-regulatory-database-file.patch"
 
-		wdir="wireless_regdb"
+		wdir="external/wireless_regdb"
 		number=1
 		cleanup
 	fi
 
-	dir 'wireless_regdb'
+	dir 'external/wireless_regdb'
 }
 
 ti_pm_firmware () {
 	#https://git.ti.com/gitweb?p=processor-firmware/ti-amx3-cm3-pm-firmware.git;a=shortlog;h=refs/heads/ti-v4.1.y
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
-
 		cd ../
-		if [ ! -d ./ti-amx3-cm3-pm-firmware ] ; then
-			${git_bin} clone -b ti-v4.1.y git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git --depth=1
-			cd ./ti-amx3-cm3-pm-firmware
-				ti_amx3_cm3_hash=$(git rev-parse HEAD)
-			cd -
-		else
+		if [ -d ./ti-amx3-cm3-pm-firmware ] ; then
 			rm -rf ./ti-amx3-cm3-pm-firmware || true
-			${git_bin} clone -b ti-v4.1.y git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git --depth=1
-			cd ./ti-amx3-cm3-pm-firmware
-				ti_amx3_cm3_hash=$(git rev-parse HEAD)
-			cd -
 		fi
+
+		${git_bin} clone -b ti-v4.1.y git://git.ti.com/processor-firmware/ti-amx3-cm3-pm-firmware.git --depth=1
+		cd ./ti-amx3-cm3-pm-firmware
+			ti_amx3_cm3_hash=$(git rev-parse HEAD)
+		cd -
+
 		cd ./KERNEL/
 
 		mkdir -p ./firmware/ || true
@@ -381,7 +362,7 @@ ti_pm_firmware () {
 		${git_bin} add -f ./firmware/am*
 		${git_bin} commit -a -m 'Add AM335x CM3 Power Managment Firmware' -m "http://git.ti.com/gitweb/?p=processor-firmware/ti-amx3-cm3-pm-firmware.git;a=commit;h=${ti_amx3_cm3_hash}" -s
 		${git_bin} format-patch -1 -o ../patches/drivers/ti/firmware/
-		echo "TI_AMX3_CM3: http://git.ti.com/gitweb/?p=processor-firmware/ti-amx3-cm3-pm-firmware.git;a=commit;h=${ti_amx3_cm3_hash}" > ../patches/git/TI_AMX3_CM3
+		echo "TI_AMX3_CM3: http://git.ti.com/gitweb/?p=processor-firmware/ti-amx3-cm3-pm-firmware.git;a=commit;h=${ti_amx3_cm3_hash}" > ../patches/external/git/TI_AMX3_CM3
 
 		rm -rf ../ti-amx3-cm3-pm-firmware/ || true
 
@@ -420,23 +401,20 @@ dtb_makefile_append () {
 
 beagleboard_dtbs () {
 	branch="v4.19.x"
-	https_repo="https://github.com/beagleboard/BeagleBoard-DeviceTrees"
+	https_repo="https://git.beagleboard.org/beagleboard/BeagleBoard-DeviceTrees.git"
 	work_dir="BeagleBoard-DeviceTrees"
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
 		cd ../
-		if [ ! -d ./${work_dir} ] ; then
-			${git_bin} clone -b ${branch} ${https_repo} --depth=1
-			cd ./${work_dir}
-				git_hash=$(git rev-parse HEAD)
-			cd -
-		else
+		if [ -d ./${work_dir} ] ; then
 			rm -rf ./${work_dir} || true
-			${git_bin} clone -b ${branch} ${https_repo} --depth=1
-			cd ./${work_dir}
-				git_hash=$(git rev-parse HEAD)
-			cd -
 		fi
+
+		${git_bin} clone -b ${branch} ${https_repo} --depth=1
+		cd ./${work_dir}
+			git_hash=$(git rev-parse HEAD)
+		cd -
+
 		cd ./KERNEL/
 
 		cleanup_dts_builds
@@ -469,9 +447,9 @@ beagleboard_dtbs () {
 
 		${git_bin} add -f arch/arm/boot/dts/
 		${git_bin} add -f include/dt-bindings/
-		${git_bin} commit -a -m "Add BeagleBoard.org Device Tree Changes" -m "${https_repo}/tree/${branch}" -m "${https_repo}/commit/${git_hash}" -s
+		${git_bin} commit -a -m "Add BeagleBoard.org Device Tree Changes" -m "https://git.beagleboard.org/beagleboard/BeagleBoard-DeviceTrees/-/tree/${branch}" -m "https://git.beagleboard.org/beagleboard/BeagleBoard-DeviceTrees/-/commit/${git_hash}" -s
 		${git_bin} format-patch -1 -o ../patches/soc/ti/beagleboard_dtbs/
-		echo "BBDTBS: ${https_repo}/commit/${git_hash}" > ../patches/git/BBDTBS
+		echo "BBDTBS: https://git.beagleboard.org/beagleboard/BeagleBoard-DeviceTrees/-/commit/${git_hash}" > ../patches/external/git/BBDTBS
 
 		rm -rf ../${work_dir}/ || true
 
@@ -593,7 +571,7 @@ patch_backports (){
 }
 
 backports () {
-	backport_tag="v4.19.232"
+	backport_tag="v4.19.282"
 
 	subsystem="iio"
 	#regenerate="enable"
@@ -607,11 +585,11 @@ backports () {
 
 		post_backports
 		exit 2
-	#else
+	else
 		patch_backports
 	fi
 
-	backport_tag="v5.4.182"
+	backport_tag="v5.4.242"
 
 	subsystem="wiznet"
 	#regenerate="enable"
@@ -619,22 +597,6 @@ backports () {
 		pre_backports
 
 		cp -v ~/linux-src/drivers/net/ethernet/wiznet/* ./drivers/net/ethernet/wiznet/
-
-		post_backports
-		exit 2
-	else
-		patch_backports
-	fi
-
-	backport_tag="v4.20.17"
-
-	subsystem="remoteproc"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		pre_backports
-
-		cp -rv ~/linux-src/drivers/remoteproc/* ./drivers/remoteproc/
-		cp -v ~/linux-src/include/linux/remoteproc.h ./include/linux/remoteproc.h
 
 		post_backports
 		exit 2

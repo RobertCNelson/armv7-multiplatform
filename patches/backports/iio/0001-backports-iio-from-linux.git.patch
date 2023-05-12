@@ -1,130 +1,83 @@
-From d3ea6f65c3cbf83f1b25cdaa6374604f6ea4c31d Mon Sep 17 00:00:00 2001
+From 0228299b6022e6547ca51c3cd13e5632cc6665ab Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Wed, 20 Oct 2021 16:53:43 -0500
+Date: Fri, 12 May 2023 13:22:52 -0500
 Subject: [PATCH] backports: iio: from: linux.git
 
-Reference: v4.19.213
+Reference: v4.19.282
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
- drivers/iio/adc/aspeed_adc.c             |  1 +
- drivers/iio/adc/ti-adc128s052.c          |  6 ++++++
- drivers/iio/common/ssp_sensors/ssp_spi.c | 11 +++++++++--
- drivers/iio/dac/ti-dac5571.c             |  1 +
- drivers/iio/light/opt3001.c              |  6 +++---
- 5 files changed, 20 insertions(+), 5 deletions(-)
+ drivers/iio/adc/at91-sama5d2_adc.c |  2 +-
+ drivers/iio/counter/104-quad-8.c   | 14 +-------------
+ drivers/iio/dac/cio-dac.c          |  4 ++--
+ 3 files changed, 4 insertions(+), 16 deletions(-)
 
-diff --git a/drivers/iio/adc/aspeed_adc.c b/drivers/iio/adc/aspeed_adc.c
-index 9515ca165dfd..a8e6046d3948 100644
---- a/drivers/iio/adc/aspeed_adc.c
-+++ b/drivers/iio/adc/aspeed_adc.c
-@@ -188,6 +188,7 @@ static int aspeed_adc_probe(struct platform_device *pdev)
+diff --git a/drivers/iio/adc/at91-sama5d2_adc.c b/drivers/iio/adc/at91-sama5d2_adc.c
+index b355899f54cc..41afb9b8696d 100644
+--- a/drivers/iio/adc/at91-sama5d2_adc.c
++++ b/drivers/iio/adc/at91-sama5d2_adc.c
+@@ -989,7 +989,7 @@ static struct iio_trigger *at91_adc_allocate_trigger(struct iio_dev *indio,
+ 	trig = devm_iio_trigger_alloc(&indio->dev, "%s-dev%d-%s", indio->name,
+ 				      indio->id, trigger_name);
+ 	if (!trig)
+-		return NULL;
++		return ERR_PTR(-ENOMEM);
  
- 	data = iio_priv(indio_dev);
- 	data->dev = &pdev->dev;
-+	platform_set_drvdata(pdev, indio_dev);
+ 	trig->dev.parent = indio->dev.parent;
+ 	iio_trigger_set_drvdata(trig, indio);
+diff --git a/drivers/iio/counter/104-quad-8.c b/drivers/iio/counter/104-quad-8.c
+index 92be8d0f7735..92e68cada844 100644
+--- a/drivers/iio/counter/104-quad-8.c
++++ b/drivers/iio/counter/104-quad-8.c
+@@ -61,10 +61,6 @@ struct quad8_iio {
  
- 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
- 	data->base = devm_ioremap_resource(&pdev->dev, res);
-diff --git a/drivers/iio/adc/ti-adc128s052.c b/drivers/iio/adc/ti-adc128s052.c
-index 7cf39b3e2416..9986fc81b737 100644
---- a/drivers/iio/adc/ti-adc128s052.c
-+++ b/drivers/iio/adc/ti-adc128s052.c
-@@ -168,7 +168,13 @@ static int adc128_probe(struct spi_device *spi)
- 	mutex_init(&adc->lock);
+ #define QUAD8_REG_CHAN_OP 0x11
+ #define QUAD8_REG_INDEX_INPUT_LEVELS 0x16
+-/* Borrow Toggle flip-flop */
+-#define QUAD8_FLAG_BT BIT(0)
+-/* Carry Toggle flip-flop */
+-#define QUAD8_FLAG_CT BIT(1)
+ /* Error flag */
+ #define QUAD8_FLAG_E BIT(4)
+ /* Up/Down flag */
+@@ -97,9 +93,6 @@ static int quad8_read_raw(struct iio_dev *indio_dev,
+ {
+ 	struct quad8_iio *const priv = iio_priv(indio_dev);
+ 	const int base_offset = priv->base + 2 * chan->channel;
+-	unsigned int flags;
+-	unsigned int borrow;
+-	unsigned int carry;
+ 	int i;
  
- 	ret = iio_device_register(indio_dev);
-+	if (ret)
-+		goto err_disable_regulator;
+ 	switch (mask) {
+@@ -110,12 +103,7 @@ static int quad8_read_raw(struct iio_dev *indio_dev,
+ 			return IIO_VAL_INT;
+ 		}
  
-+	return 0;
-+
-+err_disable_regulator:
-+	regulator_disable(adc->reg);
- 	return ret;
- }
+-		flags = inb(base_offset + 1);
+-		borrow = flags & QUAD8_FLAG_BT;
+-		carry = !!(flags & QUAD8_FLAG_CT);
+-
+-		/* Borrow XOR Carry effectively doubles count range */
+-		*val = (borrow ^ carry) << 24;
++		*val = 0;
  
-diff --git a/drivers/iio/common/ssp_sensors/ssp_spi.c b/drivers/iio/common/ssp_sensors/ssp_spi.c
-index 2ab106bb3e03..3d11cfa03a31 100644
---- a/drivers/iio/common/ssp_sensors/ssp_spi.c
-+++ b/drivers/iio/common/ssp_sensors/ssp_spi.c
-@@ -147,7 +147,7 @@ static int ssp_print_mcu_debug(char *data_frame, int *data_index,
- 	if (length > received_len - *data_index || length <= 0) {
- 		ssp_dbg("[SSP]: MSG From MCU-invalid debug length(%d/%d)\n",
- 			length, received_len);
--		return length ? length : -EPROTO;
-+		return -EPROTO;
- 	}
+ 		/* Reset Byte Pointer; transfer Counter to Output Latch */
+ 		outb(QUAD8_CTR_RLD | QUAD8_RLD_RESET_BP | QUAD8_RLD_CNTR_OUT,
+diff --git a/drivers/iio/dac/cio-dac.c b/drivers/iio/dac/cio-dac.c
+index 6898b0c79013..901350697390 100644
+--- a/drivers/iio/dac/cio-dac.c
++++ b/drivers/iio/dac/cio-dac.c
+@@ -74,8 +74,8 @@ static int cio_dac_write_raw(struct iio_dev *indio_dev,
+ 	if (mask != IIO_CHAN_INFO_RAW)
+ 		return -EINVAL;
  
- 	ssp_dbg("[SSP]: MSG From MCU - %s\n", &data_frame[*data_index]);
-@@ -283,6 +283,8 @@ static int ssp_parse_dataframe(struct ssp_data *data, char *dataframe, int len)
- 	for (idx = 0; idx < len;) {
- 		switch (dataframe[idx++]) {
- 		case SSP_MSG2AP_INST_BYPASS_DATA:
-+			if (idx >= len)
-+				return -EPROTO;
- 			sd = dataframe[idx++];
- 			if (sd < 0 || sd >= SSP_SENSOR_MAX) {
- 				dev_err(SSP_DEV,
-@@ -292,10 +294,13 @@ static int ssp_parse_dataframe(struct ssp_data *data, char *dataframe, int len)
+-	/* DAC can only accept up to a 16-bit value */
+-	if ((unsigned int)val > 65535)
++	/* DAC can only accept up to a 12-bit value */
++	if ((unsigned int)val > 4095)
+ 		return -EINVAL;
  
- 			if (indio_devs[sd]) {
- 				spd = iio_priv(indio_devs[sd]);
--				if (spd->process_data)
-+				if (spd->process_data) {
-+					if (idx >= len)
-+						return -EPROTO;
- 					spd->process_data(indio_devs[sd],
- 							  &dataframe[idx],
- 							  data->timestamp);
-+				}
- 			} else {
- 				dev_err(SSP_DEV, "no client for frame\n");
- 			}
-@@ -303,6 +308,8 @@ static int ssp_parse_dataframe(struct ssp_data *data, char *dataframe, int len)
- 			idx += ssp_offset_map[sd];
- 			break;
- 		case SSP_MSG2AP_INST_DEBUG_DATA:
-+			if (idx >= len)
-+				return -EPROTO;
- 			sd = ssp_print_mcu_debug(dataframe, &idx, len);
- 			if (sd) {
- 				dev_err(SSP_DEV,
-diff --git a/drivers/iio/dac/ti-dac5571.c b/drivers/iio/dac/ti-dac5571.c
-index e39d1e901353..2ed927b582f4 100644
---- a/drivers/iio/dac/ti-dac5571.c
-+++ b/drivers/iio/dac/ti-dac5571.c
-@@ -355,6 +355,7 @@ static int dac5571_probe(struct i2c_client *client,
- 		data->dac5571_pwrdwn = dac5571_pwrdwn_quad;
- 		break;
- 	default:
-+		ret = -EINVAL;
- 		goto err;
- 	}
- 
-diff --git a/drivers/iio/light/opt3001.c b/drivers/iio/light/opt3001.c
-index f9d13e4ec108..162eff78c673 100644
---- a/drivers/iio/light/opt3001.c
-+++ b/drivers/iio/light/opt3001.c
-@@ -283,6 +283,8 @@ static int opt3001_get_lux(struct opt3001 *opt, int *val, int *val2)
- 		ret = wait_event_timeout(opt->result_ready_queue,
- 				opt->result_ready,
- 				msecs_to_jiffies(OPT3001_RESULT_READY_LONG));
-+		if (ret == 0)
-+			return -ETIMEDOUT;
- 	} else {
- 		/* Sleep for result ready time */
- 		timeout = (opt->int_time == OPT3001_INT_TIME_SHORT) ?
-@@ -319,9 +321,7 @@ static int opt3001_get_lux(struct opt3001 *opt, int *val, int *val2)
- 		/* Disallow IRQ to access the device while lock is active */
- 		opt->ok_to_ignore_lock = false;
- 
--	if (ret == 0)
--		return -ETIMEDOUT;
--	else if (ret < 0)
-+	if (ret < 0)
- 		return ret;
- 
- 	if (opt->use_irq) {
+ 	priv->chan_out_states[chan->channel] = val;
 -- 
-2.30.2
+2.39.2
 
