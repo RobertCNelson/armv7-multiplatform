@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.15.118 Kernel Configuration
+# Linux/arm 5.15.119 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-linux-gnueabi-gcc (GCC) 11.4.0"
 CONFIG_CC_IS_GCC=y
@@ -37,8 +37,8 @@ CONFIG_HAVE_KERNEL_LZ4=y
 # CONFIG_KERNEL_GZIP is not set
 # CONFIG_KERNEL_LZMA is not set
 # CONFIG_KERNEL_XZ is not set
-CONFIG_KERNEL_LZO=y
-# CONFIG_KERNEL_LZ4 is not set
+# CONFIG_KERNEL_LZO is not set
+CONFIG_KERNEL_LZ4=y
 CONFIG_DEFAULT_INIT=""
 CONFIG_DEFAULT_HOSTNAME="(none)"
 CONFIG_SWAP=y
