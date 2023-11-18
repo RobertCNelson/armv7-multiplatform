@@ -26,7 +26,7 @@ Reviewed-by: Vaibhav Hiremath <hvaibhav.linux@gmail.com>
  3 files changed, 47 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/usb/Kconfig b/drivers/usb/Kconfig
-index 26475b409b53f..994037e561757 100644
+index 26475b409b53..994037e56175 100644
 --- a/drivers/usb/Kconfig
 +++ b/drivers/usb/Kconfig
 @@ -46,6 +46,7 @@ config USB
@@ -38,7 +38,7 @@ index 26475b409b53f..994037e561757 100644
  	help
  	  Universal Serial Bus (USB) is a specification for a serial bus
 diff --git a/drivers/usb/core/hub.c b/drivers/usb/core/hub.c
-index b1e14beaac5f7..fea634a608104 100644
+index cfcd4f2ffffa..debe00cfe56d 100644
 --- a/drivers/usb/core/hub.c
 +++ b/drivers/usb/core/hub.c
 @@ -30,6 +30,7 @@
@@ -47,9 +47,9 @@ index b1e14beaac5f7..fea634a608104 100644
  #include <linux/kobject.h>
 +#include <linux/power/pwrseq.h>
  
+ #include <linux/bitfield.h>
  #include <linux/uaccess.h>
- #include <asm/byteorder.h>
-@@ -1714,6 +1715,7 @@ static void hub_disconnect(struct usb_interface *intf)
+@@ -1735,6 +1736,7 @@ static void hub_disconnect(struct usb_interface *intf)
  	hub->error = 0;
  	hub_quiesce(hub, HUB_DISCONNECT);
  
@@ -57,7 +57,7 @@ index b1e14beaac5f7..fea634a608104 100644
  	mutex_lock(&usb_port_peer_mutex);
  
  	/* Avoid races with recursively_mark_NOTATTACHED() */
-@@ -1764,11 +1766,41 @@ static bool hub_descriptor_is_sane(struct usb_host_interface *desc)
+@@ -1785,11 +1787,41 @@ static bool hub_descriptor_is_sane(struct usb_host_interface *desc)
          return true;
  }
  
@@ -99,7 +99,7 @@ index b1e14beaac5f7..fea634a608104 100644
  
  	desc = intf->cur_altsetting;
  	hdev = interface_to_usbdev(intf);
-@@ -1859,6 +1891,7 @@ static int hub_probe(struct usb_interface *intf, const struct usb_device_id *id)
+@@ -1880,6 +1912,7 @@ static int hub_probe(struct usb_interface *intf, const struct usb_device_id *id)
  	INIT_DELAYED_WORK(&hub->leds, led_work);
  	INIT_DELAYED_WORK(&hub->init_work, NULL);
  	INIT_WORK(&hub->events, hub_event);
@@ -107,7 +107,7 @@ index b1e14beaac5f7..fea634a608104 100644
  	spin_lock_init(&hub->irq_urb_lock);
  	timer_setup(&hub->irq_urb_retry, hub_retry_irq_urb, 0);
  	usb_get_intf(intf);
-@@ -1879,11 +1912,14 @@ static int hub_probe(struct usb_interface *intf, const struct usb_device_id *id)
+@@ -1900,11 +1933,14 @@ static int hub_probe(struct usb_interface *intf, const struct usb_device_id *id)
  		usb_autopm_get_interface_no_resume(intf);
  	}
  
@@ -125,7 +125,7 @@ index b1e14beaac5f7..fea634a608104 100644
  }
  
  static int
-@@ -3745,7 +3781,7 @@ static int hub_suspend(struct usb_interface *intf, pm_message_t msg)
+@@ -3869,7 +3905,7 @@ static int hub_suspend(struct usb_interface *intf, pm_message_t msg)
  
  	/* stop hub_wq and related activity */
  	hub_quiesce(hub, HUB_SUSPEND);
@@ -134,7 +134,7 @@ index b1e14beaac5f7..fea634a608104 100644
  }
  
  /* Report wakeup requests from the ports of a resuming root hub */
-@@ -3785,8 +3821,13 @@ static void report_wakeup_requests(struct usb_hub *hub)
+@@ -3909,8 +3945,13 @@ static void report_wakeup_requests(struct usb_hub *hub)
  static int hub_resume(struct usb_interface *intf)
  {
  	struct usb_hub *hub = usb_get_intfdata(intf);
@@ -149,7 +149,7 @@ index b1e14beaac5f7..fea634a608104 100644
  
  	/*
 diff --git a/drivers/usb/core/hub.h b/drivers/usb/core/hub.h
-index 73f4482d833a7..dc4fd5908c7e6 100644
+index db4c7e2c5960..e181f0e2b47b 100644
 --- a/drivers/usb/core/hub.h
 +++ b/drivers/usb/core/hub.h
 @@ -73,6 +73,7 @@ struct usb_hub {
@@ -161,5 +161,5 @@ index 73f4482d833a7..dc4fd5908c7e6 100644
  
  /**
 -- 
-2.27.0
+2.39.2
 
