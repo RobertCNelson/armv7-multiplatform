@@ -194,7 +194,7 @@ rt () {
 
 	#regenerate="enable"
 	if [ "x${regenerate}" = "xenable" ] ; then
-		wget -c https://www.kernel.org/pub/linux/kernel/projects/rt/${KERNEL_REL}/patch-${rt_patch}.patch.xz
+		wget -c https://www.kernel.org/pub/linux/kernel/projects/rt/${KERNEL_REL}/older/patch-${rt_patch}.patch.xz
 		xzcat patch-${rt_patch}.patch.xz | patch -p1 || rt_cleanup
 		rm -f patch-${rt_patch}.patch.xz
 		rm -f localversion-rt
@@ -358,8 +358,8 @@ local_patch () {
 }
 
 #external_git
-wpanusb
-bcfserial
+#wpanusb
+#bcfserial
 #rt
 wireless_regdb
 ti_pm_firmware
@@ -401,7 +401,7 @@ patch_backports () {
 }
 
 backports () {
-	backport_tag="v5.10.186"
+	backport_tag="v5.10.201"
 
 	subsystem="uio"
 	#regenerate="enable"
@@ -415,24 +415,6 @@ backports () {
 	else
 		patch_backports
 		dir 'drivers/ti/uio'
-	fi
-
-	backport_tag="v5.15.120"
-
-	subsystem="iio"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		pre_backports
-
-		cp -rv ~/linux-src/include/linux/iio/* ./include/linux/iio/
-		cp -rv ~/linux-src/include/uapi/linux/iio/* ./include/uapi/linux/iio/
-		cp -rv ~/linux-src/drivers/iio/* ./drivers/iio/
-		cp -rv ~/linux-src/drivers/staging/iio/* ./drivers/staging/iio/
-
-		post_backports
-		exit 2
-	#else
-		patch_backports
 	fi
 
 	backport_tag="v5.19.17"

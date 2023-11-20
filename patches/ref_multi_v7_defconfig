@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 5.15.119 Kernel Configuration
+# Linux/arm 5.15.137 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-linux-gnueabi-gcc (GCC) 11.4.0"
 CONFIG_CC_IS_GCC=y
@@ -868,6 +868,7 @@ CONFIG_GENERIC_IDLE_POLL_SETUP=y
 CONFIG_ARCH_HAS_FORTIFY_SOURCE=y
 CONFIG_ARCH_HAS_KEEPINITRD=y
 CONFIG_ARCH_HAS_SET_MEMORY=y
+CONFIG_ARCH_HAS_CPU_FINALIZE_INIT=y
 CONFIG_HAVE_ARCH_THREAD_STRUCT_WHITELIST=y
 CONFIG_ARCH_32BIT_OFF_T=y
 CONFIG_HAVE_REGS_AND_STACK_ACCESS_API=y
@@ -7772,6 +7773,11 @@ CONFIG_STMPE_ADC=m
 CONFIG_VF610_ADC=m
 CONFIG_XILINX_XADC=y
 # end of Analog to digital converters
+
+#
+# Analog to digital and digital to analog converters
+#
+# end of Analog to digital and digital to analog converters
 
 #
 # Analog Front Ends
