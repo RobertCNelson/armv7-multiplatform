@@ -359,8 +359,8 @@ local_patch () {
 }
 
 #external_git
-wpanusb
-bcfserial
+#wpanusb
+#bcfserial
 #rt
 wireless_regdb
 ti_pm_firmware
