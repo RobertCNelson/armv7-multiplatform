@@ -8,7 +8,7 @@ build_prefix="-armv7-x"
 branch_prefix="v"
 branch_postfix=".x"
 
-#https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/Documentation/process/changes.rst?h=v5.10-rc1
+#https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/Documentation/process/changes.rst?h=v6.1-rc1
 #arm
 KERNEL_ARCH=arm
 DEBARCH=armhf
@@ -16,9 +16,9 @@ DEBARCH=armhf
 #toolchain="gcc_7_arm"
 #toolchain="gcc_8_arm"
 #toolchain="gcc_9_arm"
-toolchain="gcc_10_arm"
+#toolchain="gcc_10_arm"
 #toolchain="gcc_11_arm"
-#toolchain="gcc_12_arm"
+toolchain="gcc_12_arm"
 #toolchain="gcc_13_arm"
 #arm64
 #KERNEL_ARCH=arm64
@@ -43,11 +43,11 @@ toolchain="gcc_10_arm"
 #toolchain="gcc_13_riscv64"
 
 #Kernel
-KERNEL_REL=5.10
-KERNEL_TAG=${KERNEL_REL}.199
-kernel_rt=".199-rt97"
+KERNEL_REL=6.1
+KERNEL_TAG=${KERNEL_REL}.59
+kernel_rt=".59-rt16"
 #Kernel Build
-BUILD=${build_prefix}77
+BUILD=${build_prefix}0.1
 
 #v6.X-rcX + upto SHA
 #prev_KERNEL_SHA=""

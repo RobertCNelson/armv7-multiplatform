@@ -1,45 +1,17 @@
-From 4a88d82c7f8dfbdffb68b951555d1f1f132888d7 Mon Sep 17 00:00:00 2001
+From 753bb82300f87656650b2cbc74990ed8007e53f2 Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Tue, 20 Apr 2021 15:00:48 -0500
+Date: Mon, 11 Jul 2022 12:52:02 -0500
 Subject: [PATCH] Overlays: Port RPi Overlay building
 
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
- .gitignore                 |  1 +
- Makefile                   |  3 +++
  arch/arm/boot/dts/Makefile | 10 ++++++++++
- scripts/Makefile.dtbinst   |  6 +++++-
+ scripts/Makefile.dtbinst   |  3 ++-
  scripts/Makefile.lib       | 19 +++++++++++++++++++
- 5 files changed, 38 insertions(+), 1 deletion(-)
+ 3 files changed, 31 insertions(+), 1 deletion(-)
 
-diff --git a/.gitignore b/.gitignore
-index d01cda8e1177..bb65fa253e58 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -18,6 +18,7 @@
- *.c.[012]*.*
- *.dt.yaml
- *.dtb
-+*.dtbo
- *.dtb.S
- *.dwo
- *.elf
-diff --git a/Makefile b/Makefile
-index 872af26e085a..9df21158a2f8 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1353,6 +1353,9 @@ ifneq ($(dtstree),)
- %.dtb: include/config/kernel.release scripts_dtc
- 	$(Q)$(MAKE) $(build)=$(dtstree) $(dtstree)/$@
- 
-+%.dtbo: include/config/kernel.release scripts_dtc
-+	$(Q)$(MAKE) $(build)=$(dtstree) $(dtstree)/$@
-+
- PHONY += dtbs dtbs_install dtbs_check
- dtbs: include/config/kernel.release scripts_dtc
- 	$(Q)$(MAKE) $(build)=$(dtstree)
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 0867912e8b9f..c28427db95b0 100644
+index 5112f493f494..8b201dc560e7 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
 @@ -1,4 +1,9 @@
@@ -52,20 +24,20 @@ index 0867912e8b9f..c28427db95b0 100644
  dtb-$(CONFIG_ARCH_ALPINE) += \
  	alpine-db.dtb
  dtb-$(CONFIG_MACH_ARTPEC6) += \
-@@ -1412,3 +1417,8 @@ dtb-$(CONFIG_ARCH_ASPEED) += \
- 	aspeed-bmc-opp-zaius.dtb \
- 	aspeed-bmc-portwell-neptune.dtb \
- 	aspeed-bmc-quanta-q71l.dtb
+@@ -1608,3 +1613,8 @@ dtb-$(CONFIG_ARCH_ASPEED) += \
+ 	aspeed-bmc-vegman-n110.dtb \
+ 	aspeed-bmc-vegman-rx20.dtb \
+ 	aspeed-bmc-vegman-sx20.dtb
 +
 +targets += dtbs dtbs_install
 +targets += $(dtb-y)
 +
 +subdir-y	:= overlays
 diff --git a/scripts/Makefile.dtbinst b/scripts/Makefile.dtbinst
-index 50d580d77ae9..079b83308011 100644
+index 190d781e84f4..84c46c081218 100644
 --- a/scripts/Makefile.dtbinst
 +++ b/scripts/Makefile.dtbinst
-@@ -18,9 +18,10 @@ include scripts/Kbuild.include
+@@ -18,9 +18,10 @@ include $(srctree)/scripts/Kbuild.include
  include $(src)/Makefile
  
  dtbs    := $(addprefix $(dst)/, $(dtb-y) $(if $(CONFIG_OF_ALL_DTBS),$(dtb-)))
@@ -77,31 +49,21 @@ index 50d580d77ae9..079b83308011 100644
  	@:
  
  quiet_cmd_dtb_install = INSTALL $@
-@@ -29,6 +30,9 @@ quiet_cmd_dtb_install = INSTALL $@
- $(dst)/%.dtb: $(obj)/%.dtb
- 	$(call cmd,dtb_install)
- 
-+$(dst)/%.dtbo: $(obj)/%.dtbo
-+	$(call cmd,dtb_install)
-+
- PHONY += $(subdirs)
- $(subdirs):
- 	$(Q)$(MAKE) $(dtbinst)=$@ dst=$(patsubst $(obj)/%,$(dst)/%,$@)
 diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 94133708889d..37629658350c 100644
+index d1425778664b..0b382ebb206c 100644
 --- a/scripts/Makefile.lib
 +++ b/scripts/Makefile.lib
-@@ -281,6 +281,7 @@ DTC_FLAGS += -Wno-interrupt_provider
+@@ -314,6 +314,7 @@ DTC_FLAGS += -Wno-interrupt_provider
+ # Disable noisy checks by default
  ifeq ($(findstring 1,$(KBUILD_EXTRA_WARN)),)
  DTC_FLAGS += -Wno-unit_address_vs_reg \
- 	-Wno-unit_address_format \
 +	-Wno-gpios_property \
  	-Wno-avoid_unnecessary_addr_size \
  	-Wno-alias_paths \
  	-Wno-graph_child_address \
-@@ -341,6 +342,24 @@ endef
- $(obj)/%.dt.yaml: $(src)/%.dts $(DTC) $(DT_TMP_SCHEMA) FORCE
- 	$(call if_changed_rule,dtc,yaml)
+@@ -385,6 +386,24 @@ $(obj)/%.dtb: $(src)/%.dts $(DTC) $(DT_TMP_SCHEMA) FORCE
+ $(obj)/%.dtbo: $(src)/%.dts $(DTC) FORCE
+ 	$(call if_changed_dep,dtc)
  
 +quiet_cmd_dtco = DTCO    $@
 +cmd_dtco = mkdir -p $(dir ${dtc-tmp}) ; \
