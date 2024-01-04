@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 6.1.67 Kernel Configuration
+# Linux/arm 6.1.69 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="arm-linux-gnueabi-gcc (GCC) 12.3.0"
 CONFIG_CC_IS_GCC=y
@@ -2409,7 +2409,6 @@ CONFIG_DWMAC_SUNXI=y
 CONFIG_DWMAC_SUN8I=y
 CONFIG_DWMAC_IMX8=y
 # CONFIG_DWMAC_INTEL_PLAT is not set
-# CONFIG_DWMAC_LOONGSON is not set
 # CONFIG_STMMAC_PCI is not set
 CONFIG_NET_VENDOR_SUN=y
 # CONFIG_HAPPYMEAL is not set
