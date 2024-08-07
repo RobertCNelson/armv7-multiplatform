@@ -220,4 +220,8 @@ config="CONFIG_USB_TI_CPPI41_DMA" ; config_disable
 #configure CONFIG_EXTRA_FIRMWARE
 ./scripts/config --set-str CONFIG_EXTRA_FIRMWARE "regulatory.db regulatory.db.p7s am335x-pm-firmware.elf am335x-bone-scale-data.bin am335x-evm-scale-data.bin am43x-evm-scale-data.bin"
 
+#Panda
+./scripts/config --enable CONFIG_DRM_DISPLAY_CONNECTOR
+./scripts/config --enable CONFIG_DRM_TI_TPD12S015
+
 cd ${DIR}/
