@@ -502,7 +502,6 @@ drivers () {
 #	dir 'drivers/ti/tsc'
 #	dir 'drivers/fb_ssd1306'
 
-	dir 'drivers/sdhci-omap'
 	dir 'external/ti-amx3-cm3-pm-firmware'
 	dir 'soc/ti/panda'
 }
