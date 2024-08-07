@@ -413,9 +413,11 @@ backports () {
 }
 
 drivers () {
-#	dir 'boris'
+#	dir 'branding/boris'
+
 	dir 'mmc'
 	dir 'external/ti-amx3-cm3-pm-firmware'
+	dir 'soc/ti/panda'
 }
 
 ###
