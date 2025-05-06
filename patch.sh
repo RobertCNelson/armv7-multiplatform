@@ -106,6 +106,7 @@ external_git () {
 mainline_patches () {
 	#exit 2
 	dir 'rfc/mainline'
+	dir 'mainline/pocketbeagle2'
 	#exit 2
 }
 
@@ -239,6 +240,7 @@ k3_makefile_patch_cleanup_overlays () {
 	echo "# Enable support for device-tree overlays" >> arch/arm64/boot/dts/ti/Makefile
 	cat arch/arm64/boot/dts/ti/Makefile.dtc >> arch/arm64/boot/dts/ti/Makefile
 	rm arch/arm64/boot/dts/ti/Makefile.dtc
+	echo "DTC_FLAGS_k3-am62-pocketbeagle2 += -@" >> arch/arm64/boot/dts/ti/Makefile
 	echo "DTC_FLAGS_k3-am67a-beagley-ai += -@" >> arch/arm64/boot/dts/ti/Makefile
 	echo "DTC_FLAGS_k3-j721e-beagleboneai64 += -@" >> arch/arm64/boot/dts/ti/Makefile
 }
@@ -287,6 +289,7 @@ beagleboard_dtbs () {
 		device="BONE-ADC" ; arm_dtbo_makefile_append
 
 		device="am335x-boneblack-uboot.dtb" ; arm_dtb_makefile_append
+		device="am335x-boneblack-revd.dtb" ; arm_dtb_makefile_append
 
 		device="BONE-I2C1" ; k3_dtbo_makefile_append
 		device="BONE-I2C2" ; k3_dtbo_makefile_append
@@ -446,10 +449,6 @@ drivers () {
 
 	dir 'external/ti-amx3-cm3-pm-firmware'
 	dir 'soc/ti/panda'
-
-	#git revert --no-edit -s 3edf588e7fe00e90d1dc7fb9e599861b2c2cf442
-	#Breaking Kingston eMMC on new BBB's..
-	dir 'drivers/fixes/mmc'
 }
 
 ###
