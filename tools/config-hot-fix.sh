@@ -161,9 +161,27 @@ cd ${DIR}/KERNEL/
 #removed in 6.7-rc1
 ./scripts/config --disable CONFIG_DEV_APPLETALK
 
-#09.02.00.005
+#TI delta 09.01.00.004:
+./scripts/config --enable CONFIG_APERTURE_HELPERS
+./scripts/config --enable CONFIG_FB_CFB_FILLRECT
+./scripts/config --enable CONFIG_FB_CFB_COPYAREA
+./scripts/config --enable CONFIG_FB_CFB_IMAGEBLIT
+./scripts/config --enable CONFIG_FB_SIMPLE
+./scripts/config --module CONFIG_TI_EQEP
+
 ./scripts/config --module CONFIG_VIDEO_TI_VIP
 ./scripts/config --module CONFIG_VIDEO_OV1063X
+./scripts/config --module CONFIG_VIDEO_OV2312
+./scripts/config --module CONFIG_VIDEO_OV5640
+./scripts/config --module CONFIG_VIDEO_OV5645
+./scripts/config --module CONFIG_VIDEO_IMX219
+./scripts/config --module CONFIG_VIDEO_IMX390
+./scripts/config --module CONFIG_VIDEO_OX05B1S
+
+#enable SPI/W1
+./scripts/config --enable CONFIG_SPI_OMAP24XX
+./scripts/config --enable CONFIG_W1
+./scripts/config --enable CONFIG_MIKROBUS
 
 #20240305: regression on discord, some systemd can no longer load *.xz modules...
 ./scripts/config --disable CONFIG_MODULE_DECOMPRESS
@@ -172,9 +190,11 @@ cd ${DIR}/KERNEL/
 ./scripts/config --enable CONFIG_FUNCTION_TRACER
 ./scripts/config --enable CONFIG_DYNAMIC_FTRACE
 
+./scripts/config --enable CONFIG_MODULE_COMPRESS
 ./scripts/config --disable CONFIG_MODULE_COMPRESS_GZIP
 ./scripts/config --enable CONFIG_MODULE_COMPRESS_XZ
 ./scripts/config --disable CONFIG_MODULE_COMPRESS_ZSTD
+./scripts/config --enable CONFIG_MODULE_COMPRESS_ALL
 ./scripts/config --enable CONFIG_GPIO_AGGREGATOR
 ./scripts/config --module CONFIG_PWM_GPIO
 
@@ -209,6 +229,31 @@ cd ${DIR}/KERNEL/
 ./scripts/config --enable CONFIG_ZRAM_BACKEND_DEFLATE
 ./scripts/config --enable CONFIG_ZRAM_DEF_COMP_LZ4
 ./scripts/config --set-str CONFIG_ZRAM_DEF_COMP "lz4"
+
+#debian 6.12.16-1
+./scripts/config --enable CONFIG_RCU_LAZY
+./scripts/config --module CONFIG_NSM
+./scripts/config --module CONFIG_NITRO_ENCLAVES
+./scripts/config --module CONFIG_USB_MASS_STORAGE
+
+#debian 6.12.20-1
+./scripts/config --module CONFIG_VIDEO_OV5675
+./scripts/config --enable CONFIG_RPCSEC_GSS_KRB5_ENCTYPES_AES_SHA2
+
+#debian 6.13.5-1
+./scripts/config --enable CONFIG_UDMABUF
+
+#debian 6.13.7-1
+./scripts/config --module CONFIG_VIRTIO_IOMMU
+./scripts/config --enable CONFIG_CRYPTO_ECDSA
+
+#debian 6.13.8-1
+./scripts/config --enable CONFIG_NVME_TARGET_PASSTHRU
+./scripts/config --module CONFIG_NVME_TARGET_LOOP
+./scripts/config --module CONFIG_NVME_TARGET_FCLOOP
+
+#debian 6.13.11-1
+./scripts/config --enable CONFIG_KALLSYMS_ALL
 
 #new in v6.14
 ./scripts/config --module CONFIG_NTSYNC
@@ -246,9 +291,54 @@ cd ${DIR}/KERNEL/
 
 #BeagleBoard.org
 ./scripts/config --enable CONFIG_MSPM0_I2C
+./scripts/config --module CONFIG_SEG_LED_GPIO
+./scripts/config --module CONFIG_INPUT_PWM_BEEPER
+./scripts/config --module CONFIG_SND_SOC_TLV320AIC3X_I2C
+./scripts/config --module CONFIG_WIZNET_W5100
+./scripts/config --module CONFIG_WIZNET_W5100_SPI
 
 #Panda
 ./scripts/config --enable CONFIG_DRM_DISPLAY_CONNECTOR
 ./scripts/config --enable CONFIG_DRM_TI_TPD12S015
+
+#Regressions:
+./scripts/config --enable CONFIG_MMC_BLOCK
+
+#Rev D
+./scripts/config --enable CONFIG_DRM_ITE_IT66121
+./scripts/config --enable CONFIG_SYSFB_SIMPLEFB
+
+#Cool for debugging, little noisy on production...
+./scripts/config --disable CONFIG_UBSAN
+
+#Debugging Defaults
+./scripts/config --enable CONFIG_BPF_JIT_ALWAYS_ON
+./scripts/config --enable CONFIG_BPF_PRELOAD
+./scripts/config --enable CONFIG_BPF_PRELOAD_UMD
+./scripts/config --enable CONFIG_IDLE_PAGE_TRACKING
+./scripts/config --enable CONFIG_ANON_VMA_NAME
+./scripts/config --enable CONFIG_USERFAULTFD
+./scripts/config --enable CONFIG_LRU_GEN
+./scripts/config --enable CONFIG_LRU_GEN_ENABLED
+./scripts/config --enable CONFIG_HEADERS_INSTALL
+./scripts/config --enable CONFIG_DEBUG_SECTION_MISMATCH
+./scripts/config --enable CONFIG_PAGE_OWNER
+./scripts/config --enable CONFIG_DEBUG_SHIRQ
+./scripts/config --enable CONFIG_WQ_CPU_INTENSIVE_REPORT
+./scripts/config --enable CONFIG_RCU_CPU_STALL_CPUTIME
+./scripts/config --enable CONFIG_BOOTTIME_TRACING
+./scripts/config --enable CONFIG_FUNCTION_PROFILER
+./scripts/config --enable CONFIG_STACK_TRACER
+./scripts/config --enable CONFIG_SCHED_TRACER
+./scripts/config --enable CONFIG_HWLAT_TRACER
+./scripts/config --enable CONFIG_TIMERLAT_TRACER
+./scripts/config --enable CONFIG_FUNCTION_ERROR_INJECTION
+./scripts/config --enable CONFIG_MEMTEST
+
+./scripts/config --enable CONFIG_VIRT_CPU_ACCOUNTING_GEN
+./scripts/config --enable CONFIG_PSI_DEFAULT_DISABLED
+./scripts/config --enable CONFIG_PRINTK_INDEX
+./scripts/config --enable CONFIG_MEMCG_V1
+./scripts/config --enable CONFIG_CGROUP_DMEM
 
 cd ${DIR}/
