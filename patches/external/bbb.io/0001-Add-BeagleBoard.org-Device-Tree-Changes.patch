@@ -1,11 +1,11 @@
-From 8c38e5de07271925449fc780c2a3ebb8a75cf457 Mon Sep 17 00:00:00 2001
+From 2973b52acced71138797eb072e8a1e992ba5fc9b Mon Sep 17 00:00:00 2001
 From: Robert Nelson <robertcnelson@gmail.com>
-Date: Thu, 6 Feb 2025 16:36:13 -0600
+Date: Fri, 25 Apr 2025 16:44:36 -0500
 Subject: [PATCH] Add BeagleBoard.org Device Tree Changes
 
 https://openbeagle.org/beagleboard/BeagleBoard-DeviceTrees/-/tree/v6.1.x
 
-https://openbeagle.org/beagleboard/BeagleBoard-DeviceTrees/-/commit/c89d4f7adfc91b5615451f5437a4054cc13fbc58
+https://openbeagle.org/beagleboard/BeagleBoard-DeviceTrees/-/commit/086401885d80ec4471e35173faacd78d3e8944e5
 Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 ---
  arch/arm/boot/dts/AM335X-PRU-UIO-00A0.dtso    |   28 +
@@ -39,7 +39,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  arch/arm/boot/dts/BONE-ADC.dtso               |   28 +
  arch/arm/boot/dts/M-BB-BBG-00A0.dtso          |   21 +
  arch/arm/boot/dts/M-BB-BBGG-00A0.dtso         |   24 +
- arch/arm/boot/dts/Makefile                    |   40 +-
+ arch/arm/boot/dts/Makefile                    |   41 +-
  arch/arm/boot/dts/PB-MIKROBUS-0.dtso          |  107 +
  arch/arm/boot/dts/PB-MIKROBUS-1.dtso          |  108 +
  arch/arm/boot/dts/am335x-bbb-bone-buses.dtsi  |   69 +
@@ -47,6 +47,8 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  arch/arm/boot/dts/am335x-bone-common.dtsi     |   60 +-
  arch/arm/boot/dts/am335x-bone.dts             |    5 +
  arch/arm/boot/dts/am335x-boneblack-hdmi.dtsi  |   13 +-
+ .../boot/dts/am335x-boneblack-ite-hdmi.dtsi   |  175 ++
+ arch/arm/boot/dts/am335x-boneblack-revd.dts   |  180 ++
  arch/arm/boot/dts/am335x-boneblack-uboot.dts  |  194 ++
  .../boot/dts/am335x-boneblack-wireless.dts    |   16 +-
  arch/arm/boot/dts/am335x-boneblack.dts        |    8 +-
@@ -71,7 +73,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  arch/arm/boot/dts/am57xx-beagle-x15-revc.dts  |    5 +
  arch/arm/boot/dts/am57xx-beagle-x15.dts       |    5 +
  arch/arm/boot/dts/bbai-bone-buses.dtsi        |   75 +
- arch/arm/boot/dts/dra7-l4.dtsi                |    2 +-
+ arch/arm/boot/dts/dra7-l4.dtsi                |    4 +-
  arch/arm/boot/dts/dra7.dtsi                   |   20 +-
  arch/arm/boot/dts/dra74x-mmc-iodelay.dtsi     |   44 +-
  arch/arm/boot/dts/dra7xx-clocks.dtsi          |    2 +-
@@ -89,7 +91,7 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  arch/arm/boot/dts/twl4030.dtsi                |    2 +-
  arch/arm/boot/dts/twl4030_omap3.dtsi          |    4 +-
  arch/arm/boot/dts/twl6030.dtsi                |    4 +-
- arch/arm64/boot/dts/ti/k3-am62-main.dtsi      |  265 +-
+ arch/arm64/boot/dts/ti/k3-am62-main.dtsi      |  266 +-
  arch/arm64/boot/dts/ti/k3-am62-mcu.dtsi       |   52 +-
  arch/arm64/boot/dts/ti/k3-am62-wakeup.dtsi    |   10 +-
  arch/arm64/boot/dts/ti/k3-am62.dtsi           |   11 +-
@@ -110,8 +112,8 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  include/dt-bindings/mux/ti-serdes.h           |   82 +
  include/dt-bindings/pinctrl/k3.h              |    3 +
  include/dt-bindings/pinctrl/omap.h            |    4 +-
- include/uapi/linux/input-event-codes.h        |    3 +
- 103 files changed, 14104 insertions(+), 965 deletions(-)
+ include/uapi/linux/input-event-codes.h        |    4 +-
+ 105 files changed, 14461 insertions(+), 968 deletions(-)
  create mode 100644 arch/arm/boot/dts/AM335X-PRU-UIO-00A0.dtso
  create mode 100644 arch/arm/boot/dts/BB-ADC-00A0.dtso
  create mode 100644 arch/arm/boot/dts/BB-BBBW-WL1835-00A0.dtso
@@ -147,6 +149,8 @@ Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
  create mode 100644 arch/arm/boot/dts/PB-MIKROBUS-1.dtso
  create mode 100644 arch/arm/boot/dts/am335x-bbb-bone-buses.dtsi
  create mode 100644 arch/arm/boot/dts/am335x-bone-common-univ.dtsi
+ create mode 100644 arch/arm/boot/dts/am335x-boneblack-ite-hdmi.dtsi
+ create mode 100644 arch/arm/boot/dts/am335x-boneblack-revd.dts
  create mode 100644 arch/arm/boot/dts/am335x-boneblack-uboot.dts
  create mode 100644 arch/arm/boot/dts/am335x-bonegreen-gateway.dts
  create mode 100644 arch/arm/boot/dts/am335x-bonegreen-wireless-common-univ.dtsi
@@ -3639,7 +3643,7 @@ index 000000000000..6dc003082c03
 +	model = "SeeedStudio BeagleBone Green Gateway";
 +};
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index df6d905eeb87..44807b8337f6 100644
+index df6d905eeb87..f20ae3bbd00d 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
 @@ -1,11 +1,15 @@
@@ -3659,10 +3663,11 @@ index df6d905eeb87..44807b8337f6 100644
  dtb-$(CONFIG_SOC_AT91RM9200) += \
  	at91rm9200ek.dtb \
  	mpa1600.dtb
-@@ -933,6 +937,40 @@ dtb-$(CONFIG_SOC_AM33XX) += \
+@@ -933,6 +937,41 @@ dtb-$(CONFIG_SOC_AM33XX) += \
  	am335x-base0033.dtb \
  	am335x-bone.dtb \
  	am335x-boneblack.dtb \
++	am335x-boneblack-revd.dtb \
 +	am335x-boneblack-uboot.dtb \
 +	PB-MIKROBUS-1.dtbo \
 +	PB-MIKROBUS-0.dtbo \
@@ -6554,6 +6559,373 @@ index 7cfddada9348..109f08fd174d 100644
  					remote-endpoint = <&lcdc_0>;
  				};
  			};
+diff --git a/arch/arm/boot/dts/am335x-boneblack-ite-hdmi.dtsi b/arch/arm/boot/dts/am335x-boneblack-ite-hdmi.dtsi
+new file mode 100644
+index 000000000000..b311e936577d
+--- /dev/null
++++ b/arch/arm/boot/dts/am335x-boneblack-ite-hdmi.dtsi
+@@ -0,0 +1,175 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (C) 2012 Texas Instruments Incorporated - https://www.ti.com/
++ */
++
++#include <dt-bindings/interrupt-controller/irq.h>
++
++/ {
++	connector-hdmi {
++		compatible = "hdmi-connector";
++		label = "hdmi";
++		type = "a";
++		port {
++			hdmi_connector_in: endpoint {
++				remote-endpoint = <&it66122_out>;
++			};
++		};
++	};
++
++	it66122_vcn18_fixed: fixedregulator1 {
++		compatible = "regulator-fixed";
++		regulator-name = "it66122_vcn18_fixed";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++	};
++};
++
++&am33xx_pinmux {
++	nxp_hdmi_bonelt_pins: nxp-hdmi-bonelt-pins {
++		pinctrl-single,pins = <
++			AM33XX_PADCONF(AM335X_PIN_XDMA_EVENT_INTR0, PIN_OUTPUT_PULLDOWN, MUX_MODE3)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA0, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA1, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA2, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA3, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA4, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA5, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA6, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA7, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA8, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA9, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA10, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA11, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA12, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA13, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA14, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_DATA15, PIN_OUTPUT, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_VSYNC, PIN_OUTPUT_PULLDOWN, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_HSYNC, PIN_OUTPUT_PULLDOWN, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_PCLK, PIN_OUTPUT_PULLDOWN, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_LCD_AC_BIAS_EN, PIN_OUTPUT_PULLDOWN, MUX_MODE0)
++		>;
++	};
++
++	hdmi_gpio_pins_default: hdmi-gpio-default-pins {
++		pinctrl-single,pins = <
++			AM33XX_PADCONF(AM335X_PIN_GPMC_A9, PIN_INPUT_PULLUP, MUX_MODE7)	/* HDMI_INT gpmc_a9.GPIO1_25 */
++			AM33XX_PADCONF(AM335X_PIN_UART0_RTSN, PIN_OUTPUT_PULLUP, MUX_MODE7) /* HDMI_RESET uart0_rtsn.GPIO1_9 */
++		>;
++	};
++
++	mcasp0_pins: mcasp0-pins {
++		pinctrl-single,pins = <
++			AM33XX_PADCONF(AM335X_PIN_MCASP0_AHCLKX, PIN_INPUT_PULLUP, MUX_MODE0) /* mcasp0_ahcklx.mcasp0_ahclkx */
++			AM33XX_PADCONF(AM335X_PIN_MCASP0_AHCLKR, PIN_OUTPUT_PULLDOWN, MUX_MODE2) /* mcasp0_ahclkr.mcasp0_axr2*/
++			AM33XX_PADCONF(AM335X_PIN_MCASP0_FSX, PIN_OUTPUT_PULLUP, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_MCASP0_ACLKX, PIN_OUTPUT_PULLDOWN, MUX_MODE0)
++			AM33XX_PADCONF(AM335X_PIN_GPMC_A11, PIN_OUTPUT_PULLDOWN, MUX_MODE7) /* gpmc_a11.GPIO1_27 */
++		>;
++	};
++};
++
++&lcdc {
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&nxp_hdmi_bonelt_pins>;
++
++	/* If you want to get 24 bit RGB and 16 BGR mode instead of
++	 * current 16 bit RGB and 24 BGR modes, set the propety
++	 * below to "crossed" and uncomment the video-ports -property
++	 * in tda19988 node.
++	 */
++	blue-and-red-wiring = "straight";
++
++	port {
++		lcdc_0: endpoint@0 {
++			remote-endpoint = <&it66122_in>;
++		};
++	};
++};
++
++&i2c0 {
++	it66122: bridge-hdmi@4c {
++		compatible = "ite,it66122";
++		reg = <0x4c>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&hdmi_gpio_pins_default>;
++
++		vcn33-supply = <&vmmcsd_fixed>;
++		vcn18-supply = <&it66122_vcn18_fixed>;
++		//vrf12-supply = <&mt6358_vrf12_reg>;
++		reset-gpios = <&gpio1 9 GPIO_ACTIVE_LOW>;
++		interrupt-parent = <&gpio1>;
++		interrupts = <25 IRQ_TYPE_EDGE_FALLING>;
++		#sound-dai-cells = <0>;
++
++		ports {
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			port@0 {
++				reg = <0>;
++
++				it66122_in: endpoint {
++					bus-width = <24>;
++					remote-endpoint = <&lcdc_0>;
++				};
++			};
++
++			port@1 {
++				reg = <1>;
++
++				it66122_out: endpoint {
++					remote-endpoint = <&hdmi_connector_in>;
++				};
++			};
++		};
++	};
++};
++
++&mcasp0	{
++	#sound-dai-cells = <0>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&mcasp0_pins>;
++	status = "okay";
++	op-mode = <0>;	/* MCASP_IIS_MODE */
++	tdm-slots = <2>;
++	serial-dir = <	/* 0: INACTIVE, 1: TX, 2: RX */
++			0 0 1 0
++		>;
++	tx-num-evt = <32>;
++	rx-num-evt = <32>;
++};
++
++/ {
++	clk_mcasp0_fixed: clk_mcasp0_fixed {
++		#clock-cells = <0>;
++		compatible = "fixed-clock";
++		clock-frequency = <24576000>;
++	};
++
++	clk_mcasp0: clk_mcasp0 {
++		#clock-cells = <0>;
++		compatible = "gpio-gate-clock";
++		clocks = <&clk_mcasp0_fixed>;
++		enable-gpios = <&gpio1 27 0>; /* BeagleBone Black Clk enable on GPIO1_27 */
++	};
++
++	sound {
++		compatible = "simple-audio-card";
++		simple-audio-card,name = "TI BeagleBone Black";
++		simple-audio-card,format = "i2s";
++		simple-audio-card,bitclock-master = <&dailink0_master>;
++		simple-audio-card,frame-master = <&dailink0_master>;
++
++		dailink0_master: simple-audio-card,cpu {
++			sound-dai = <&mcasp0>;
++			clocks = <&clk_mcasp0>;
++		};
++
++		simple-audio-card,codec {
++			sound-dai = <&it66122>;
++		};
++	};
++};
+diff --git a/arch/arm/boot/dts/am335x-boneblack-revd.dts b/arch/arm/boot/dts/am335x-boneblack-revd.dts
+new file mode 100644
+index 000000000000..925264ebba79
+--- /dev/null
++++ b/arch/arm/boot/dts/am335x-boneblack-revd.dts
+@@ -0,0 +1,180 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (C) 2012 Texas Instruments Incorporated - https://www.ti.com/
++ */
++/dts-v1/;
++
++#include "am33xx.dtsi"
++#include "am335x-bone-common.dtsi"
++#include "am335x-boneblack-common.dtsi"
++#include "am335x-boneblack-ite-hdmi.dtsi"
++
++/ {
++	model = "TI AM335x BeagleBone Black rev D";
++	compatible = "ti,am335x-bone-black", "ti,am335x-bone", "ti,am33xx";
++
++	chosen {
++		base_dtb = "am335x-boneblack-revd.dts";
++		base_dtb_timestamp = __TIMESTAMP__;
++	};
++};
++
++&cpu0_opp_table {
++	/*
++	 * All PG 2.0 silicon may not support 1GHz but some of the early
++	 * BeagleBone Blacks have PG 2.0 silicon which is guaranteed
++	 * to support 1GHz OPP so enable it for PG 2.0 on this board.
++	 */
++	oppnitro-1000000000 {
++		/* OPP Nitro */
++		opp-supported-hw = <0x06 0x0100>;
++	};
++};
++
++&gpio0 {
++	gpio-line-names =
++		"[mdio_data]",
++		"[mdio_clk]",
++		"P9_22 [spi0_sclk]",
++		"P9_21 [spi0_d0]",
++		"P9_18 [spi0_d1]",
++		"P9_17 [spi0_cs0]",
++		"[mmc0_cd]",
++		"P9_42A [ecappwm0]",
++		"P8_35 [lcd d12]",
++		"P8_33 [lcd d13]",
++		"P8_31 [lcd d14]",
++		"P8_32 [lcd d15]",
++		"P9_20 [i2c2_sda]",
++		"P9_19 [i2c2_scl]",
++		"P9_26 [uart1_rxd]",
++		"P9_24 [uart1_txd]",
++		"[rmii1_txd3]",
++		"[rmii1_txd2]",
++		"[usb0_drvvbus]",
++		"[hdmi cec]",
++		"P9_41B",
++		"[rmii1_txd1]",
++		"P8_19 [ehrpwm2a]",
++		"P8_13 [ehrpwm2b]",
++		"NC",
++		"NC",
++		"P8_14",
++		"P8_17",
++		"[rmii1_txd0]",
++		"[rmii1_refclk]",
++		"P9_11 [uart4_rxd]",
++		"P9_13 [uart4_txd]";
++};
++
++&gpio1 {
++	gpio-line-names =
++		"P8_25 [mmc1_dat0]",
++		"[mmc1_dat1]",
++		"P8_5 [mmc1_dat2]",
++		"P8_6 [mmc1_dat3]",
++		"P8_23 [mmc1_dat4]",
++		"P8_22 [mmc1_dat5]",
++		"P8_3 [mmc1_dat6]",
++		"P8_4 [mmc1_dat7]",
++		"NC",
++		"NC",
++		"NC",
++		"NC",
++		"P8_12",
++		"P8_11",
++		"P8_16",
++		"P8_15",
++		"P9_15A",
++		"P9_23",
++		"P9_14 [ehrpwm1a]",
++		"P9_16 [ehrpwm1b]",
++		"[emmc rst]",
++		"[usr0 led]",
++		"[usr1 led]",
++		"[usr2 led]",
++		"[usr3 led]",
++		"[hdmi irq]",
++		"[usb vbus oc]",
++		"[hdmi audio]",
++		"P9_12",
++		"P8_26",
++		"P8_21 [emmc]",
++		"P8_20 [emmc]";
++};
++
++&gpio2 {
++	gpio-line-names =
++		"P9_15B",
++		"P8_18",
++		"P8_7",
++		"P8_8",
++		"P8_10",
++		"P8_9",
++		"P8_45 [hdmi]",
++		"P8_46 [hdmi]",
++		"P8_43 [hdmi]",
++		"P8_44 [hdmi]",
++		"P8_41 [hdmi]",
++		"P8_42 [hdmi]",
++		"P8_39 [hdmi]",
++		"P8_40 [hdmi]",
++		"P8_37 [hdmi]",
++		"P8_38 [hdmi]",
++		"P8_36 [hdmi]",
++		"P8_34 [hdmi]",
++		"[rmii1_rxd3]",
++		"[rmii1_rxd2]",
++		"[rmii1_rxd1]",
++		"[rmii1_rxd0]",
++		"P8_27 [hdmi]",
++		"P8_29 [hdmi]",
++		"P8_28 [hdmi]",
++		"P8_30 [hdmi]",
++		"[mmc0_dat3]",
++		"[mmc0_dat2]",
++		"[mmc0_dat1]",
++		"[mmc0_dat0]",
++		"[mmc0_clk]",
++		"[mmc0_cmd]";
++};
++
++&gpio3 {
++	gpio-line-names =
++		"[mii col]",
++		"[mii crs]",
++		"[mii rx err]",
++		"[mii tx en]",
++		"[mii rx dv]",
++		"[i2c0 sda]",
++		"[i2c0 scl]",
++		"[jtag emu0]",
++		"[jtag emu1]",
++		"[mii tx clk]",
++		"[mii rx clk]",
++		"NC",
++		"NC",
++		"[usb vbus en]",
++		"P9_31 [spi1_sclk]",
++		"P9_29 [spi1_d0]",
++		"P9_30 [spi1_d1]",
++		"P9_28 [spi1_cs0]",
++		"P9_42B [ecappwm0]",
++		"P9_27",
++		"P9_41A",
++		"P9_25",
++		"NC",
++		"NC",
++		"NC",
++		"NC",
++		"NC",
++		"NC",
++		"NC",
++		"NC",
++		"NC",
++		"NC";
++};
++
++&baseboard_eeprom {
++	vcc-supply = <&ldo4_reg>;
++};
 diff --git a/arch/arm/boot/dts/am335x-boneblack-uboot.dts b/arch/arm/boot/dts/am335x-boneblack-uboot.dts
 new file mode 100644
 index 000000000000..261888a05acd
@@ -12711,10 +13083,18 @@ index 000000000000..983854bfc1e2
 +	pinctrl-0 = <&bborg_comms_can_pins>;
 +};
 diff --git a/arch/arm/boot/dts/dra7-l4.dtsi b/arch/arm/boot/dts/dra7-l4.dtsi
-index 5733e3a4ea8e..6e67d99832ac 100644
+index 3fdb79b0e8bf..6e67d99832ac 100644
 --- a/arch/arm/boot/dts/dra7-l4.dtsi
 +++ b/arch/arm/boot/dts/dra7-l4.dtsi
-@@ -80,7 +80,7 @@ pbias_mmc_reg: pbias_mmc_omap5 {
+@@ -12,7 +12,6 @@ &l4_cfg {						/* 0x4a000000 */
+ 	ranges = <0x00000000 0x4a000000 0x100000>,	/* segment 0 */
+ 		 <0x00100000 0x4a100000 0x100000>,	/* segment 1 */
+ 		 <0x00200000 0x4a200000 0x100000>;	/* segment 2 */
+-	dma-ranges;
+ 
+ 	segment@0 {					/* 0x4a000000 */
+ 		compatible = "simple-pm-bus";
+@@ -81,7 +80,7 @@ pbias_mmc_reg: pbias_mmc_omap5 {
  						};
  					};
  
@@ -12723,6 +13103,14 @@ index 5733e3a4ea8e..6e67d99832ac 100644
  						compatible = "ti,dra7xx-phy-gmii-sel";
  						reg = <0x554 0x4>;
  						#phy-cells = <1>;
+@@ -558,7 +557,6 @@ segment@100000 {					/* 0x4a100000 */
+ 			 <0x0007e000 0x0017e000 0x001000>,	/* ap 124 */
+ 			 <0x00059000 0x00159000 0x001000>,	/* ap 125 */
+ 			 <0x0005a000 0x0015a000 0x001000>;	/* ap 126 */
+-		dma-ranges;
+ 
+ 		target-module@2000 {			/* 0x4a102000, ap 27 3c.0 */
+ 			compatible = "ti,sysc";
 diff --git a/arch/arm/boot/dts/dra7.dtsi b/arch/arm/boot/dts/dra7.dtsi
 index a79920ec461f..783ece2c8be1 100644
 --- a/arch/arm/boot/dts/dra7.dtsi
@@ -13630,7 +14018,7 @@ index 9d588cfaa5cb..8da969035c41 100644
  &twl {
  	compatible = "ti,twl6030";
 diff --git a/arch/arm64/boot/dts/ti/k3-am62-main.dtsi b/arch/arm64/boot/dts/ti/k3-am62-main.dtsi
-index eb8690a6be16..c8f4f0043e89 100644
+index 04222028e53e..c8f4f0043e89 100644
 --- a/arch/arm64/boot/dts/ti/k3-am62-main.dtsi
 +++ b/arch/arm64/boot/dts/ti/k3-am62-main.dtsi
 @@ -1,8 +1,8 @@
@@ -13644,7 +14032,15 @@ index eb8690a6be16..c8f4f0043e89 100644
   */
  
  &cbass_main {
-@@ -63,6 +63,7 @@ epwm_tbclk: clock@4130 {
+@@ -23,6 +23,7 @@ gic500: interrupt-controller@1800000 {
+ 		interrupt-controller;
+ 		reg = <0x00 0x01800000 0x00 0x10000>,	/* GICD */
+ 		      <0x00 0x01880000 0x00 0xc0000>,	/* GICR */
++		      <0x00 0x01880000 0x00 0xc0000>,   /* GICR */
+ 		      <0x01 0x00000000 0x00 0x2000>,    /* GICC */
+ 		      <0x01 0x00010000 0x00 0x1000>,    /* GICH */
+ 		      <0x01 0x00020000 0x00 0x2000>;    /* GICV */
+@@ -62,6 +63,7 @@ epwm_tbclk: clock@4130 {
  	};
  
  	dmss: bus@48000000 {
@@ -13652,7 +14048,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  		compatible = "simple-mfd";
  		#address-cells = <2>;
  		#size-cells = <2>;
-@@ -72,6 +73,7 @@ dmss: bus@48000000 {
+@@ -71,6 +73,7 @@ dmss: bus@48000000 {
  		ti,sci-dev-id = <25>;
  
  		secure_proxy_main: mailbox@4d000000 {
@@ -13660,7 +14056,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  			compatible = "ti,am654-secure-proxy";
  			#mbox-cells = <1>;
  			reg-names = "target_data", "rt", "scfg";
-@@ -147,6 +149,7 @@ main_pktdma: dma-controller@485c0000 {
+@@ -146,6 +149,7 @@ main_pktdma: dma-controller@485c0000 {
  	};
  
  	dmsc: system-controller@44043000 {
@@ -13668,7 +14064,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  		compatible = "ti,k2g-sci";
  		ti,host-id = <12>;
  		mbox-names = "rx", "tx";
-@@ -156,16 +159,19 @@ dmsc: system-controller@44043000 {
+@@ -155,16 +159,19 @@ dmsc: system-controller@44043000 {
  		reg = <0x00 0x44043000 0x00 0xfe0>;
  
  		k3_pds: power-controller {
@@ -13688,7 +14084,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  			compatible = "ti,sci-reset";
  			#reset-cells = <2>;
  		};
-@@ -185,6 +191,7 @@ crypto: crypto@40900000 {
+@@ -184,6 +191,7 @@ crypto: crypto@40900000 {
  	};
  
  	main_pmx0: pinctrl@f4000 {
@@ -13696,7 +14092,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  		compatible = "pinctrl-single";
  		reg = <0x00 0xf4000 0x00 0x2ac>;
  		#pinctrl-cells = <1>;
-@@ -192,6 +199,103 @@ main_pmx0: pinctrl@f4000 {
+@@ -191,6 +199,103 @@ main_pmx0: pinctrl@f4000 {
  		pinctrl-single,function-mask = <0xffffffff>;
  	};
  
@@ -13800,7 +14196,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	main_uart0: serial@2800000 {
  		compatible = "ti,am64-uart", "ti,am654-uart";
  		reg = <0x00 0x02800000 0x00 0x100>;
-@@ -199,6 +303,7 @@ main_uart0: serial@2800000 {
+@@ -198,6 +303,7 @@ main_uart0: serial@2800000 {
  		power-domains = <&k3_pds 146 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 146 0>;
  		clock-names = "fclk";
@@ -13808,7 +14204,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	main_uart1: serial@2810000 {
-@@ -208,6 +313,7 @@ main_uart1: serial@2810000 {
+@@ -207,6 +313,7 @@ main_uart1: serial@2810000 {
  		power-domains = <&k3_pds 152 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 152 0>;
  		clock-names = "fclk";
@@ -13816,7 +14212,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	main_uart2: serial@2820000 {
-@@ -217,6 +323,7 @@ main_uart2: serial@2820000 {
+@@ -216,6 +323,7 @@ main_uart2: serial@2820000 {
  		power-domains = <&k3_pds 153 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 153 0>;
  		clock-names = "fclk";
@@ -13824,7 +14220,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	main_uart3: serial@2830000 {
-@@ -226,6 +333,7 @@ main_uart3: serial@2830000 {
+@@ -225,6 +333,7 @@ main_uart3: serial@2830000 {
  		power-domains = <&k3_pds 154 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 154 0>;
  		clock-names = "fclk";
@@ -13832,7 +14228,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	main_uart4: serial@2840000 {
-@@ -235,6 +343,7 @@ main_uart4: serial@2840000 {
+@@ -234,6 +343,7 @@ main_uart4: serial@2840000 {
  		power-domains = <&k3_pds 155 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 155 0>;
  		clock-names = "fclk";
@@ -13840,7 +14236,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	main_uart5: serial@2850000 {
-@@ -244,6 +353,7 @@ main_uart5: serial@2850000 {
+@@ -243,6 +353,7 @@ main_uart5: serial@2850000 {
  		power-domains = <&k3_pds 156 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 156 0>;
  		clock-names = "fclk";
@@ -13848,7 +14244,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	main_uart6: serial@2860000 {
-@@ -253,6 +363,7 @@ main_uart6: serial@2860000 {
+@@ -252,6 +363,7 @@ main_uart6: serial@2860000 {
  		power-domains = <&k3_pds 158 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 158 0>;
  		clock-names = "fclk";
@@ -13856,7 +14252,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	main_i2c0: i2c@20000000 {
-@@ -264,6 +375,7 @@ main_i2c0: i2c@20000000 {
+@@ -263,6 +375,7 @@ main_i2c0: i2c@20000000 {
  		power-domains = <&k3_pds 102 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 102 2>;
  		clock-names = "fck";
@@ -13864,7 +14260,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	main_i2c1: i2c@20010000 {
-@@ -275,6 +387,7 @@ main_i2c1: i2c@20010000 {
+@@ -274,6 +387,7 @@ main_i2c1: i2c@20010000 {
  		power-domains = <&k3_pds 103 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 103 2>;
  		clock-names = "fck";
@@ -13872,7 +14268,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	main_i2c2: i2c@20020000 {
-@@ -286,6 +399,7 @@ main_i2c2: i2c@20020000 {
+@@ -285,6 +399,7 @@ main_i2c2: i2c@20020000 {
  		power-domains = <&k3_pds 104 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 104 2>;
  		clock-names = "fck";
@@ -13880,7 +14276,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	main_i2c3: i2c@20030000 {
-@@ -297,6 +411,7 @@ main_i2c3: i2c@20030000 {
+@@ -296,6 +411,7 @@ main_i2c3: i2c@20030000 {
  		power-domains = <&k3_pds 105 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 105 2>;
  		clock-names = "fck";
@@ -13888,7 +14284,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	main_spi0: spi@20100000 {
-@@ -306,7 +421,7 @@ main_spi0: spi@20100000 {
+@@ -305,7 +421,7 @@ main_spi0: spi@20100000 {
  		#address-cells = <1>;
  		#size-cells = <0>;
  		power-domains = <&k3_pds 141 TI_SCI_PD_EXCLUSIVE>;
@@ -13897,7 +14293,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  		status = "disabled";
  	};
  
-@@ -317,7 +432,7 @@ main_spi1: spi@20110000 {
+@@ -316,7 +432,7 @@ main_spi1: spi@20110000 {
  		#address-cells = <1>;
  		#size-cells = <0>;
  		power-domains = <&k3_pds 142 TI_SCI_PD_EXCLUSIVE>;
@@ -13906,7 +14302,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  		status = "disabled";
  	};
  
-@@ -328,7 +443,7 @@ main_spi2: spi@20120000 {
+@@ -327,7 +443,7 @@ main_spi2: spi@20120000 {
  		#address-cells = <1>;
  		#size-cells = <0>;
  		power-domains = <&k3_pds 143 TI_SCI_PD_EXCLUSIVE>;
@@ -13915,7 +14311,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  		status = "disabled";
  	};
  
-@@ -347,6 +462,9 @@ main_gpio_intr: interrupt-controller@a00000 {
+@@ -346,6 +462,9 @@ main_gpio_intr: interrupt-controller@a00000 {
  	main_gpio0: gpio@600000 {
  		compatible = "ti,am64-gpio", "ti,keystone-gpio";
  		reg = <0x0 0x00600000 0x0 0x100>;
@@ -13925,7 +14321,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  		gpio-controller;
  		#gpio-cells = <2>;
  		interrupt-parent = <&main_gpio_intr>;
-@@ -354,7 +472,7 @@ main_gpio0: gpio@600000 {
+@@ -353,7 +472,7 @@ main_gpio0: gpio@600000 {
  			     <193>, <194>, <195>;
  		interrupt-controller;
  		#interrupt-cells = <2>;
@@ -13934,7 +14330,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  		ti,davinci-gpio-unbanked = <0>;
  		power-domains = <&k3_pds 77 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 77 0>;
-@@ -365,13 +483,17 @@ main_gpio1: gpio@601000 {
+@@ -364,13 +483,17 @@ main_gpio1: gpio@601000 {
  		compatible = "ti,am64-gpio", "ti,keystone-gpio";
  		reg = <0x0 0x00601000 0x0 0x100>;
  		gpio-controller;
@@ -13953,7 +14349,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  		ti,davinci-gpio-unbanked = <0>;
  		power-domains = <&k3_pds 78 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 78 0>;
-@@ -387,15 +509,17 @@ sdhci0: mmc@fa10000 {
+@@ -386,15 +509,17 @@ sdhci0: mmc@fa10000 {
  		clock-names = "clk_ahb", "clk_xin";
  		assigned-clocks = <&k3_clks 57 6>;
  		assigned-clock-parents = <&k3_clks 57 8>;
@@ -13975,7 +14371,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	sdhci1: mmc@fa00000 {
-@@ -405,20 +529,20 @@ sdhci1: mmc@fa00000 {
+@@ -404,20 +529,20 @@ sdhci1: mmc@fa00000 {
  		power-domains = <&k3_pds 58 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 58 5>, <&k3_clks 58 6>;
  		clock-names = "clk_ahb", "clk_xin";
@@ -14009,7 +14405,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	sdhci2: mmc@fa20000 {
-@@ -428,19 +552,70 @@ sdhci2: mmc@fa20000 {
+@@ -427,19 +552,70 @@ sdhci2: mmc@fa20000 {
  		power-domains = <&k3_pds 184 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 184 5>, <&k3_clks 184 6>;
  		clock-names = "clk_ahb", "clk_xin";
@@ -14092,7 +14488,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	fss: bus@fc00000 {
-@@ -465,9 +640,19 @@ ospi0: spi@fc40000 {
+@@ -464,9 +640,19 @@ ospi0: spi@fc40000 {
  			power-domains = <&k3_pds 75 TI_SCI_PD_EXCLUSIVE>;
  			#address-cells = <1>;
  			#size-cells = <0>;
@@ -14112,7 +14508,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	cpsw3g: ethernet@8000000 {
  		compatible = "ti,am642-cpsw-nuss";
  		#address-cells = <2>;
-@@ -523,6 +708,7 @@ cpsw3g_mdio: mdio@f00 {
+@@ -522,6 +708,7 @@ cpsw3g_mdio: mdio@f00 {
  			clocks = <&k3_clks 13 0>;
  			clock-names = "fck";
  			bus_freq = <1000000>;
@@ -14120,7 +14516,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  		};
  
  		cpts@3d000 {
-@@ -560,6 +746,7 @@ ecap0: pwm@23100000 {
+@@ -559,6 +746,7 @@ ecap0: pwm@23100000 {
  		power-domains = <&k3_pds 51 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 51 0>;
  		clock-names = "fck";
@@ -14128,7 +14524,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	ecap1: pwm@23110000 {
-@@ -569,6 +756,7 @@ ecap1: pwm@23110000 {
+@@ -568,6 +756,7 @@ ecap1: pwm@23110000 {
  		power-domains = <&k3_pds 52 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 52 0>;
  		clock-names = "fck";
@@ -14136,7 +14532,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	ecap2: pwm@23120000 {
-@@ -578,6 +766,7 @@ ecap2: pwm@23120000 {
+@@ -577,6 +766,7 @@ ecap2: pwm@23120000 {
  		power-domains = <&k3_pds 53 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&k3_clks 53 0>;
  		clock-names = "fck";
@@ -14144,7 +14540,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	main_mcan0: can@20701000 {
-@@ -592,6 +781,7 @@ main_mcan0: can@20701000 {
+@@ -591,6 +781,7 @@ main_mcan0: can@20701000 {
  			     <GIC_SPI 156 IRQ_TYPE_LEVEL_HIGH>;
  		interrupt-names = "int0", "int1";
  		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
@@ -14152,7 +14548,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	epwm0: pwm@23000000 {
-@@ -601,6 +791,7 @@ epwm0: pwm@23000000 {
+@@ -600,6 +791,7 @@ epwm0: pwm@23000000 {
  		power-domains = <&k3_pds 86 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&epwm_tbclk 0>, <&k3_clks 86 0>;
  		clock-names = "tbclk", "fck";
@@ -14160,7 +14556,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	epwm1: pwm@23010000 {
-@@ -610,6 +801,7 @@ epwm1: pwm@23010000 {
+@@ -609,6 +801,7 @@ epwm1: pwm@23010000 {
  		power-domains = <&k3_pds 87 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&epwm_tbclk 1>, <&k3_clks 87 0>;
  		clock-names = "tbclk", "fck";
@@ -14168,7 +14564,7 @@ index eb8690a6be16..c8f4f0043e89 100644
  	};
  
  	epwm2: pwm@23020000 {
-@@ -619,5 +811,6 @@ epwm2: pwm@23020000 {
+@@ -618,5 +811,6 @@ epwm2: pwm@23020000 {
  		power-domains = <&k3_pds 88 TI_SCI_PD_EXCLUSIVE>;
  		clocks = <&epwm_tbclk 2>, <&k3_clks 88 0>;
  		clock-names = "tbclk", "fck";
@@ -19178,10 +19574,18 @@ index f48245ff87e5..625718042413 100644
  /*
   * Macros to allow using the offset from the padconf physical address
 diff --git a/include/uapi/linux/input-event-codes.h b/include/uapi/linux/input-event-codes.h
-index 1ce8a91349e9..03edf2ccdf6c 100644
+index f410c22e080d..03edf2ccdf6c 100644
 --- a/include/uapi/linux/input-event-codes.h
 +++ b/include/uapi/linux/input-event-codes.h
-@@ -615,6 +615,9 @@
+@@ -519,7 +519,6 @@
+ #define KEY_NOTIFICATION_CENTER	0x1bc	/* Show/hide the notification center */
+ #define KEY_PICKUP_PHONE	0x1bd	/* Answer incoming call */
+ #define KEY_HANGUP_PHONE	0x1be	/* Decline incoming call */
+-#define KEY_LINK_PHONE		0x1bf   /* AL Phone Syncing */
+ 
+ #define KEY_DEL_EOL		0x1c0
+ #define KEY_DEL_EOS		0x1c1
+@@ -616,6 +615,9 @@
  #define KEY_KBD_LAYOUT_NEXT	0x248	/* AC Next Keyboard Layout Select */
  #define KEY_EMOJI_PICKER	0x249	/* Show/hide emoji picker (HUTRR101) */
  #define KEY_DICTATE		0x24a	/* Start or Stop Voice Dictation Session (HUTRR99) */
