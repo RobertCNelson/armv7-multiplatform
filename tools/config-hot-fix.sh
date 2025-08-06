@@ -309,8 +309,4 @@ config="CONFIG_USB_TI_CPPI41_DMA" ; config_disable
 #BeagleBoard.org
 ./scripts/config --enable CONFIG_MSPM0_I2C
 
-#Panda
-./scripts/config --enable CONFIG_DRM_DISPLAY_CONNECTOR
-./scripts/config --enable CONFIG_DRM_TI_TPD12S015
-
 cd ${DIR}/
