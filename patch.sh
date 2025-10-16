@@ -149,21 +149,25 @@ wireless_regdb () {
 			rm -rf ./src || true
 		fi
 
-		${git_bin} clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/wens/wireless-regdb.git --depth=1 ./src/
-		cd ./src
-			wireless_regdb_hash=$(git rev-parse HEAD)
-		cd -
+		wget -c https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-${WIRELESS_REGDB}.tar.xz
+		mkdir ./src/
+		tar xf wireless-regdb-${WIRELESS_REGDB}.tar.xz -C ./src/
+		sync
+		rm -rf wireless-regdb-${WIRELESS_REGDB}.tar.xz
 
 		cd ./KERNEL/
 
 		mkdir -p ./firmware/ || true
-		cp -v ../src/regulatory.db ./firmware/
-		cp -v ../src/regulatory.db.p7s ./firmware/
+		cp -v ../src/wireless-regdb-${WIRELESS_REGDB}/regulatory.db ./firmware/
+		cp -v ../src/wireless-regdb-${WIRELESS_REGDB}/regulatory.db.p7s ./firmware/
 		${git_bin} add -f ./firmware/regulatory.*
-		${git_bin} commit -a -m 'Add wireless-regdb regulatory database file' -m "https://git.kernel.org/pub/scm/linux/kernel/git/wens/wireless-regdb.git/commit/?id=${wireless_regdb_hash}" -s
+
+		commit_regdb=$(echo "$WIRELESS_REGDB" | sed 's/\./-/g')
+
+		${git_bin} commit -a -m 'Add wireless-regdb regulatory database file' -m "https://git.kernel.org/pub/scm/linux/kernel/git/wens/wireless-regdb.git/tag/?h=master-${commit_regdb}" -s
 
 		${git_bin} format-patch -1 -o ../patches/external/wireless_regdb/
-		echo "WIRELESS_REGDB: https://git.kernel.org/pub/scm/linux/kernel/git/wens/wireless-regdb.git/commit/?id=${wireless_regdb_hash}" > ../patches/external/git/WIRELESS_REGDB
+		echo "WIRELESS_REGDB: https://git.kernel.org/pub/scm/linux/kernel/git/wens/wireless-regdb.git/tag/?h=master-${commit_regdb}" > ../patches/external/git/WIRELESS_REGDB
 
 		rm -rf ../src/ || true
 
@@ -277,7 +281,7 @@ beagleboard_dtbs () {
 		cp -v ../${work_dir}/src/arm64/ti/*.h arch/arm64/boot/dts/ti/
 		cp -vr ../${work_dir}/include/dt-bindings/* ./include/dt-bindings/
 
-		#ls src/arm/overlays/ | grep dtso
+		ls ../${work_dir}/src/arm/overlays/ | grep dtso
 
 		device="AM335X-PRU-UIO-00A0" ; arm_dtbo_makefile_append
 		device="BB-ADC-00A0" ; arm_dtbo_makefile_append
@@ -304,7 +308,10 @@ beagleboard_dtbs () {
 		device="BB-UART1-00A0" ; arm_dtbo_makefile_append
 		device="BB-UART2-00A0" ; arm_dtbo_makefile_append
 		device="BB-UART4-00A0" ; arm_dtbo_makefile_append
+		device="BB-W1-P9.12-00A0" ; arm_dtbo_makefile_append
 		device="BONE-ADC" ; arm_dtbo_makefile_append
+		device="BONE-LED-P8-37" ; arm_dtbo_makefile_append
+		device="BONE-LED-P9-19" ; arm_dtbo_makefile_append
 		device="BONE-LED-P9-42" ; arm_dtbo_makefile_append
 		device="M-BB-BBG-00A0" ; arm_dtbo_makefile_append
 		device="M-BB-BBGG-00A0" ; arm_dtbo_makefile_append
@@ -318,6 +325,7 @@ beagleboard_dtbs () {
 
 		device="k3-am6232-pocketbeagle2-techlab-cape" ; k3_dtbo_makefile_append
 		device="k3-am62-pocketbeagle2-ardupilot-cape" ; k3_dtbo_makefile_append
+		device="k3-am62-pocketbeagle2-led-all" ; k3_dtbo_makefile_append
 		device="k3-am62-pocketbeagle2-leds-off" ; k3_dtbo_makefile_append
 		device="k3-am62-pocketbeagle2-mspm0swd" ; k3_dtbo_makefile_append
 		device="k3-am62-pocketbeagle2-techlab-cape" ; k3_dtbo_makefile_append
@@ -486,19 +494,6 @@ post_rpibackports () {
 }
 
 backports () {
-	subsystem="uio"
-	#regenerate="enable"
-	if [ "x${regenerate}" = "xenable" ] ; then
-		unset backport_tag
-
-		cp -v ../patches/drivers/ti/uio/uio_pruss.c ./drivers/uio/
-
-		post_backports
-	else
-		patch_backports
-		dir 'drivers/ti/uio'
-	fi
-
 	backport_tag="rpi-6.6.y"
 
 	subsystem="edt-ft5x06"
